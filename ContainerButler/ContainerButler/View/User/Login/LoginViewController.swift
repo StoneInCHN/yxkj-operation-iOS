@@ -181,7 +181,9 @@ extension LoginViewController {
         
         forgetPwdBtn.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(CaptchaLoginVC(), animated: true)
+                let vcc = CaptchaLoginVC()
+                vcc.phoneNumber = self?.phoneNumTF.text
+                self?.navigationController?.pushViewController(vcc, animated: true)
             })
             .disposed(by: disposeBag)
         

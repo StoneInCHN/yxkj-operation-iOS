@@ -12,17 +12,18 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        setupUI()
     }
 }
 
 extension TabBarController {
+    
+    fileprivate func setupUI() {
+        add(childVC: CounterViewController(), title: "货柜", normalImageName: "", selectedImageName: "")
+        add(childVC: CounterViewController(), title: "消息", normalImageName: "", selectedImageName: "")
+        add(childVC: CounterViewController(), title: "我的", normalImageName: "", selectedImageName: "")
+    }
+    
     fileprivate func add(childVC: UIViewController,
                          title: String?,
                          normalImageName: String,

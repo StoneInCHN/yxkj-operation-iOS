@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class CaptchaLoginVC: BaseViewController {
+    var phoneNumber: String?
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "请输入手机号"
@@ -18,7 +19,6 @@ class CaptchaLoginVC: BaseViewController {
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-        //        textField.text = "15608066219"
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
@@ -29,7 +29,6 @@ class CaptchaLoginVC: BaseViewController {
         pwdTF.font = UIFont.sizeToFit(with: 14)
         pwdTF.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         pwdTF.returnKeyType = .done
-        //        pwdTF.text = "123456"
         return pwdTF
     }()
     fileprivate lazy  var userIcon: UIImageView = {
@@ -92,6 +91,7 @@ class CaptchaLoginVC: BaseViewController {
 extension CaptchaLoginVC {
     fileprivate func setupUI() {
         navigationItem.title = "验证码登录"
+        phoneNumTF.text = phoneNumber
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
         view.addSubview(line0)
