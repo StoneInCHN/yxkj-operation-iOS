@@ -92,7 +92,6 @@ class CaptchaLoginVC: BaseViewController {
 extension CaptchaLoginVC {
     fileprivate func setupUI() {
         navigationItem.title = "验证码登录"
-        view.backgroundColor = .white
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
         view.addSubview(line0)
@@ -211,6 +210,9 @@ extension CaptchaLoginVC {
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 print("login:\(self.debugDescription)")
+                let vcc = ResetPasswordVC()
+                vcc.phoneNumber = self?.phoneNumTF.text
+                self?.navigationController?.pushViewController(vcc, animated: true)
             })
             .disposed(by: disposeBag)
     }

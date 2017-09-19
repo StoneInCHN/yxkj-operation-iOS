@@ -91,7 +91,6 @@ class LoginViewController: BaseViewController {
 extension LoginViewController {
     fileprivate func setupUI() {
         navigationItem.title = "登录"
-        view.backgroundColor = .white
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
         view.addSubview(line0)
@@ -188,7 +187,7 @@ extension LoginViewController {
         
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
-                
+                print(self.debugDescription)
             })
             .disposed(by: disposeBag)
     }
