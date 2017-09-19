@@ -83,6 +83,8 @@
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
 		CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */; };
 		CDE202971F71100800CB0145 /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202961F71100800CB0145 /* CounterViewController.swift */; };
+		CDE202991F71160300CB0145 /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202981F71160300CB0145 /* CounterTableViewCell.swift */; };
+		CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2029C1F71187800CB0145 /* CounterViewModel.swift */; };
 		CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B5091F68C44A000A1915 /* Network.swift */; };
 		CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50B1F68C4A6000A1915 /* Router.swift */; };
 		CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50D1F68C88D000A1915 /* RequestManager.swift */; };
@@ -172,6 +174,8 @@
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
 		CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		CDE202961F71100800CB0145 /* CounterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
+		CDE202981F71160300CB0145 /* CounterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
+		CDE2029C1F71187800CB0145 /* CounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		CDF6B5091F68C44A000A1915 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CDF6B50B1F68C4A6000A1915 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CDF6B50D1F68C88D000A1915 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 		CD69C4721F66888D00623B91 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CDE2029B1F71186800CB0145 /* Counter */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -415,6 +420,15 @@
 			isa = PBXGroup;
 			children = (
 				CDE202961F71100800CB0145 /* CounterViewController.swift */,
+				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
+			);
+			path = Counter;
+			sourceTree = "<group>";
+		};
+		CDE2029B1F71186800CB0145 /* Counter */ = {
+			isa = PBXGroup;
+			children = (
+				CDE2029C1F71187800CB0145 /* CounterViewModel.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -573,6 +587,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -586,6 +601,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -660,6 +676,7 @@
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
 				CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */,
+				CDE202991F71160300CB0145 /* CounterTableViewCell.swift in Sources */,
 				CD78F0941F67C6B000D50B7B /* TabBarController.swift in Sources */,
 				CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */,
 				CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */,
@@ -669,6 +686,7 @@
 				CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */,
 				CD78F0901F67AE3F00D50B7B /* Location.swift in Sources */,
 				CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */,
+				CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */,
 				CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */,
 				CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */,
 				CD844C7F1F70E8F900D50722 /* Model.swift in Sources */,
