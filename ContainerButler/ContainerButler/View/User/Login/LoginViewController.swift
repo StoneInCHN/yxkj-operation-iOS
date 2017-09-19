@@ -97,7 +97,6 @@ extension LoginViewController {
         view.addSubview(line0)
         view.addSubview(pwdIcon)
         view.addSubview(pwdTF)
-        view.addSubview(line1)
         view.addSubview(forgetPwdBtn)
         view.addSubview(line2)
         view.addSubview(loginBtn)
@@ -124,12 +123,6 @@ extension LoginViewController {
             maker.width.equalTo(20)
         }
      
-        line1.snp.makeConstraints { (maker) in
-            maker.right.equalTo(forgetPwdBtn.snp.left).offset(-12)
-            maker.width.equalTo(1)
-            maker.height.equalTo(20)
-            maker.centerY.equalTo(pwdIcon.snp.centerY)
-        }
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
             maker.right.equalTo(phoneNumTF.snp.right)
@@ -189,7 +182,7 @@ extension LoginViewController {
         
         forgetPwdBtn.rx.tap
             .subscribe(onNext: { [weak self] in
-                
+                self?.navigationController?.pushViewController(CaptchaLoginVC(), animated: true)
             })
             .disposed(by: disposeBag)
         

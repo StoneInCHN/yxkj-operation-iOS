@@ -18,14 +18,14 @@ class HUD {
                               enterAction: ((Void) -> Void)?,
                               cancleAction: ((Void) -> Void)?) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
+            cancleAction?()
+        }))
         if let enter = enterTitle, !enter.isEmpty {
             alertVC.addAction(UIAlertAction(title: enter, style: .default, handler: { (_) in
                 enterAction?()
             }))
         }
-        alertVC.addAction(UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
-            cancleAction?()
-        }))
         currentVC.present(alertVC, animated: true, completion: nil)
     }
     
