@@ -12,6 +12,15 @@ import RxCocoa
 import RxDataSources
 
 class CounterViewController: BaseViewController {
+    lazy var animator: TransitionAnimator = {
+        let animator = TransitionAnimator()
+        var x: CGFloat = 100
+        var height: CGFloat = 280
+        var y: CGFloat = self.view.bounds.size.height * 0.5 - height * 0.5
+        var width: CGFloat = self.view.bounds.size.width - 30 * 2
+        animator.presentFrame = CGRect(x: x, y: y, width: width, height: height)
+        return animator
+    }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -76,9 +85,15 @@ extension CounterViewController {
                 ])
         ]
         
-        dataSource.configureCell = { (_, tableView, indexPath, element) in
+        dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
             let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-//            cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
+            cell.itemdidSelected
+                .subscribe(onNext: {[weak self] (model) in
+                let vcc = ReplenishmentVC()
+                    vcc.transitioningDelegate = self
+                    vcc.modalPresentationStyle = .custom
+                    self?.navigationController?.present(vcc, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
             return cell
         }
         
@@ -130,5 +145,11 @@ extension CounterViewController: YBPopupMenuDelegate {
         default:
             break
         }
+    }
+}
+
+extension CounterViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PopDownAnimationVC()
     }
 }

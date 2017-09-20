@@ -12,6 +12,7 @@ import RxSwift
 
 class CounterTableViewCell: UITableViewCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
+    var itemdidSelected: PublishSubject<String> = PublishSubject<String> ()
     fileprivate lazy  var numberLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: 13)
@@ -60,6 +61,14 @@ class CounterTableViewCell: UITableViewCell, ViewNameReusable {
                 return cell
             }
             .disposed(by: disposeBag)
+        collectionView.rx.modelSelected(String.self)
+            .subscribe(onNext: {[weak self] (model) in
+                    self?.itemdidSelected.onNext(model)
+                }, onError: { [weak self]  (error) in
+                    self?.itemdidSelected.onError(error)
+            }, onCompleted: { [weak self]  in
+                self?.itemdidSelected.onCompleted()
+            }).disposed(by: disposeBag)
     }
     
     override func layoutSubviews() {

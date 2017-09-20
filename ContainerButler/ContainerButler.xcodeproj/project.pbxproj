@@ -13,6 +13,9 @@
 		CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD711F7257CA00902F91 /* YBPopupMenu.m */; };
 		CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD731F7257CA00902F91 /* YBPopupMenuPath.m */; };
 		CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD751F7257CA00902F91 /* YBRectConst.m */; };
+		CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */; };
+		CD3BAD7F1F7264D100902F91 /* ReplenishmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */; };
+		CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
 		CD69C4651F66874000623B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4641F66874000623B91 /* Assets.xcassets */; };
@@ -109,6 +112,9 @@
 		CD3BAD731F7257CA00902F91 /* YBPopupMenuPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuPath.m; sourceTree = "<group>"; };
 		CD3BAD741F7257CA00902F91 /* YBRectConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBRectConst.h; sourceTree = "<group>"; };
 		CD3BAD751F7257CA00902F91 /* YBRectConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
+		CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDownAnimationVC.swift; sourceTree = "<group>"; };
+		CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentVC.swift; sourceTree = "<group>"; };
+		CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmationAnimator.swift; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD69C4621F66874000623B91 /* ContainerButler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerButler.xcdatamodel; sourceTree = "<group>"; };
@@ -249,6 +255,15 @@
 			path = YBPopupMenu;
 			sourceTree = "<group>";
 		};
+		CD3BAD7B1F72613B00902F91 /* Aniamations */ = {
+			isa = PBXGroup;
+			children = (
+				CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */,
+				CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */,
+			);
+			path = Aniamations;
+			sourceTree = "<group>";
+		};
 		CD69C44E1F66874000623B91 = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +345,7 @@
 		CD69C47D1F668FBB00623B91 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CD3BAD7B1F72613B00902F91 /* Aniamations */,
 				CD69C47E1F668FE500623B91 /* BaseViewController.swift */,
 				CD69C4801F66908E00623B91 /* CommonWebVC.swift */,
 				CD78F08D1F6782AB00D50B7B /* HUD.swift */,
@@ -460,6 +476,7 @@
 				CDE202961F71100800CB0145 /* CounterViewController.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
 				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
+				CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -708,12 +725,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3BAD7F1F7264D100902F91 /* ReplenishmentVC.swift in Sources */,
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
 				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
 				CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */,
+				CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */,
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
@@ -727,6 +746,7 @@
 				CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */,
 				CD78F0921F67C66E00D50B7B /* NavigationController.swift in Sources */,
 				CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */,
+				CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */,
 				CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */,
 				CD78F0901F67AE3F00D50B7B /* Location.swift in Sources */,
 				CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */,
