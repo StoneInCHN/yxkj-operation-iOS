@@ -36,6 +36,20 @@ extension CounterViewController {
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
+        let addBtn = UIButton(type: .contactAdd)
+        addBtn.frame = CGRect(x: UIScreen.width - 44, y: 20, width: 44, height: 44)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addBtn)
+        addBtn.rx.tap.subscribe(onNext: { [weak self] in
+            let point = CGPoint(x:  UIScreen.width - 44 + 12, y: 12 + 44)
+            YBPopupMenu.show(at: point, titles: ["待补清单", "补货记录"],
+                             icons: nil,
+                             menuWidth: 92) { menu in
+                menu?.arrowDirection = .top
+                menu?.rectCorner = UIRectCorner.bottomRight
+                menu?.delegate = self
+            }
+        })
+        .disposed(by: disposeBag)
     }
     
     fileprivate func setupRX() {
@@ -103,5 +117,18 @@ extension CounterViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 220
+    }
+}
+
+extension CounterViewController: YBPopupMenuDelegate {
+    func ybPopupMenuDidSelected(at index: Int, ybPopupMenu: YBPopupMenu!) {
+        switch index {
+        case 0: /// 待补清单
+            navigationController?.pushViewController(UIViewController(), animated: true)
+        case 1: /// 补货记录
+            navigationController?.pushViewController(UIViewController(), animated: true)
+        default:
+            break
+        }
     }
 }
