@@ -13,7 +13,7 @@ target 'ContainerButler' do
  pod 'RxDataSources', :git => 'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'swift4.0'
 # pod 'IQKeyboardManagerSwift', '~> 4.0.13'
  pod 'SVProgressHUD'
-  pod 'Kingfisher', '~> 4.0'
+ pod 'Kingfisher', '~> 4.0'
  pod 'MJRefresh'
  pod 'ObjectMapper', :git => 'https://github.com/Hearst-DD/ObjectMapper.git', :branch => 'swift-4'
 end

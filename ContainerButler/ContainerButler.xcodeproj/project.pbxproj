@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
 		CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */; };
+		CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD6D1F72537800902F91 /* GIBadgeView.m */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
 		CD69C4651F66874000623B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4641F66874000623B91 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F0981F67D97300D50B7B /* CoreData.swift */; };
 		CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F09A1F67D97300D50B7B /* Extension.swift */; };
 		CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F09B1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift */; };
+		CD7F85661F72387100BDE5AE /* CounterSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */; };
 		CD844C471F70E82800D50722 /* auth_succeed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD84469B1F70E82600D50722 /* auth_succeed@3x.png */; };
 		CD844C481F70E82800D50722 /* cash_out_succeed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD84469C1F70E82600D50722 /* cash_out_succeed@3x.png */; };
 		CD844C491F70E82800D50722 /* earnings_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD84469D1F70E82600D50722 /* earnings_icon@3x.png */; };
@@ -96,6 +98,8 @@
 		023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.release.xcconfig"; sourceTree = "<group>"; };
 		3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.debug.xcconfig"; sourceTree = "<group>"; };
 		CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		CD3BAD6C1F72537800902F91 /* GIBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GIBadgeView.h; sourceTree = "<group>"; };
+		CD3BAD6D1F72537800902F91 /* GIBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GIBadgeView.m; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD69C4621F66874000623B91 /* ContainerButler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerButler.xcdatamodel; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		CD78F0981F67D97300D50B7B /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		CD78F09A1F67D97300D50B7B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CD78F09B1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+RxCreate.swift"; sourceTree = "<group>"; };
+		CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSectionHeaderView.swift; sourceTree = "<group>"; };
 		CD84469B1F70E82600D50722 /* auth_succeed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "auth_succeed@3x.png"; sourceTree = "<group>"; };
 		CD84469C1F70E82600D50722 /* cash_out_succeed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cash_out_succeed@3x.png"; sourceTree = "<group>"; };
 		CD84469D1F70E82600D50722 /* earnings_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earnings_icon@3x.png"; sourceTree = "<group>"; };
@@ -213,6 +218,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD3BAD6B1F72537800902F91 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				CD3BAD6C1F72537800902F91 /* GIBadgeView.h */,
+				CD3BAD6D1F72537800902F91 /* GIBadgeView.m */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		CD69C44E1F66874000623B91 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +320,7 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CD3BAD6B1F72537800902F91 /* Badge */,
 				CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */,
 				CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */,
 			);
@@ -421,6 +436,7 @@
 			children = (
 				CDE202961F71100800CB0145 /* CounterViewController.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
+				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -667,11 +683,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
 				CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */,
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
+				CD7F85661F72387100BDE5AE /* CounterSectionHeaderView.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
 				CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */,
 				CDE202991F71160300CB0145 /* CounterTableViewCell.swift in Sources */,
@@ -827,6 +845,30 @@
 				INFOPLIST_FILE = ContainerButler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxDataSources\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftDate\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yxkj.deliveryman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -848,6 +890,30 @@
 				INFOPLIST_FILE = ContainerButler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxDataSources\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftDate\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yxkj.deliveryman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

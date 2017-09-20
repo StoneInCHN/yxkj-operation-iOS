@@ -17,6 +17,7 @@ class CounterViewController: BaseViewController {
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
         taleView.register(CounterTableViewCell.self, forCellReuseIdentifier: "CounterTableViewCell")
+        taleView.register(CounterSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "CounterSectionHeaderView")
         return taleView
     }()
   var dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>()
@@ -63,12 +64,8 @@ extension CounterViewController {
         
         dataSource.configureCell = { (_, tableView, indexPath, element) in
             let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
+//            cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
             return cell
-        }
-        
-        dataSource.titleForHeaderInSection = { dataSource, sectionIndex in
-            return dataSource[sectionIndex].model
         }
         
         items.asObservable()
@@ -92,5 +89,19 @@ extension CounterViewController {
 }
 
 extension CounterViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: CounterSectionHeaderView = tableView.dequeueReusableHeaderFooter()
+        headerView.listTapAction = {
+            
+        }
+        return headerView
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 220
+    }
 }

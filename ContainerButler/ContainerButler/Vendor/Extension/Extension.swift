@@ -644,6 +644,13 @@ extension UITableView {
         }
         return cell
     }
+    
+    func dequeueReusableHeaderFooter<T: UITableViewHeaderFooterView>() -> T where T: ViewNameReusable {
+        guard let cell = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T else {
+            fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
+        }
+        return cell
+    }
 }
 
 extension UICollectionView {
