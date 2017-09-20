@@ -177,7 +177,9 @@ extension CaptchaLoginVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 4 ? text: text.substring(to: "0123".endIndex)
+                let index = text.index(text.startIndex, offsetBy: 4)
+                let subText = text[ ..<index]
+                return text.characters.count <= 4 ? text: (String(subText))
             }
             .shareReplay(1)
             .bind(to: pwdTF.rx.text)
@@ -185,7 +187,9 @@ extension CaptchaLoginVC {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 11 ? text: text.substring(to: "15608006621".endIndex)
+                let index = text.index(text.startIndex, offsetBy: 11)
+                let subText = text[ ..<index]
+                 return text.characters.count <= 11 ? text: String(subText)
             }
             .shareReplay(1)
             .bind(to: phoneNumTF.rx.text)
@@ -201,7 +205,7 @@ extension CaptchaLoginVC {
                 HUD.showAlert(from: weakSelf, title: "确认手机号码",
                               message: "我们将发送验证码短信到这个号码：\n +86 \(weakSelf.phoneNumTF.text ?? "")",
                     enterTitle: "好",
-                    enterAction: { (_) in
+                    enterAction: { 
                     weakSelf.forgetPwdBtn.start(withTime: 120, title: "获取验证码", countDownTitle: "S后重发", mainColor: UIColor.white, count: UIColor.white)
                 }, cancleAction: nil)
             })

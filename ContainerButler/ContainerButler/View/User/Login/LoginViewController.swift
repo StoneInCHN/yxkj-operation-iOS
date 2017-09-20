@@ -165,7 +165,8 @@ extension LoginViewController {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 20 ? text: text.substring(to: "01234567890123456789".endIndex)
+                let index = text.index(text.startIndex, offsetBy: 20)
+                 return text.characters.count <= 20 ? text: String(text[..<index])
             }
             .shareReplay(1)
             .bind(to: pwdTF.rx.text)
@@ -173,7 +174,8 @@ extension LoginViewController {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 11 ? text: text.substring(to: "15608006621".endIndex)
+                let index = text.index(text.startIndex, offsetBy: 11)
+                return text.characters.count <= 11 ? text: String(text[..<index])
             }
             .shareReplay(1)
             .bind(to: phoneNumTF.rx.text)

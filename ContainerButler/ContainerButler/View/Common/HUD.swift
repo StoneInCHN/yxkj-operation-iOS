@@ -15,8 +15,8 @@ class HUD {
                               message: String?,
                               enterTitle: String?,
                               cancleTitle: String? = "取消",
-                              enterAction: ((Void) -> Void)?,
-                              cancleAction: ((Void) -> Void)?) {
+                              enterAction: (() -> Void)?,
+                              cancleAction: (() -> Void)?) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
             cancleAction?()

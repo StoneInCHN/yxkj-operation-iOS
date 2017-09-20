@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,14 +38,14 @@ extension AppDelegate {
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
         if let font = UIFont(name: "PingFangSC-Medium", size: 18) {
             UINavigationBar.appearance().titleTextAttributes =
-                [NSForegroundColorAttributeName: UIColor.white,
-                 NSFontAttributeName: font]
+                [NSAttributedStringKey.foregroundColor: UIColor.white,
+                 NSAttributedStringKey.font: font]
         }
-        let keyboardManager = IQKeyboardManager.sharedManager()
-        keyboardManager.enableAutoToolbar = false
-        keyboardManager.enable = true
-        keyboardManager.shouldResignOnTouchOutside = true
-        keyboardManager.shouldShowTextFieldPlaceholder = false
+//        let keyboardManager = IQKeyboardManager.shared()
+//        keyboardManager.isEnableAutoToolbar = false
+//        keyboardManager.isEnabled = true
+//        keyboardManager.shouldResignOnTouchOutside = true
+//        keyboardManager.shouldShowToolbarPlaceholder = false
     }
     
     fileprivate func chooseRootVC() {

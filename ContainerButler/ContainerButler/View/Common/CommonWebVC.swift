@@ -131,7 +131,7 @@ class CommonWebVC: BaseViewController {
         }
     }
     
-    func leftItemHandle() {
+    @objc func leftItemHandle() {
         if webView.canGoBack {
             webView.goBack()
         } else {
@@ -140,11 +140,11 @@ class CommonWebVC: BaseViewController {
         }
     }
     
-    func close_coupons() {
+    @objc func close_coupons() {
         navigationController?.popViewController(animated: true)
     }
     
-    func rightItemHandle() {
+    @objc func rightItemHandle() {
     }
 }
 

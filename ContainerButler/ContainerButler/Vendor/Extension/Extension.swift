@@ -392,10 +392,10 @@ extension String {
     func attributedString(_ color: UIColor = UIColor(hex: 0xff6400), fontSize: CGFloat, weight: CGFloat? = nil, strikethrough: Bool = false) -> NSAttributedString {
         guard let weight = weight else {
             return NSAttributedString(string: self,
-                                      attributes: [NSForegroundColorAttributeName: color, NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSStrikethroughStyleAttributeName: strikethrough])
+                                      attributes: [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize), NSAttributedStringKey.strikethroughStyle: strikethrough])
         }
         return NSAttributedString(string: self,
-                                  attributes: [NSForegroundColorAttributeName: color, NSFontAttributeName: UIFont.systemFont(ofSize: fontSize, weight: weight), NSStrikethroughStyleAttributeName: strikethrough])
+                                  attributes: [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight(rawValue: weight)), NSAttributedStringKey.strikethroughStyle: strikethrough])
     }
     
     /**
@@ -450,13 +450,13 @@ extension String {
         let range = (self as NSString).range(of: ".")
         let rangeZhe = (newString as NSString).range(of: "折")
         
-        attString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize:27), range:
+        attString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize:27), range:
             NSRange(location: range.location-1, length: 1))
         
-        attString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize:20), range: NSRange(location: 1, length: 2))
-        attString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize:15), range: NSRange(location: 3, length: 1))
-        attString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 0, length: 4))
-        attString.addAttribute(NSBaselineOffsetAttributeName, value: 1, range: rangeZhe)
+        attString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize:20), range: NSRange(location: 1, length: 2))
+        attString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize:15), range: NSRange(location: 3, length: 1))
+        attString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: 4))
+        attString.addAttribute(NSAttributedStringKey.baselineOffset, value: 1, range: rangeZhe)
         return attString
     }
     // 保留两位小数
