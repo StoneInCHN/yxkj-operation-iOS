@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
+		CD0C178E1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C178D1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift */; };
 		CD0FEDED1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */; };
 		CD0FEDEF1F73B9A4003DF9F0 /* NotReplenishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEE1F73B9A4003DF9F0 /* NotReplenishView.swift */; };
 		CD0FEDF11F73C500003DF9F0 /* ReplenishHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDF01F73C500003DF9F0 /* ReplenishHistoryVC.swift */; };
@@ -117,6 +118,7 @@
 /* Begin PBXFileReference section */
 		023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.release.xcconfig"; sourceTree = "<group>"; };
 		3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.debug.xcconfig"; sourceTree = "<group>"; };
+		CD0C178D1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishHistoryDetailVC.swift; sourceTree = "<group>"; };
 		CD0FEDA61F73A6E9003DF9F0 /* RITLBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLBaseViewModel.swift; sourceTree = "<group>"; };
 		CD0FEDA81F73A6E9003DF9F0 /* RITLPhotoBrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseCell.swift; sourceTree = "<group>"; };
 		CD0FEDA91F73A6E9003DF9F0 /* RITLPhotoBrowseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseController.swift; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 				CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */,
 				CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */,
 				CD0FEDF01F73C500003DF9F0 /* ReplenishHistoryVC.swift */,
+				CD0C178D1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
 				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
 				CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */,
@@ -1033,6 +1036,7 @@
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
 				CD7F85661F72387100BDE5AE /* CounterSectionHeaderView.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
+				CD0C178E1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift in Sources */,
 				CD0FEDF31F73C679003DF9F0 /* ReplenishHistoryTableHeader.swift in Sources */,
 				CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */,
 				CDE202991F71160300CB0145 /* CounterTableViewCell.swift in Sources */,

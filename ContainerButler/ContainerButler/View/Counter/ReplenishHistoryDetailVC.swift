@@ -1,22 +1,22 @@
 //
-//  ReplenishHistoryVC.swift
+//  ReplenishHistoryDetailVC.swift
 //  ContainerButler
 //
 //  Created by lieon on 2017/9/21.
 //  Copyright © 2017年 QuanChengShouWei. All rights reserved.
-//  补货记录
+//
 
 import UIKit
 import RxCocoa
 import RxSwift
 import RxDataSources
 
-class ReplenishHistoryVC: BaseViewController {
+class ReplenishHistoryDetailVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
-        taleView.register(ReplenishHistoryCell.self, forCellReuseIdentifier: "ReplenishHistoryCell")
+         taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         taleView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
         return taleView
     }()
@@ -27,11 +27,12 @@ class ReplenishHistoryVC: BaseViewController {
         setupUI()
         setupRX()
     }
+
 }
 
-extension ReplenishHistoryVC {
-     fileprivate func setupUI() {
-        title = "补货记录"
+extension ReplenishHistoryDetailVC {
+    fileprivate func setupUI() {
+        title = "香年广场-编号:01"
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
@@ -43,17 +44,17 @@ extension ReplenishHistoryVC {
         let items = Variable<[SectionModel<String, Double>]>([])
         
         items.value = [
-            SectionModel(model: "First section", items: [
+            SectionModel(model: "货道A", items: [
                 1.0,
                 2.0,
                 3.0
                 ]),
-            SectionModel(model: "Second section", items: [
+            SectionModel(model: "货道A", items: [
                 1.0,
                 2.0,
                 3.0
                 ]),
-            SectionModel(model: "Third section", items: [
+            SectionModel(model: "货道A", items: [
                 1.0,
                 2.0,
                 3.0
@@ -61,8 +62,11 @@ extension ReplenishHistoryVC {
         ]
         
         dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
-            let cell: ReplenishHistoryCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             return cell
+        }
+        dataSource.titleForHeaderInSection = { dataSource, index in
+            return dataSource[index].model
         }
         
         items.asObservable()
@@ -74,23 +78,12 @@ extension ReplenishHistoryVC {
     }
 }
 
-extension ReplenishHistoryVC: UITableViewDelegate {
+extension ReplenishHistoryDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ReplenishHistoryDetailVC(), animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: ReplenishHistoryTableHeader = tableView.dequeueReusableHeaderFooter()
-       
-        return headerView
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 60
     }
 }
