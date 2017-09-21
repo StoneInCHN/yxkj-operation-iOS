@@ -12,13 +12,8 @@ import RxCocoa
 import RxDataSources
 
 class CounterViewController: BaseViewController {
-    lazy var animator: TransitionAnimator = {
-        let animator = TransitionAnimator()
-        var x: CGFloat = 100
-        var height: CGFloat = 280
-        var y: CGFloat = self.view.bounds.size.height * 0.5 - height * 0.5
-        var width: CGFloat = self.view.bounds.size.width - 30 * 2
-        animator.presentFrame = CGRect(x: x, y: y, width: width, height: height)
+    lazy var replenishmentView: ReplenishmentView = {
+        let animator = ReplenishmentView()
         return animator
     }()
     fileprivate lazy var tableView: UITableView = {
@@ -42,6 +37,8 @@ extension CounterViewController {
     fileprivate func setupUI() {
         title = "货柜"
         view.addSubview(tableView)
+        replenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
+        view.addSubview(replenishmentView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
@@ -89,10 +86,8 @@ extension CounterViewController {
             let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.itemdidSelected
                 .subscribe(onNext: {[weak self] (model) in
-                let vcc = ReplenishmentVC()
-                    vcc.transitioningDelegate = self
-                    vcc.modalPresentationStyle = .custom
-                    self?.navigationController?.present(vcc, animated: true, completion: nil)
+                    guard let weakSelf = self else { return }
+                    weakSelf.replenishmentView.show()
             }).disposed(by: self.disposeBag)
             return cell
         }
@@ -151,5 +146,9 @@ extension CounterViewController: YBPopupMenuDelegate {
 extension CounterViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PopDownAnimationVC()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PopDowanDismissingVC()
     }
 }

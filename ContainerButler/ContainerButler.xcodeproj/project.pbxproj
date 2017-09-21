@@ -14,7 +14,7 @@
 		CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD731F7257CA00902F91 /* YBPopupMenuPath.m */; };
 		CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD751F7257CA00902F91 /* YBRectConst.m */; };
 		CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */; };
-		CD3BAD7F1F7264D100902F91 /* ReplenishmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */; };
+		CD3BAD7F1F7264D100902F91 /* ReplenishmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */; };
 		CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
@@ -113,7 +113,7 @@
 		CD3BAD741F7257CA00902F91 /* YBRectConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBRectConst.h; sourceTree = "<group>"; };
 		CD3BAD751F7257CA00902F91 /* YBRectConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDownAnimationVC.swift; sourceTree = "<group>"; };
-		CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentVC.swift; sourceTree = "<group>"; };
+		CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentView.swift; sourceTree = "<group>"; };
 		CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmationAnimator.swift; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				CDE202961F71100800CB0145 /* CounterViewController.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
 				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
-				CD3BAD7E1F7264D100902F91 /* ReplenishmentVC.swift */,
+				CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -725,7 +725,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD3BAD7F1F7264D100902F91 /* ReplenishmentVC.swift in Sources */,
+				CD3BAD7F1F7264D100902F91 /* ReplenishmentView.swift in Sources */,
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,

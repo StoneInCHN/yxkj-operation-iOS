@@ -65,8 +65,8 @@ class TransitionAnimator: NSObject, UIViewControllerTransitioningDelegate, UIVie
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if isPresent {
-            if let toView = transitionContext.view(forKey: UITransitionContextViewKey.to),  let
-            positionAnimation = POPSpringAnimation(propertyNamed: kPOPLayerPositionY),  let scaleAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY) {
+            if let toView = transitionContext.view(forKey: UITransitionContextViewKey.to), let
+            positionAnimation = POPSpringAnimation(propertyNamed: kPOPLayerPositionY), let scaleAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY) {
                 transitionContext.containerView.addSubview(toView)
                 positionAnimation.toValue = transitionContext.containerView.center.y
                 positionAnimation.springBounciness = 10
@@ -91,4 +91,3 @@ class TransitionAnimator: NSObject, UIViewControllerTransitioningDelegate, UIVie
     }
     
 }
-

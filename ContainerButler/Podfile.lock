@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - Kingfisher (4.0.1)
   - MJRefresh (3.1.12)
-  - ObjectMapper (2.3.0)
+  - ObjectMapper (3.0.0)
   - pop (1.0.10)
   - RxCocoa (4.0.0-beta.0):
     - RxSwift (~> 4.0.0-beta.0)
@@ -20,9 +20,9 @@ DEPENDENCIES:
   - MJRefresh
   - ObjectMapper (from `https://github.com/Hearst-DD/ObjectMapper.git`, branch `swift-4`)
   - pop (from `https://github.com/facebook/pop.git`)
-  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, branch `swift4.0`)
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, branch `rxswift4.0-swift4.0`)
   - RxDataSources (from `https://github.com/RxSwiftCommunity/RxDataSources.git`, branch `swift4.0`)
-  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `swift4.0`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `rxswift4.0-swift4.0`)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SwiftDate (~> 4.0)
@@ -34,37 +34,37 @@ EXTERNAL SOURCES:
   pop:
     :git: https://github.com/facebook/pop.git
   RxCocoa:
-    :branch: swift4.0
+    :branch: rxswift4.0-swift4.0
     :git: https://github.com/ReactiveX/RxSwift.git
   RxDataSources:
     :branch: swift4.0
     :git: https://github.com/RxSwiftCommunity/RxDataSources.git
   RxSwift:
-    :branch: swift4.0
+    :branch: rxswift4.0-swift4.0
     :git: https://github.com/ReactiveX/RxSwift.git
 
 CHECKOUT OPTIONS:
   ObjectMapper:
-    :commit: 0fac1f2b3cf26acd0dd8e605b67fdc3c292fb74c
+    :commit: 01d976a6096417e33f0c421e4c6ba8c8f53519d9
     :git: https://github.com/Hearst-DD/ObjectMapper.git
   pop:
     :commit: e645e895687a29f0093b92e1026656f50e8308be
     :git: https://github.com/facebook/pop.git
   RxCocoa:
-    :commit: b30319edaceea1650a9af8dcba1f0f5da144b196
+    :commit: a0bf386834ca09e0438e2edf03d740eac3c4a6ce
     :git: https://github.com/ReactiveX/RxSwift.git
   RxDataSources:
     :commit: 3fd24a694ba808e020f980d008385ac007d9f3c7
     :git: https://github.com/RxSwiftCommunity/RxDataSources.git
   RxSwift:
-    :commit: b30319edaceea1650a9af8dcba1f0f5da144b196
+    :commit: a0bf386834ca09e0438e2edf03d740eac3c4a6ce
     :git: https://github.com/ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  ObjectMapper: 071f9e47ae0ac75e3b445a4f3510b6a94afef52d
+  ObjectMapper: 739e5530df22248823f6cc7ed9e016ebf2c26a27
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   RxCocoa: f2dff5e6b6a40f842867ec5915f449e1c3af563a
   RxDataSources: 3cf110f8e681b360dfab76cd933ed9aba1b1176f
@@ -73,6 +73,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   SwiftDate: a70a534d4feed03b2a2b575e36bef82dc2286a8d
 
-PODFILE CHECKSUM: 5419bde98f1d98089330cd503f6bcd5ef252ee17
+PODFILE CHECKSUM: cabbe9479489983d340fe404f7186364906f94c8
 
 COCOAPODS: 1.3.1
