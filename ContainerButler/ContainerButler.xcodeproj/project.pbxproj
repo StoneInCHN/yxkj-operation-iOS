@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
+		CD0FEDED1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */; };
+		CD0FEDEF1F73B9A4003DF9F0 /* NotReplenishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEE1F73B9A4003DF9F0 /* NotReplenishView.swift */; };
 		CD1D1E2E1F736909008A3092 /* ContainerManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */; };
 		CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E2F1F736A05008A3092 /* PageContentView.swift */; };
 		CD1D1E321F736AFD008A3092 /* NotReplenishedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */; };
@@ -171,6 +173,8 @@
 		CD0FEDE91F73A6E9003DF9F0 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		CD0FEDEA1F73A6E9003DF9F0 /* SnapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SnapKit.h; sourceTree = "<group>"; };
 		CD0FEDEB1F73A6E9003DF9F0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
+		CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishedGoodsListVC.swift; sourceTree = "<group>"; };
+		CD0FEDEE1F73B9A4003DF9F0 /* NotReplenishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishView.swift; sourceTree = "<group>"; };
 		CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageVC.swift; sourceTree = "<group>"; };
 		CD1D1E2F1F736A05008A3092 /* PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
 		CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishedVC.swift; sourceTree = "<group>"; };
@@ -744,10 +748,12 @@
 				CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */,
 				CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */,
 				CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */,
+				CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
 				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
 				CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */,
 				CD1D1E371F738ACB008A3092 /* GoodListCell.swift */,
+				CD0FEDEE1F73B9A4003DF9F0 /* NotReplenishView.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -1003,10 +1009,12 @@
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CD1D1E381F738ACB008A3092 /* GoodListCell.swift in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
+				CD0FEDED1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift in Sources */,
 				CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */,
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
 				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
+				CD0FEDEF1F73B9A4003DF9F0 /* NotReplenishView.swift in Sources */,
 				CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */,
 				CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */,
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,

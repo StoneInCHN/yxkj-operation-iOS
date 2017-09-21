@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import pop
 
 class ReplenishmentView: UIView {
     var replenishAction: (() -> Void)?
@@ -81,40 +80,6 @@ class ReplenishmentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
-    }
-    
-    func show() {
-        let positionAnimation = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
-        positionAnimation?.toValue = superview?.center.y
-        positionAnimation?.springBounciness = 10
-        let scaleAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnimation?.springBounciness = 20
-        scaleAnimation?.fromValue = NSValue.init(cgPoint: CGPoint(x: 1.2, y: 1.4))
-         scaleAnimation?.toValue = NSValue.init(cgPoint: CGPoint(x: 1.0, y: 1.0))
-        if let position = positionAnimation, let scale = scaleAnimation {
-            layer.pop_add(position, forKey: "positionAnimation")
-            layer.pop_add(scale, forKey: "scaleAnimation")
-        }
-      
-    }
-    
-    func dismiss() {
-        let closeAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
-        closeAnimation?.duration = 0.5
-        closeAnimation?.toValue = 0 - (superview?.layer.position.y ?? 0)
-        closeAnimation?.completionBlock = { _, _ in
-            
-        }
-        let scaleDownAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleDownAnimation?.springBounciness = 20
-        scaleDownAnimation?.toValue = NSValue.init(cgPoint: CGPoint(x: 0, y: 0))
-        scaleDownAnimation?.completionBlock = {[weak self]_, _ in
-            self?.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
-        }
-        if let close = closeAnimation, let scale = scaleDownAnimation {
-            layer.pop_add(close, forKey: "closeAnimation")
-            layer.pop_add(scale, forKey: "scaleDownAnimation")
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {

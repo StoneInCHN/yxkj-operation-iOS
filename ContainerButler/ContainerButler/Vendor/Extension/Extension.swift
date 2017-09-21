@@ -11,6 +11,7 @@ import UIKit
 import SwiftDate
 import RxSwift
 import RxCocoa
+import pop
 
 extension UIScreen {
     static var width: CGFloat {
@@ -695,4 +696,44 @@ fileprivate func castOrThrow<T>(_ resultType: T.Type, _ object: Any) throws -> T
     }
     
     return returnValue
+}
+
+extension UIView {
+    
+    func show() {
+        let positionAnimation = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
+        positionAnimation?.toValue = superview?.center.y
+        positionAnimation?.springBounciness = 10
+        let scaleAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation?.springBounciness = 20
+        scaleAnimation?.fromValue = NSValue.init(cgPoint: CGPoint(x: 1.2, y: 1.4))
+        scaleAnimation?.toValue = NSValue.init(cgPoint: CGPoint(x: 1, y: 1))
+        scaleAnimation?.removedOnCompletion = true
+        positionAnimation?.removedOnCompletion = true
+        if let position = positionAnimation, let scale = scaleAnimation {
+            layer.pop_add(position, forKey: "positionAnimation")
+            layer.pop_add(scale, forKey: "scaleAnimation")
+            layer.pop_removeAnimation(forKey: "scaleDownAnimation")
+        }
+    }
+    
+    func dismiss() {
+        let closeAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
+        closeAnimation?.duration = 0.5
+        closeAnimation?.toValue = 0 - (superview?.layer.position.y ?? 0)
+        closeAnimation?.removedOnCompletion = true
+        let scaleDownAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleDownAnimation?.springBounciness = 20
+        scaleDownAnimation?.toValue = NSValue.init(cgPoint: CGPoint(x: 0, y: 0))
+        scaleDownAnimation?.removedOnCompletion = true
+        if let close = closeAnimation, let scale = scaleDownAnimation {
+            layer.pop_add(close, forKey: "closeAnimation")
+            layer.pop_removeAnimation(forKey: "scaleAnimation")
+            layer.pop_add(scale, forKey: "scaleDownAnimation")
+        }
+        scaleDownAnimation?.completionBlock = {_, _ in
+            self.transform = .identity
+        }
+    }
+
 }

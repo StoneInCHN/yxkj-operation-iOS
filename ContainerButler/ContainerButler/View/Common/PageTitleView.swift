@@ -10,7 +10,6 @@ import UIKit
 
 private let scrollowLineH: CGFloat = 2.0
 private let zoomScale: CGFloat = 1.2
-private let labelCountPerPage: Int = 2
 private let normalColor: (CGFloat, CGFloat, CGFloat) = (205, 115, 255)
 private let selectColor: (CGFloat, CGFloat, CGFloat) = (255, 171, 51)
 
@@ -21,8 +20,9 @@ class  PageTitleView: UIView {
             self.scrollRectToVisibleCentered(on: self.titleLabels[currentIndex].frame, isAnimate: true)
         }
     }
+    var labelCountPerPage: Int = 2
     fileprivate var labelWidth: CGFloat = 0.0
-    fileprivate var titles: [String]
+    fileprivate var titles: [String] = []
     fileprivate lazy var colorLineWidths: [CGFloat] = [CGFloat]()
     fileprivate var titleLabels: [UILabel] = [UILabel]()
     fileprivate lazy var scrollView: UIScrollView = {
@@ -45,9 +45,19 @@ class  PageTitleView: UIView {
         return scrollLine
     }()
     
-    init(frame: CGRect, titles: [String]) {
-        self.titles = titles
+    init(frame: CGRect, titles: [String]?) {
         super.init(frame: frame)
+        if let titles = titles {
+            self.titles = titles
+            setupUI()
+        }
+    }
+    
+    func setTitles(_ titles: [String]) {
+        self.titles.removeAll(keepingCapacity: false)
+        titleLabels.removeAll(keepingCapacity: false)
+        self.titles = titles
+        subviews.forEach { $0.removeFromSuperview() }
         setupUI()
     }
     
