@@ -16,7 +16,7 @@ class PageContentView: UIView {
     fileprivate var startOffsetX: CGFloat = 0.0
     fileprivate var  isForbiden: Bool = false
     fileprivate weak var parentVC: UIViewController?
-    fileprivate lazy var collectView: UICollectionView = { [weak self] in
+    lazy var collectView: UICollectionView = { [weak self] in
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = (self?.bounds.size)!
         layout.minimumInteritemSpacing = 0
