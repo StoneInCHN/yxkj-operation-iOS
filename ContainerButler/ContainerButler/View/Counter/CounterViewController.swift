@@ -14,6 +14,9 @@ import RxDataSources
 class CounterViewController: BaseViewController {
     lazy var replenishmentView: ReplenishmentView = {
         let animator = ReplenishmentView()
+        animator.replenishAction = { [weak self] in
+            self?.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+        }
         return animator
     }()
     fileprivate lazy var tableView: UITableView = {
@@ -140,15 +143,5 @@ extension CounterViewController: YBPopupMenuDelegate {
         default:
             break
         }
-    }
-}
-
-extension CounterViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PopDownAnimationVC()
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PopDowanDismissingVC()
     }
 }

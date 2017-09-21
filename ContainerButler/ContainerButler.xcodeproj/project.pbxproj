@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
+		CD1D1E2E1F736909008A3092 /* ContainerManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */; };
+		CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E2F1F736A05008A3092 /* PageContentView.swift */; };
+		CD1D1E321F736AFD008A3092 /* NotReplenishedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */; };
+		CD1D1E341F736B53008A3092 /* WholeGoodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */; };
+		CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E351F736C4F008A3092 /* PageTitleView.swift */; };
 		CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */; };
 		CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD6D1F72537800902F91 /* GIBadgeView.m */; };
 		CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD711F7257CA00902F91 /* YBPopupMenu.m */; };
@@ -103,6 +108,11 @@
 /* Begin PBXFileReference section */
 		023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.release.xcconfig"; sourceTree = "<group>"; };
 		3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.debug.xcconfig"; sourceTree = "<group>"; };
+		CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageVC.swift; sourceTree = "<group>"; };
+		CD1D1E2F1F736A05008A3092 /* PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
+		CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishedVC.swift; sourceTree = "<group>"; };
+		CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholeGoodsVC.swift; sourceTree = "<group>"; };
+		CD1D1E351F736C4F008A3092 /* PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		CD3BAD6C1F72537800902F91 /* GIBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GIBadgeView.h; sourceTree = "<group>"; };
 		CD3BAD6D1F72537800902F91 /* GIBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GIBadgeView.m; sourceTree = "<group>"; };
@@ -349,6 +359,8 @@
 				CD69C47E1F668FE500623B91 /* BaseViewController.swift */,
 				CD69C4801F66908E00623B91 /* CommonWebVC.swift */,
 				CD78F08D1F6782AB00D50B7B /* HUD.swift */,
+				CD1D1E2F1F736A05008A3092 /* PageContentView.swift */,
+				CD1D1E351F736C4F008A3092 /* PageTitleView.swift */,
 				CD78F0911F67C66E00D50B7B /* NavigationController.swift */,
 				CD78F0931F67C6B000D50B7B /* TabBarController.swift */,
 			);
@@ -474,6 +486,9 @@
 			isa = PBXGroup;
 			children = (
 				CDE202961F71100800CB0145 /* CounterViewController.swift */,
+				CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */,
+				CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */,
+				CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */,
 				CDE202981F71160300CB0145 /* CounterTableViewCell.swift */,
 				CD7F85651F72387100BDE5AE /* CounterSectionHeaderView.swift */,
 				CD3BAD7E1F7264D100902F91 /* ReplenishmentView.swift */,
@@ -728,6 +743,7 @@
 				CD3BAD7F1F7264D100902F91 /* ReplenishmentView.swift in Sources */,
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
+				CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */,
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
 				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
@@ -744,12 +760,15 @@
 				CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */,
 				CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */,
 				CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */,
+				CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */,
 				CD78F0921F67C66E00D50B7B /* NavigationController.swift in Sources */,
 				CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */,
 				CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */,
 				CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */,
+				CD1D1E2E1F736909008A3092 /* ContainerManageVC.swift in Sources */,
 				CD78F0901F67AE3F00D50B7B /* Location.swift in Sources */,
 				CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */,
+				CD1D1E321F736AFD008A3092 /* NotReplenishedVC.swift in Sources */,
 				CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */,
 				CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */,
 				CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */,
@@ -759,6 +778,7 @@
 				CDE202971F71100800CB0145 /* CounterViewController.swift in Sources */,
 				CDF6B5101F68D136000A1915 /* Enum.swift in Sources */,
 				CD69C47A1F668EDF00623B91 /* Protocol.swift in Sources */,
+				CD1D1E341F736B53008A3092 /* WholeGoodsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
