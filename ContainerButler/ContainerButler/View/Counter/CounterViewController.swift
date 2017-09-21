@@ -139,7 +139,7 @@ extension CounterViewController: YBPopupMenuDelegate {
         case 0: /// 待补清单
             navigationController?.pushViewController(NotReplenishedGoodsListVC(), animated: true)
         case 1: /// 补货记录
-            navigationController?.pushViewController(UIViewController(), animated: true)
+            navigationController?.pushViewController(ReplenishHistoryVC(), animated: true)
         default:
             break
         }

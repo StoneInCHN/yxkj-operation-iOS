@@ -12,7 +12,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
     lazy var notreplenishmentView: NotReplenishView = {
         let animator = NotReplenishView()
         animator.replenishAction = { [weak self] in
-            self?.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+            
         }
         return animator
     }()

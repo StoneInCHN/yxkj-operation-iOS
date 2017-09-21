@@ -83,6 +83,7 @@ class NotReplenishView: UIView {
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         if let disposeBag = self?.disposeBag {
             loginBtn.rx.tap.subscribe({ (_) in
+                self?.dismiss()
                 self?.replenishAction?()
             }).disposed(by: disposeBag)
         }
