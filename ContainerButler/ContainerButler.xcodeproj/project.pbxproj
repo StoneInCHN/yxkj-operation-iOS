@@ -14,6 +14,9 @@
 		CD1D1E341F736B53008A3092 /* WholeGoodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */; };
 		CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E351F736C4F008A3092 /* PageTitleView.swift */; };
 		CD1D1E381F738ACB008A3092 /* GoodListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E371F738ACB008A3092 /* GoodListCell.swift */; };
+		CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E3F1F73A19F008A3092 /* DZNPhotoEditorViewController.m */; };
+		CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E411F73A19F008A3092 /* DZNPhotoPickerControllerConstants.m */; };
+		CD1D1E491F73A1B8008A3092 /* UIImagePickerController+Edit.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E431F73A19F008A3092 /* UIImagePickerController+Edit.m */; };
 		CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */; };
 		CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD6D1F72537800902F91 /* GIBadgeView.m */; };
 		CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD711F7257CA00902F91 /* YBPopupMenu.m */; };
@@ -109,12 +112,77 @@
 /* Begin PBXFileReference section */
 		023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.release.xcconfig"; sourceTree = "<group>"; };
 		3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.debug.xcconfig"; sourceTree = "<group>"; };
+		CD0FEDA61F73A6E9003DF9F0 /* RITLBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLBaseViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDA81F73A6E9003DF9F0 /* RITLPhotoBrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseCell.swift; sourceTree = "<group>"; };
+		CD0FEDA91F73A6E9003DF9F0 /* RITLPhotoBrowseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseController.swift; sourceTree = "<group>"; };
+		CD0FEDAA1F73A6E9003DF9F0 /* RITLPhotoBrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDAC1F73A6E9003DF9F0 /* RITLPhotoGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoGroupCell.swift; sourceTree = "<group>"; };
+		CD0FEDAD1F73A6E9003DF9F0 /* RITLPhotoGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoGroupViewController.swift; sourceTree = "<group>"; };
+		CD0FEDAE1F73A6E9003DF9F0 /* RITLPhotoGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoGroupViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDB01F73A6E9003DF9F0 /* RITLPhotoNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoNavigationViewController.swift; sourceTree = "<group>"; };
+		CD0FEDB11F73A6E9003DF9F0 /* RITLPhotoNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoNavigationViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDB31F73A6E9003DF9F0 /* RITLPhotoBottomReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBottomReusableView.swift; sourceTree = "<group>"; };
+		CD0FEDB41F73A6E9003DF9F0 /* RITLPhotoPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoPreviewController.swift; sourceTree = "<group>"; };
+		CD0FEDB51F73A6E9003DF9F0 /* RITLPhotosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotosCell.swift; sourceTree = "<group>"; };
+		CD0FEDB61F73A6E9003DF9F0 /* RITLPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotosViewController.swift; sourceTree = "<group>"; };
+		CD0FEDB71F73A6E9003DF9F0 /* RITLPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotosViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDB91F73A6E9003DF9F0 /* RITLPhotoBridgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBridgeManager.swift; sourceTree = "<group>"; };
+		CD0FEDBA1F73A6E9003DF9F0 /* RITLPhotoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoCacheManager.swift; sourceTree = "<group>"; };
+		CD0FEDBB1F73A6E9003DF9F0 /* RITLPhotoHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoHandleManager.swift; sourceTree = "<group>"; };
+		CD0FEDBD1F73A6E9003DF9F0 /* RITLPhotoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoConfig.swift; sourceTree = "<group>"; };
+		CD0FEDBE1F73A6E9003DF9F0 /* RITLPhotoConfigExtern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoConfigExtern.swift; sourceTree = "<group>"; };
+		CD0FEDBF1F73A6E9003DF9F0 /* RITLPhotoRequestStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoRequestStore.swift; sourceTree = "<group>"; };
+		CD0FEDC01F73A6E9003DF9F0 /* RITLPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoStore.swift; sourceTree = "<group>"; };
+		CD0FEDC31F73A6E9003DF9F0 /* RITLPhotoClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoClosure.swift; sourceTree = "<group>"; };
+		CD0FEDC51F73A6E9003DF9F0 /* RITLPhotoExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoExtension.swift; sourceTree = "<group>"; };
+		CD0FEDC71F73A6E9003DF9F0 /* RITLPublicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPublicViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDC81F73A6E9003DF9F0 /* RITLScrollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLScrollViewModel.swift; sourceTree = "<group>"; };
+		CD0FEDCA1F73A6E9003DF9F0 /* Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		CD0FEDCB1F73A6E9003DF9F0 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
+		CD0FEDCC1F73A6E9003DF9F0 /* ConstraintConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
+		CD0FEDCD1F73A6E9003DF9F0 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintConstantTarget.swift; sourceTree = "<group>"; };
+		CD0FEDCE1F73A6E9003DF9F0 /* ConstraintDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
+		CD0FEDCF1F73A6E9003DF9F0 /* ConstraintDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintDSL.swift; sourceTree = "<group>"; };
+		CD0FEDD01F73A6E9003DF9F0 /* ConstraintInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintInsets.swift; sourceTree = "<group>"; };
+		CD0FEDD11F73A6E9003DF9F0 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintInsetTarget.swift; sourceTree = "<group>"; };
+		CD0FEDD21F73A6E9003DF9F0 /* ConstraintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
+		CD0FEDD31F73A6E9003DF9F0 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
+		CD0FEDD41F73A6E9003DF9F0 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		CD0FEDD51F73A6E9003DF9F0 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		CD0FEDD61F73A6E9003DF9F0 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
+		CD0FEDD71F73A6E9003DF9F0 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
+		CD0FEDD81F73A6E9003DF9F0 /* ConstraintMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
+		CD0FEDD91F73A6E9003DF9F0 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMakerEditable.swift; sourceTree = "<group>"; };
+		CD0FEDDA1F73A6E9003DF9F0 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		CD0FEDDB1F73A6E9003DF9F0 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		CD0FEDDC1F73A6E9003DF9F0 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
+		CD0FEDDD1F73A6E9003DF9F0 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		CD0FEDDE1F73A6E9003DF9F0 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		CD0FEDDF1F73A6E9003DF9F0 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
+		CD0FEDE01F73A6E9003DF9F0 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
+		CD0FEDE11F73A6E9003DF9F0 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
+		CD0FEDE21F73A6E9003DF9F0 /* ConstraintRelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
+		CD0FEDE31F73A6E9003DF9F0 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		CD0FEDE41F73A6E9003DF9F0 /* ConstraintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
+		CD0FEDE51F73A6E9003DF9F0 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintViewDSL.swift; sourceTree = "<group>"; };
+		CD0FEDE61F73A6E9003DF9F0 /* Debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
+		CD0FEDE71F73A6E9003DF9F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD0FEDE81F73A6E9003DF9F0 /* LayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
+		CD0FEDE91F73A6E9003DF9F0 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
+		CD0FEDEA1F73A6E9003DF9F0 /* SnapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SnapKit.h; sourceTree = "<group>"; };
+		CD0FEDEB1F73A6E9003DF9F0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		CD1D1E2D1F736909008A3092 /* ContainerManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageVC.swift; sourceTree = "<group>"; };
 		CD1D1E2F1F736A05008A3092 /* PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
 		CD1D1E311F736AFD008A3092 /* NotReplenishedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishedVC.swift; sourceTree = "<group>"; };
 		CD1D1E331F736B53008A3092 /* WholeGoodsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholeGoodsVC.swift; sourceTree = "<group>"; };
 		CD1D1E351F736C4F008A3092 /* PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		CD1D1E371F738ACB008A3092 /* GoodListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodListCell.swift; sourceTree = "<group>"; };
+		CD1D1E3E1F73A19F008A3092 /* DZNPhotoEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZNPhotoEditorViewController.h; sourceTree = "<group>"; };
+		CD1D1E3F1F73A19F008A3092 /* DZNPhotoEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZNPhotoEditorViewController.m; sourceTree = "<group>"; };
+		CD1D1E401F73A19F008A3092 /* DZNPhotoPickerControllerConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZNPhotoPickerControllerConstants.h; sourceTree = "<group>"; };
+		CD1D1E411F73A19F008A3092 /* DZNPhotoPickerControllerConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZNPhotoPickerControllerConstants.m; sourceTree = "<group>"; };
+		CD1D1E421F73A19F008A3092 /* UIImagePickerController+Edit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Edit.h"; sourceTree = "<group>"; };
+		CD1D1E431F73A19F008A3092 /* UIImagePickerController+Edit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Edit.m"; sourceTree = "<group>"; };
 		CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		CD3BAD6C1F72537800902F91 /* GIBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GIBadgeView.h; sourceTree = "<group>"; };
 		CD3BAD6D1F72537800902F91 /* GIBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GIBadgeView.m; sourceTree = "<group>"; };
@@ -245,6 +313,189 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD0FEDA31F73A6E9003DF9F0 /* RITLImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDA41F73A6E9003DF9F0 /* Photofiles */,
+				CD0FEDC11F73A6E9003DF9F0 /* Tool */,
+			);
+			path = RITLImagePicker;
+			sourceTree = "<group>";
+		};
+		CD0FEDA41F73A6E9003DF9F0 /* Photofiles */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDA51F73A6E9003DF9F0 /* BaseClass */,
+				CD0FEDA71F73A6E9003DF9F0 /* Browse */,
+				CD0FEDAB1F73A6E9003DF9F0 /* Group */,
+				CD0FEDAF1F73A6E9003DF9F0 /* Navigation */,
+				CD0FEDB21F73A6E9003DF9F0 /* Photo */,
+				CD0FEDB81F73A6E9003DF9F0 /* PhotoManager */,
+				CD0FEDBC1F73A6E9003DF9F0 /* PhotoStore */,
+			);
+			path = Photofiles;
+			sourceTree = "<group>";
+		};
+		CD0FEDA51F73A6E9003DF9F0 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDA61F73A6E9003DF9F0 /* RITLBaseViewModel.swift */,
+			);
+			path = BaseClass;
+			sourceTree = "<group>";
+		};
+		CD0FEDA71F73A6E9003DF9F0 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDA81F73A6E9003DF9F0 /* RITLPhotoBrowseCell.swift */,
+				CD0FEDA91F73A6E9003DF9F0 /* RITLPhotoBrowseController.swift */,
+				CD0FEDAA1F73A6E9003DF9F0 /* RITLPhotoBrowseViewModel.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		CD0FEDAB1F73A6E9003DF9F0 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDAC1F73A6E9003DF9F0 /* RITLPhotoGroupCell.swift */,
+				CD0FEDAD1F73A6E9003DF9F0 /* RITLPhotoGroupViewController.swift */,
+				CD0FEDAE1F73A6E9003DF9F0 /* RITLPhotoGroupViewModel.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		CD0FEDAF1F73A6E9003DF9F0 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDB01F73A6E9003DF9F0 /* RITLPhotoNavigationViewController.swift */,
+				CD0FEDB11F73A6E9003DF9F0 /* RITLPhotoNavigationViewModel.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		CD0FEDB21F73A6E9003DF9F0 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDB31F73A6E9003DF9F0 /* RITLPhotoBottomReusableView.swift */,
+				CD0FEDB41F73A6E9003DF9F0 /* RITLPhotoPreviewController.swift */,
+				CD0FEDB51F73A6E9003DF9F0 /* RITLPhotosCell.swift */,
+				CD0FEDB61F73A6E9003DF9F0 /* RITLPhotosViewController.swift */,
+				CD0FEDB71F73A6E9003DF9F0 /* RITLPhotosViewModel.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		CD0FEDB81F73A6E9003DF9F0 /* PhotoManager */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDB91F73A6E9003DF9F0 /* RITLPhotoBridgeManager.swift */,
+				CD0FEDBA1F73A6E9003DF9F0 /* RITLPhotoCacheManager.swift */,
+				CD0FEDBB1F73A6E9003DF9F0 /* RITLPhotoHandleManager.swift */,
+			);
+			path = PhotoManager;
+			sourceTree = "<group>";
+		};
+		CD0FEDBC1F73A6E9003DF9F0 /* PhotoStore */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDBD1F73A6E9003DF9F0 /* RITLPhotoConfig.swift */,
+				CD0FEDBE1F73A6E9003DF9F0 /* RITLPhotoConfigExtern.swift */,
+				CD0FEDBF1F73A6E9003DF9F0 /* RITLPhotoRequestStore.swift */,
+				CD0FEDC01F73A6E9003DF9F0 /* RITLPhotoStore.swift */,
+			);
+			path = PhotoStore;
+			sourceTree = "<group>";
+		};
+		CD0FEDC11F73A6E9003DF9F0 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDC21F73A6E9003DF9F0 /* Closure */,
+				CD0FEDC41F73A6E9003DF9F0 /* Extension */,
+				CD0FEDC61F73A6E9003DF9F0 /* Protocol */,
+				CD0FEDC91F73A6E9003DF9F0 /* SnapKit */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		CD0FEDC21F73A6E9003DF9F0 /* Closure */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDC31F73A6E9003DF9F0 /* RITLPhotoClosure.swift */,
+			);
+			path = Closure;
+			sourceTree = "<group>";
+		};
+		CD0FEDC41F73A6E9003DF9F0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDC51F73A6E9003DF9F0 /* RITLPhotoExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CD0FEDC61F73A6E9003DF9F0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDC71F73A6E9003DF9F0 /* RITLPublicViewModel.swift */,
+				CD0FEDC81F73A6E9003DF9F0 /* RITLScrollViewModel.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CD0FEDC91F73A6E9003DF9F0 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FEDCA1F73A6E9003DF9F0 /* Constraint.swift */,
+				CD0FEDCB1F73A6E9003DF9F0 /* ConstraintAttributes.swift */,
+				CD0FEDCC1F73A6E9003DF9F0 /* ConstraintConfig.swift */,
+				CD0FEDCD1F73A6E9003DF9F0 /* ConstraintConstantTarget.swift */,
+				CD0FEDCE1F73A6E9003DF9F0 /* ConstraintDescription.swift */,
+				CD0FEDCF1F73A6E9003DF9F0 /* ConstraintDSL.swift */,
+				CD0FEDD01F73A6E9003DF9F0 /* ConstraintInsets.swift */,
+				CD0FEDD11F73A6E9003DF9F0 /* ConstraintInsetTarget.swift */,
+				CD0FEDD21F73A6E9003DF9F0 /* ConstraintItem.swift */,
+				CD0FEDD31F73A6E9003DF9F0 /* ConstraintLayoutGuide+Extensions.swift */,
+				CD0FEDD41F73A6E9003DF9F0 /* ConstraintLayoutGuide.swift */,
+				CD0FEDD51F73A6E9003DF9F0 /* ConstraintLayoutGuideDSL.swift */,
+				CD0FEDD61F73A6E9003DF9F0 /* ConstraintLayoutSupport.swift */,
+				CD0FEDD71F73A6E9003DF9F0 /* ConstraintLayoutSupportDSL.swift */,
+				CD0FEDD81F73A6E9003DF9F0 /* ConstraintMaker.swift */,
+				CD0FEDD91F73A6E9003DF9F0 /* ConstraintMakerEditable.swift */,
+				CD0FEDDA1F73A6E9003DF9F0 /* ConstraintMakerExtendable.swift */,
+				CD0FEDDB1F73A6E9003DF9F0 /* ConstraintMakerFinalizable.swift */,
+				CD0FEDDC1F73A6E9003DF9F0 /* ConstraintMakerPriortizable.swift */,
+				CD0FEDDD1F73A6E9003DF9F0 /* ConstraintMakerRelatable.swift */,
+				CD0FEDDE1F73A6E9003DF9F0 /* ConstraintMultiplierTarget.swift */,
+				CD0FEDDF1F73A6E9003DF9F0 /* ConstraintOffsetTarget.swift */,
+				CD0FEDE01F73A6E9003DF9F0 /* ConstraintPriorityTarget.swift */,
+				CD0FEDE11F73A6E9003DF9F0 /* ConstraintRelatableTarget.swift */,
+				CD0FEDE21F73A6E9003DF9F0 /* ConstraintRelation.swift */,
+				CD0FEDE31F73A6E9003DF9F0 /* ConstraintView+Extensions.swift */,
+				CD0FEDE41F73A6E9003DF9F0 /* ConstraintView.swift */,
+				CD0FEDE51F73A6E9003DF9F0 /* ConstraintViewDSL.swift */,
+				CD0FEDE61F73A6E9003DF9F0 /* Debugging.swift */,
+				CD0FEDE71F73A6E9003DF9F0 /* Info.plist */,
+				CD0FEDE81F73A6E9003DF9F0 /* LayoutConstraint.swift */,
+				CD0FEDE91F73A6E9003DF9F0 /* LayoutConstraintItem.swift */,
+				CD0FEDEA1F73A6E9003DF9F0 /* SnapKit.h */,
+				CD0FEDEB1F73A6E9003DF9F0 /* UILayoutSupport+Extensions.swift */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		CD1D1E3D1F73A19F008A3092 /* UIImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				CD1D1E3E1F73A19F008A3092 /* DZNPhotoEditorViewController.h */,
+				CD1D1E3F1F73A19F008A3092 /* DZNPhotoEditorViewController.m */,
+				CD1D1E401F73A19F008A3092 /* DZNPhotoPickerControllerConstants.h */,
+				CD1D1E411F73A19F008A3092 /* DZNPhotoPickerControllerConstants.m */,
+				CD1D1E421F73A19F008A3092 /* UIImagePickerController+Edit.h */,
+				CD1D1E431F73A19F008A3092 /* UIImagePickerController+Edit.m */,
+			);
+			path = UIImagePickerController;
+			sourceTree = "<group>";
+		};
 		CD3BAD6B1F72537800902F91 /* Badge */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +623,8 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CD0FEDA31F73A6E9003DF9F0 /* RITLImagePicker */,
+				CD1D1E3D1F73A19F008A3092 /* UIImagePickerController */,
 				CD3BAD6F1F7257CA00902F91 /* YBPopupMenu */,
 				CD3BAD6B1F72537800902F91 /* Badge */,
 				CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */,
@@ -743,6 +996,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */,
+				CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */,
+				CD1D1E491F73A1B8008A3092 /* UIImagePickerController+Edit.m in Sources */,
 				CD3BAD7F1F7264D100902F91 /* ReplenishmentView.swift in Sources */,
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CD1D1E381F738ACB008A3092 /* GoodListCell.swift in Sources */,

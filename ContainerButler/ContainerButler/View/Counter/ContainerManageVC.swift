@@ -8,6 +8,7 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
 
 class ContainerManageVC: BaseViewController {
     fileprivate lazy var pageTitleView: PageTitleView = {
@@ -39,9 +40,10 @@ extension ContainerManageVC {
         view.addSubview(pageTitleView)
         view.addSubview(pageContenView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "拍照完成", style: .plain, target: nil, action: nil)
+        // FIXME:IN main thread
         navigationItem.rightBarButtonItem?.rx.tap
             .subscribe(onNext: { [weak self] in
-            
+            self?.complishAction()
         })
             .disposed(by: disposeBag)
     }
@@ -53,5 +55,47 @@ extension ContainerManageVC {
         pageContenView.tapAction = {[weak self] (progress, souceIndex, targetIndex) in
             self?.pageTitleView.setTitle(progress: progress, sourceIndex: souceIndex, targetIndex: targetIndex)
         }
+    }
+    
+}
+
+extension ContainerManageVC {
+    fileprivate func complishAction() {
+        let sheet = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        let camerAction = UIAlertAction(title: "拍照", style: .default) { (_) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.getNewImg(type: UIImagePickerControllerSourceType.camera)
+            }
+        }
+        let photoAction = UIAlertAction(title: "从手机相册中选择", style: .default) { (_) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                self.getNewImg(type: UIImagePickerControllerSourceType.photoLibrary)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (_) -> Void in
+        }
+        sheet.addAction(camerAction)
+        sheet.addAction(photoAction)
+        sheet.addAction(cancelAction)
+        present(sheet, animated: true, completion: nil)
+    }
+    
+    private func getNewImg(type: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = type
+        imagePicker.cropMode = DZNPhotoEditorViewControllerCropMode.circular
+        imagePicker.finalizationBlock = {[weak self](picker, info) in
+            if let image: UIImage = info?[UIImagePickerControllerEditedImage] as? UIImage {
+                print("image: \(image)")
+                if  let imgData: Data = UIImageJPEGRepresentation(image, 0.1) {
+                  
+                }
+            }
+            self?.dismiss(animated: true, completion: nil)
+        }
+        imagePicker.cancellationBlock = {[weak self] (picker) in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        present(imagePicker, animated: true, completion: nil)
     }
 }

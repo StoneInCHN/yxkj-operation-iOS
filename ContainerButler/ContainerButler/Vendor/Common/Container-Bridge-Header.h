@@ -10,3 +10,4 @@
 #import "UIButton+CountDown.h"
 #import "GIBadgeView.h"
 #import "YBPopupMenu.h"
+#import "UIImagePickerController+Edit.h"
