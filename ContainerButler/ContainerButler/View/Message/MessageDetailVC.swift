@@ -1,16 +1,17 @@
 //
-//  MessageHomeVC.swift
+//  MessageDetailVC.swift
 //  ContainerButler
 //
-//  Created by lieon on 2017/9/21.
+//  Created by lieon on 2017/9/22.
 //  Copyright © 2017年 QuanChengShouWei. All rights reserved.
-//  消息
+//  消息详情
 
+import UIKit
 import UIKit
 import RxSwift
 import RxCocoa
 
-class MessageHomeVC: BaseViewController {
+class MessageDetailVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
@@ -23,12 +24,12 @@ class MessageHomeVC: BaseViewController {
         setupUI()
         setupRX()
     }
-
+    
 }
 
-extension MessageHomeVC {
+extension MessageDetailVC {
     fileprivate func setupUI() {
-        title = "消息"
+        title = "补货通知"
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
@@ -50,9 +51,9 @@ extension MessageHomeVC {
     }
 }
 
-extension MessageHomeVC: UITableViewDelegate {
+extension MessageDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(MessageDetailVC(), animated: true)
+        navigationController?.pushViewController(ReplenishHistoryDetailVC(), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

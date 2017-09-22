@@ -104,6 +104,8 @@
 		CD844C7F1F70E8F900D50722 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7D1F70E8F900D50722 /* Model.swift */; };
 		CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7E1F70E8F900D50722 /* ResponseObject.swift */; };
 		CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */; };
+		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
+		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
 		CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */; };
 		CDE202971F71100800CB0145 /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202961F71100800CB0145 /* CounterViewController.swift */; };
@@ -284,6 +286,8 @@
 		CD844C7D1F70E8F900D50722 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CD844C7E1F70E8F900D50722 /* ResponseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
 		CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaLoginVC.swift; sourceTree = "<group>"; };
+		CD9466611F74A96C00C85D7B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
 		CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
@@ -331,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				CD0C17901F74126100A96A81 /* MessageHomeVC.swift */,
+				CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */,
+				CD9466611F74A96C00C85D7B /* MessageCell.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1066,12 +1072,14 @@
 				CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */,
 				CD1D1E321F736AFD008A3092 /* NotReplenishedVC.swift in Sources */,
 				CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */,
+				CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */,
 				CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */,
 				CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */,
 				CD844C7F1F70E8F900D50722 /* Model.swift in Sources */,
 				CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */,
 				CD78F08E1F6782AB00D50B7B /* HUD.swift in Sources */,
 				CDE202971F71100800CB0145 /* CounterViewController.swift in Sources */,
+				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
 				CDF6B5101F68D136000A1915 /* Enum.swift in Sources */,
 				CD69C47A1F668EDF00623B91 /* Protocol.swift in Sources */,
 				CD1D1E341F736B53008A3092 /* WholeGoodsVC.swift in Sources */,
