@@ -720,7 +720,7 @@ extension UIView {
     func dismiss() {
         let closeAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
         closeAnimation?.duration = 0.5
-        closeAnimation?.toValue = 0 - (superview?.layer.position.y ?? 0)
+        closeAnimation?.toValue = 0 - (superview?.layer.position.y ?? 0 )
         closeAnimation?.removedOnCompletion = true
         let scaleDownAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
         scaleDownAnimation?.springBounciness = 20

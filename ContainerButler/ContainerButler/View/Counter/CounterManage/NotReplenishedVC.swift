@@ -11,6 +11,13 @@ import RxSwift
 import RxCocoa
 
 class NotReplenishedVC: BaseViewController {
+    lazy var replenishManageView: ReplenishManageView = {
+        let animator = ReplenishManageView()
+        animator.replenishAction = { [weak self] in
+            
+        }
+        return animator
+    }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
@@ -33,12 +40,19 @@ extension NotReplenishedVC {
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
+        replenishManageView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
+        parent?.view.addSubview(replenishManageView)
     }
 }
 
 extension NotReplenishedVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         replenishManageView.show()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
