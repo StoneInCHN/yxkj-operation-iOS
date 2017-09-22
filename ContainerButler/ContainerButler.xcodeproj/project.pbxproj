@@ -943,7 +943,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -958,7 +957,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -1204,6 +1202,7 @@
 			baseConfigurationReference = 3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5AUADUBV2;
 				ENABLE_BITCODE = NO;
@@ -1217,8 +1216,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Kingfisher\"",
-					"-framework",
-					"\"MJRefresh\"",
 					"-framework",
 					"\"ObjectMapper\"",
 					"-framework",
@@ -1241,6 +1238,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -1249,6 +1247,7 @@
 			baseConfigurationReference = 023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5AUADUBV2;
 				ENABLE_BITCODE = NO;
@@ -1262,8 +1261,6 @@
 					"\"Alamofire\"",
 					"-framework",
 					"\"Kingfisher\"",
-					"-framework",
-					"\"MJRefresh\"",
 					"-framework",
 					"\"ObjectMapper\"",
 					"-framework",
@@ -1286,6 +1283,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};

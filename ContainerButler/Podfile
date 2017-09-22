@@ -14,7 +14,6 @@ target 'ContainerButler' do
  pod 'IQKeyboardManager',  :git => 'https://github.com/hackiftekhar/IQKeyboardManager.git', :branch => 'swift4'
  pod 'SVProgressHUD'
  pod 'Kingfisher', '~> 4.0'
- pod 'MJRefresh'
  pod 'ObjectMapper', '~> 3.0'
  pod 'pop', :git => 'https://github.com/facebook/pop.git'
 end
