@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
 		CD0C178E1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C178D1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift */; };
+		CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C17901F74126100A96A81 /* MessageHomeVC.swift */; };
 		CD0FEDED1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEC1F73AAE0003DF9F0 /* NotReplenishedGoodsListVC.swift */; };
 		CD0FEDEF1F73B9A4003DF9F0 /* NotReplenishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDEE1F73B9A4003DF9F0 /* NotReplenishView.swift */; };
 		CD0FEDF11F73C500003DF9F0 /* ReplenishHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FEDF01F73C500003DF9F0 /* ReplenishHistoryVC.swift */; };
@@ -119,6 +120,7 @@
 		023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.release.xcconfig"; sourceTree = "<group>"; };
 		3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContainerButler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0C178D1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishHistoryDetailVC.swift; sourceTree = "<group>"; };
+		CD0C17901F74126100A96A81 /* MessageHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHomeVC.swift; sourceTree = "<group>"; };
 		CD0FEDA61F73A6E9003DF9F0 /* RITLBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLBaseViewModel.swift; sourceTree = "<group>"; };
 		CD0FEDA81F73A6E9003DF9F0 /* RITLPhotoBrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseCell.swift; sourceTree = "<group>"; };
 		CD0FEDA91F73A6E9003DF9F0 /* RITLPhotoBrowseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RITLPhotoBrowseController.swift; sourceTree = "<group>"; };
@@ -323,6 +325,14 @@
 				023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CD0C178F1F74124500A96A81 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CD0C17901F74126100A96A81 /* MessageHomeVC.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		CD0FEDA31F73A6E9003DF9F0 /* RITLImagePicker */ = {
@@ -591,6 +601,7 @@
 			isa = PBXGroup;
 			children = (
 				CD69C47D1F668FBB00623B91 /* Common */,
+				CD0C178F1F74124500A96A81 /* Message */,
 				CDE202951F710F6F00CB0145 /* Counter */,
 				CDFE07A01F70BE3500C89CA9 /* User */,
 			);
@@ -930,6 +941,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -944,6 +956,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -1035,6 +1048,7 @@
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
 				CD7F85661F72387100BDE5AE /* CounterSectionHeaderView.swift in Sources */,
+				CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
 				CD0C178E1F740E5B00A96A81 /* ReplenishHistoryDetailVC.swift in Sources */,
 				CD0FEDF31F73C679003DF9F0 /* ReplenishHistoryTableHeader.swift in Sources */,

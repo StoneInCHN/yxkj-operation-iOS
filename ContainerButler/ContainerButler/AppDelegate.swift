@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,11 +42,11 @@ extension AppDelegate {
                 [NSAttributedStringKey.foregroundColor: UIColor.white,
                  NSAttributedStringKey.font: font]
         }
-//        let keyboardManager = IQKeyboardManager.shared()
-//        keyboardManager.isEnableAutoToolbar = false
-//        keyboardManager.isEnabled = true
-//        keyboardManager.shouldResignOnTouchOutside = true
-//        keyboardManager.shouldShowToolbarPlaceholder = false
+        let keyboardManager = IQKeyboardManager.shared()
+        keyboardManager.isEnableAutoToolbar = false
+        keyboardManager.isEnabled = true
+        keyboardManager.shouldResignOnTouchOutside = true
+        keyboardManager.shouldShowToolbarPlaceholder = false
     }
     
     fileprivate func chooseRootVC() {
