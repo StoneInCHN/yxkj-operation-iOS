@@ -62,6 +62,7 @@ extension ReplenishHistoryVC {
         
         dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
             let cell: ReplenishHistoryCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+             debugPrint(self.description)
             return cell
         }
         

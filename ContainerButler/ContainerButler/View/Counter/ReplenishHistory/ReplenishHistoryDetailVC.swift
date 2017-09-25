@@ -63,6 +63,7 @@ extension ReplenishHistoryDetailVC {
         
         dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
             let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            debugPrint(self.description)
             return cell
         }
         dataSource.titleForHeaderInSection = { dataSource, index in

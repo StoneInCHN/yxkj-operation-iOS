@@ -794,10 +794,10 @@
 		CD9466701F74B20B00C85D7B /* ReplenishHistory */ = {
 			isa = PBXGroup;
 			children = (
-				CD9466711F74B20B00C85D7B /* ReplenishHistoryCell.swift */,
+				CD9466741F74B20B00C85D7B /* ReplenishHistoryVC.swift */,
 				CD9466721F74B20B00C85D7B /* ReplenishHistoryDetailVC.swift */,
 				CD9466731F74B20B00C85D7B /* ReplenishHistoryTableHeader.swift */,
-				CD9466741F74B20B00C85D7B /* ReplenishHistoryVC.swift */,
+				CD9466711F74B20B00C85D7B /* ReplenishHistoryCell.swift */,
 			);
 			path = ReplenishHistory;
 			sourceTree = "<group>";

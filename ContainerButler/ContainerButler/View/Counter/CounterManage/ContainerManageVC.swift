@@ -87,7 +87,7 @@ extension ContainerManageVC {
         imagePicker.finalizationBlock = {[weak self](picker, info) in
             if let image: UIImage = info?[UIImagePickerControllerEditedImage] as? UIImage {
                 print("image: \(image)")
-                if  let imgData: Data = UIImageJPEGRepresentation(image, 0.1) {
+                if  let _: Data = UIImageJPEGRepresentation(image, 0.1) {
                   
                 }
             }

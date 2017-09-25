@@ -58,10 +58,11 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
     }()
     fileprivate lazy  var bgView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius =  5
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.borderWidth = 1
+        imageView.image = UIImage(named: "Artboard 1")
+//        imageView.layer.cornerRadius =  5
+//        imageView.layer.masksToBounds = true
+//        imageView.layer.borderColor = UIColor.gray.cgColor
+//        imageView.layer.borderWidth = 1
         return imageView
     }()
     
