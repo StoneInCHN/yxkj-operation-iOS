@@ -6,12 +6,14 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
 #endif
+import Differentiator
 
 open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : TableViewSectionedDataSource<S>
@@ -27,7 +29,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     }
 
     open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif
@@ -46,7 +48,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                     }
                     let oldSections = dataSource.sectionModels
                     do {
-                        let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                        let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
                         for difference in differences {
                             dataSource.setSections(difference.finalSections)
@@ -64,3 +66,4 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
         }.on(observedEvent)
     }
 }
+#endif

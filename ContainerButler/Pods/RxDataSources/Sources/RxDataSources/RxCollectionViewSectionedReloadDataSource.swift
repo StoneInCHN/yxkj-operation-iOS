@@ -6,12 +6,14 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
 #endif
+import Differentiator
 
 open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
     : CollectionViewSectionedDataSource<S>
@@ -24,7 +26,7 @@ open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
     }
 
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, element in
+        Binder(self) { dataSource, element in
             #if DEBUG
                 self._dataSourceBound = true
             #endif
@@ -34,3 +36,4 @@ open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
         }.on(observedEvent)
     }
 }
+#endif

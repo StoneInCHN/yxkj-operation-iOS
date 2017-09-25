@@ -6,6 +6,7 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 
@@ -13,9 +14,9 @@ import UIKit
    Exposes custom animation styles for insertion, deletion and reloading behavior.
 */
 public struct AnimationConfiguration {
-  let insertAnimation: UITableViewRowAnimation
-  let reloadAnimation: UITableViewRowAnimation
-  let deleteAnimation: UITableViewRowAnimation
+  public let insertAnimation: UITableViewRowAnimation
+  public let reloadAnimation: UITableViewRowAnimation
+  public let deleteAnimation: UITableViewRowAnimation
   
   public init(insertAnimation: UITableViewRowAnimation = .automatic,
     reloadAnimation: UITableViewRowAnimation = .automatic,
@@ -25,3 +26,4 @@ public struct AnimationConfiguration {
       self.deleteAnimation = deleteAnimation
   }
 }
+#endif

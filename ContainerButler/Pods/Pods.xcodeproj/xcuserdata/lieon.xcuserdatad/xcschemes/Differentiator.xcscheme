@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2618097B007C75C7E82668853D5CE147"
-               BuildableName = "pop.framework"
-               BlueprintName = "pop"
+               BlueprintIdentifier = "844C9B244CEFA2F26288789C423101B4"
+               BuildableName = "Differentiator.framework"
+               BlueprintName = "Differentiator"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2618097B007C75C7E82668853D5CE147"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop"
+            BlueprintIdentifier = "844C9B244CEFA2F26288789C423101B4"
+            BuildableName = "Differentiator.framework"
+            BlueprintName = "Differentiator"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

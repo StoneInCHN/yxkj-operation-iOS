@@ -6,12 +6,14 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
 #endif
+import Differentiator
 
 /*
  This is commented becuse collection view has bugs when doing animated updates. 
@@ -54,7 +56,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
      Collection view behaves poorly during fast updates, so this should remedy those issues.
     */
     open func collectionView(_ collectionView: UICollectionView, throttledObservedEvent event: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             let oldSections = dataSource.sectionModels
             do {
                 // if view is not in view hierarchy, performing batch updates will crash the app
@@ -63,7 +65,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                     collectionView.reloadData()
                     return
                 }
-                let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
                 for difference in differences {
                     dataSource.setSections(difference.finalSections)
@@ -83,7 +85,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     }
 
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif
@@ -99,3 +101,4 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
         }.on(observedEvent)
     }
 }
+#endif

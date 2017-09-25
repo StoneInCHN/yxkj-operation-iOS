@@ -1,14 +1,16 @@
 PODS:
   - Alamofire (4.5.1)
+  - Differentiator (3.0.0-beta.0)
   - IQKeyboardManager (4.0.12)
   - Kingfisher (4.0.1)
   - ObjectMapper (3.0.0)
   - pop (1.0.10)
   - RxCocoa (4.0.0-beta.0):
     - RxSwift (~> 4.0.0-beta.0)
-  - RxDataSources (2.0.0-alpha.0):
-    - RxCocoa (~> 4.0.0-alpha.0)
-    - RxSwift (~> 4.0.0-alpha.0)
+  - RxDataSources (3.0.0-beta.0):
+    - Differentiator (~> 3.0.0-beta.0)
+    - RxCocoa (~> 4.0.0-beta.0)
+    - RxSwift (~> 4.0.0-beta.0)
   - RxSwift (4.0.0-beta.0)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.1)
@@ -51,23 +53,24 @@ CHECKOUT OPTIONS:
     :commit: 2a9440a3ded796625f088a861b6401e63e93f1b6
     :git: https://github.com/facebook/pop.git
   RxCocoa:
-    :commit: cb0fb3bda41f2a5622909b6e6deafd435efaf859
+    :commit: 8718c90d7cc9592c9663489e488e595e4feac882
     :git: https://github.com/ReactiveX/RxSwift.git
   RxDataSources:
-    :commit: 3fd24a694ba808e020f980d008385ac007d9f3c7
+    :commit: 847b3ce429f5dab62ddc00d5d2d10131a650af11
     :git: https://github.com/RxSwiftCommunity/RxDataSources.git
   RxSwift:
-    :commit: cb0fb3bda41f2a5622909b6e6deafd435efaf859
+    :commit: 8718c90d7cc9592c9663489e488e595e4feac882
     :git: https://github.com/ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Differentiator: 965f8c36f26dd94f380fc08ce29114ab147f5022
   IQKeyboardManager: feb4562ba22266c179801a76228017f7a3c0d111
   Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   RxCocoa: f2dff5e6b6a40f842867ec5915f449e1c3af563a
-  RxDataSources: 3cf110f8e681b360dfab76cd933ed9aba1b1176f
+  RxDataSources: 2ec4fd48dd47a8c8f0886aa9fa25338fda930017
   RxSwift: cafebeafadc860ca27a2f3fb3760a8bb8663f6ef
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
