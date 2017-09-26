@@ -34,6 +34,8 @@ protocol UserEndPointProtocol: EndPointProtocol { }
 
 protocol ContentEndPointProtocol: EndPointProtocol { }
 
+protocol FileUploadProtocol: EndPointProtocol {}
+
 extension UserEndPointProtocol {
     var method: HTTPMethod {
         return .post
@@ -43,6 +45,12 @@ extension UserEndPointProtocol {
 extension ContentEndPointProtocol {
     var method: HTTPMethod {
         return .get
+    }
+}
+
+extension FileUploadProtocol {
+    var method: HTTPMethod {
+        return .post
     }
 }
 
