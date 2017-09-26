@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "293D0EB15A069E133CD688C525920B30"
-               BuildableName = "SVProgressHUD.framework"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "C235F77E101E742652CCF98FFDFA5182"
+               BuildableName = "IQKeyboardManagerSwift.framework"
+               BlueprintName = "IQKeyboardManagerSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "293D0EB15A069E133CD688C525920B30"
-            BuildableName = "SVProgressHUD.framework"
-            BlueprintName = "SVProgressHUD"
+            BlueprintIdentifier = "C235F77E101E742652CCF98FFDFA5182"
+            BuildableName = "IQKeyboardManagerSwift.framework"
+            BlueprintName = "IQKeyboardManagerSwift"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

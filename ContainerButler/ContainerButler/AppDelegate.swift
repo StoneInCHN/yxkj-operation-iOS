@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,9 +42,9 @@ extension AppDelegate {
                 [NSAttributedStringKey.foregroundColor: UIColor.white,
                  NSAttributedStringKey.font: font]
         }
-        let keyboardManager = IQKeyboardManager.shared()
-        keyboardManager.isEnableAutoToolbar = false
-        keyboardManager.isEnabled = true
+        let keyboardManager = IQKeyboardManager.sharedManager()
+        keyboardManager.enableAutoToolbar = false
+        keyboardManager.enable = true
         keyboardManager.shouldResignOnTouchOutside = true
         keyboardManager.shouldShowToolbarPlaceholder = false
     }
