@@ -10,7 +10,7 @@
 
 @implementation UIButton (CountDown)
 
-- (void)startWithTime:(NSInteger)timeLine title:(NSString *)title countDownTitle:(NSString *)subTitle mainColor:(UIColor *)mColor countColor:(UIColor *)color{
+- (void)startWithTime:(NSInteger)timeLine title:(NSString *)title countDownTitle:(NSString *)subTitle normalColor:(UIColor *)normalColor countColor:(UIColor *)countColor {
     
     // 倒计时时间
     __block NSInteger timeOut = timeLine;
@@ -24,16 +24,15 @@
         if (timeOut <= 0) {
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.backgroundColor = mColor;
                 [self setTitle:title forState:UIControlStateNormal];
+                [self setTitleColor:normalColor forState:UIControlStateNormal];
                 self.userInteractionEnabled = YES;
             });
         } else {
-//            int seconds = timeOut %60;
             NSInteger seconds = timeOut;
             NSString *timeStr = [NSString stringWithFormat:@"%0.2ld", (long)seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.backgroundColor = color;
+                [self setTitleColor:countColor forState:UIControlStateNormal];
                 [self setTitle:[NSString stringWithFormat:@"%@%@", timeStr, subTitle] forState:UIControlStateNormal];
                 self.userInteractionEnabled = NO;
             });

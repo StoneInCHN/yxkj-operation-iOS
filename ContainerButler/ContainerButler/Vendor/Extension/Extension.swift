@@ -33,6 +33,10 @@ extension UIScreen {
         guard let shot = UIImage(data: data) else { return UIImage() }
         return shot
     }
+    
+    static var maxLength: CGFloat {
+        return max(width, height)
+    }
 }
 
 extension UIColor {
@@ -110,6 +114,21 @@ public extension UIDevice {
         }
     }
     
+    var isPhone: Bool {
+       return UIDevice.current.userInterfaceIdiom == .phone
+    }
+    var isiPhone4OrLess: Bool {
+        return isPhone && UIScreen.maxLength < 568.0
+    }
+    var isiPhone5: Bool {
+        return isPhone && UIScreen.maxLength  == 568.0
+    }
+    var isiPhone6: Bool {
+        return isPhone && UIScreen.maxLength  == 667.0
+    }
+    var isiPhone6p: Bool {
+        return isPhone && UIScreen.maxLength  == 736.0
+    }
 }
 
 fileprivate let dateFormatter: DateFormatter = {
@@ -630,7 +649,21 @@ extension UIFont {
 
 extension Double {
     var fitHeight: CGFloat {
-        return CGFloat((self / 1334.0) * Double(UIScreen.height))
+        let desigHeight: Double = 1334.0 * 0.5
+        var height = desigHeight
+        if UIDevice.current.isiPhone4OrLess {
+            height = 480.0
+        } else if UIDevice.current.isiPhone5 {
+             height =  568.0
+        } else if UIDevice.current.isiPhone6 {
+             height =  667.0
+        } else if UIDevice.current.isiPhone6p {
+             height =  736.0
+        } else {
+             height =  1024.0
+        }
+        let scale = height / desigHeight
+        return CGFloat(self * scale)
     }
     
     var fitWidth: CGFloat {

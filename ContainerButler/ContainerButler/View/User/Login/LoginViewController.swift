@@ -12,9 +12,16 @@ import RxCocoa
 import RxSwift
 
 class LoginViewController: BaseViewController {
+    fileprivate lazy  var companyIcon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "bg"))
+        imageView.contentMode = .scaleAspectFit
+    
+        return imageView
+    }()
+    
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "请输入用户名"
+        textField.placeholder = "请输入您的手机号"
         textField.font = UIFont.sizeToFit(with: 14)
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
@@ -38,14 +45,22 @@ class LoginViewController: BaseViewController {
         imageView.contentMode = .center
         return imageView
     }()
+    fileprivate lazy   var captchdBtn: UIButton = {
+        let forgetPwdBtn = UIButton()
+        forgetPwdBtn.sizeToFit()
+        forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
+        forgetPwdBtn.setTitle("短信验证码登录", for: .normal)
+        forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .normal)
+         forgetPwdBtn.setTitleColor(UIColor(hex: 0xfbc205), for: .highlighted)
+        return forgetPwdBtn
+    }()
     fileprivate lazy   var forgetPwdBtn: UIButton = {
         let forgetPwdBtn = UIButton()
         forgetPwdBtn.sizeToFit()
         forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
-        forgetPwdBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
-        forgetPwdBtn.setTitle("用短信验证码登录", for: .normal)
-        forgetPwdBtn.setTitleColor(UIColor.blue, for: .normal)
-         forgetPwdBtn.setTitleColor(UIColor.gray, for: .highlighted)
+        forgetPwdBtn.setTitle("忘记密码?", for: .normal)
+        forgetPwdBtn.setTitleColor(UIColor(hex: 0xfbc205), for: .normal)
+        forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .highlighted)
         return forgetPwdBtn
     }()
     fileprivate lazy  var loginBtn: UIButton = {
@@ -86,11 +101,19 @@ class LoginViewController: BaseViewController {
         setupUI()
         setupRx()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
 }
 
 extension LoginViewController {
     fileprivate func setupUI() {
         navigationItem.title = "登录"
+        view.backgroundColor = .white
+        view.addSubview(companyIcon)
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
         view.addSubview(line0)
@@ -99,9 +122,14 @@ extension LoginViewController {
         view.addSubview(forgetPwdBtn)
         view.addSubview(line2)
         view.addSubview(loginBtn)
+        view.addSubview(captchdBtn)
+        companyIcon.snp.makeConstraints { (maker) in
+            maker.left.right.top.equalTo(0)
+            maker.height.equalTo(185.5.fitHeight)
+        }
         
         userIcon.snp.makeConstraints { (maker) in
-            maker.top.equalTo(73)
+            maker.top.equalTo(companyIcon.snp.bottom).offset(55)
             maker.left.equalTo(30)
             maker.width.equalTo(20)
         }
@@ -114,7 +142,7 @@ extension LoginViewController {
             maker.left.equalTo(20)
             maker.top.equalTo(userIcon.snp.bottom).offset(12)
             maker.right.equalTo(-20)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         pwdIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.left).offset(2)
@@ -131,7 +159,7 @@ extension LoginViewController {
             maker.top.equalTo(pwdIcon.snp.bottom).offset(12)
             maker.left.equalTo(line0.snp.left)
             maker.right.equalTo(line0.snp.right)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         loginBtn.snp.makeConstraints { (maker) in
             maker.top.equalTo(line2.snp.bottom).offset(50)
@@ -139,11 +167,15 @@ extension LoginViewController {
             maker.right.equalTo(-10)
             maker.height.equalTo(40)
         }
-
+        captchdBtn.snp.makeConstraints { (maker) in
+            maker.top.equalTo(loginBtn.snp.bottom).offset(120.0.fitHeight)
+            maker.centerX.equalTo(loginBtn.snp.centerX)
+            maker.height.equalTo(30)
+        }
         forgetPwdBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(loginBtn.snp.bottom).offset(25)
-            maker.right.equalTo(loginBtn.snp.right)
-            maker.height.equalTo(40)
+            maker.top.equalTo(captchdBtn.snp.bottom).offset(32.0)
+            maker.centerX.equalTo(loginBtn.snp.centerX)
+            maker.height.equalTo(30)
         }
     }
     
@@ -165,8 +197,7 @@ extension LoginViewController {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                let index = text.index(text.startIndex, offsetBy: 20)
-                 return text.characters.count <= 20 ? text: String(text[..<index])
+                return text.characters.count < 20 ? text: String(text[..<text.index(text.startIndex, offsetBy: 20)])
             }
             .shareReplay(1)
             .bind(to: pwdTF.rx.text)
@@ -174,14 +205,13 @@ extension LoginViewController {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                let index = text.index(text.startIndex, offsetBy: 11)
-                return text.characters.count <= 11 ? text: String(text[..<index])
+                return text.characters.count <= 11 ? text: String(text[..<text.index(text.startIndex, offsetBy: 11)])
             }
             .shareReplay(1)
             .bind(to: phoneNumTF.rx.text)
             .disposed(by: disposeBag)
         
-        forgetPwdBtn.rx.tap
+        captchdBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 let vcc = CaptchaLoginVC()
                 vcc.phoneNumber = self?.phoneNumTF.text

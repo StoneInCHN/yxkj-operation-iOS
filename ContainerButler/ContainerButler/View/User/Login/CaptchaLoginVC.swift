@@ -12,6 +12,15 @@ import RxSwift
 
 class CaptchaLoginVC: BaseViewController {
     var phoneNumber: String?
+    
+    fileprivate lazy  var descPwdLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: CGFloat(22.5))
+        descLabel.textColor = UIColor(hex: 0x333333)
+        descLabel.text = "填写验证码"
+        descLabel.numberOfLines = 0
+        return descLabel
+    }()
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "请输入手机号"
@@ -39,12 +48,16 @@ class CaptchaLoginVC: BaseViewController {
     fileprivate lazy   var forgetPwdBtn: UIButton = {
         let forgetPwdBtn = UIButton()
         forgetPwdBtn.sizeToFit()
-        forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
-        forgetPwdBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
-        forgetPwdBtn.setTitle("获取验证码", for: .normal)
-        forgetPwdBtn.setTitleColor(UIColor.blue, for: .normal)
+        forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+        forgetPwdBtn.setTitle("发送验证码", for: .normal)
+        forgetPwdBtn.titleLabel?.textAlignment = .center
+        forgetPwdBtn.setTitleColor(UIColor(hex: 0x333333), for: .normal)
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .highlighted)
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .disabled)
+        forgetPwdBtn.layer.borderColor = UIColor.gray.cgColor
+         forgetPwdBtn.layer.borderWidth = 0.5
+         forgetPwdBtn.layer.cornerRadius = 3
+         forgetPwdBtn.layer.masksToBounds = true
         return forgetPwdBtn
     }()
     fileprivate lazy  var loginBtn: UIButton = {
@@ -90,8 +103,9 @@ class CaptchaLoginVC: BaseViewController {
 
 extension CaptchaLoginVC {
     fileprivate func setupUI() {
-        navigationItem.title = "验证码登录"
         phoneNumTF.text = phoneNumber
+        whenHiddenNavigationBarSetupBackBtn()
+        view.addSubview(descPwdLabel)
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
         view.addSubview(line0)
@@ -101,9 +115,13 @@ extension CaptchaLoginVC {
         view.addSubview(forgetPwdBtn)
         view.addSubview(line2)
         view.addSubview(loginBtn)
+        descPwdLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(26 + 64)
+            maker.centerX.equalTo(view.snp.centerX)
+        }
         
         userIcon.snp.makeConstraints { (maker) in
-            maker.top.equalTo(73)
+            maker.top.equalTo(descPwdLabel.snp.bottom).offset(86.0.fitHeight)
             maker.left.equalTo(30)
             maker.width.equalTo(20)
         }
@@ -116,13 +134,14 @@ extension CaptchaLoginVC {
             maker.left.equalTo(20)
             maker.top.equalTo(userIcon.snp.bottom).offset(12)
             maker.right.equalTo(-20)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         
         forgetPwdBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(line0.snp.bottom).offset(1)
+            maker.centerY.equalTo(phoneNumTF.snp.centerY)
             maker.right.equalTo(-30)
-            maker.height.equalTo(40)
+            maker.height.equalTo(30)
+            maker.width.equalTo(90)
         }
         
         pwdIcon.snp.makeConstraints { (maker) in
@@ -131,18 +150,11 @@ extension CaptchaLoginVC {
             maker.width.equalTo(20)
         }
         
-        line1.snp.makeConstraints { (maker) in
-            maker.right.equalTo(forgetPwdBtn.snp.left).offset(-5)
-            maker.width.equalTo(1)
-            maker.height.equalTo(20)
-            maker.centerY.equalTo(pwdIcon.snp.centerY)
-        }
-      
         line2.snp.makeConstraints { (maker) in
             maker.top.equalTo(pwdIcon.snp.bottom).offset(12)
             maker.left.equalTo(line0.snp.left)
             maker.right.equalTo(line0.snp.right)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         
         pwdTF.snp.makeConstraints { (maker) in
@@ -177,9 +189,7 @@ extension CaptchaLoginVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                let index = text.index(text.startIndex, offsetBy: 4)
-                let subText = text[ ..<index]
-                return text.characters.count <= 4 ? text: (String(subText))
+                return text.characters.count <= 4 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
             }
             .shareReplay(1)
             .bind(to: pwdTF.rx.text)
@@ -187,9 +197,7 @@ extension CaptchaLoginVC {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                let index = text.index(text.startIndex, offsetBy: 11)
-                let subText = text[ ..<index]
-                 return text.characters.count <= 11 ? text: String(subText)
+                 return text.characters.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
             }
             .shareReplay(1)
             .bind(to: phoneNumTF.rx.text)
@@ -206,7 +214,7 @@ extension CaptchaLoginVC {
                               message: "我们将发送验证码短信到这个号码：\n +86 \(weakSelf.phoneNumTF.text ?? "")",
                     enterTitle: "好",
                     enterAction: { 
-                    weakSelf.forgetPwdBtn.start(withTime: 120, title: "获取验证码", countDownTitle: "S后重发", mainColor: UIColor.white, count: UIColor.white)
+                    weakSelf.forgetPwdBtn.start(withTime: 5, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                 }, cancleAction: nil)
             })
             .disposed(by: disposeBag)

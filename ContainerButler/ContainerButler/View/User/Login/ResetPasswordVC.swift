@@ -14,7 +14,7 @@ class ResetPasswordVC: BaseViewController {
     var phoneNumber: String?
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "请输入用户名"
+        textField.placeholder = "请输入您的手机号"
         textField.font = UIFont.sizeToFit(with: 14)
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad

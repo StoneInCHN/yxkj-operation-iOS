@@ -10,6 +10,10 @@
 
 @interface UIButton (CountDown)
 
-- (void)startWithTime:(NSInteger)timeLine title:(NSString *)title countDownTitle:(NSString *)subTitle mainColor:(UIColor *)mColor countColor:(UIColor *)color;
+- (void)startWithTime:(NSInteger)timeLine
+                title:(NSString *)title
+       countDownTitle:(NSString *)subTitle
+            normalColor:(UIColor *)normalColor
+           countColor:(UIColor *)countColor;
 
 @end

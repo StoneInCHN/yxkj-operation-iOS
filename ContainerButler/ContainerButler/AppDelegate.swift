@@ -29,17 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     fileprivate func setupUI() {
-        UINavigationBar.appearance().barStyle = .black
-        UINavigationBar.appearance().barTintColor = UIColor.black
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = UIColor(hex: CustomKey.Color.tabBackgroundColor)
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor(hex: CustomKey.Color.mainColor)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
         if let font = UIFont(name: "PingFangSC-Medium", size: 18) {
             UINavigationBar.appearance().titleTextAttributes =
-                [NSAttributedStringKey.foregroundColor: UIColor.white,
+                [NSAttributedStringKey.foregroundColor: UIColor.black,
                  NSAttributedStringKey.font: font]
         }
         let keyboardManager = IQKeyboardManager.sharedManager()
@@ -52,7 +48,7 @@ extension AppDelegate {
     fileprivate func chooseRootVC() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-        window?.rootViewController = TabBarController()
+        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
         window?.makeKeyAndVisible()
     }
     
