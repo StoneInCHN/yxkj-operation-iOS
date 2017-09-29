@@ -107,6 +107,13 @@ class LoginViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        companyIcon.snp.updateConstraints {
+            $0.top.equalTo(-64)
+        }
+    }
+    
 }
 
 extension LoginViewController {
