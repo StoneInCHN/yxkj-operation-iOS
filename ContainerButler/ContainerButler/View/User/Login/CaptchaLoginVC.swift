@@ -55,7 +55,7 @@ class CaptchaLoginVC: BaseViewController {
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .highlighted)
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .disabled)
         forgetPwdBtn.layer.borderColor = UIColor.gray.cgColor
-         forgetPwdBtn.layer.borderWidth = 0.5
+         forgetPwdBtn.layer.borderWidth = 1
          forgetPwdBtn.layer.cornerRadius = 3
          forgetPwdBtn.layer.masksToBounds = true
         return forgetPwdBtn
