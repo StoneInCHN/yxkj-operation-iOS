@@ -13,9 +13,7 @@ class BaseViewController: UIViewController {
     let disposeBag: DisposeBag = DisposeBag()
     fileprivate lazy  var backBtn: UIButton = {
         let loginBtn = UIButton()
-        loginBtn.setBackgroundImage(UIImage(named: "pulic_pic_deleted@3x"), for: .normal)
-        loginBtn.setBackgroundImage(UIImage(named: "pulic_pic_deleted@3x"), for: .highlighted)
-        loginBtn.setBackgroundImage(UIImage(named: "pulic_pic_deleted@3x"), for: .disabled)
+        loginBtn.setBackgroundImage(UIImage(named: "login_back"), for: .normal)
         return loginBtn
     }()
     

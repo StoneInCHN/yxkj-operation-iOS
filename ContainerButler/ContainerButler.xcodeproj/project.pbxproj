@@ -44,9 +44,6 @@
 		CD844C4C1F70E82800D50722 /* login_qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A01F70E82600D50722 /* login_qq@3x.png */; };
 		CD844C4D1F70E82800D50722 /* login_sina@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A11F70E82600D50722 /* login_sina@3x.png */; };
 		CD844C4E1F70E82800D50722 /* login_wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A21F70E82600D50722 /* login_wechat@3x.png */; };
-		CD844C4F1F70E82800D50722 /* loginBtn_highlighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A31F70E82600D50722 /* loginBtn_highlighted@3x.png */; };
-		CD844C501F70E82800D50722 /* loginBtn_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A41F70E82600D50722 /* loginBtn_normal@3x.png */; };
-		CD844C511F70E82800D50722 /* pulic_pic_deleted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A51F70E82600D50722 /* pulic_pic_deleted@3x.png */; };
 		CD844C521F70E82800D50722 /* setting_binded_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A61F70E82600D50722 /* setting_binded_icon@3x.png */; };
 		CD844C531F70E82800D50722 /* upload_camre_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A71F70E82600D50722 /* upload_camre_icon@3x.png */; };
 		CD844C551F70E82800D50722 /* user_center_allorder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8446A91F70E82600D50722 /* user_center_allorder@3x.png */; };
@@ -118,6 +115,10 @@
 		CDF727BB1F7F72CD00CDCC75 /* sms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727B71F7F72B200CDCC75 /* sms@3x.png */; };
 		CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727B81F7F72B200CDCC75 /* user_center_account@3x.png */; };
 		CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727B91F7F72B200CDCC75 /* user_center_pwd@3x.png */; };
+		CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF727C01F7F7B6400CDCC75 /* UIView+Shake.m */; };
+		CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C31F7F7D7E00CDCC75 /* loginBtn_highlighted@3x.png */; };
+		CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C21F7F7D7D00CDCC75 /* loginBtn_normal@3x.png */; };
+		CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */; };
 		CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -229,9 +230,6 @@
 		CD8446A01F70E82600D50722 /* login_qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_qq@3x.png"; sourceTree = "<group>"; };
 		CD8446A11F70E82600D50722 /* login_sina@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_sina@3x.png"; sourceTree = "<group>"; };
 		CD8446A21F70E82600D50722 /* login_wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_wechat@3x.png"; sourceTree = "<group>"; };
-		CD8446A31F70E82600D50722 /* loginBtn_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBtn_highlighted@3x.png"; sourceTree = "<group>"; };
-		CD8446A41F70E82600D50722 /* loginBtn_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBtn_normal@3x.png"; sourceTree = "<group>"; };
-		CD8446A51F70E82600D50722 /* pulic_pic_deleted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pulic_pic_deleted@3x.png"; sourceTree = "<group>"; };
 		CD8446A61F70E82600D50722 /* setting_binded_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_binded_icon@3x.png"; sourceTree = "<group>"; };
 		CD8446A71F70E82600D50722 /* upload_camre_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload_camre_icon@3x.png"; sourceTree = "<group>"; };
 		CD8446A91F70E82600D50722 /* user_center_allorder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_center_allorder@3x.png"; sourceTree = "<group>"; };
@@ -304,6 +302,11 @@
 		CDF727B71F7F72B200CDCC75 /* sms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@3x.png"; sourceTree = "<group>"; };
 		CDF727B81F7F72B200CDCC75 /* user_center_account@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_center_account@3x.png"; sourceTree = "<group>"; };
 		CDF727B91F7F72B200CDCC75 /* user_center_pwd@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_center_pwd@3x.png"; sourceTree = "<group>"; };
+		CDF727BF1F7F7B6400CDCC75 /* UIView+Shake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
+		CDF727C01F7F7B6400CDCC75 /* UIView+Shake.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
+		CDF727C21F7F7D7D00CDCC75 /* loginBtn_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBtn_normal@3x.png"; sourceTree = "<group>"; };
+		CDF727C31F7F7D7E00CDCC75 /* loginBtn_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBtn_highlighted@3x.png"; sourceTree = "<group>"; };
+		CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_back@3x.png"; sourceTree = "<group>"; };
 		CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -658,6 +661,7 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CDF727BE1F7F7B6400CDCC75 /* ShakeUI */,
 				CD0FEDA31F73A6E9003DF9F0 /* RITLImagePicker */,
 				CD1D1E3D1F73A19F008A3092 /* UIImagePickerController */,
 				CD3BAD6F1F7257CA00902F91 /* YBPopupMenu */,
@@ -715,9 +719,6 @@
 				CD8446A01F70E82600D50722 /* login_qq@3x.png */,
 				CD8446A11F70E82600D50722 /* login_sina@3x.png */,
 				CD8446A21F70E82600D50722 /* login_wechat@3x.png */,
-				CD8446A31F70E82600D50722 /* loginBtn_highlighted@3x.png */,
-				CD8446A41F70E82600D50722 /* loginBtn_normal@3x.png */,
-				CD8446A51F70E82600D50722 /* pulic_pic_deleted@3x.png */,
 				CD8446A61F70E82600D50722 /* setting_binded_icon@3x.png */,
 				CD8446A71F70E82600D50722 /* upload_camre_icon@3x.png */,
 				CD8446A91F70E82600D50722 /* user_center_allorder@3x.png */,
@@ -836,12 +837,24 @@
 		CDF727B51F7F72B200CDCC75 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */,
+				CDF727C31F7F7D7E00CDCC75 /* loginBtn_highlighted@3x.png */,
+				CDF727C21F7F7D7D00CDCC75 /* loginBtn_normal@3x.png */,
 				CDF727B61F7F72B200CDCC75 /* error_warning@3x.png */,
 				CDF727B71F7F72B200CDCC75 /* sms@3x.png */,
 				CDF727B81F7F72B200CDCC75 /* user_center_account@3x.png */,
 				CDF727B91F7F72B200CDCC75 /* user_center_pwd@3x.png */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		CDF727BE1F7F7B6400CDCC75 /* ShakeUI */ = {
+			isa = PBXGroup;
+			children = (
+				CDF727BF1F7F7B6400CDCC75 /* UIView+Shake.h */,
+				CDF727C01F7F7B6400CDCC75 /* UIView+Shake.m */,
+			);
+			path = ShakeUI;
 			sourceTree = "<group>";
 		};
 		CDFE07A01F70BE3500C89CA9 /* User */ = {
@@ -926,6 +939,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */,
+				CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */,
+				CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */,
 				CDF727BA1F7F72CD00CDCC75 /* error_warning@3x.png in Resources */,
 				CDF727BB1F7F72CD00CDCC75 /* sms@3x.png in Resources */,
 				CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */,
@@ -953,12 +969,9 @@
 				CD844C681F70E82800D50722 /* user_center_vip_seletced_normal@3x.png in Resources */,
 				CD844C521F70E82800D50722 /* setting_binded_icon@3x.png in Resources */,
 				CD844C531F70E82800D50722 /* upload_camre_icon@3x.png in Resources */,
-				CD844C501F70E82800D50722 /* loginBtn_normal@3x.png in Resources */,
 				CD844C6E1F70E82800D50722 /* user_center_waitPay@3x.png in Resources */,
 				CD844C701F70E82800D50722 /* user_look_history@3x.png in Resources */,
 				CD844C5B1F70E82800D50722 /* user_center_more@3x.png in Resources */,
-				CD844C4F1F70E82800D50722 /* loginBtn_highlighted@3x.png in Resources */,
-				CD844C511F70E82800D50722 /* pulic_pic_deleted@3x.png in Resources */,
 				CD844C5A1F70E82800D50722 /* user_center_level_bg.png in Resources */,
 				CD844C4C1F70E82800D50722 /* login_qq@3x.png in Resources */,
 				CD844C5C1F70E82800D50722 /* user_center_paizza@3x.png in Resources */,
@@ -1084,6 +1097,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD9466771F74B26600C85D7B /* CounterViewController.swift in Sources */,
 				CD9466781F74B26600C85D7B /* CounterSectionHeaderView.swift in Sources */,
 				CD9466791F74B26600C85D7B /* CounterTableViewCell.swift in Sources */,

@@ -11,3 +11,4 @@
 #import "GIBadgeView.h"
 #import "YBPopupMenu.h"
 #import "UIImagePickerController+Edit.h"
+#import "UIView+Shake.h"

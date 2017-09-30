@@ -73,7 +73,6 @@ class LoginViewController: BaseViewController {
         loginBtn.setTitleColor(UIColor.white, for: .normal)
         loginBtn.layer.cornerRadius = 20
         loginBtn.layer.masksToBounds = true
-        loginBtn.isEnabled = false
         return loginBtn
     }()
     fileprivate lazy   var pwdIcon: UIImageView = {
@@ -188,21 +187,6 @@ extension LoginViewController {
     }
     
     fileprivate func setupRx() {
-        let usernameValid = phoneNumTF.rx.text.orEmpty
-            .map { $0.characters.count >= 11}
-            .shareReplay(2)
-        
-        let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 6 }
-            .shareReplay(1)
-        
-        let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
-            .shareReplay(1)
-        
-        everythingValid
-            .bind(to: loginBtn.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
                 return text.characters.count < 20 ? text: String(text[..<text.index(text.startIndex, offsetBy: 20)])
@@ -230,6 +214,7 @@ extension LoginViewController {
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 print(self.debugDescription)
+                self?.phoneNumTF.shake(5, withDelta: 0.5, speed: 0.04, shakeDirection: ShakeDirection.horizontal)
             })
             .disposed(by: disposeBag)
     }
