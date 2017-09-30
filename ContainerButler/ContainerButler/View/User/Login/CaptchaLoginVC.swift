@@ -74,7 +74,7 @@ class CaptchaLoginVC: BaseViewController {
         return loginBtn
     }()
     fileprivate lazy   var pwdIcon: UIImageView = {
-        let pwdLog = UIImageView(image: UIImage(named: "user_center_pwd"))
+        let pwdLog = UIImageView(image: UIImage(named: "sms"))
         pwdLog.contentMode = .center
         return pwdLog
     }()
@@ -145,7 +145,7 @@ extension CaptchaLoginVC {
         }
         
         pwdIcon.snp.makeConstraints { (maker) in
-            maker.left.equalTo(userIcon.snp.left).offset(2)
+            maker.left.equalTo(userIcon.snp.left)
             maker.top.equalTo(line0.snp.bottom).offset(12)
             maker.width.equalTo(20)
         }

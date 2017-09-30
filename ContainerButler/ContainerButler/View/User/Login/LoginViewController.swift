@@ -109,9 +109,10 @@ class LoginViewController: BaseViewController {
     
     @available(iOS 11.0, *)
     override func viewSafeAreaInsetsDidChange() {
-        companyIcon.snp.updateConstraints {
-            $0.top.equalTo(-64)
+        if UIDevice.current.modelName == "iPhone X" {
+             companyIcon.snp.updateConstraints {  $0.top.equalTo(-64) }
         }
+       
     }
     
 }
@@ -152,7 +153,7 @@ extension LoginViewController {
             maker.height.equalTo(1)
         }
         pwdIcon.snp.makeConstraints { (maker) in
-            maker.left.equalTo(userIcon.snp.left).offset(2)
+            maker.left.equalTo(userIcon.snp.left)
             maker.top.equalTo(line0.snp.bottom).offset(12)
             maker.width.equalTo(20)
         }
@@ -180,7 +181,7 @@ extension LoginViewController {
             maker.height.equalTo(30)
         }
         forgetPwdBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(captchdBtn.snp.bottom).offset(32.0)
+            maker.top.equalTo(captchdBtn.snp.bottom).offset(32.0.fitHeight)
             maker.centerX.equalTo(loginBtn.snp.centerX)
             maker.height.equalTo(30)
         }
