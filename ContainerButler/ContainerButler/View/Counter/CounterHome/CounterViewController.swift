@@ -27,7 +27,6 @@ class CounterViewController: BaseViewController {
         taleView.register(CounterSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "CounterSectionHeaderView")
         return taleView
     }()
-  var dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +62,6 @@ extension CounterViewController {
     
     fileprivate func setupRX() {
         
-        let dataSource = self.dataSource
-        
         let items = Variable<[SectionModel<String, Double>]>([])
         
         items.value = [
@@ -85,16 +82,15 @@ extension CounterViewController {
                 ])
         ]
         
-        dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(configureCell: { [unowned  self](_, tableView, indexPath, element) in
             let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.itemdidSelected
                 .subscribe(onNext: {[weak self] (model) in
                     guard let weakSelf = self else { return }
                     weakSelf.replenishmentView.show()
-            }).disposed(by: self.disposeBag)
+                }).disposed(by: self.disposeBag)
             return cell
-        }
-        
+        })
         items.asObservable()
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

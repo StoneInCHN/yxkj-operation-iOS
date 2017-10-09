@@ -1,17 +1,17 @@
 PODS:
   - Alamofire (4.5.1)
-  - Differentiator (3.0.0-beta.0)
-  - IQKeyboardManagerSwift (5.0.2)
+  - Differentiator (3.0.0-rc.0)
+  - IQKeyboardManagerSwift (5.0.3)
   - Kingfisher (4.1.0)
   - ObjectMapper (3.0.0)
   - pop (1.0.10)
-  - RxCocoa (4.0.0-beta.0):
-    - RxSwift (~> 4.0.0-beta.0)
-  - RxDataSources (3.0.0-beta.0):
-    - Differentiator (~> 3.0.0-beta.0)
-    - RxCocoa (~> 4.0.0-beta.0)
-    - RxSwift (~> 4.0.0-beta.0)
-  - RxSwift (4.0.0-beta.0)
+  - RxCocoa (4.0.0-rc.0):
+    - RxSwift (~> 4.0.0-rc.0)
+  - RxDataSources (3.0.0-rc.0):
+    - Differentiator (~> 3.0.0-rc.0)
+    - RxCocoa (~> 4.0.0-rc.0)
+    - RxSwift (~> 4.0.0-rc.0)
+  - RxSwift (4.0.0-rc.0)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.1)
   - SwiftDate (4.4.1)
@@ -47,25 +47,25 @@ CHECKOUT OPTIONS:
     :commit: 2a9440a3ded796625f088a861b6401e63e93f1b6
     :git: https://github.com/facebook/pop.git
   RxCocoa:
-    :commit: ecb9ba58435f703c361b3906ee29c2d45a605a4a
+    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
     :git: https://github.com/ReactiveX/RxSwift.git
   RxDataSources:
-    :commit: 155d1022fcfd147c874da5ee6eebf30e0edae3b3
+    :commit: bc0085272566b7ef45af1dee90d2c14395aa14fb
     :git: https://github.com/RxSwiftCommunity/RxDataSources.git
   RxSwift:
-    :commit: ecb9ba58435f703c361b3906ee29c2d45a605a4a
+    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
     :git: https://github.com/ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Differentiator: 965f8c36f26dd94f380fc08ce29114ab147f5022
-  IQKeyboardManagerSwift: e580da046d804d2836ee84668cc17e43a850a35d
+  Differentiator: 1e7575c5613fc4e72659d9d2d0867ff5bc4dbac5
+  IQKeyboardManagerSwift: e257e513744cf32123eca7061272acea0246fc83
   Kingfisher: f14df8cbe576bf55f211fa589e9869bceb4ea87d
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
-  RxCocoa: f2dff5e6b6a40f842867ec5915f449e1c3af563a
-  RxDataSources: 2ec4fd48dd47a8c8f0886aa9fa25338fda930017
-  RxSwift: cafebeafadc860ca27a2f3fb3760a8bb8663f6ef
+  RxCocoa: 58841348f4c6e6f6cd244522c16a6b7df5008956
+  RxDataSources: 7ec7ea638328629297eeee107e7a0595bd03c5c6
+  RxSwift: f0ff3c78e1f71a7d3506defde0b79c72fe39bac3
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   SwiftDate: a70a534d4feed03b2a2b575e36bef82dc2286a8d

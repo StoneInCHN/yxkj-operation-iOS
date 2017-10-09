@@ -20,7 +20,6 @@ class ReplenishHistoryDetailVC: BaseViewController {
         taleView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
         return taleView
     }()
-    var dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +39,6 @@ extension ReplenishHistoryDetailVC {
     }
     
     fileprivate func setupRX() {
-        let dataSource = self.dataSource
         let items = Variable<[SectionModel<String, Double>]>([])
         
         items.value = [
@@ -61,11 +59,11 @@ extension ReplenishHistoryDetailVC {
                 ])
         ]
         
-        dataSource.configureCell = { [unowned  self](_, tableView, indexPath, element) in
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(configureCell: { [unowned  self](_, tableView, indexPath, element) in
             let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             debugPrint(self.description)
             return cell
-        }
+        })
         dataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource[index].model
         }
