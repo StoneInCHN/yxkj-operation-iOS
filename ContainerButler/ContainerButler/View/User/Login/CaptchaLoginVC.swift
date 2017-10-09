@@ -55,9 +55,8 @@ class CaptchaLoginVC: BaseViewController {
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .highlighted)
         forgetPwdBtn.setTitleColor(UIColor.gray, for: .disabled)
         forgetPwdBtn.layer.borderColor = UIColor.gray.cgColor
-         forgetPwdBtn.layer.borderWidth = 1
+         forgetPwdBtn.layer.borderWidth = 0.5
          forgetPwdBtn.layer.cornerRadius = 3
-         forgetPwdBtn.layer.masksToBounds = true
         return forgetPwdBtn
     }()
     fileprivate lazy  var loginBtn: UIButton = {
@@ -174,14 +173,14 @@ extension CaptchaLoginVC {
     fileprivate func setupRx() {
         let usernameValid = phoneNumTF.rx.text.orEmpty
             .map { $0.characters.count >= 11}
-            .shareReplay(2)
+            .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
             .map { $0.characters.count >= 4 }
-            .shareReplay(1)
+            .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
-            .shareReplay(1)
+            .share(replay: 1)
         
         everythingValid
             .bind(to: loginBtn.rx.isEnabled)
@@ -191,7 +190,7 @@ extension CaptchaLoginVC {
             .map { (text) -> String in
                 return text.characters.count <= 4 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
             }
-            .shareReplay(1)
+            .share(replay: 1)
             .bind(to: pwdTF.rx.text)
             .disposed(by: disposeBag)
         
@@ -199,7 +198,7 @@ extension CaptchaLoginVC {
             .map { (text) -> String in
                  return text.characters.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
             }
-            .shareReplay(1)
+            .share(replay: 1)
             .bind(to: phoneNumTF.rx.text)
             .disposed(by: disposeBag)
         

@@ -105,7 +105,8 @@
 		CD9466841F74B26600C85D7B /* ReplenishHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466741F74B20B00C85D7B /* ReplenishHistoryVC.swift */; };
 		CD9466861F74B37C00C85D7B /* ReplenishManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466851F74B37C00C85D7B /* ReplenishManageView.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
-		CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */; };
+		CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */; };
+		CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */; };
 		CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2029C1F71187800CB0145 /* CounterViewModel.swift */; };
 		CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B5091F68C44A000A1915 /* Network.swift */; };
 		CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50B1F68C4A6000A1915 /* Router.swift */; };
@@ -292,7 +293,8 @@
 		CD9466851F74B37C00C85D7B /* ReplenishManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishManageView.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
-		CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaResetVC.swift; sourceTree = "<group>"; };
 		CDE2029C1F71187800CB0145 /* CounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		CDF6B5091F68C44A000A1915 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CDF6B50B1F68C4A6000A1915 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -815,6 +817,15 @@
 			path = NotReplenishList;
 			sourceTree = "<group>";
 		};
+		CDCED5B71F8B4D890038C1F3 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */,
+				CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
 		CDE202951F710F6F00CB0145 /* Counter */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,6 +872,7 @@
 			isa = PBXGroup;
 			children = (
 				CDFE07A11F70BE3500C89CA9 /* Login */,
+				CDCED5B71F8B4D890038C1F3 /* ResetPassword */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -870,7 +882,6 @@
 			children = (
 				CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */,
 				CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */,
-				CDE202931F7102CD00CB0145 /* ResetPasswordVC.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1097,6 +1108,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */,
 				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD9466771F74B26600C85D7B /* CounterViewController.swift in Sources */,
 				CD9466781F74B26600C85D7B /* CounterSectionHeaderView.swift in Sources */,
@@ -1121,8 +1133,8 @@
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
 				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
-				CDE202941F7102CD00CB0145 /* ResetPasswordVC.swift in Sources */,
 				CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */,
+				CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */,
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,

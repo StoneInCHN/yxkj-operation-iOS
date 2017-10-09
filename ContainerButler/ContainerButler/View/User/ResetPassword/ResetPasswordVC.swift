@@ -11,6 +11,15 @@ import RxSwift
 import RxCocoa
 
 class ResetPasswordVC: BaseViewController {
+    fileprivate lazy  var descPwdLabel0: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: CGFloat(22.5))
+        descLabel.textColor = UIColor(hex: 0x333333)
+        descLabel.text = "设置密码"
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        return descLabel
+    }()
     var phoneNumber: String?
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
@@ -56,16 +65,7 @@ class ResetPasswordVC: BaseViewController {
         descLabel.numberOfLines = 0
         return descLabel
     }()
-    
-    fileprivate lazy  var descPwdLabel0: UILabel = {
-        let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: CGFloat(13))
-        descLabel.textColor = UIColor(hex: 0x808080)
-        descLabel.text = "如果你已忘记密码，可以在本页面重置密码"
-        descLabel.numberOfLines = 0
-        return descLabel
-    }()
-    
+
     fileprivate lazy   var pwdIcon: UIImageView = {
         let pwdLog = UIImageView(image: UIImage(named: "user_center_pwd"))
         pwdLog.contentMode = .center
@@ -115,8 +115,8 @@ class ResetPasswordVC: BaseViewController {
 
 extension ResetPasswordVC {
     fileprivate func setupUI() {
-        title = "设置密码"
         phoneNumTF.text = phoneNumber
+       whenHiddenNavigationBarSetupBackBtn()
         view.addSubview(descPwdLabel0)
         view.addSubview(userIcon)
         view.addSubview(phoneNumTF)
@@ -130,12 +130,12 @@ extension ResetPasswordVC {
         view.addSubview(descPwdLabel)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: enterBtn)
         descPwdLabel0.snp.makeConstraints { (maker) in
-            maker.left.equalTo(20)
-            maker.top.equalTo(84)
+            maker.top.equalTo(26 + 64)
+            maker.centerX.equalTo(view.snp.centerX)
         }
         userIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(20)
-            maker.top.equalTo(descPwdLabel0.snp.bottom).offset(35)
+            maker.top.equalTo(descPwdLabel0.snp.bottom).offset(82.0.fitHeight)
             maker.width.equalTo(20)
         }
         phoneNumTF.snp.makeConstraints { (maker) in
@@ -167,7 +167,7 @@ extension ResetPasswordVC {
             maker.top.equalTo(pwdIcon.snp.bottom).offset(12)
             maker.left.equalTo(line0.snp.left)
             maker.right.equalTo(line0.snp.right)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         
         pwdIconAgain.snp.makeConstraints { (maker) in
@@ -186,11 +186,11 @@ extension ResetPasswordVC {
             maker.top.equalTo(pwdIconAgain.snp.bottom).offset(12)
             maker.left.equalTo(line1.snp.left)
             maker.right.equalTo(line1.snp.right)
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
         
         descPwdLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(descPwdLabel0.snp.left)
+            maker.left.equalTo(line2.snp.left)
             maker.top.equalTo(line2.snp.top).offset(25)
             maker.right.equalTo(-20)
         }
@@ -199,14 +199,14 @@ extension ResetPasswordVC {
      fileprivate func setupRx() {
         let usernameValid = pwdTFAgain.rx.text.orEmpty
             .map { $0.characters.count >= 8}
-            .shareReplay(1)
+            .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
             .map { $0.characters.count >= 8 }
-            .shareReplay(1)
+            .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
-            .shareReplay(1)
+            .share(replay: 1)
         
          everythingValid
             .bind(to: enterBtn.rx.isEnabled)
