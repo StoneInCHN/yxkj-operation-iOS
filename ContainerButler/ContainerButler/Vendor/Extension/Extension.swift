@@ -534,6 +534,10 @@ extension String {
         }
         return nil
     }
+    
+    func rsaEncryptor(with publicKey: String) -> String {
+       return RSAEncryptor.encryptString(self, publicKey: publicKey)
+    }
 }
 
 func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedString {

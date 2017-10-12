@@ -87,6 +87,7 @@
 		CD844C7F1F70E8F900D50722 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7D1F70E8F900D50722 /* Model.swift */; };
 		CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7E1F70E8F900D50722 /* ResponseObject.swift */; };
 		CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */; };
+		CD8C5B561F8F046200E2E7B5 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */; };
 		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CD9466771F74B26600C85D7B /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466681F74B20B00C85D7B /* CounterViewController.swift */; };
@@ -274,6 +275,8 @@
 		CD844C7D1F70E8F900D50722 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CD844C7E1F70E8F900D50722 /* ResponseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
 		CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaLoginVC.swift; sourceTree = "<group>"; };
+		CD8C5B541F8F044D00E2E7B5 /* RSAEncryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
+		CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
 		CD9466611F74A96C00C85D7B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CD9466661F74B20B00C85D7B /* CounterSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -663,6 +666,7 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CD8C5B531F8F044D00E2E7B5 /* RSA */,
 				CDF727BE1F7F7B6400CDCC75 /* ShakeUI */,
 				CD0FEDA31F73A6E9003DF9F0 /* RITLImagePicker */,
 				CD1D1E3D1F73A19F008A3092 /* UIImagePickerController */,
@@ -774,6 +778,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CD8C5B531F8F044D00E2E7B5 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C5B541F8F044D00E2E7B5 /* RSAEncryptor.h */,
+				CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */,
+			);
+			path = RSA;
+			sourceTree = "<group>";
+		};
 		CD9466651F74B20B00C85D7B /* CounterHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,8 +833,8 @@
 		CDCED5B71F8B4D890038C1F3 /* ResetPassword */ = {
 			isa = PBXGroup;
 			children = (
-				CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */,
 				CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */,
+				CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */,
 			);
 			path = ResetPassword;
 			sourceTree = "<group>";
@@ -1108,6 +1121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8C5B561F8F046200E2E7B5 /* RSAEncryptor.m in Sources */,
 				CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */,
 				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD9466771F74B26600C85D7B /* CounterViewController.swift in Sources */,

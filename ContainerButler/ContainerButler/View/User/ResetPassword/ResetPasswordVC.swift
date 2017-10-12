@@ -95,10 +95,13 @@ class ResetPasswordVC: BaseViewController {
     }()
     fileprivate lazy  var enterBtn: UIButton = {
         let loginBtn = UIButton()
+        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_normal"), for: .normal)
+        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .highlighted)
+        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .disabled)
         loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 16)
-        loginBtn.setTitle("完成", for: .normal)
+        loginBtn.setTitle("确 定", for: .normal)
         loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.setTitleColor(UIColor.gray, for: .disabled)
+        loginBtn.setTitleColor(UIColor.white, for: .disabled)
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         loginBtn.isEnabled = false
         loginBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 35)
@@ -128,6 +131,7 @@ extension ResetPasswordVC {
         view.addSubview(line1)
         view.addSubview(line2)
         view.addSubview(descPwdLabel)
+        view.addSubview(enterBtn)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: enterBtn)
         descPwdLabel0.snp.makeConstraints { (maker) in
             maker.top.equalTo(26 + 64)
@@ -193,6 +197,13 @@ extension ResetPasswordVC {
             maker.left.equalTo(line2.snp.left)
             maker.top.equalTo(line2.snp.top).offset(25)
             maker.right.equalTo(-20)
+        }
+        
+        enterBtn.snp.makeConstraints { (maker) in
+            maker.top.equalTo(descPwdLabel.snp.bottom).offset(46.5 .fitHeight)
+            maker.left.equalTo(10)
+            maker.right.equalTo(-10)
+            maker.height.equalTo(40)
         }
     }
     
