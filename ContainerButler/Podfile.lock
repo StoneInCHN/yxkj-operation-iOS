@@ -47,13 +47,13 @@ CHECKOUT OPTIONS:
     :commit: 2a9440a3ded796625f088a861b6401e63e93f1b6
     :git: https://github.com/facebook/pop.git
   RxCocoa:
-    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
+    :commit: 34acbfcc7d0740b6fa1b100af2001c1587b8997c
     :git: https://github.com/ReactiveX/RxSwift.git
   RxDataSources:
     :commit: bc0085272566b7ef45af1dee90d2c14395aa14fb
     :git: https://github.com/RxSwiftCommunity/RxDataSources.git
   RxSwift:
-    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
+    :commit: 34acbfcc7d0740b6fa1b100af2001c1587b8997c
     :git: https://github.com/ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
