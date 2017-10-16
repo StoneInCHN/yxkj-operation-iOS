@@ -29,4 +29,8 @@ class NavigationController: UINavigationController {
         }
         super.pushViewController(viewController, animated: animated)
     }
+    
+    func reomveBackGesture() {
+        interactivePopGestureRecognizer?.isEnabled = false
+    }
 }

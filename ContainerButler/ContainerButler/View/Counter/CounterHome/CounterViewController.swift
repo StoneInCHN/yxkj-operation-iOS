@@ -62,58 +62,33 @@ extension CounterViewController {
     }
     
     fileprivate func setupRX() {
-        
-        let items = Variable<[SectionModel<String, Double>]>([])
-        
-        items.value = [
-            SectionModel(model: "First section", items: [
-                1.0,
-                2.0,
-                3.0
-                ]),
-            SectionModel(model: "Second section", items: [
-                1.0,
-                2.0,
-                3.0
-                ]),
-            SectionModel(model: "Third section", items: [
-                1.0,
-                2.0,
-                3.0
-                ])
-        ]
-        
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(configureCell: { [unowned  self](_, tableView, indexPath, element) in
-            let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.itemdidSelected
-                .subscribe(onNext: {[weak self] (model) in
-                    guard let weakSelf = self else { return }
-                    HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
-                        weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
-                    })
-                }).disposed(by: self.disposeBag)
-            return cell
-        })
-        items.asObservable()
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        tableView.rx
-            .itemSelected
-            .map { indexPath in
-                return (indexPath, dataSource[indexPath])
-            }
-            .subscribe(onNext: { indexPath, model in
-                
-            })
-            .disposed(by: disposeBag)
-        
+     tableView.dataSource = self
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
     }
 }
 
+extension CounterViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.itemdidSelected = { [weak self] model in
+            guard let weakSelf = self else { return }
+            HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
+                weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+            })
+        }
+        return cell
+    }
+}
 extension CounterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: CounterSectionHeaderView = tableView.dequeueReusableHeaderFooter()
@@ -124,7 +99,7 @@ extension CounterViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 92
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

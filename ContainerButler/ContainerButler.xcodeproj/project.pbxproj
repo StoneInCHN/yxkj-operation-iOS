@@ -108,6 +108,7 @@
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
 		CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */; };
 		CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */; };
+		CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDDBD27B1F94B646004F5526 /* juic.jpg */; };
 		CDE2029D1F71187800CB0145 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2029C1F71187800CB0145 /* CounterViewModel.swift */; };
 		CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B5091F68C44A000A1915 /* Network.swift */; };
 		CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50B1F68C4A6000A1915 /* Router.swift */; };
@@ -298,6 +299,7 @@
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
 		CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaResetVC.swift; sourceTree = "<group>"; };
+		CDDBD27B1F94B646004F5526 /* juic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = juic.jpg; sourceTree = "<group>"; };
 		CDE2029C1F71187800CB0145 /* CounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		CDF6B5091F68C44A000A1915 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CDF6B50B1F68C4A6000A1915 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 		CD8441101F70E82400D50722 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDDBD27B1F94B646004F5526 /* juic.jpg */,
 				CD84469A1F70E82600D50722 /* UserCenter */,
 			);
 			path = Resource;
@@ -963,6 +966,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */,
 				CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */,
 				CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */,
 				CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */,
@@ -1045,6 +1049,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
+				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1060,6 +1065,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1341,6 +1347,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
 				WARNING_CFLAGS = "";
+				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -1386,6 +1393,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
 				WARNING_CFLAGS = "";
+				WARNING_LDFLAGS = "";
 			};
 			name = Release;
 		};

@@ -12,7 +12,7 @@ import RxSwift
 
 class ContainerManageVC: BaseViewController {
     fileprivate lazy var pageTitleView: PageTitleView = {
-        let pvc = PageTitleView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
+        let pvc = PageTitleView(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
         return pvc
     }()
     fileprivate lazy var pageContenView: PageContentView  = { [unowned self] in
@@ -21,7 +21,7 @@ class ContainerManageVC: BaseViewController {
         let wholeGoodsVC = WholeGoodsVC()
         childVCs.append(notReplenishVC)
         childVCs.append(wholeGoodsVC)
-        let pageContenView = PageContentView(frame: CGRect(x: 0, y: 44, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 44), childVCs: childVCs, parentVC: self)
+        let pageContenView = PageContentView(frame: CGRect(x: 0, y: 44 + 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 44), childVCs: childVCs, parentVC: self)
         pageContenView.collectView.isScrollEnabled = false
         return pageContenView
         }()
@@ -39,6 +39,15 @@ extension ContainerManageVC {
         title = "A货柜管理"
         view.addSubview(pageTitleView)
         view.addSubview(pageContenView)
+        let centerLine = UIView()
+        centerLine.backgroundColor = UIColor(hex: 0xefefef)
+        pageTitleView.addSubview(centerLine)
+        centerLine.snp.makeConstraints {
+            $0.top.equalTo(3)
+            $0.bottom.equalTo(-3)
+            $0.width.equalTo(1)
+            $0.centerX.equalTo(pageTitleView.snp.centerX)
+        }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "拍照完成", style: .plain, target: nil, action: nil)
         // FIXME:IN main thread
         navigationItem.rightBarButtonItem?.rx.tap

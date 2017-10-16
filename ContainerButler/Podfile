@@ -16,4 +16,5 @@ target 'ContainerButler' do
  pod 'Kingfisher', '~> 4.0'
  pod 'ObjectMapper', '~> 3.0'
  pod 'pop', :git => 'https://github.com/facebook/pop.git'
+ pod 'YYText'
 end

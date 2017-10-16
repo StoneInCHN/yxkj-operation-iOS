@@ -10,7 +10,7 @@ import UIKit
 
 private let scrollowLineH: CGFloat = 2.0
 private let zoomScale: CGFloat = 1.2
-private let normalColor: (CGFloat, CGFloat, CGFloat) = (205, 115, 255)
+private let normalColor: (CGFloat, CGFloat, CGFloat) = (51, 51, 51)
 private let selectColor: (CGFloat, CGFloat, CGFloat) = (255, 171, 51)
 
 class  PageTitleView: UIView {
