@@ -63,6 +63,7 @@ extension CounterViewController {
     
     fileprivate func setupRX() {
      tableView.dataSource = self
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
@@ -88,6 +89,12 @@ extension CounterViewController: UITableViewDataSource {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
 }
 extension CounterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

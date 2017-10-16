@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MGSwipeTableCell
 
 class NotReplenishedVC: BaseViewController {
     lazy var replenishManageView: ReplenishManageView = {
@@ -43,7 +44,6 @@ class NotReplenishedVC: BaseViewController {
 extension NotReplenishedVC {
     fileprivate func setupUI() {
         view.addSubview(tableView)
-       
         tableView.dataSource = self
         tableView.delegate = self
         tableView.snp.makeConstraints { (maker) in
@@ -63,6 +63,7 @@ extension NotReplenishedVC: UITableViewDelegate {
          replenishManageView.show()
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }
 
 extension NotReplenishedVC: UITableViewDataSource {
@@ -72,6 +73,26 @@ extension NotReplenishedVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.delegate = self
         return cell
     }
 }
+
+extension NotReplenishedVC: MGSwipeTableCellDelegate {
+    func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        if direction == .rightToLeft {
+            if index == 0 {
+                if let cell = cell as? GoodListCell {
+                    cell.showCover(with: 2)
+                }
+            } else if index == 1 {
+                  replenishManageView.show()
+            } else {
+                
+            }
+        }
+        return true
+    }
+}
+
+

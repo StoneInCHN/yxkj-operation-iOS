@@ -33,4 +33,5 @@ class NavigationController: UINavigationController {
     func reomveBackGesture() {
         interactivePopGestureRecognizer?.isEnabled = false
     }
+    
 }

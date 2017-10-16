@@ -10,8 +10,9 @@ import UIKit
 import RxCocoa
 import RxSwift
 import YYText
+import MGSwipeTableCell
 
-class GoodListCell: UITableViewCell, ViewNameReusable {
+class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
     var rightPanAction: (() -> Void)?
     var itemdidSelected: PublishSubject<String> = PublishSubject<String> ()
@@ -94,6 +95,30 @@ class GoodListCell: UITableViewCell, ViewNameReusable {
         return imageView
     }()
 
+    fileprivate lazy  var editButton: UIButton = {
+        let loginBtn = UIButton()
+//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_normal"), for: .normal)
+//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .highlighted)
+//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .disabled)
+        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+        loginBtn.setTitle("编辑补货", for: .normal)
+        loginBtn.setTitleColor(UIColor.white, for: .normal)
+        loginBtn.backgroundColor = UIColor(hex: 0x30C7AC)
+        return loginBtn
+    }()
+    
+    fileprivate lazy  var doneButton: UIButton = {
+        let loginBtn = UIButton()
+        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_normal"), for: .normal)
+        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .highlighted)
+        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .disabled)
+        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+        loginBtn.setTitle("完成补货", for: .normal)
+        loginBtn.setTitleColor(UIColor.white, for: .normal)
+        loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
+        return loginBtn
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
@@ -141,7 +166,12 @@ class GoodListCell: UITableViewCell, ViewNameReusable {
             maker.right.equalTo(-12)
     
         }
-     
+        editButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+         doneButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        rightButtons = [doneButton, editButton]
+        leftSwipeSettings.transition = .rotate3D
+        leftExpansion.buttonIndex = 1
+        leftExpansion.fillOnTrigger = true
     }
     
     override func layoutSubviews() {
@@ -156,6 +186,11 @@ class GoodListCell: UITableViewCell, ViewNameReusable {
 
 }
 
-
-
-
+extension GoodListCell {
+    func showCover(with count: Int) {
+        badgeView.badgeValue = count
+        UIView.animate(withDuration: 0.25) {[unowned self] in
+            self.coverView.transform = CGAffineTransform(translationX: UIScreen.width, y: 0)
+        }
+    }
+}
