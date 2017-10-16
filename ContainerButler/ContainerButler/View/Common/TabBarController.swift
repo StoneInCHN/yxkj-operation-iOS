@@ -29,6 +29,7 @@ extension TabBarController {
                          normalImageName: String,
                          selectedImageName: String) {
         let navi = NavigationController(rootViewController: childVC)
+        navi.title = title
         navi.tabBarItem = UITabBarItem(title: title, image: UIImage(named: normalImageName), selectedImage: UIImage(named: selectedImageName))
         navi.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         addChildViewController(navi)

@@ -23,6 +23,7 @@ class CounterViewController: BaseViewController {
         let taleView = UITableView()
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
+        taleView.allowsSelection = false
         taleView.register(CounterTableViewCell.self, forCellReuseIdentifier: "CounterTableViewCell")
         taleView.register(CounterSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "CounterSectionHeaderView")
         return taleView
@@ -87,7 +88,9 @@ extension CounterViewController {
             cell.itemdidSelected
                 .subscribe(onNext: {[weak self] (model) in
                     guard let weakSelf = self else { return }
-                    weakSelf.replenishmentView.show()
+                    HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
+                        weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+                    })
                 }).disposed(by: self.disposeBag)
             return cell
         })
@@ -121,7 +124,7 @@ extension CounterViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 80
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

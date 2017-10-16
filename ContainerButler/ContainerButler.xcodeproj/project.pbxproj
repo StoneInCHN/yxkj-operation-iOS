@@ -621,8 +621,8 @@
 			isa = PBXGroup;
 			children = (
 				CD69C47D1F668FBB00623B91 /* Common */,
-				CD0C178F1F74124500A96A81 /* Message */,
 				CDE202951F710F6F00CB0145 /* Counter */,
+				CD0C178F1F74124500A96A81 /* Message */,
 				CDFE07A01F70BE3500C89CA9 /* User */,
 			);
 			path = View;

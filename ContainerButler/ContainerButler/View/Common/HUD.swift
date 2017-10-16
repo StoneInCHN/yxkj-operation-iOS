@@ -21,12 +21,12 @@ class HUD {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if let title = title {
             let titleText = NSMutableAttributedString(string: title )
-            titleText.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)], range: NSMakeRange(0, title.characters.count))
+            titleText.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14.5)], range: NSMakeRange(0, title.characters.count))
             alertVC.setValue(titleText, forKey: "attributedTitle")
         }
         if let message = message {
-            let messageText = NSMutableAttributedString(string: "\n" + message )
-            messageText.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor(hex: 0x333333)], range: NSMakeRange(0, message.characters.count + 1))
+            let messageText = NSMutableAttributedString(string: message )
+            messageText.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor(hex: 0x333333)], range: NSMakeRange(0, message.characters.count))
             alertVC.setValue(messageText, forKey: "attributedMessage")
         }
         let cancleAction = UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
@@ -38,7 +38,7 @@ class HUD {
                 enterAction?()
             })
             alertVC.addAction(enterAction)
-             enterAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
+          enterAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
         }
          alertVC.addAction(cancleAction)
         currentVC.present(alertVC, animated: true, completion: nil)

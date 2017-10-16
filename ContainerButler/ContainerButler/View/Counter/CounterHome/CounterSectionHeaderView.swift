@@ -15,28 +15,28 @@ class CounterSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
     fileprivate lazy  var numberLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 13)
-        descLabel.textColor = UIColor.randomColor
+        descLabel.font = UIFont.systemFont(ofSize: 11)
+        descLabel.textColor = UIColor(hex: 0x666666)
         descLabel.numberOfLines = 0
-        descLabel.text = "编号1"
+        descLabel.text = "编号1000000001"
         return descLabel
     }()
     
     fileprivate lazy  var nameLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 13)
-        descLabel.textColor = UIColor.randomColor
+        descLabel.font = UIFont.systemFont(ofSize: 14.5)
+        descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "编号1"
+        descLabel.text = "花样年华T3优享空间"
         return descLabel
     }()
     
     fileprivate lazy  var listLabel: UILabel = {[weak self] in
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 13)
-        descLabel.textColor = UIColor.randomColor
+        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.textColor = UIColor(hex: 0x30C7AC)
         descLabel.numberOfLines = 0
-        descLabel.text = "编号1"
+        descLabel.text = "完成补货"
         descLabel.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer()
         descLabel.addGestureRecognizer(tap)
@@ -47,23 +47,37 @@ class CounterSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable {
         return descLabel
     }()
     
+    fileprivate lazy  var bgView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor.randomColor
-        contentView.addSubview(numberLabel)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(listLabel)
-        numberLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(12)
-            maker.centerY.equalTo(self.snp.centerY)
+        contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+         contentView.addSubview(bgView)
+        bgView.addSubview(numberLabel)
+        bgView.addSubview(nameLabel)
+        bgView.addSubview(listLabel)
+        bgView.snp.makeConstraints { (maker) in
+            maker.left.top.equalTo(12)
+            maker.right.equalTo(-12)
+            maker.bottom.equalTo(-12)
         }
         nameLabel.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(self.snp.centerX)
-            maker.centerY.equalTo(self.snp.centerY)
+            maker.left.equalTo(12)
+            maker.top.equalTo(12)
+        }
+       numberLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(12)
+            maker.top.equalTo(nameLabel.snp.bottom).offset(6)
         }
         listLabel.snp.makeConstraints { (maker) in
             maker.right.equalTo(-12)
-            maker.centerY.equalTo(self.snp.centerY)
+            maker.centerY.equalTo(bgView.snp.centerY)
         }
         
     }

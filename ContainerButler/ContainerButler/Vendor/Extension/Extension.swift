@@ -679,8 +679,25 @@ extension Double {
         return CGFloat(self * scale)
     }
     
+    private var scaleWidth: CGFloat {
+        let desigWidth: CGFloat = 750.0 * 0.5
+        var width: CGFloat = 750.0
+        if UIDevice.current.isiPhone4OrLess {
+            width = 320
+        } else if UIDevice.current.isiPhone5 {
+            width =  320
+        } else if UIDevice.current.isiPhone6 {
+            width =  375
+        } else if UIDevice.current.isiPhone6p {
+            width =  375
+        } else {
+            width =  768
+        }
+        return width / desigWidth
+    }
+    
     var fitWidth: CGFloat {
-        return CGFloat((self / 750.0) * Double(UIScreen.width))
+        return CGFloat(self) * scaleWidth
     }
 }
 

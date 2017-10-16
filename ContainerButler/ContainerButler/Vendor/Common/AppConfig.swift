@@ -26,10 +26,10 @@ struct CustomKey {
         static let baseImageUrl = (Bundle.main.infoDictionary?["BASE_IMAGE_URL"] as? String) ?? ""
     }
     struct Color {
-        static let mainBackgroundColor: UInt32 = 0xfafafa
+        static let mainBackgroundColor: UInt32 = 0xf3f3f3
         static let mainColor: UInt32 = 0xffab33
         static let mainBlueColor: UInt32 = 0x00a8fe
-        static let tabBackgroundColor: UInt32 = 0x222222
+        static let tabBackgroundColor: UInt32 = 0xffffff
         static let viewBackgroundColor: UInt32 = 0xf2f2f2
         static let redDotColor: UInt32 = 0xFF3824
         static let lineColor: UInt32 = 0xe5e5e5

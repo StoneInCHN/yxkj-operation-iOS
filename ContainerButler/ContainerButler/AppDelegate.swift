@@ -31,7 +31,7 @@ extension AppDelegate {
     fileprivate func setupUI() {
         UITabBar.appearance().barTintColor = UIColor(hex: CustomKey.Color.tabBackgroundColor)
         UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().tintColor = UIColor(hex: CustomKey.Color.mainColor)
+        UITabBar.appearance().tintColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
         if let font = UIFont(name: "PingFangSC-Medium", size: 18) {
             UINavigationBar.appearance().titleTextAttributes =
@@ -48,7 +48,8 @@ extension AppDelegate {
     fileprivate func chooseRootVC() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
+//        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
+         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
     
