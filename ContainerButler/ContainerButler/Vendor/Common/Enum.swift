@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum StatusType: String {
-    case loginInValid = "1001"
-    case error404 = "-1011"
-    case timeout = "-1001"
-    case disconnect = "-1009"
-    case pointUnavailable = "2001"
-    case success = "0000"
+enum StatusType: Int {
+    case loginInValid = 10001
+    case error404 = -1011
+    case timeout = -1001
+    case disconnect = -1009
+    case pointUnavailable = 2001
+    case success = 0000
+    case fail = 0001
 }

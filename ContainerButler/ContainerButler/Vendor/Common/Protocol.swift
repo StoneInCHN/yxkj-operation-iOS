@@ -21,7 +21,7 @@ protocol EndPointProtocol {
 extension EndPointProtocol {
     
     var baseURL: String {
-        return (Bundle.main.infoDictionary?["BASE_URL"] as? String) ?? ""
+        return (Bundle.main.infoDictionary?["BasseURL"] as? String) ?? ""
     }
     
     func URL() -> String {

@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 class BaseResponseObject<T: Mappable>: Mappable {
-    var status: StatusType = .success
+    var status: StatusType = .fail
     var description: String?
     var token: String?
     var object: T?

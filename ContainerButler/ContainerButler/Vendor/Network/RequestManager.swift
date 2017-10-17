@@ -46,10 +46,11 @@ class RequestManager {
         print("******Method*******\(urlRequest!.httpMethod ?? "")")
         print("******Body*******\(body ?? [: ])")
         var appError = AppError()
-        requst.validate()
+        requst
                 .responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
+                        print(value)
                         guard let responseJson = value as? [String: Any] else {
                              observer.on(.completed)
                             return
@@ -65,10 +66,14 @@ class RequestManager {
                                 appError.message = "Data Parase Error"
                                 observer.on(.error(appError))
                             }
-                        }
-                        if responseObj.status == .loginInValid {  /// 通知重新登录
-                            appError.message = "Data Parase Error"
-                            observer.on(.error(appError))
+                        } else {
+                            if responseObj.status == .loginInValid {  /// 通知重新登录
+                                appError.message = "Data Parase Error"
+                                observer.on(.error(appError))
+                            } else {
+                                appError.message = responseObj.description ?? "Error"
+                                observer.on(.error(appError))
+                            }
                         }
                     case .failure(let error):
                          appError.message = error.localizedDescription

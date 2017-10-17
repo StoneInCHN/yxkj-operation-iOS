@@ -15,6 +15,7 @@
 		CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E411F73A19F008A3092 /* DZNPhotoPickerControllerConstants.m */; };
 		CD1D1E491F73A1B8008A3092 /* UIImagePickerController+Edit.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E431F73A19F008A3092 /* UIImagePickerController+Edit.m */; };
 		CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */; };
+		CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD319ED41F95E8B2007BF050 /* UserSessionInfo.swift */; };
 		CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD6D1F72537800902F91 /* GIBadgeView.m */; };
 		CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD711F7257CA00902F91 /* YBPopupMenu.m */; };
 		CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD731F7257CA00902F91 /* YBPopupMenuPath.m */; };
@@ -88,6 +89,7 @@
 		CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7E1F70E8F900D50722 /* ResponseObject.swift */; };
 		CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */; };
 		CD8C5B561F8F046200E2E7B5 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */; };
+		CD8DA7C71F95D72900C5C010 /* UserSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DA7C61F95D72900C5C010 /* UserSessionViewModel.swift */; };
 		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
@@ -197,6 +199,7 @@
 		CD1D1E421F73A19F008A3092 /* UIImagePickerController+Edit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Edit.h"; sourceTree = "<group>"; };
 		CD1D1E431F73A19F008A3092 /* UIImagePickerController+Edit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Edit.m"; sourceTree = "<group>"; };
 		CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CD319ED41F95E8B2007BF050 /* UserSessionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionInfo.swift; sourceTree = "<group>"; };
 		CD3BAD6C1F72537800902F91 /* GIBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GIBadgeView.h; sourceTree = "<group>"; };
 		CD3BAD6D1F72537800902F91 /* GIBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GIBadgeView.m; sourceTree = "<group>"; };
 		CD3BAD701F7257CA00902F91 /* YBPopupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu.h; sourceTree = "<group>"; };
@@ -278,6 +281,7 @@
 		CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaLoginVC.swift; sourceTree = "<group>"; };
 		CD8C5B541F8F044D00E2E7B5 /* RSAEncryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
 		CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
+		CD8DA7C61F95D72900C5C010 /* UserSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionViewModel.swift; sourceTree = "<group>"; };
 		CD9466611F74A96C00C85D7B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
@@ -540,6 +544,14 @@
 			path = UIImagePickerController;
 			sourceTree = "<group>";
 		};
+		CD319ED31F95E89D007BF050 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				CD319ED41F95E8B2007BF050 /* UserSessionInfo.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		CD3BAD6B1F72537800902F91 /* Badge */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				CDE2029B1F71186800CB0145 /* Counter */,
+				CD8DA7C31F95D69500C5C010 /* User */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -778,6 +791,7 @@
 			children = (
 				CD844C7D1F70E8F900D50722 /* Model.swift */,
 				CD844C7E1F70E8F900D50722 /* ResponseObject.swift */,
+				CD319ED31F95E89D007BF050 /* User */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -789,6 +803,14 @@
 				CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */,
 			);
 			path = RSA;
+			sourceTree = "<group>";
+		};
+		CD8DA7C31F95D69500C5C010 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				CD8DA7C61F95D72900C5C010 /* UserSessionViewModel.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		CDCED5B71F8B4D890038C1F3 /* ResetPassword */ = {
@@ -1159,6 +1181,7 @@
 				CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */,
 				CD1D1E491F73A1B8008A3092 /* UIImagePickerController+Edit.m in Sources */,
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
+				CD8DA7C71F95D72900C5C010 /* UserSessionViewModel.swift in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
 				CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */,
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
@@ -1191,6 +1214,7 @@
 				CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */,
 				CD78F08E1F6782AB00D50B7B /* HUD.swift in Sources */,
 				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
+				CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */,
 				CDF6B5101F68D136000A1915 /* Enum.swift in Sources */,
 				CD69C47A1F668EDF00623B91 /* Protocol.swift in Sources */,
 			);
@@ -1320,6 +1344,7 @@
 			baseConfigurationReference = 3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "http://192.167.1.242:8080";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5AUADUBV2;
@@ -1366,6 +1391,7 @@
 			baseConfigurationReference = 023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5AUADUBV2;

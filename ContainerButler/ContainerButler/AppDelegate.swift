@@ -48,8 +48,8 @@ extension AppDelegate {
     fileprivate func chooseRootVC() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-//        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
-         window?.rootViewController = TabBarController()
+        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
+//         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
     
