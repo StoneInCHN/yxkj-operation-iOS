@@ -18,7 +18,7 @@ class UserSessionViewModel {
     func loadRSAPublickey() {
         let keyOberable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
         keyOberable.subscribe(onNext: {[weak self] (response) in
-            if let key = response.description {
+            if let _ = response.description {
 //                self?.rsaPublickey = key
             }
         })
@@ -28,6 +28,11 @@ class UserSessionViewModel {
     /// 登录
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
         let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
+        loginObserable.subscribe(onNext: { (response) in
+            if response.status == .success, let token = response.token, !token.isEmpty{
+                UserSessionInfo.share.token = token
+            }
+        }).disposed(by: disposeBag)
         return loginObserable
     }
     

@@ -12,7 +12,7 @@ import RxSwift
 
 class CaptchaLoginVC: BaseViewController {
     var phoneNumber: String?
-    
+    fileprivate lazy var chaptchVM: UserSessionViewModel = UserSessionViewModel()
     fileprivate lazy  var descPwdLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: CGFloat(22.5))
@@ -212,7 +212,10 @@ extension CaptchaLoginVC {
                 HUD.showAlert(from: weakSelf, title: "确认手机号码",
                               message: "我们将发送验证码短信到这个号码：\n +86 \(weakSelf.phoneNumTF.text ?? "")",
                     enterTitle: "好",
-                    enterAction: { 
+                    enterAction: {
+                        let param = UserSessionParam()
+                        param.phoneNum = self?.phoneNumTF.text
+                        self?.chaptchVM.getLoginVerificationCode(param)
                     weakSelf.forgetPwdBtn.start(withTime: 5, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                 }, cancleAction: nil)
             })
@@ -223,6 +226,10 @@ extension CaptchaLoginVC {
                 print("login:\(self.debugDescription)")
                 let vcc = ResetPasswordVC()
                 vcc.phoneNumber = self?.phoneNumTF.text
+                 let param = UserSessionParam()
+                param.phoneNum = self?.phoneNumTF.text
+                param.verificationCode = self?.pwdTF.text
+//                self?.chaptchVM.handle(with: .loginWithVerificationCode(param)).subscribe(onNext: <#T##((NullDataResponse) -> Void)?##((NullDataResponse) -> Void)?##(NullDataResponse) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
                 self?.navigationController?.pushViewController(vcc, animated: true)
             })
             .disposed(by: disposeBag)

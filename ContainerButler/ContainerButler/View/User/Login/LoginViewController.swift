@@ -228,10 +228,16 @@ extension LoginViewController {
                 guard let weakSelf = self else { return }
                 param.phoneNum = weakSelf.phoneNumTF.text
                 param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey)
-                weakSelf.loginVM.handle(with: .loginWithPassword(param)) .subscribe(onNext: { (response) in
-                    if let token = response.token {
-                        UserSessionInfo.share.token = token
-                    }
+                weakSelf.loginVM.handle(with: .loginWithPassword(param))
+                    .subscribe(onNext: { (response) in
+                        HUD.hideLoading()
+                         let rootVC = TabBarController()
+                        UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
+                            weakSelf.view.removeFromSuperview()
+                             UIApplication.shared.keyWindow?.addSubview(rootVC.view)
+                        }, completion: { _ in
+                              UIApplication.shared.keyWindow?.rootViewController = rootVC
+                        })
                 }).disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)
     }
