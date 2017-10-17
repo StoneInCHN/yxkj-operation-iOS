@@ -223,18 +223,14 @@ extension LoginViewController {
         
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
+                HUD.showLoading()
                 let param = UserSessionParam()
                 guard let weakSelf = self else { return }
                 param.phoneNum = weakSelf.phoneNumTF.text
                 param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey)
-                weakSelf.loginVM.loaginWithPassword(param).subscribe(onNext: { (response) in
+                weakSelf.loginVM.handle(with: .loginWithPassword(param)) .subscribe(onNext: { (response) in
                     if let token = response.token {
                         UserSessionInfo.share.token = token
-                    }
-                }, onError: { error in
-                    if let error = error as? AppError {
-                        print(error.message)
-                        HUD.showError(error.message)
                     }
                 }).disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)

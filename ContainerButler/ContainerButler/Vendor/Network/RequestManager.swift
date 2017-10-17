@@ -46,8 +46,39 @@ class RequestManager {
         print("******Method*******\(urlRequest!.httpMethod ?? "")")
         print("******Body*******\(body ?? [: ])")
         var appError = AppError()
-        requst
-                .responseJSON(completionHandler: { response in
+        requst.responseString(completionHandler: { (response) in
+            switch response.result {
+            case .success(let value):
+                print(value)
+                guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSONString: value) else {
+                    observer.on(.completed)
+                    return
+                }
+                if responseObj.status == .success {
+                    if let obj = Mapper<T>().map(JSONString: value) {
+                        observer.on(.next(obj))
+                    } else {
+                        appError.message = "Data Parase Error"
+                        observer.on(.error(appError))
+                        HUD.showError(appError.message)
+                    }
+                } else {
+                    if responseObj.status == .loginInValid {  /// 通知重新登录
+                        appError.message = "Data Parase Error"
+                        observer.on(.error(appError))
+                    } else {
+                        appError.message = responseObj.description ?? "Error"
+                        observer.on(.error(appError))
+                    }
+                    HUD.showError(appError.message)
+                }
+            case .failure(let error):
+                appError.message = error.localizedDescription
+                observer.on(.error(appError))
+                break
+            }
+        })
+                /*.responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
                         print(value)
@@ -65,6 +96,7 @@ class RequestManager {
                             } else {
                                 appError.message = "Data Parase Error"
                                 observer.on(.error(appError))
+                                HUD.showError(appError.message)
                             }
                         } else {
                             if responseObj.status == .loginInValid {  /// 通知重新登录
@@ -74,13 +106,14 @@ class RequestManager {
                                 appError.message = responseObj.description ?? "Error"
                                 observer.on(.error(appError))
                             }
+                            HUD.showError(appError.message)
                         }
                     case .failure(let error):
                          appError.message = error.localizedDescription
                          observer.on(.error(appError))
                         break
                     }
-                })
+                })*/
             return Disposables.create()
         }
     }

@@ -13,7 +13,7 @@ import MGSwipeTableCell
 
 class NotReplenishedVC: BaseViewController {
     fileprivate lazy var datas: [Bool] = {
-        let datas: [Bool] = [true, false, false, true, true, false, false, false,  false, false]
+        let datas: [Bool] = [true, false, false, true, true, false, false, false, false, false]
         return datas
     }()
     lazy var replenishManageView: ReplenishManageView = {

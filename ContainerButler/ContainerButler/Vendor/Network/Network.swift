@@ -39,6 +39,9 @@ enum UserSession: UserEndPointProtocol {
     case resetPwd
     /// 修改密码
     case updatePwd
+    /// 忘记密码时验证码验证
+    case verifyForgetPwdCaptchCode
+    
     var path: String {
         return "/keeper"
     }
@@ -59,6 +62,8 @@ enum UserSession: UserEndPointProtocol {
             return "/resetPwd"
         case .updatePwd:
             return "/updatePwd"
+        case .verifyForgetPwdCaptchCode:
+            return "/forgetPwd"
         }
     }
     
@@ -69,5 +74,23 @@ enum UserSession: UserEndPointProtocol {
         default:
             return .post
         }
+    }
+}
+
+class UserSessionParam: Model {
+    var phoneNum: String?
+    var newPwd: String?
+    var oldPwd: String?
+    var password: String?
+    var userName: String?
+    var verificationCode: String?
+    
+    override func mapping(map: Map) {
+        phoneNum <- map["cellPhoneNum"]
+        newPwd <- map["cellPhoneNum"]
+        oldPwd <- map["oldPwd"]
+        password <- map["password"]
+        userName <- map["userName"]
+        verificationCode <- map["verificationCode"]
     }
 }

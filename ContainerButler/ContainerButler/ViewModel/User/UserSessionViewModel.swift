@@ -14,45 +14,28 @@ import ObjectMapper
 class UserSessionViewModel {
     var rsaPublickey: String = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBMPGboxzPh9SApXHBKMQHF31rgB6LQBZxg3VirK9Rbp0qvgIDw+2ygZxPQAkgiK24PTWuBbw2UTNy5NxglSCsCnY8+vJXd8cwZKrBpnwXEcO0Wuh5G8Z++X0AIisMCIoiDZZwWnvqJ7a3vUQIj62qTX259s0UqvjGA7uvoDM9tQIDAQAB"
     fileprivate let disposeBag: DisposeBag = DisposeBag()
-    
+    /// 获取公钥
     func loadRSAPublickey() {
         let keyOberable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
-        keyOberable.subscribe(onNext: { (response) in
-            print(response.description ?? "")
-
+        keyOberable.subscribe(onNext: {[weak self] (response) in
+            if let key = response.description {
+//                self?.rsaPublickey = key
+            }
         })
         .disposed(by: disposeBag)
     }
     
-    func loaginWithPassword(_ param: UserSessionParam) -> Observable<NullDataResponse> {
-        let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.loginByPwd, param: param), needToken: .false)
+    /// 登录
+    func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
+        let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
         return loginObserable
     }
-}
-
-class UserSessionParam: Model {
-    var phoneNum: String?
-    var newPwd: String?
-    var oldPwd: String?
-    var password: String?
-    var userName: String?
-    var verificationCode: String?
     
-    override func mapping(map: Map) {
-        phoneNum <- map["cellPhoneNum"]
-         newPwd <- map["cellPhoneNum"]
-         oldPwd <- map["oldPwd"]
-         password <- map["password"]
-         userName <- map["userName"]
-         verificationCode <- map["verificationCode"]
+    /// 获取验证码
+    func getLoginVerificationCode(_ param: UserSessionParam) {
+        let codeObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getVerificationCode, param: param), needToken: .true)
+        codeObserable.subscribe(onNext: {_ in    }).disposed(by: disposeBag)
+
     }
+    
 }
-
-
-
-
-
-
-
-
-
