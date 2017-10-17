@@ -94,30 +94,6 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         imageView.contentMode = .center
         return imageView
     }()
-
-    fileprivate lazy  var editButton: UIButton = {
-        let loginBtn = UIButton()
-//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_normal"), for: .normal)
-//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .highlighted)
-//        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .disabled)
-        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
-        loginBtn.setTitle("编辑补货", for: .normal)
-        loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.backgroundColor = UIColor(hex: 0x30C7AC)
-        return loginBtn
-    }()
-    
-    fileprivate lazy  var doneButton: UIButton = {
-        let loginBtn = UIButton()
-        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_normal"), for: .normal)
-        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .highlighted)
-        //        loginBtn.setBackgroundImage(UIImage(named: "loginBtn_highlighted"), for: .disabled)
-        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
-        loginBtn.setTitle("完成补货", for: .normal)
-        loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
-        return loginBtn
-    }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -166,19 +142,23 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
             maker.right.equalTo(-12)
     
         }
-        editButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-         doneButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        rightButtons = [doneButton, editButton]
-        leftSwipeSettings.transition = .rotate3D
-        leftExpansion.buttonIndex = 1
-        leftExpansion.fillOnTrigger = true
+        coverView.snp.makeConstraints {
+            $0.left.equalTo(bgView.snp.left)
+            $0.right.equalTo(bgView.snp.right)
+            $0.top.equalTo(bgView.snp.top)
+            $0.bottom.equalTo(bgView.snp.bottom)
+        }
+        descLabel.snp.makeConstraints {
+            $0.centerX.equalTo(UIScreen.width * 0.5)
+            $0.centerY.equalTo(bgView.snp.centerY)
+        }
+         descLabel.sizeToFit()
+        coverView.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        coverView.frame = CGRect(x: -UIScreen.width, y: 0, width: UIScreen.width, height: bounds.height - 12)
-        descLabel.center = CGPoint(x: UIScreen.width * 0.5, y: (bounds.height - 12) * 0.5)
-        descLabel.sizeToFit()
+       
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -187,10 +167,11 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
 }
 
 extension GoodListCell {
-    func showCover(with count: Int) {
-        badgeView.badgeValue = count
-        UIView.animate(withDuration: 0.25) {[unowned self] in
-            self.coverView.transform = CGAffineTransform(translationX: UIScreen.width, y: 0)
-        }
+    func showCover(_ count: Int) {
+        coverView.isHidden = false
+    }
+    
+    func hiddenCover() {
+        coverView.isHidden = true
     }
 }
