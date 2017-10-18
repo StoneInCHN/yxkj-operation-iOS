@@ -25,14 +25,15 @@ class BaseViewController: UIViewController {
     deinit {
         debugPrint("ViewController deinit")
     }
+    
     func setBackBarButton() {
-        let image = UIImage(named: "new_nav_arrow_white")
+        let image = UIImage(named: "navigation_back")
         navigationController?.navigationBar.backIndicatorImage = image
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         let backBarItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarItem
         automaticallyAdjustsScrollViewInsets = false
-         view.backgroundColor = .white
+        view.backgroundColor = .white
     }
     
     func whenHiddenNavigationBarSetupBackBtn() {

@@ -29,7 +29,7 @@ class UserSessionViewModel {
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
         let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
         loginObserable.subscribe(onNext: { (response) in
-            if response.status == .success, let token = response.token, !token.isEmpty{
+            if response.status == .success, let token = response.token, !token.isEmpty {
                 UserSessionInfo.share.token = token
             }
         }).disposed(by: disposeBag)

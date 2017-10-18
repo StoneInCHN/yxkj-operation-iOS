@@ -644,6 +644,22 @@ extension UIButton {
         btnAnimation.duration = 0.3
         self.layer.add(btnAnimation, forKey: nil)
     }
+    static  func createButtons(with titles: [String], backgroudColors: [UIColor]) -> [UIButton] {
+        var buttons: [UIButton] = [UIButton]()
+        if titles.count != backgroudColors.count {
+            return buttons
+        }
+        for index in 0 ..< titles.count {
+            let loginBtn = UIButton()
+            loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+            loginBtn.setTitle(titles[index], for: .normal)
+            loginBtn.setTitleColor(UIColor.white, for: .normal)
+            loginBtn.backgroundColor = backgroudColors[index]
+            loginBtn.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+            buttons.append(loginBtn)
+        }
+        return buttons
+    }
 }
 
 extension Dictionary {
@@ -656,7 +672,7 @@ extension Dictionary {
 
 extension UIFont {
     static func sizeToFit(with size: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: (size * UIScreen.width) / 320.0)
+        return UIFont.systemFont(ofSize: size * CGFloat(1.0.scaleWidth))
     }
 }
 
@@ -679,7 +695,7 @@ extension Double {
         return CGFloat(self * scale)
     }
     
-    private var scaleWidth: CGFloat {
+     var scaleWidth: CGFloat {
         let desigWidth: CGFloat = 750.0 * 0.5
         var width: CGFloat = 750.0
         if UIDevice.current.isiPhone4OrLess {

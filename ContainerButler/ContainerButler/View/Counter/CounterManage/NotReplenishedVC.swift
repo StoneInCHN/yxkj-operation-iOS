@@ -23,10 +23,56 @@ class NotReplenishedVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
         taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         return taleView
+    }()
+    
+    fileprivate lazy  var doneBtn: UIButton = {
+        let loginBtn = UIButton()
+        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+        loginBtn.setTitle("拍照完成", for: .normal)
+        loginBtn.setTitleColor(UIColor.white, for: .normal)
+        loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainGreenColor)
+        loginBtn.layer.cornerRadius = 20
+        loginBtn.layer.masksToBounds = true
+        return loginBtn
+    }()
+    fileprivate lazy  var stopBtn: UIButton = {
+        let loginBtn = UIButton()
+        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
+        loginBtn.setTitle("暂停补货", for: .normal)
+        loginBtn.setTitleColor(UIColor.white, for: .normal)
+        loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
+        loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
+        loginBtn.layer.cornerRadius = 20
+        loginBtn.layer.masksToBounds = true
+        return loginBtn
+    }()
+    fileprivate lazy  var descPwdLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: CGFloat(12))
+        descLabel.textColor = UIColor(hex: 0x333333)
+        descLabel.textAlignment = .center
+        descLabel.text = "* 若完成了整个货柜的补货，需要拍照记录"
+        descLabel.numberOfLines = 0
+        return descLabel
+    }()
+    
+    fileprivate lazy  var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        return view
+    }()
+    fileprivate lazy var pictureOptionView: PictureChooseOptionView = {[unowned self] in
+        let view = PictureChooseOptionView(frame: CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height ))
+        return view
+    }()
+    lazy  var cover: UIButton = {
+        let cover = UIButton()
+        cover.frame = UIScreen.main.bounds
+        cover.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return cover
     }()
     
     override func viewDidLoad() {
@@ -36,24 +82,74 @@ class NotReplenishedVC: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let navi = navigationController as? NavigationController {
-            navi.reomveBackGesture()
-        }
     }
 }
 
 extension NotReplenishedVC {
     fileprivate func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(doneBtn)
+        view.addSubview(stopBtn)
+        view.addSubview(descPwdLabel)
+        view.addSubview(containerView)
+        containerView.addSubview(doneBtn)
+        containerView.addSubview(stopBtn)
+        containerView.addSubview(descPwdLabel)
         tableView.dataSource = self
         tableView.delegate = self
+        containerView.snp.makeConstraints { (maker) in
+            maker.left.right.bottom.equalTo(0)
+            maker.height.equalTo(180.0.fitHeight)
+        }
+        descPwdLabel.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(containerView.snp.centerX)
+            maker.bottom.equalTo(containerView.snp.bottom).offset(-12)
+        }
+        stopBtn.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(containerView.snp.centerX)
+            maker.bottom.equalTo(descPwdLabel.snp.top).offset(-50.0.fitHeight)
+            maker.width.equalTo(180.0.fitWidth)
+            maker.height.equalTo(40)
+        }
+        doneBtn.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(containerView.snp.centerX)
+            maker.bottom.equalTo(stopBtn.snp.top).offset(-20.0.fitHeight)
+            maker.width.equalTo(180.0.fitWidth)
+            maker.height.equalTo(40)
+        }
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.equalTo(0)
             maker.top.equalTo(0)
-            maker.bottom.equalTo(-64)
+            maker.bottom.equalTo(containerView.snp.top).offset(-12)
         }
-        replenishManageView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-        parent?.view.addSubview(replenishManageView)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
+        replenishManageView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
+         UIApplication.shared.keyWindow?.addSubview(replenishManageView)
+         view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        UIApplication.shared.keyWindow?.addSubview(pictureOptionView)
+        pictureOptionView.cameraBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+
+            })
+        .disposed(by: disposeBag)
+
+        pictureOptionView.photoBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+
+            })
+            .disposed(by: disposeBag)
+
+        pictureOptionView.cancleBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+                self?.dismissPictureOptionView()
+            })
+            .disposed(by: disposeBag)
+        
+        doneBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+                self?.doneAction()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -97,7 +193,7 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
         }
         if datas[indexPath.row], direction == .rightToLeft {
             swipeSettings.transition = .border
-            return  createLeftButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
+            return  UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
         }
         return nil
     }
@@ -111,22 +207,29 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
         return true
     }
 }
-
 extension NotReplenishedVC {
-    fileprivate  func createLeftButtons(with titles: [String], backgroudColors: [UIColor]) -> [UIButton] {
-        var buttons: [UIButton] = [UIButton]()
-        if titles.count != backgroudColors.count {
-            return buttons
+    fileprivate func doneAction() {
+        UIApplication.shared.keyWindow?.insertSubview(cover, belowSubview: pictureOptionView)
+        UIView.animate(withDuration: 0.25, animations: {[unowned self] in
+            self.containerView.snp.updateConstraints {
+                $0.bottom.equalTo(180)
+            }
+        }) { (_) in
+            UIView.animate(withDuration: 0.25, animations: {[unowned self] in
+                self.pictureOptionView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.height)
+            })
         }
-        for index in 0 ..< titles.count {
-            let loginBtn = UIButton()
-            loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
-            loginBtn.setTitle(titles[index], for: .normal)
-            loginBtn.setTitleColor(UIColor.white, for: .normal)
-            loginBtn.backgroundColor = backgroudColors[index]
-            loginBtn.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-            buttons.append(loginBtn)
+        
+    }
+    
+    fileprivate func dismissPictureOptionView() {
+        UIView.animate(withDuration: 0.25, animations: { [unowned self] in
+            self.pictureOptionView.transform = .identity
+            self.cover.removeFromSuperview()
+        }) { (_) in
+            self.containerView.snp.updateConstraints {
+                $0.bottom.equalTo(0)
+            }
         }
-        return buttons
     }
 }

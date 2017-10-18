@@ -45,21 +45,25 @@ class HUD {
     }
     
     static func showLoading() {
+        UIApplication.shared.keyWindow?.isUserInteractionEnabled = false
         SVProgressHUD.setRingNoTextRadius(10)
         SVProgressHUD.show()
         
     }
     
     static func hideLoading() {
+         UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
         SVProgressHUD.dismiss()
     }
     
     static func showError(_ meessage: String) {
+        UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
         SVProgressHUD.setMaximumDismissTimeInterval(2)
         SVProgressHUD.showError(withStatus: meessage)
     }
     
     static func showSuccess(_ message: String) {
+        UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
         SVProgressHUD.showSuccess(withStatus: message)
     }
     

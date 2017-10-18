@@ -36,6 +36,7 @@ struct CustomKey {
         static let greyColor: UInt32 = 0xa0a0a0
         static let mainBlackColor: UInt32 = 0x000000
         static let mainOrangeColor: UInt32 = 0xFBC205
+        static let mainGreenColor: UInt32 = 0x30C7AC
     }
     struct UserDefaultsKey {
         static let session = "sessionInfo"

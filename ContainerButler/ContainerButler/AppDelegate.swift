@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     fileprivate func setupUI() {
+        UINavigationBar.appearance().tintColor = UIColor.black
+        UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = UIColor(hex: CustomKey.Color.tabBackgroundColor)
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
