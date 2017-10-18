@@ -104,7 +104,6 @@ class ResetPasswordVC: BaseViewController {
         loginBtn.setTitleColor(UIColor.white, for: .disabled)
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         loginBtn.isEnabled = false
-        loginBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 35)
         return loginBtn
     }()
     
@@ -203,7 +202,7 @@ extension ResetPasswordVC {
             maker.top.equalTo(descPwdLabel.snp.bottom).offset(46.5 .fitHeight)
             maker.left.equalTo(10)
             maker.right.equalTo(-10)
-            maker.height.equalTo(40)
+            maker.height.equalTo(50)
         }
     }
     

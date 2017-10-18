@@ -5,18 +5,18 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 4,
-          "height" : 2
+          "width" : 1,
+          "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 5,
-          "top" : 27,
-          "right" : 34,
-          "left" : 21
+          "bottom" : 34,
+          "top" : 19,
+          "right" : 19,
+          "left" : 18
         }
       },
       "idiom" : "universal",
-      "filename" : "Artboard 1.png",
+      "filename" : "dashed@1x.png",
       "scale" : "1x"
     },
     {
@@ -24,18 +24,18 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 30,
-          "height" : 8
+          "width" : 385,
+          "height" : 412
         },
         "cap-insets" : {
-          "bottom" : 7,
-          "top" : 53,
-          "right" : 68,
-          "left" : 30
+          "bottom" : 41,
+          "top" : 33,
+          "right" : 53,
+          "left" : 48
         }
       },
       "idiom" : "universal",
-      "filename" : "Artboard 1@2x.png",
+      "filename" : "dashed@2x.png",
       "scale" : "2x"
     },
     {
@@ -43,18 +43,18 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 59,
-          "height" : 10
+          "width" : 607,
+          "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 15,
-          "top" : 77,
-          "right" : 98,
-          "left" : 35
+          "bottom" : 81,
+          "top" : 53,
+          "right" : 64,
+          "left" : 59
         }
       },
       "idiom" : "universal",
-      "filename" : "Artboard 1@3x.png",
+      "filename" : "dashed@3x.png",
       "scale" : "3x"
     }
   ],

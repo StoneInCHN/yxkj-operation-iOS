@@ -166,7 +166,7 @@ extension CaptchaResetVC {
             maker.top.equalTo(line2.snp.bottom).offset(50)
             maker.left.equalTo(10)
             maker.right.equalTo(-10)
-            maker.height.equalTo(40)
+            maker.height.equalTo(50)
         }
     }
     

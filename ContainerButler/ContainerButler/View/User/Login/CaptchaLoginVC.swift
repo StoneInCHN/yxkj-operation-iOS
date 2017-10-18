@@ -67,8 +67,6 @@ class CaptchaLoginVC: BaseViewController {
         loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 16)
         loginBtn.setTitle("登 录", for: .normal)
         loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.layer.cornerRadius = 20
-        loginBtn.layer.masksToBounds = true
         loginBtn.isEnabled = false
         return loginBtn
     }()
@@ -166,7 +164,7 @@ extension CaptchaLoginVC {
             maker.top.equalTo(line2.snp.bottom).offset(50)
             maker.left.equalTo(10)
             maker.right.equalTo(-10)
-            maker.height.equalTo(40)
+            maker.height.equalTo(50)
         }
     }
     

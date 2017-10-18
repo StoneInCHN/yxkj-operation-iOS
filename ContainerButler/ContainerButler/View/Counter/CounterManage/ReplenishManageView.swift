@@ -90,6 +90,12 @@ class ReplenishManageView: UIView {
         return view
     }()
     
+    
+    fileprivate  lazy  var bgView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "dashed"))
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -116,6 +122,7 @@ extension ReplenishManageView {
         contanierView.addSubview(realDeliveryGoodsLabel)
         contanierView.addSubview(realDeliveryGoodsInputTF)
         contanierView.addSubview(line0)
+        contanierView.addSubview(bgView)
         addSubview(replenishBtn)
         addSubview(contanierView)
         contanierView.snp.makeConstraints { (maker) in
@@ -128,8 +135,14 @@ extension ReplenishManageView {
         goodsIcon.snp.makeConstraints { (maker) in
             maker.top.equalTo(25)
             maker.left.equalTo(25)
-            maker.right.equalTo(25)
+            maker.right.equalTo(-25)
             maker.height.equalTo(243.0.fitHeight)
+        }
+        bgView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(goodsIcon.snp.top)
+            maker.left.equalTo(goodsIcon.snp.left)
+            maker.right.equalTo(goodsIcon.snp.right)
+            maker.height.equalTo(goodsIcon.snp.height)
         }
         nameLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(goodsIcon.snp.left).offset(25)

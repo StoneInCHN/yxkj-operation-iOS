@@ -89,8 +89,6 @@ class PictureChooseOptionView: UIView {
             maker.bottom.equalTo(line0.snp.top)
             maker.height.equalTo(50)
         }
-
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,15 +96,3 @@ class PictureChooseOptionView: UIView {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-

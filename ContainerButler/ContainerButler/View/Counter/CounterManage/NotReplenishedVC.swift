@@ -16,8 +16,12 @@ class NotReplenishedVC: BaseViewController {
         let datas: [Bool] = [true, false, false, true, true, false, false, false, false, false]
         return datas
     }()
-    lazy var replenishManageView: ReplenishManageView = {
+   fileprivate lazy var replenishManageView: ReplenishManageView = {
         let animator = ReplenishManageView()
+        return animator
+    }()
+    fileprivate lazy var replenishDoneView: ReplenishedDoneView = {
+        let animator = ReplenishedDoneView()
         return animator
     }()
     fileprivate lazy var tableView: UITableView = {
@@ -124,18 +128,22 @@ extension NotReplenishedVC {
         }
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
         replenishManageView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
+          replenishDoneView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
          UIApplication.shared.keyWindow?.addSubview(replenishManageView)
+         UIApplication.shared.keyWindow?.addSubview(replenishDoneView)
          view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         UIApplication.shared.keyWindow?.addSubview(pictureOptionView)
         pictureOptionView.cameraBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
-
+                 self?.dismissPictureOptionView()
+                self?.openMedia(.camera)
             })
         .disposed(by: disposeBag)
 
         pictureOptionView.photoBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
-
+                self?.dismissPictureOptionView()
+                self?.openMedia(.photoLibrary)
             })
             .disposed(by: disposeBag)
 
@@ -150,6 +158,22 @@ extension NotReplenishedVC {
                 self?.doneAction()
             })
             .disposed(by: disposeBag)
+        
+        replenishDoneView.closeBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+                self?.replenishDoneView.dismiss()
+            }).disposed(by: disposeBag)
+        
+        replenishDoneView.rechooseBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+                 self?.replenishDoneView.dismiss()
+                self?.openMedia(.camera)
+            }).disposed(by: disposeBag)
+        
+        replenishDoneView.doneBtn.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -221,7 +245,7 @@ extension NotReplenishedVC {
         }
         
     }
-    
+  
     fileprivate func dismissPictureOptionView() {
         UIView.animate(withDuration: 0.25, animations: { [unowned self] in
             self.pictureOptionView.transform = .identity
@@ -231,5 +255,26 @@ extension NotReplenishedVC {
                 $0.bottom.equalTo(0)
             }
         }
+    }
+    
+    fileprivate func openMedia(_ type: UIImagePickerControllerSourceType) {
+       
+        if !UIImagePickerController.isSourceTypeAvailable(type) {
+            return
+        }
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = type
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension NotReplenishedVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let imge = info[UIImagePickerControllerOriginalImage] as? UIImage
+        replenishDoneView.imageView.image = imge
+        replenishDoneView.show()
+        dismiss(animated: true, completion: nil)
     }
 }
