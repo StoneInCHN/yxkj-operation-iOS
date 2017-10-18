@@ -21,6 +21,7 @@ class NavigationController: UINavigationController {
         let panGes = UIPanGestureRecognizer()
         gesView.addGestureRecognizer(panGes)
         panGes.addTarget(target, action: action)
+        panGes.delegate = self
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -30,8 +31,13 @@ class NavigationController: UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    func reomveBackGesture() {
-        interactivePopGestureRecognizer?.isEnabled = false
+}
+
+extension NavigationController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if viewControllers.count == 1 {
+            return false
+        }
+        return true
     }
-    
 }

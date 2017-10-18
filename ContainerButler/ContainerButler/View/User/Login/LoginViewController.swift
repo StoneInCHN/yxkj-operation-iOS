@@ -49,6 +49,7 @@ class LoginViewController: BaseViewController {
     fileprivate lazy   var captchdBtn: UIButton = {
         let forgetPwdBtn = UIButton()
         forgetPwdBtn.sizeToFit()
+        forgetPwdBtn.backgroundColor = .red
         forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
         forgetPwdBtn.setTitle("短信验证码登录", for: .normal)
         forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .normal)
@@ -60,6 +61,7 @@ class LoginViewController: BaseViewController {
         forgetPwdBtn.sizeToFit()
         forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
         forgetPwdBtn.setTitle("忘记密码?", for: .normal)
+        forgetPwdBtn.backgroundColor = .red
         forgetPwdBtn.setTitleColor(UIColor(hex: 0xfbc205), for: .normal)
         forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .highlighted)
         return forgetPwdBtn
