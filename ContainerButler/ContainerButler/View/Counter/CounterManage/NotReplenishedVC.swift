@@ -128,10 +128,10 @@ extension NotReplenishedVC {
         }
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
         replenishManageView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-          replenishDoneView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-         UIApplication.shared.keyWindow?.addSubview(replenishManageView)
-         UIApplication.shared.keyWindow?.addSubview(replenishDoneView)
-         view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        replenishDoneView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
+        UIApplication.shared.keyWindow?.addSubview(replenishManageView)
+        UIApplication.shared.keyWindow?.addSubview(replenishDoneView)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         UIApplication.shared.keyWindow?.addSubview(pictureOptionView)
         pictureOptionView.cameraBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
@@ -159,6 +159,12 @@ extension NotReplenishedVC {
             })
             .disposed(by: disposeBag)
         
+        stopBtn.rx.tap
+            .subscribe(onNext: { [weak self]_ in
+                 self?.navigationController?.popToRootViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         replenishDoneView.closeBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
                 self?.replenishDoneView.dismiss()
@@ -172,6 +178,7 @@ extension NotReplenishedVC {
         
         replenishDoneView.doneBtn.rx.tap
             .subscribe(onNext: { [weak self] _ in
+                self?.replenishDoneView.dismiss()
                 self?.navigationController?.popToRootViewController(animated: true)
             }).disposed(by: disposeBag)
     }
