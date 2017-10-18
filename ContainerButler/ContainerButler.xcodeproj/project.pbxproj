@@ -25,7 +25,6 @@
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
 		CD69C4651F66874000623B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4641F66874000623B91 /* Assets.xcassets */; };
-		CD69C4681F66874000623B91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4661F66874000623B91 /* LaunchScreen.storyboard */; };
 		CD69C47A1F668EDF00623B91 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4791F668EDF00623B91 /* Protocol.swift */; };
 		CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C47E1F668FE500623B91 /* BaseViewController.swift */; };
 		CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4801F66908E00623B91 /* CommonWebVC.swift */; };
@@ -46,6 +45,7 @@
 		CD92CD161F972F0F0077C78F /* ReplenishedDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92CD151F972F0F0077C78F /* ReplenishedDoneView.swift */; };
 		CD92CD191F973CE20077C78F /* navigation_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD181F973CD50077C78F /* navigation_back@3x.png */; };
 		CD92CD1C1F973D1B0077C78F /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD1B1F973D160077C78F /* delete@3x.png */; };
+		CD92CD1F1F974B4A0077C78F /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD1E1F974B440077C78F /* bg.png */; };
 		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
@@ -170,7 +170,6 @@
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD69C4621F66874000623B91 /* ContainerButler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerButler.xcdatamodel; sourceTree = "<group>"; };
 		CD69C4641F66874000623B91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CD69C4671F66874000623B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD69C4691F66874000623B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD69C4781F668E3000623B91 /* Container-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Container-Bridge-Header.h"; sourceTree = "<group>"; };
 		CD69C4791F668EDF00623B91 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
@@ -194,6 +193,7 @@
 		CD92CD151F972F0F0077C78F /* ReplenishedDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishedDoneView.swift; sourceTree = "<group>"; };
 		CD92CD181F973CD50077C78F /* navigation_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back@3x.png"; sourceTree = "<group>"; };
 		CD92CD1B1F973D160077C78F /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		CD92CD1E1F974B440077C78F /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		CD9466611F74A96C00C85D7B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
@@ -523,7 +523,6 @@
 				CD69C4701F66888D00623B91 /* Vendor */,
 				CD8441101F70E82400D50722 /* Resource */,
 				CD69C4641F66874000623B91 /* Assets.xcassets */,
-				CD69C4661F66874000623B91 /* LaunchScreen.storyboard */,
 				CD69C4691F66874000623B91 /* Info.plist */,
 				CD2CD6091F66DE8B00C22166 /* .swiftlint.yml */,
 				CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */,
@@ -778,6 +777,7 @@
 		CDF727B51F7F72B200CDCC75 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				CD92CD1E1F974B440077C78F /* bg.png */,
 				CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */,
 				CDF727C31F7F7D7E00CDCC75 /* loginBtn_highlighted@3x.png */,
 				CDF727C21F7F7D7D00CDCC75 /* loginBtn_normal@3x.png */,
@@ -880,6 +880,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92CD1F1F974B4A0077C78F /* bg.png in Resources */,
 				CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */,
 				CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */,
 				CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */,
@@ -891,7 +892,6 @@
 				CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */,
 				CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */,
 				CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */,
-				CD69C4681F66874000623B91 /* LaunchScreen.storyboard in Resources */,
 				CD69C4651F66874000623B91 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1062,17 +1062,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		CD69C4661F66874000623B91 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CD69C4671F66874000623B91 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		CD69C46A1F66874000623B91 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1184,6 +1173,7 @@
 			baseConfigurationReference = 3A33785C1CC8431B187D1A1B /* Pods-ContainerButler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BASE_URL = "http://192.167.1.242:8080";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1231,6 +1221,7 @@
 			baseConfigurationReference = 023F0DC873BB46850BA2711A /* Pods-ContainerButler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BASE_URL = "";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

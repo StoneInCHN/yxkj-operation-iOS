@@ -90,7 +90,6 @@ class ReplenishManageView: UIView {
         return view
     }()
     
-    
     fileprivate  lazy  var bgView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "dashed"))
         return imageView
