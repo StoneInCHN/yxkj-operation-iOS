@@ -45,17 +45,21 @@ extension CounterViewController {
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
-        let addBtn = UIButton(type: .contactAdd)
+        let addBtn = UIButton()
+        addBtn.setImage(UIImage(named: "add"), for: .normal)
         addBtn.frame = CGRect(x: UIScreen.width - 44, y: 20, width: 44, height: 44)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addBtn)
         addBtn.rx.tap.subscribe(onNext: { [weak self] in
             let point = CGPoint(x:  UIScreen.width - 44 + 12, y: 12 + 44)
             YBPopupMenu.show(at: point, titles: ["待补清单", "补货记录"],
-                             icons: nil,
-                             menuWidth: 92) { menu in
+                             icons: ["pending_replenishment_list", "replenishment_record"],
+                             menuWidth: 125) { menu in
                 menu?.arrowDirection = .top
                 menu?.rectCorner = UIRectCorner.bottomRight
                 menu?.delegate = self
+                menu?.backColor = UIColor(hex: 0x333333)
+                menu?.textColor = UIColor.white
+                menu?.fontSize = 13
             }
         })
         .disposed(by: disposeBag)

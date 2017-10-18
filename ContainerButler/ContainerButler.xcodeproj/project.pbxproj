@@ -46,6 +46,9 @@
 		CD92CD191F973CE20077C78F /* navigation_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD181F973CD50077C78F /* navigation_back@3x.png */; };
 		CD92CD1C1F973D1B0077C78F /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD1B1F973D160077C78F /* delete@3x.png */; };
 		CD92CD1F1F974B4A0077C78F /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD1E1F974B440077C78F /* bg.png */; };
+		CD92CD2D1F97526D0077C78F /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD2C1F9752660077C78F /* add@3x.png */; };
+		CD92CD301F9755730077C78F /* pending_replenishment_list@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD2F1F97553C0077C78F /* pending_replenishment_list@3x.png */; };
+		CD92CD311F9755730077C78F /* replenishment_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92CD2E1F9755320077C78F /* replenishment_record@3x.png */; };
 		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
@@ -194,6 +197,9 @@
 		CD92CD181F973CD50077C78F /* navigation_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back@3x.png"; sourceTree = "<group>"; };
 		CD92CD1B1F973D160077C78F /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
 		CD92CD1E1F974B440077C78F /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CD92CD2C1F9752660077C78F /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
+		CD92CD2E1F9755320077C78F /* replenishment_record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "replenishment_record@3x.png"; sourceTree = "<group>"; };
+		CD92CD2F1F97553C0077C78F /* pending_replenishment_list@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pending_replenishment_list@3x.png"; sourceTree = "<group>"; };
 		CD9466611F74A96C00C85D7B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
@@ -690,7 +696,10 @@
 		CD92CD1A1F973D0F0077C78F /* Counter */ = {
 			isa = PBXGroup;
 			children = (
+				CD92CD2F1F97553C0077C78F /* pending_replenishment_list@3x.png */,
+				CD92CD2E1F9755320077C78F /* replenishment_record@3x.png */,
 				CD92CD1B1F973D160077C78F /* delete@3x.png */,
+				CD92CD2C1F9752660077C78F /* add@3x.png */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -718,8 +727,8 @@
 		CDDBD27E1F95004A004F5526 /* CounterHome */ = {
 			isa = PBXGroup;
 			children = (
-				CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */,
 				CDDBD2801F95004A004F5526 /* CounterViewController.swift */,
+				CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */,
 				CDDBD2811F95004A004F5526 /* CounterSectionHeaderView.swift */,
 				CDDBD2821F95004A004F5526 /* CounterTableViewCell.swift */,
 			);
@@ -880,9 +889,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92CD301F9755730077C78F /* pending_replenishment_list@3x.png in Resources */,
 				CD92CD1F1F974B4A0077C78F /* bg.png in Resources */,
+				CD92CD2D1F97526D0077C78F /* add@3x.png in Resources */,
 				CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */,
 				CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */,
+				CD92CD311F9755730077C78F /* replenishment_record@3x.png in Resources */,
 				CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */,
 				CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */,
 				CD92CD1C1F973D1B0077C78F /* delete@3x.png in Resources */,
