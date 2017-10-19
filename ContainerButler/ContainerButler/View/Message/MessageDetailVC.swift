@@ -14,7 +14,8 @@ import RxCocoa
 class MessageDetailVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
+         taleView.separatorStyle = .none
+          taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
         return taleView
     }()
@@ -58,7 +59,7 @@ extension MessageDetailVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 105
     }
     
 }

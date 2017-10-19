@@ -88,6 +88,8 @@
 		CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */; };
 		CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */; };
 		CDFF58C91F987FE500605761 /* NotReplenishListHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */; };
+		CDFF58CD1F988D9B00605761 /* inform@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58CC1F988D9400605761 /* inform@3x.png */; };
+		CDFF58CF1F988EBF00605761 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58CE1F988EB500605761 /* arrow@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -245,6 +247,8 @@
 		CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_back@3x.png"; sourceTree = "<group>"; };
 		CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishListHelper.swift; sourceTree = "<group>"; };
+		CDFF58CC1F988D9400605761 /* inform@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inform@3x.png"; sourceTree = "<group>"; };
+		CDFF58CE1F988EB500605761 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -651,6 +655,7 @@
 			isa = PBXGroup;
 			children = (
 				CDDBD27B1F94B646004F5526 /* juic.jpg */,
+				CDFF58CB1F988D8E00605761 /* Message */,
 				CD8A0A2C1F987892004F6661 /* Replenish */,
 				CD92CD1A1F973D0F0077C78F /* Counter */,
 				CD92CD171F973CD50077C78F /* Common */,
@@ -845,6 +850,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		CDFF58CB1F988D8E00605761 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CDFF58CE1F988EB500605761 /* arrow@3x.png */,
+				CDFF58CC1F988D9400605761 /* inform@3x.png */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -913,6 +927,7 @@
 				CD92CD1F1F974B4A0077C78F /* bg.png in Resources */,
 				CD92CD2D1F97526D0077C78F /* add@3x.png in Resources */,
 				CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */,
+				CDFF58CD1F988D9B00605761 /* inform@3x.png in Resources */,
 				CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */,
 				CD92CD311F9755730077C78F /* replenishment_record@3x.png in Resources */,
 				CDF727C41F7F7D9F00CDCC75 /* loginBtn_highlighted@3x.png in Resources */,
@@ -922,6 +937,7 @@
 				CDF727BA1F7F72CD00CDCC75 /* error_warning@3x.png in Resources */,
 				CDF727BB1F7F72CD00CDCC75 /* sms@3x.png in Resources */,
 				CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */,
+				CDFF58CF1F988EBF00605761 /* arrow@3x.png in Resources */,
 				CD8A0A2E1F9878A4004F6661 /* triangle@3x.png in Resources */,
 				CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */,
 				CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */,

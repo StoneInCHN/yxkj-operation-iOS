@@ -69,8 +69,6 @@ extension UIColor {
     static var mainGreen: UIColor {
         return UIColor(hex: CustomKey.Color.mainGreenColor)
     }
-    
-    
 }
 
 extension URL {

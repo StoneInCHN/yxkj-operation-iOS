@@ -10,25 +10,47 @@ import UIKit
 
 class MessageCell: UITableViewCell, ViewNameReusable {
     fileprivate lazy  var messageIcon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "user_center_paizza"))
+        let imageView = UIImageView(image: UIImage(named: "inform"))
+        imageView.contentMode = .center
+        return imageView
+    }()
+    fileprivate lazy  var arrowIcon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "arrow"))
         imageView.contentMode = .center
         return imageView
     }()
     fileprivate lazy  var messageTitleLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 15)
-        descLabel.textColor = UIColor.black
+        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "补货通知          17/8/9 15:25:21"
+        descLabel.text = "补货通知"
         return descLabel
     }()
+    
+    fileprivate lazy  var timeLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.textAlignment = .center
+        descLabel.font = UIFont.systemFont(ofSize: 12)
+        descLabel.textColor = UIColor(hex: 0x999999)
+        descLabel.numberOfLines = 0
+        descLabel.text = "2017-9-2 . 17:15"
+        return descLabel
+    }()
+    
     fileprivate lazy  var messageBodyLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 15)
-        descLabel.textColor = UIColor.black
+        descLabel.font = UIFont.systemFont(ofSize: 13)
+        descLabel.textColor = UIColor(hex: 0x666666)
         descLabel.numberOfLines = 0
         descLabel.text = "花样年T3优享空间急需补货15件"
         return descLabel
+    }()
+    
+    fileprivate lazy  var line0: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        return view
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -36,24 +58,38 @@ class MessageCell: UITableViewCell, ViewNameReusable {
         contentView.addSubview(messageIcon)
         contentView.addSubview(messageTitleLabel)
         contentView.addSubview(messageBodyLabel)
+        contentView.addSubview(timeLabel)
+        contentView.addSubview(arrowIcon)
+        contentView.addSubview(line0)
         
         messageIcon.snp.makeConstraints { (maker) in
-            maker.left.equalTo(12)
+            maker.left.equalTo(20)
             maker.centerY.equalTo(contentView.snp.centerY)
-            maker.size.equalTo(CGSize(width: 40, height: 50))
         }
         
         messageTitleLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(messageIcon.snp.right).offset(12)
-            maker.top.equalTo(messageIcon.snp.top).offset(3)
+            maker.top.equalTo(messageIcon.snp.top).offset(-8)
             maker.right.equalTo(-12)
             maker.height.equalTo(20)
         }
         messageBodyLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(messageTitleLabel.snp.left)
-            maker.top.equalTo(messageTitleLabel.snp.bottom).offset(10)
-            maker.right.equalTo(-12)
-            maker.bottom.equalTo(-5)
+            maker.top.equalTo(messageTitleLabel.snp.bottom).offset(22)
+        }
+        arrowIcon.snp.makeConstraints { (maker) in
+            maker.right.equalTo(-15)
+            maker.centerY.equalTo(contentView.snp.centerY)
+        }
+        timeLabel.snp.makeConstraints { (maker) in
+            maker.right.equalTo(-15)
+            maker.top.equalTo(8.5)
+        }
+        line0.snp.makeConstraints { (maker) in
+            maker.left.equalTo(0)
+            maker.right.equalTo(0)
+            maker.height.equalTo(5)
+            maker.bottom.equalTo(0)
         }
     }
     

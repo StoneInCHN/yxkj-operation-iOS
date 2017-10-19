@@ -48,13 +48,6 @@ extension ContainerManageVC {
             $0.width.equalTo(1)
             $0.centerX.equalTo(pageTitleView.snp.centerX)
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "拍照完成", style: .plain, target: nil, action: nil)
-        // FIXME:IN main thread
-        navigationItem.rightBarButtonItem?.rx.tap
-            .subscribe(onNext: { [weak self] in
-            self?.complishAction()
-        })
-            .disposed(by: disposeBag)
     }
     
     private  func tapAction() {
