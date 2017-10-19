@@ -13,6 +13,7 @@ import RxSwift
 class ContainerManageVC: BaseViewController {
     fileprivate lazy var pageTitleView: PageTitleView = {
         let pvc = PageTitleView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
+        pvc.backgroundColor = .white
         return pvc
     }()
     fileprivate lazy var pageContenView: PageContentView  = { [unowned self] in

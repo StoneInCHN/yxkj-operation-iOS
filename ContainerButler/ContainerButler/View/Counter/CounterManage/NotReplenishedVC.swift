@@ -65,7 +65,7 @@ class NotReplenishedVC: BaseViewController {
     
     fileprivate lazy  var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         return view
     }()
     fileprivate lazy var pictureOptionView: PictureChooseOptionView = {[unowned self] in
@@ -92,9 +92,6 @@ class NotReplenishedVC: BaseViewController {
 extension NotReplenishedVC {
     fileprivate func setupUI() {
         view.addSubview(tableView)
-        view.addSubview(doneBtn)
-        view.addSubview(stopBtn)
-        view.addSubview(descPwdLabel)
         view.addSubview(containerView)
         containerView.addSubview(doneBtn)
         containerView.addSubview(stopBtn)
@@ -103,22 +100,22 @@ extension NotReplenishedVC {
         tableView.delegate = self
         containerView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.equalTo(0)
-            maker.height.equalTo(180.0.fitHeight)
+            maker.height.equalTo(100.0.fitHeight)
         }
         descPwdLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(containerView.snp.centerX)
             maker.bottom.equalTo(containerView.snp.bottom).offset(-12)
         }
         stopBtn.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(containerView.snp.centerX)
-            maker.bottom.equalTo(descPwdLabel.snp.top).offset(-50.0.fitHeight)
-            maker.width.equalTo(180.0.fitWidth)
+            maker.centerX.equalTo(containerView.snp.centerX).offset(70)
+            maker.bottom.equalTo(descPwdLabel.snp.top).offset(-16.0.fitHeight)
+            maker.width.equalTo(100.0.fitWidth)
             maker.height.equalTo(40)
         }
         doneBtn.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(containerView.snp.centerX)
-            maker.bottom.equalTo(stopBtn.snp.top).offset(-20.0.fitHeight)
-            maker.width.equalTo(180.0.fitWidth)
+            maker.centerX.equalTo(containerView.snp.centerX).offset(-70)
+            maker.top.equalTo(stopBtn.snp.top)
+            maker.width.equalTo(100.0.fitWidth)
             maker.height.equalTo(40)
         }
         tableView.snp.makeConstraints { (maker) in

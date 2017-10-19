@@ -69,12 +69,19 @@ class NotReplenishedGoodsListVC: BaseViewController {
     fileprivate lazy  var doneBtn: UIButton = {
         let loginBtn = UIButton()
         loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
-        loginBtn.setTitle("完成取货", for: .normal)
         loginBtn.setTitleColor(UIColor.white, for: .normal)
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
-        loginBtn.layer.cornerRadius = 17.5
+        loginBtn.layer.cornerRadius = 24
         loginBtn.layer.masksToBounds = true
+        let label = UILabel()
+        label.text = "完成\n取货"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 13.0)
+        label.layer.cornerRadius = 24
+        label.layer.masksToBounds = true
+        label.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
+        loginBtn.addSubview(label)
         return loginBtn
     }()
     override func viewDidLoad() {
@@ -97,13 +104,13 @@ extension NotReplenishedGoodsListVC {
         optionChooseView.addSubview(chooseBtn)
         optionChooseView.addSubview(triangleIcon)
         view.addSubview(pageTitleView)
+        view.addSubview(tableView)
+        view.addSubview(doneBtn)
         pageTitleView.setTitles(["全部", "水果牛奶", " 饼干蛋糕", "全部", "水果牛奶", " 饼干蛋糕"])
         let line = UIView()
         line.backgroundColor = UIColor(hex: 0xcccccc)
         pageTitleView.addSubview(line)
          pageTitleView.backgroundColor = .white
-         view.addSubview(doneBtn)
-        view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
         notreplenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
@@ -137,15 +144,15 @@ extension NotReplenishedGoodsListVC {
             maker.height.equalTo(0.5)
         }
         doneBtn.snp.makeConstraints {
-            $0.centerX.equalTo(view.snp.centerX)
-            $0.width.equalTo(150)
-            $0.height.equalTo(36)
-            $0.bottom.equalTo(-36)
+            $0.right.equalTo(-15)
+            $0.width.equalTo(48)
+            $0.height.equalTo(48)
+            $0.bottom.equalTo(-15)
         }
         tableView.snp.makeConstraints { (maker) in
              maker.top.equalTo(pageTitleView.snp.bottom)
              maker.left.right.equalTo(0)
-             maker.bottom.equalTo(doneBtn.snp.top).offset(-20)
+             maker.bottom.equalTo(0)
         }
     }
     
