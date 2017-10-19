@@ -111,7 +111,7 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         badgeView.rightOffset = UIScreen.width - 52
         bgView.snp.makeConstraints { (maker) in
             maker.left.equalTo(0)
-            maker.top.equalTo(12)
+            maker.top.equalTo(5)
             maker.right.equalTo(0)
             maker.bottom.equalTo(0)
         }

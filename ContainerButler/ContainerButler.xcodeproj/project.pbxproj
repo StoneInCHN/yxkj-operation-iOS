@@ -40,6 +40,7 @@
 		CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C7E1F70E8F900D50722 /* ResponseObject.swift */; };
 		CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */; };
 		CD8A0A2B1F985423004F6661 /* ReplenishHistoryDetailTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A0A2A1F985423004F6661 /* ReplenishHistoryDetailTableHeader.swift */; };
+		CD8A0A2E1F9878A4004F6661 /* triangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8A0A2D1F98789F004F6661 /* triangle@3x.png */; };
 		CD8C5B561F8F046200E2E7B5 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */; };
 		CD8DA7C71F95D72900C5C010 /* UserSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DA7C61F95D72900C5C010 /* UserSessionViewModel.swift */; };
 		CD92CD141F96FF4E0077C78F /* PictureChooseOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92CD131F96FF4E0077C78F /* PictureChooseOptionView.swift */; };
@@ -86,6 +87,7 @@
 		CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C21F7F7D7D00CDCC75 /* loginBtn_normal@3x.png */; };
 		CDF727C71F7F7F9200CDCC75 /* login_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */; };
 		CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */; };
+		CDFF58C91F987FE500605761 /* NotReplenishListHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +194,7 @@
 		CD844C7E1F70E8F900D50722 /* ResponseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
 		CD844C811F70F23A00D50722 /* CaptchaLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaLoginVC.swift; sourceTree = "<group>"; };
 		CD8A0A2A1F985423004F6661 /* ReplenishHistoryDetailTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishHistoryDetailTableHeader.swift; sourceTree = "<group>"; };
+		CD8A0A2D1F98789F004F6661 /* triangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle@3x.png"; sourceTree = "<group>"; };
 		CD8C5B541F8F044D00E2E7B5 /* RSAEncryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
 		CD8C5B551F8F044D00E2E7B5 /* RSAEncryptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
 		CD8DA7C61F95D72900C5C010 /* UserSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionViewModel.swift; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 		CDF727C31F7F7D7E00CDCC75 /* loginBtn_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBtn_highlighted@3x.png"; sourceTree = "<group>"; };
 		CDF727C61F7F7F5900CDCC75 /* login_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_back@3x.png"; sourceTree = "<group>"; };
 		CDFE07A21F70BEB500C89CA9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishListHelper.swift; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -647,6 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				CDDBD27B1F94B646004F5526 /* juic.jpg */,
+				CD8A0A2C1F987892004F6661 /* Replenish */,
 				CD92CD1A1F973D0F0077C78F /* Counter */,
 				CD92CD171F973CD50077C78F /* Common */,
 				CD84469A1F70E82600D50722 /* UserCenter */,
@@ -670,6 +675,14 @@
 				CD319ED31F95E89D007BF050 /* User */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CD8A0A2C1F987892004F6661 /* Replenish */ = {
+			isa = PBXGroup;
+			children = (
+				CD8A0A2D1F98789F004F6661 /* triangle@3x.png */,
+			);
+			path = Replenish;
 			sourceTree = "<group>";
 		};
 		CD8C5B531F8F044D00E2E7B5 /* RSA */ = {
@@ -768,8 +781,9 @@
 		CDDBD28E1F95004A004F5526 /* NotReplenishList */ = {
 			isa = PBXGroup;
 			children = (
-				CDDBD28F1F95004A004F5526 /* NotReplenishView.swift */,
 				CDDBD2901F95004A004F5526 /* NotReplenishedGoodsListVC.swift */,
+				CDDBD28F1F95004A004F5526 /* NotReplenishView.swift */,
+				CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */,
 			);
 			path = NotReplenishList;
 			sourceTree = "<group>";
@@ -908,6 +922,7 @@
 				CDF727BA1F7F72CD00CDCC75 /* error_warning@3x.png in Resources */,
 				CDF727BB1F7F72CD00CDCC75 /* sms@3x.png in Resources */,
 				CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */,
+				CD8A0A2E1F9878A4004F6661 /* triangle@3x.png in Resources */,
 				CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */,
 				CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */,
 				CD69C4651F66874000623B91 /* Assets.xcassets in Resources */,
@@ -1072,6 +1087,7 @@
 				CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */,
 				CD844C7F1F70E8F900D50722 /* Model.swift in Sources */,
 				CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */,
+				CDFF58C91F987FE500605761 /* NotReplenishListHelper.swift in Sources */,
 				CD78F08E1F6782AB00D50B7B /* HUD.swift in Sources */,
 				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
 				CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */,

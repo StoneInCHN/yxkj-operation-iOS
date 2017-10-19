@@ -33,7 +33,7 @@ class BaseViewController: UIViewController {
         let backBarItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarItem
         automaticallyAdjustsScrollViewInsets = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
     }
     
     func whenHiddenNavigationBarSetupBackBtn() {
