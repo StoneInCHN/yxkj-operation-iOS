@@ -81,7 +81,6 @@ extension ReplenishHistoryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: ReplenishHistoryTableHeader = tableView.dequeueReusableHeaderFooter()
-       
         return headerView
     }
     
@@ -90,6 +89,6 @@ extension ReplenishHistoryVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 40
     }
 }

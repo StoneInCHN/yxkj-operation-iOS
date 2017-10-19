@@ -29,6 +29,7 @@ class ReplenishHistoryTableHeader: UITableViewHeaderFooterView, ViewNameReusable
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         contentView.addSubview(dateLabel)
         contentView.addSubview(goodsCountLabel)
         dateLabel.snp.makeConstraints { (maker) in

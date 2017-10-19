@@ -16,8 +16,8 @@ class ReplenishHistoryDetailVC: BaseViewController {
         let taleView = UITableView()
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
-         taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
-        taleView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
+         taleView.register(ReplenishHistoryDetailCell.self, forCellReuseIdentifier: "ReplenishHistoryDetailCell")
+        taleView.register(ReplenishHistoryDetailTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryDetailTableHeader")
         return taleView
     }()
     
@@ -60,13 +60,10 @@ extension ReplenishHistoryDetailVC {
         ]
         
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(configureCell: { [unowned  self](_, tableView, indexPath, element) in
-            let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: ReplenishHistoryDetailCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             debugPrint(self.description)
             return cell
         })
-        dataSource.titleForHeaderInSection = { dataSource, index in
-            return dataSource[index].model
-        }
         
         items.asObservable()
             .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -78,11 +75,20 @@ extension ReplenishHistoryDetailVC {
 }
 
 extension ReplenishHistoryDetailVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: ReplenishHistoryDetailTableHeader = tableView.dequeueReusableHeaderFooter()
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 107
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
     }
 }
