@@ -73,7 +73,7 @@ class ReplenishmentView: UIView {
     
     fileprivate lazy  var line0: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     

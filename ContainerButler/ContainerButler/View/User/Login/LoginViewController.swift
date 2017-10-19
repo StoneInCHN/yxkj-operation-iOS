@@ -49,7 +49,6 @@ class LoginViewController: BaseViewController {
     fileprivate lazy   var captchdBtn: UIButton = {
         let forgetPwdBtn = UIButton()
         forgetPwdBtn.sizeToFit()
-        forgetPwdBtn.backgroundColor = .red
         forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
         forgetPwdBtn.setTitle("短信验证码登录", for: .normal)
         forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .normal)
@@ -61,7 +60,6 @@ class LoginViewController: BaseViewController {
         forgetPwdBtn.sizeToFit()
         forgetPwdBtn.titleLabel?.font = UIFont.sizeToFit(with: 14)
         forgetPwdBtn.setTitle("忘记密码?", for: .normal)
-        forgetPwdBtn.backgroundColor = .red
         forgetPwdBtn.setTitleColor(UIColor(hex: 0xfbc205), for: .normal)
         forgetPwdBtn.setTitleColor(UIColor(hex: 0x999999), for: .highlighted)
         return forgetPwdBtn
@@ -83,17 +81,17 @@ class LoginViewController: BaseViewController {
     }()
     fileprivate lazy  var line0: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     fileprivate lazy   var line1: UIView  = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     fileprivate lazy  var line2: UIView  = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     override func viewDidLoad() {
@@ -149,31 +147,31 @@ extension LoginViewController {
         }
         line0.snp.makeConstraints { (maker) in
             maker.left.equalTo(20)
-            maker.top.equalTo(userIcon.snp.bottom).offset(12)
+            maker.top.equalTo(userIcon.snp.bottom).offset(20)
             maker.right.equalTo(-20)
             maker.height.equalTo(1)
         }
         pwdIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.left)
-            maker.top.equalTo(line0.snp.bottom).offset(12)
+            maker.top.equalTo(line0.snp.bottom).offset(20)
             maker.width.equalTo(20)
         }
      
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
             maker.right.equalTo(phoneNumTF.snp.right)
-            maker.top.equalTo(line0.snp.bottom).offset(12)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         line2.snp.makeConstraints { (maker) in
-            maker.top.equalTo(pwdIcon.snp.bottom).offset(12)
+            maker.top.equalTo(pwdIcon.snp.bottom).offset(20)
             maker.left.equalTo(line0.snp.left)
             maker.right.equalTo(line0.snp.right)
             maker.height.equalTo(1)
         }
         loginBtn.snp.makeConstraints { (maker) in
             maker.top.equalTo(line2.snp.bottom).offset(50)
-            maker.left.equalTo(10)
-            maker.right.equalTo(-10)
+            maker.left.equalTo(30)
+            maker.right.equalTo(-30)
             maker.height.equalTo(50)
         }
         captchdBtn.snp.makeConstraints { (maker) in

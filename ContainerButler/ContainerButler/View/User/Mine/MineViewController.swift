@@ -63,7 +63,7 @@ extension MineViewController: UITableViewDataSource {
 
 extension MineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(MessageDetailVC(), animated: true)
+        navigationController?.pushViewController(UpdatePasswordVC(), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

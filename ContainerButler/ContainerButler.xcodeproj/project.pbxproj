@@ -94,6 +94,7 @@
 		CDFF58D41F98968C00605761 /* TitleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */; };
 		CDFF58D61F98985700605761 /* UserHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D51F98985700605761 /* UserHeaderCell.swift */; };
 		CDFF58D81F989D9600605761 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58D71F989D9200605761 /* logo@3x.png */; };
+		CDFF58DA1F989FED00605761 /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D91F989FED00605761 /* UpdatePasswordVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -257,6 +258,7 @@
 		CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabelTableViewCell.swift; sourceTree = "<group>"; };
 		CDFF58D51F98985700605761 /* UserHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderCell.swift; sourceTree = "<group>"; };
 		CDFF58D71F989D9200605761 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		CDFF58D91F989FED00605761 /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -874,6 +876,7 @@
 			isa = PBXGroup;
 			children = (
 				CDFF58D11F98955D00605761 /* MineViewController.swift */,
+				CDFF58D91F989FED00605761 /* UpdatePasswordVC.swift */,
 				CDFF58D51F98985700605761 /* UserHeaderCell.swift */,
 			);
 			path = Mine;
@@ -1068,6 +1071,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */,
+				CDFF58DA1F989FED00605761 /* UpdatePasswordVC.swift in Sources */,
 				CDDBD2921F9500AF004F5526 /* CounterViewController.swift in Sources */,
 				CDDBD2931F9500AF004F5526 /* CounterSectionHeaderView.swift in Sources */,
 				CDDBD2941F9500AF004F5526 /* CounterTableViewCell.swift in Sources */,

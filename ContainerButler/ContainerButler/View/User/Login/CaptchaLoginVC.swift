@@ -77,17 +77,17 @@ class CaptchaLoginVC: BaseViewController {
     }()
     fileprivate lazy  var line0: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     fileprivate lazy   var line1: UIView  = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     fileprivate lazy  var line2: UIView  = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xe6e6e6)
+        view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
     
@@ -101,6 +101,7 @@ class CaptchaLoginVC: BaseViewController {
 extension CaptchaLoginVC {
     fileprivate func setupUI() {
         phoneNumTF.text = phoneNumber
+        view.backgroundColor = .white
         whenHiddenNavigationBarSetupBackBtn()
         view.addSubview(descPwdLabel)
         view.addSubview(userIcon)
@@ -129,7 +130,7 @@ extension CaptchaLoginVC {
         }
         line0.snp.makeConstraints { (maker) in
             maker.left.equalTo(20)
-            maker.top.equalTo(userIcon.snp.bottom).offset(12)
+            maker.top.equalTo(userIcon.snp.bottom).offset(22)
             maker.right.equalTo(-20)
             maker.height.equalTo(1)
         }
@@ -143,12 +144,12 @@ extension CaptchaLoginVC {
         
         pwdIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.left)
-            maker.top.equalTo(line0.snp.bottom).offset(12)
+            maker.top.equalTo(line0.snp.bottom).offset(22)
             maker.width.equalTo(20)
         }
         
         line2.snp.makeConstraints { (maker) in
-            maker.top.equalTo(pwdIcon.snp.bottom).offset(12)
+            maker.top.equalTo(pwdIcon.snp.bottom).offset(22)
             maker.left.equalTo(line0.snp.left)
             maker.right.equalTo(line0.snp.right)
             maker.height.equalTo(1)
@@ -158,6 +159,7 @@ extension CaptchaLoginVC {
             maker.left.equalTo(phoneNumTF.snp.left)
             maker.right.equalTo(forgetPwdBtn.snp.left).offset(-20)
             maker.top.equalTo(line0.snp.bottom).offset(12)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         
         loginBtn.snp.makeConstraints { (maker) in
