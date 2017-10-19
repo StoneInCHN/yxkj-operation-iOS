@@ -11,108 +11,153 @@ import UIKit
 class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
     fileprivate lazy  var line0: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor(hex: 0xcccccc)
         return view
     }()
     fileprivate lazy  var line1: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor(hex: 0xcccccc)
         return view
-    }()
-    
-    fileprivate lazy  var timeLabel: UILabel = {
-        let descLabel = UILabel()
-        descLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        descLabel.textColor = UIColor.randomColor
-        descLabel.numberOfLines = 0
-        descLabel.text = "12:54:36"
-        descLabel.textAlignment = .center
-        return descLabel
     }()
     
     fileprivate lazy  var addressLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.textAlignment = .center
-        descLabel.font = UIFont.systemFont(ofSize: 15)
-        descLabel.textColor = UIColor.black
+        descLabel.font = UIFont.systemFont(ofSize: 12.5)
+        descLabel.textColor = UIColor.mainBlack
         descLabel.numberOfLines = 0
-        descLabel.text = "香年广场T1    编号：4"
+        descLabel.text = "香年广场T1  "
+        return descLabel
+    }()
+    fileprivate lazy  var numberLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.textAlignment = .center
+        descLabel.font = UIFont.systemFont(ofSize: 10)
+        descLabel.textColor = UIColor(hex: 0x888888)
+        descLabel.numberOfLines = 0
+        descLabel.text = "编号(1111111001) "
         return descLabel
     }()
     
-    fileprivate lazy  var goodsCountLabel: UILabel = {
+    fileprivate lazy  var timeLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 15)
-        descLabel.textColor = UIColor.black
+        descLabel.textAlignment = .center
+        descLabel.font = UIFont.systemFont(ofSize: 10)
+        descLabel.textColor = UIColor(hex: 0x888888)
         descLabel.numberOfLines = 0
-         descLabel.textAlignment = .center
-        descLabel.text = "总待补数：50\n总补货数：4\n缺货数:10"
+        descLabel.text = "17:15"
         return descLabel
     }()
+    
+    fileprivate lazy  var totalNotReplenishLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: 11.5)
+        descLabel.textColor =  UIColor(hex: 0x555555)
+        descLabel.numberOfLines = 0
+         descLabel.textAlignment = .center
+        descLabel.text = "总待补数：50 "
+        return descLabel
+    }()
+    
+    fileprivate lazy  var totalReplenishLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: 11.5)
+        descLabel.textColor =  UIColor(hex: 0x555555)
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        descLabel.text = "总补货数：48 "
+        return descLabel
+    }()
+    
+    fileprivate lazy  var stockoutLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.systemFont(ofSize: 11.5)
+        descLabel.textColor =  UIColor(hex: 0x555555)
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        descLabel.text = "缺货数：13"
+        return descLabel
+    }()
+    
     fileprivate lazy  var dotView: UIView = {
         let view = UIView()
         view.layer.cornerRadius =  3
         view.layer.masksToBounds = true
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor.mainBlack
         return view
     }()
-    fileprivate lazy  var bgView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Artboard 1")
-//        imageView.layer.cornerRadius =  5
-//        imageView.layer.masksToBounds = true
-//        imageView.layer.borderColor = UIColor.gray.cgColor
-//        imageView.layer.borderWidth = 1
+    fileprivate lazy  var bgView: UIView = {
+        let imageView = UIView()
+        imageView.backgroundColor = .white
+        imageView.layer.cornerRadius = 5
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         contentView.addSubview(dotView)
-        contentView.addSubview(timeLabel)
         contentView.addSubview(line0)
         contentView.addSubview(line1)
         contentView.addSubview(bgView)
         bgView.addSubview(addressLabel)
-        bgView.addSubview(goodsCountLabel)
+        bgView.addSubview(numberLabel)
+        bgView.addSubview(timeLabel)
+        bgView.addSubview(totalNotReplenishLabel)
+        bgView.addSubview(totalReplenishLabel)
+        bgView.addSubview(stockoutLabel)
         
         dotView.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(contentView.snp.left).offset(75)
-            maker.top.equalTo(12)
+            maker.centerY.equalTo(contentView.snp.centerY)
+            maker.left.equalTo(25)
             maker.size.equalTo(CGSize(width: 6, height: 6))
         }
+        
         line0.snp.makeConstraints { (maker) in
             maker.top.equalTo(0)
             maker.bottom.equalTo(dotView.snp.top)
-            maker.width.equalTo(2)
+            maker.width.equalTo(1)
             maker.centerX.equalTo(dotView.snp.centerX)
         }
         line1.snp.makeConstraints { (maker) in
             maker.left.equalTo(line0.snp.left)
             maker.top.equalTo(dotView.snp.bottom)
             maker.bottom.equalTo(0)
-            maker.width.equalTo(2)
+            maker.width.equalTo(1)
+        }
+       
+        bgView.snp.makeConstraints { (maker) in
+            maker.left.equalTo(dotView.snp.right).offset(20)
+            maker.right.equalTo(-20)
+            maker.bottom.equalTo(0)
+            maker.top.equalTo(12)
+        }
+        
+        addressLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(18)
+            maker.top.equalTo(17)
+        }
+        numberLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(addressLabel.snp.right).offset(27)
+            maker.top.equalTo(addressLabel.snp.top)
         }
         timeLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(dotView.snp.left)
-            maker.centerY.equalTo(dotView.snp.centerY)
-        }
-        bgView.snp.makeConstraints { (maker) in
             maker.right.equalTo(-30)
-            maker.left.equalTo(dotView.snp.right).offset(12)
-            maker.top.equalTo(0)
-            maker.bottom.equalTo(-12)
+            maker.top.equalTo(addressLabel.snp.top)
         }
-        addressLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(-12)
-            maker.left.equalTo(24)
-            maker.top.equalTo(12)
-            maker.height.equalTo(30)
+        
+        totalNotReplenishLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(addressLabel.snp.left)
+            maker.top.equalTo(addressLabel.snp.bottom).offset(24)
         }
-        goodsCountLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(0)
-            maker.left.equalTo(0)
-            maker.top.equalTo(addressLabel.snp.bottom)
+        totalReplenishLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(17.5)
+            maker.top.equalTo(totalNotReplenishLabel.snp.top)
+        }
+        stockoutLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(totalReplenishLabel.snp.right).offset(23)
+            maker.top.equalTo(totalReplenishLabel.snp.top)
         }
     }
     

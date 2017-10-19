@@ -35,7 +35,7 @@ extension AppDelegate {
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
-        if let font = UIFont(name: "PingFangSC-Medium", size: 18) {
+        if let font = UIFont(name: "PingFangSC-Medium", size: 17) {
             UINavigationBar.appearance().titleTextAttributes =
                 [NSAttributedStringKey.foregroundColor: UIColor.black,
                  NSAttributedStringKey.font: font]

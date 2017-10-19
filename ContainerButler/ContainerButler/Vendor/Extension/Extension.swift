@@ -58,6 +58,19 @@ extension UIColor {
         return  UIColor(red: CGFloat(r)/256.0, green: CGFloat(g)/256.0, blue: CGFloat(b)/256.0, alpha: 1.0)
     }
     
+    static var mainBlack: UIColor {
+        return UIColor(hex: 0x333333)
+    }
+    
+    static var mainOrange: UIColor {
+        return UIColor(hex: CustomKey.Color.mainOrangeColor)
+    }
+    
+    static var mainGreen: UIColor {
+        return UIColor(hex: CustomKey.Color.mainGreenColor)
+    }
+    
+    
 }
 
 extension URL {

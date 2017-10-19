@@ -15,7 +15,7 @@ class ReplenishHistoryVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
+        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.register(ReplenishHistoryCell.self, forCellReuseIdentifier: "ReplenishHistoryCell")
         taleView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
         return taleView
@@ -86,10 +86,10 @@ extension ReplenishHistoryVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 97
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 50
     }
 }
