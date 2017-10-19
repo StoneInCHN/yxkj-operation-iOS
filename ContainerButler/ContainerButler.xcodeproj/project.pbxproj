@@ -90,6 +90,10 @@
 		CDFF58C91F987FE500605761 /* NotReplenishListHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */; };
 		CDFF58CD1F988D9B00605761 /* inform@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58CC1F988D9400605761 /* inform@3x.png */; };
 		CDFF58CF1F988EBF00605761 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58CE1F988EB500605761 /* arrow@3x.png */; };
+		CDFF58D21F98955D00605761 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D11F98955D00605761 /* MineViewController.swift */; };
+		CDFF58D41F98968C00605761 /* TitleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */; };
+		CDFF58D61F98985700605761 /* UserHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D51F98985700605761 /* UserHeaderCell.swift */; };
+		CDFF58D81F989D9600605761 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58D71F989D9200605761 /* logo@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,6 +253,10 @@
 		CDFF58C81F987FE500605761 /* NotReplenishListHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotReplenishListHelper.swift; sourceTree = "<group>"; };
 		CDFF58CC1F988D9400605761 /* inform@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inform@3x.png"; sourceTree = "<group>"; };
 		CDFF58CE1F988EB500605761 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
+		CDFF58D11F98955D00605761 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabelTableViewCell.swift; sourceTree = "<group>"; };
+		CDFF58D51F98985700605761 /* UserHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderCell.swift; sourceTree = "<group>"; };
+		CDFF58D71F989D9200605761 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -604,6 +612,7 @@
 				CD78F0911F67C66E00D50B7B /* NavigationController.swift */,
 				CD78F0931F67C6B000D50B7B /* TabBarController.swift */,
 				CD92CD131F96FF4E0077C78F /* PictureChooseOptionView.swift */,
+				CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -667,6 +676,7 @@
 		CD84469A1F70E82600D50722 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				CDFF58D71F989D9200605761 /* logo@3x.png */,
 				CDF727B51F7F72B200CDCC75 /* Login */,
 			);
 			path = UserCenter;
@@ -835,6 +845,7 @@
 		CDFE07A01F70BE3500C89CA9 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				CDFF58D01F98954D00605761 /* Mine */,
 				CDFE07A11F70BE3500C89CA9 /* Login */,
 				CDCED5B71F8B4D890038C1F3 /* ResetPassword */,
 			);
@@ -857,6 +868,15 @@
 				CDFF58CC1F988D9400605761 /* inform@3x.png */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		CDFF58D01F98954D00605761 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				CDFF58D11F98955D00605761 /* MineViewController.swift */,
+				CDFF58D51F98985700605761 /* UserHeaderCell.swift */,
+			);
+			path = Mine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -941,6 +961,7 @@
 				CD8A0A2E1F9878A4004F6661 /* triangle@3x.png in Resources */,
 				CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */,
 				CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */,
+				CDFF58D81F989D9600605761 /* logo@3x.png in Resources */,
 				CD69C4651F66874000623B91 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1081,6 +1102,7 @@
 				CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */,
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
+				CDFF58D61F98985700605761 /* UserHeaderCell.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
 				CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
@@ -1103,8 +1125,10 @@
 				CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */,
 				CD844C7F1F70E8F900D50722 /* Model.swift in Sources */,
 				CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */,
+				CDFF58D41F98968C00605761 /* TitleLabelTableViewCell.swift in Sources */,
 				CDFF58C91F987FE500605761 /* NotReplenishListHelper.swift in Sources */,
 				CD78F08E1F6782AB00D50B7B /* HUD.swift in Sources */,
+				CDFF58D21F98955D00605761 /* MineViewController.swift in Sources */,
 				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
 				CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */,
 				CDF6B5101F68D136000A1915 /* Enum.swift in Sources */,

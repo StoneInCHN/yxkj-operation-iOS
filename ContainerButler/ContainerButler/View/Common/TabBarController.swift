@@ -21,7 +21,7 @@ extension TabBarController {
     fileprivate func setupUI() {
         add(childVC: CounterViewController(), title: "货柜", normalImageName: "container_grey", selectedImageName: "container")
         add(childVC: MessageHomeVC(), title: "消息", normalImageName: "news", selectedImageName: "news_grey")
-        add(childVC: CounterViewController(), title: "我的", normalImageName: "my_grey", selectedImageName: "my")
+        add(childVC: MineViewController(), title: "我的", normalImageName: "my_grey", selectedImageName: "my")
     }
     
     fileprivate func add(childVC: UIViewController,
