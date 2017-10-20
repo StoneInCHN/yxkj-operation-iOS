@@ -12,7 +12,7 @@ import Alamofire
 
 public class Header: Model {
     public var token: String {
-        get { return  "token"}
+        get { return  UserSessionInfo.share.token ?? "" }
         set { }
     }
     public var contentType: String = "application/json"

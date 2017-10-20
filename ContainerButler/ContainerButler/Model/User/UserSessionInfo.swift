@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class UserSessionInfo: NSObject {
     static let share: UserSessionInfo = UserSessionInfo()
@@ -14,5 +15,13 @@ class UserSessionInfo: NSObject {
     
     private override init() {
         super.init()
+    }
+}
+
+class RSAKey: Model {
+    var key: String?
+    
+    override func mapping(map: Map) {
+        key <- map["publicKey"]
     }
 }

@@ -12,20 +12,19 @@ import RxSwift
 import ObjectMapper
 
 class UserSessionViewModel {
-    var rsaPublickey: String = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBMPGboxzPh9SApXHBKMQHF31rgB6LQBZxg3VirK9Rbp0qvgIDw+2ygZxPQAkgiK24PTWuBbw2UTNy5NxglSCsCnY8+vJXd8cwZKrBpnwXEcO0Wuh5G8Z++X0AIisMCIoiDZZwWnvqJ7a3vUQIj62qTX259s0UqvjGA7uvoDM9tQIDAQAB"
+    var rsaPublickey: String?
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     /// 获取公钥
     func loadRSAPublickey() {
-        let keyOberable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
+        let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
         keyOberable.subscribe(onNext: {[weak self] (response) in
-            if let _ = response.description {
-//                self?.rsaPublickey = key
+            if let obj = response.object {
+                self?.rsaPublickey = obj.key
             }
         })
         .disposed(by: disposeBag)
     }
     
-    /// 登录
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
         let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
         loginObserable.subscribe(onNext: { (response) in

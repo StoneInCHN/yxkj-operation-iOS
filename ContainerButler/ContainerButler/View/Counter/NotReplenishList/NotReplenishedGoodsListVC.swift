@@ -72,16 +72,6 @@ class NotReplenishedGoodsListVC: BaseViewController {
         loginBtn.setTitleColor(UIColor.white, for: .normal)
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
-        loginBtn.layer.cornerRadius = 24
-        loginBtn.layer.masksToBounds = true
-        let label = UILabel()
-        label.text = "完成\n取货"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 13.0)
-        label.layer.cornerRadius = 24
-        label.layer.masksToBounds = true
-        label.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
-        loginBtn.addSubview(label)
         return loginBtn
     }()
     override func viewDidLoad() {

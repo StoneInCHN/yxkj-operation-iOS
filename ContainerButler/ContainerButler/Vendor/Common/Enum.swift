@@ -9,13 +9,17 @@
 import Foundation
 
 enum StatusType: String {
-    case loginInValid = "10001"
+    case loginInValid = "1003201"
     case error404 = "-1011"
     case timeout = "-1001"
     case disconnect = "-1009"
     case pointUnavailable = "2001"
     case success = "0000"
-    case fail = "0001"
+    case none = "0001"
+    case phoneNumError = "1001"
+    case passwordError = "1002"
+    case capchaError = "1003"
+    case resetPasswordError = "005"
 }
 
 /// 登录类型

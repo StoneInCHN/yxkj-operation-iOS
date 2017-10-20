@@ -32,7 +32,6 @@ class CaptchaResetVC: BaseViewController {
     }()
     fileprivate lazy   var pwdTF: UITextField = {
         let pwdTF = UITextField()
-        pwdTF.isSecureTextEntry = true
         pwdTF.placeholder = "请输入验证码"
         pwdTF.textColor = UIColor(hex: 0x222222)
         pwdTF.font = UIFont.sizeToFit(with: 14)

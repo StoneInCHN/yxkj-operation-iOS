@@ -19,7 +19,7 @@ public enum NeedToken {
 
 public struct AppError: Error {
     var message: String = ""
-    var status: StatusType = .success
+    var status: StatusType = .none
 }
 
 class RequestManager {
@@ -63,6 +63,7 @@ class RequestManager {
                         HUD.showError(appError.message)
                     }
                 } else {
+                    appError.status = responseObj.status
                     if responseObj.status == .loginInValid {  /// 通知重新登录
                         appError.message = "Data Parase Error"
                         observer.on(.error(appError))
@@ -70,7 +71,6 @@ class RequestManager {
                         appError.message = responseObj.description ?? "Error"
                         observer.on(.error(appError))
                     }
-                    HUD.showError(appError.message)
                 }
             case .failure(let error):
                 appError.message = error.localizedDescription
@@ -78,42 +78,6 @@ class RequestManager {
                 break
             }
         })
-                /*.responseJSON(completionHandler: { response in
-                    switch response.result {
-                    case .success(let value):
-                        print(value)
-                        guard let responseJson = value as? [String: Any] else {
-                             observer.on(.completed)
-                            return
-                        }
-                        guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSON: responseJson) else {
-                            observer.on(.completed)
-                            return
-                        }
-                        if responseObj.status == .success {
-                            if let obj = Mapper<T>().map(JSON: responseJson) {
-                                observer.on(.next(obj))
-                            } else {
-                                appError.message = "Data Parase Error"
-                                observer.on(.error(appError))
-                                HUD.showError(appError.message)
-                            }
-                        } else {
-                            if responseObj.status == .loginInValid {  /// 通知重新登录
-                                appError.message = "Data Parase Error"
-                                observer.on(.error(appError))
-                            } else {
-                                appError.message = responseObj.description ?? "Error"
-                                observer.on(.error(appError))
-                            }
-                            HUD.showError(appError.message)
-                        }
-                    case .failure(let error):
-                         appError.message = error.localizedDescription
-                         observer.on(.error(appError))
-                        break
-                    }
-                })*/
             return Disposables.create()
         }
     }

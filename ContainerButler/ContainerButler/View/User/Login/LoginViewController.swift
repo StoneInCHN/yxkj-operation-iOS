@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
+import YYText
 
 class LoginViewController: BaseViewController {
     fileprivate lazy var loginVM: UserSessionViewModel = UserSessionViewModel()
@@ -19,7 +20,38 @@ class LoginViewController: BaseViewController {
     
         return imageView
     }()
-    
+    fileprivate lazy var phoneError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+       let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "请输入正确的管家账号")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
+    fileprivate lazy var pwdError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "密码错误，请重新输入")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+         label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "请输入您的手机号"
@@ -27,7 +59,7 @@ class LoginViewController: BaseViewController {
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-                textField.text = "12345678901"
+                textField.text = "18212341234"
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
@@ -38,7 +70,7 @@ class LoginViewController: BaseViewController {
         pwdTF.font = UIFont.sizeToFit(with: 14)
         pwdTF.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         pwdTF.returnKeyType = .done
-        pwdTF.text = "111111"
+        pwdTF.text = "222222"
         return pwdTF
     }()
     fileprivate lazy  var userIcon: UIImageView = {
@@ -130,6 +162,8 @@ extension LoginViewController {
         view.addSubview(line2)
         view.addSubview(loginBtn)
         view.addSubview(captchdBtn)
+        view.addSubview(phoneError)
+        view.addSubview(pwdError)
         companyIcon.snp.makeConstraints { (maker) in
             maker.left.right.top.equalTo(0)
             maker.height.equalTo(185.5.fitHeight)
@@ -140,11 +174,17 @@ extension LoginViewController {
             maker.left.equalTo(30)
             maker.width.equalTo(20)
         }
+        phoneError.snp.makeConstraints { (maker) in
+            maker.width.equalTo(150.0.fitWidth)
+            maker.centerY.equalTo(userIcon.snp.centerY)
+            maker.right.equalTo(-10)
+        }
         phoneNumTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.right).offset(20)
             maker.centerY.equalTo(userIcon.snp.centerY)
-            maker.right.equalTo(-30)
+            maker.right.equalTo(phoneError.snp.left).offset(-20)
         }
+        
         line0.snp.makeConstraints { (maker) in
             maker.left.equalTo(20)
             maker.top.equalTo(userIcon.snp.bottom).offset(20)
@@ -156,10 +196,14 @@ extension LoginViewController {
             maker.top.equalTo(line0.snp.bottom).offset(20)
             maker.width.equalTo(20)
         }
-     
+        pwdError.snp.makeConstraints { (maker) in
+            maker.width.equalTo(150.0.fitWidth)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
+            maker.right.equalTo(-10)
+        }
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(phoneNumTF.snp.right)
+            maker.right.equalTo(pwdError.snp.left)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         line2.snp.makeConstraints { (maker) in
@@ -221,11 +265,19 @@ extension LoginViewController {
         
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
+                 guard let weakSelf = self, let phoneText = weakSelf.phoneNumTF.text, let pwdText = weakSelf.pwdTF.text  else { return }
+                if phoneText.isEmpty {
+                    weakSelf.phoneNumTF.shake()
+                    return
+                }
+                if pwdText.isEmpty {
+                    weakSelf.pwdTF.shake()
+                    return
+                }
                 HUD.showLoading()
                 let param = UserSessionParam()
-                guard let weakSelf = self else { return }
                 param.phoneNum = weakSelf.phoneNumTF.text
-                param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey)
+                param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey ?? "")
                 weakSelf.loginVM.handle(with: .loginWithPassword(param))
                     .subscribe(onNext: { (response) in
                         HUD.hideLoading()
@@ -236,11 +288,32 @@ extension LoginViewController {
                         }, completion: { _ in
                               UIApplication.shared.keyWindow?.rootViewController = rootVC
                         })
-                }).disposed(by: weakSelf.disposeBag)
+                    }, onError: { [weak self] error in
+                         HUD.hideLoading()
+                        if let error = error as? AppError {
+                            self?.showError(error.status)
+                        }
+                    })
+                    .disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)
     }
     
     fileprivate func loadData() {
         loginVM.loadRSAPublickey()
+    }
+    
+    private func showError(_ status: StatusType) {
+        switch status {
+        case .phoneNumError:
+            phoneError.isHidden = false
+            pwdError.isHidden = true
+            phoneNumTF.shake()
+        case .passwordError:
+            pwdError.isHidden = false
+            phoneError.isHidden = true
+           pwdTF.shake()
+        default:
+            break
+        }
     }
 }

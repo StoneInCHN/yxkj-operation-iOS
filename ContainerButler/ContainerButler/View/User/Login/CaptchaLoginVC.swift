@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import YYText
 
 class CaptchaLoginVC: BaseViewController {
     var phoneNumber: String?
@@ -90,6 +91,22 @@ class CaptchaLoginVC: BaseViewController {
         view.backgroundColor = UIColor(hex: CustomKey.Color.dividerLineColor)
         return view
     }()
+    fileprivate lazy var pwdError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "验证码错误，请重新输入")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +130,7 @@ extension CaptchaLoginVC {
         view.addSubview(forgetPwdBtn)
         view.addSubview(line2)
         view.addSubview(loginBtn)
+         view.addSubview(pwdError)
         descPwdLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(26 + 64)
             maker.centerX.equalTo(view.snp.centerX)
@@ -155,9 +173,15 @@ extension CaptchaLoginVC {
             maker.height.equalTo(1)
         }
         
+        pwdError.snp.makeConstraints { (maker) in
+            maker.right.equalTo(-30)
+            maker.width.equalTo(100)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
+        }
+        
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(forgetPwdBtn.snp.left).offset(-20)
+            maker.right.equalTo(pwdError.snp.left)
             maker.top.equalTo(line0.snp.bottom).offset(12)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
@@ -223,15 +247,36 @@ extension CaptchaLoginVC {
         
         loginBtn.rx.tap
             .subscribe(onNext: { [weak self] in
-                print("login:\(self.debugDescription)")
+                guard let weakSelf = self, let pwdText = weakSelf.pwdTF.text  else { return }
+                if pwdText.isEmpty {
+                    weakSelf.pwdTF.shake()
+                    return
+                }
                 let vcc = ResetPasswordVC()
                 vcc.phoneNumber = self?.phoneNumTF.text
                  let param = UserSessionParam()
                 param.phoneNum = self?.phoneNumTF.text
                 param.verificationCode = self?.pwdTF.text
-//                self?.chaptchVM.handle(with: .loginWithVerificationCode(param)).subscribe(onNext: <#T##((NullDataResponse) -> Void)?##((NullDataResponse) -> Void)?##(NullDataResponse) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-                self?.navigationController?.pushViewController(vcc, animated: true)
+                self?.chaptchVM.handle(with: .loginWithVerificationCode(param))
+                    .subscribe(onNext: { (response) in
+                     weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                    }, onError: { [weak self](error) in
+                        if let error = error as? AppError {
+                            HUD.hideLoading()
+                            self?.showError(error)
+                        }
+                }).disposed(by: weakSelf.disposeBag)
+               
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func showError(_ error: AppError) {
+        if error.status == .capchaError {
+            pwdError.isHidden = false
+            pwdTF.shake()
+        } else {
+            HUD.showError(error.message)
+        }
     }
 }
