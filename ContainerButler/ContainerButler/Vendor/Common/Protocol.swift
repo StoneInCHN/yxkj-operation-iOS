@@ -19,6 +19,9 @@ protocol EndPointProtocol {
 }
 
 extension EndPointProtocol {
+    var path: String {
+        return "/keeper"
+    }
     
     var baseURL: String {
         return (Bundle.main.infoDictionary?["BasseURL"] as? String) ?? ""
@@ -37,6 +40,7 @@ protocol ContentEndPointProtocol: EndPointProtocol { }
 protocol FileUploadProtocol: EndPointProtocol {}
 
 extension UserEndPointProtocol {
+
     var method: HTTPMethod {
         return .post
     }

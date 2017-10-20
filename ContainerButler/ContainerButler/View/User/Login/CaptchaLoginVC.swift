@@ -174,7 +174,7 @@ extension CaptchaLoginVC {
         
         pwdError.snp.makeConstraints { (maker) in
             maker.right.equalTo(-30)
-            maker.width.equalTo(150)
+            maker.width.equalTo(180.0.fitWidth)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         

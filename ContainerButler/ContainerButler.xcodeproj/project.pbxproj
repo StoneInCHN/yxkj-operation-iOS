@@ -23,6 +23,8 @@
 		CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */; };
 		CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */; };
 		CD44DF771F99E5D200539122 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF761F99E5D200539122 /* UserInfo.swift */; };
+		CD44DF7A1F99FB0900539122 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF791F99FB0900539122 /* Container.swift */; };
+		CD44DF7C1F9A001200539122 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF7B1F9A001200539122 /* Transform.swift */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
 		CD69C4651F66874000623B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4641F66874000623B91 /* Assets.xcassets */; };
@@ -182,6 +184,8 @@
 		CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDownAnimationVC.swift; sourceTree = "<group>"; };
 		CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmationAnimator.swift; sourceTree = "<group>"; };
 		CD44DF761F99E5D200539122 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		CD44DF791F99FB0900539122 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		CD44DF7B1F9A001200539122 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD69C4621F66874000623B91 /* ContainerButler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerButler.xcdatamodel; sourceTree = "<group>"; };
@@ -526,6 +530,14 @@
 			path = Aniamations;
 			sourceTree = "<group>";
 		};
+		CD44DF781F99FAB900539122 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				CD44DF791F99FB0900539122 /* Container.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		CD69C44E1F66874000623B91 = {
 			isa = PBXGroup;
 			children = (
@@ -690,8 +702,10 @@
 		CD844C7C1F70E8F900D50722 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD44DF7B1F9A001200539122 /* Transform.swift */,
 				CD844C7D1F70E8F900D50722 /* Model.swift */,
 				CD844C7E1F70E8F900D50722 /* ResponseObject.swift */,
+				CD44DF781F99FAB900539122 /* Container */,
 				CD319ED31F95E89D007BF050 /* User */,
 			);
 			path = Model;
@@ -1092,6 +1106,7 @@
 				CDDBD29F1F9500AF004F5526 /* NotReplenishedGoodsListVC.swift in Sources */,
 				CD8C5B561F8F046200E2E7B5 /* RSAEncryptor.m in Sources */,
 				CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */,
+				CD44DF7A1F99FB0900539122 /* Container.swift in Sources */,
 				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */,
 				CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */,
@@ -1124,6 +1139,7 @@
 				CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */,
 				CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */,
 				CD78F0901F67AE3F00D50B7B /* Location.swift in Sources */,
+				CD44DF7C1F9A001200539122 /* Transform.swift in Sources */,
 				CD78F09D1F67D97300D50B7B /* Extension.swift in Sources */,
 				CDE2029D1F71187800CB0145 /* ContainerViewModel.swift in Sources */,
 				CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */,

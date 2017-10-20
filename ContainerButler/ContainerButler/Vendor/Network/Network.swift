@@ -42,10 +42,6 @@ enum UserSession: UserEndPointProtocol {
     /// 忘记密码时验证码验证
     case verifyForgetPwdCaptchCode
     
-    var path: String {
-        return "/keeper"
-    }
-    
     var endpoint: String {
         switch self {
         case .forgetPwd:
