@@ -1,5 +1,5 @@
 //
-//  CounterSectionHeaderView.swift
+// ContainerSectionHeaderView
 //  ContainerButler
 //
 //  Created by lieon on 2017/9/20.
@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CounterSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable {
+class ContainerSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable {
     var listTapAction: (() -> Void)?
     let disposeBag: DisposeBag = DisposeBag()
     fileprivate lazy  var numberLabel: UILabel = {

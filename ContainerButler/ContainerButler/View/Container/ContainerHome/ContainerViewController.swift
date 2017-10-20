@@ -1,5 +1,5 @@
 //
-//  CounterViewController.swift
+//  ContainerViewController.swift
 //  ContainerButler
 //
 //  Created by lieon on 2017/9/19.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class CounterViewController: BaseViewController {
+class ContainerViewController: BaseViewController {
     lazy var replenishmentView: ReplenishmentView = {
         let animator = ReplenishmentView()
         animator.replenishAction = { [weak self] in
@@ -24,8 +24,8 @@ class CounterViewController: BaseViewController {
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: 0xfafafa)
         taleView.allowsSelection = false
-        taleView.register(CounterTableViewCell.self, forCellReuseIdentifier: "CounterTableViewCell")
-        taleView.register(CounterSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "CounterSectionHeaderView")
+        taleView.register(ContainerTableViewCell.self, forCellReuseIdentifier: "ContainerTableViewCell")
+        taleView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
         return taleView
     }()
     
@@ -36,7 +36,7 @@ class CounterViewController: BaseViewController {
     }
 }
 
-extension CounterViewController {
+extension ContainerViewController {
     fileprivate func setupUI() {
         title = "货柜"
         view.addSubview(tableView)
@@ -74,7 +74,7 @@ extension CounterViewController {
     }
 }
 
-extension CounterViewController: UITableViewDataSource {
+extension ContainerViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 10
     }
@@ -84,7 +84,7 @@ extension CounterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CounterTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        let cell: ContainerTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.itemdidSelected = { [weak self] model in
             guard let weakSelf = self else { return }
             HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
@@ -98,9 +98,9 @@ extension CounterViewController: UITableViewDataSource {
         return true
     }
 }
-extension CounterViewController: UITableViewDelegate {
+extension ContainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: CounterSectionHeaderView = tableView.dequeueReusableHeaderFooter()
+        let headerView: ContainerSectionHeaderView = tableView.dequeueReusableHeaderFooter()
         headerView.listTapAction = {
             
         }
@@ -116,7 +116,7 @@ extension CounterViewController: UITableViewDelegate {
     }
 }
 
-extension CounterViewController: YBPopupMenuDelegate {
+extension ContainerViewController: YBPopupMenuDelegate {
     func ybPopupMenuDidSelected(at index: Int, ybPopupMenu: YBPopupMenu!) {
         switch index {
         case 0: /// 待补清单

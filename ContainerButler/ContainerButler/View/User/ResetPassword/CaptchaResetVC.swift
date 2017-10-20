@@ -215,7 +215,7 @@ extension CaptchaResetVC {
                               message: "我们将发送验证码短信到这个号码：\n +86 \(weakSelf.phoneNumTF.text ?? "")",
                     enterTitle: "好",
                     enterAction: {
-                        weakSelf.forgetPwdBtn.start(withTime: 5, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
+                        weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                 }, cancleAction: nil)
             })
             .disposed(by: disposeBag)

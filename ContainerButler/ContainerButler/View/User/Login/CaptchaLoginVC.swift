@@ -33,7 +33,6 @@ class CaptchaLoginVC: BaseViewController {
     }()
     fileprivate lazy   var pwdTF: UITextField = {
         let pwdTF = UITextField()
-        pwdTF.isSecureTextEntry = true
         pwdTF.placeholder = "请输入验证码"
         pwdTF.textColor = UIColor(hex: 0x222222)
         pwdTF.font = UIFont.sizeToFit(with: 14)
@@ -175,7 +174,7 @@ extension CaptchaLoginVC {
         
         pwdError.snp.makeConstraints { (maker) in
             maker.right.equalTo(-30)
-            maker.width.equalTo(100)
+            maker.width.equalTo(150)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         
@@ -200,7 +199,7 @@ extension CaptchaLoginVC {
             .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 4 }
+            .map { $0.characters.count >= 6 }
             .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
@@ -212,7 +211,7 @@ extension CaptchaLoginVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 4 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
+                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -240,7 +239,7 @@ extension CaptchaLoginVC {
                         let param = UserSessionParam()
                         param.phoneNum = self?.phoneNumTF.text
                         self?.chaptchVM.getLoginVerificationCode(param)
-                    weakSelf.forgetPwdBtn.start(withTime: 5, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
+                    weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                 }, cancleAction: nil)
             })
             .disposed(by: disposeBag)
@@ -259,7 +258,13 @@ extension CaptchaLoginVC {
                 param.verificationCode = self?.pwdTF.text
                 self?.chaptchVM.handle(with: .loginWithVerificationCode(param))
                     .subscribe(onNext: { (response) in
-                     weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                        let rootVC = TabBarController()
+                        UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
+                            weakSelf.view.removeFromSuperview()
+                            UIApplication.shared.keyWindow?.addSubview(rootVC.view)
+                        }, completion: { _ in
+                            UIApplication.shared.keyWindow?.rootViewController = rootVC
+                        })
                     }, onError: { [weak self](error) in
                         if let error = error as? AppError {
                             HUD.hideLoading()

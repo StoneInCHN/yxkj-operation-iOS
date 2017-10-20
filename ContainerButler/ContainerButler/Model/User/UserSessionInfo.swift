@@ -10,12 +10,7 @@ import Foundation
 import ObjectMapper
 
 class UserSessionInfo: NSObject {
-    static let share: UserSessionInfo = UserSessionInfo()
     var token: String?
-    
-    private override init() {
-        super.init()
-    }
 }
 
 class RSAKey: Model {

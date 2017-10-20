@@ -20,7 +20,7 @@ class CoreDataManager {
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: "Container", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "ContainerButler", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
@@ -86,3 +86,103 @@ class CoreDataManager {
         }
     }
 }
+
+// Save UserSeesionInfo
+
+extension CoreDataManager {
+    func save(userSession: UserSessionInfo) {
+        let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        if searchResulst.isEmpty {
+            guard let sessionInfo: Session = NSEntityDescription.insertNewObject(forEntityName: "Session", into: self.managedObjectContext) as? Session else {  return  }
+                sessionInfo.token = userSession.token
+        } else {
+            for info in searchResulst {
+                info.token = userSession.token
+            }
+        }
+        saveContext()
+    }
+    
+    func getSessionInfo() -> UserSessionInfo? {
+        let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return nil
+        }
+        guard let info = searchResulst.last else {
+            return nil
+        }
+        let session = UserSessionInfo()
+        session.token = info.token
+        return session
+    }
+    
+    func clearSessionInfo() {
+        let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        if searchResulst.isEmpty {
+            return
+        }
+        for user in searchResulst {
+            managedObjectContext.delete(user)
+        }
+        saveContext()
+    }
+}
+
+// Save UserInfo
+extension CoreDataManager {
+    func save(userInfo: UserInfo) {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        if searchResulst.isEmpty {
+            guard let sessionInfo: User = NSEntityDescription.insertNewObject(forEntityName: "User", into: self.managedObjectContext) as? User else {  return  }
+            sessionInfo.userId = userInfo.userId
+        } else {
+            for info in searchResulst {
+                info.userId = userInfo.userId
+            }
+        }
+        saveContext()
+    }
+    
+    func getUserInfo() -> UserInfo? {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return nil
+        }
+        guard let info = searchResulst.last else {
+            return nil
+        }
+        let userInfo = UserInfo()
+        userInfo.userId = info.userId
+        return userInfo
+    }
+    
+    func clearUserInfo() {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        if searchResulst.isEmpty {
+            return
+        }
+        for user in searchResulst {
+            managedObjectContext.delete(user)
+        }
+        saveContext()
+    }
+}
+
+
+
+
+
+
+

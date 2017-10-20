@@ -70,7 +70,7 @@ class LoginViewController: BaseViewController {
         pwdTF.font = UIFont.sizeToFit(with: 14)
         pwdTF.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         pwdTF.returnKeyType = .done
-        pwdTF.text = "222222"
+        pwdTF.text = "111111"
         return pwdTF
     }()
     fileprivate lazy  var userIcon: UIImageView = {
@@ -278,7 +278,7 @@ extension LoginViewController {
                 let param = UserSessionParam()
                 param.phoneNum = weakSelf.phoneNumTF.text
                 param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey ?? "")
-                weakSelf.loginVM.handle(with: .loginWithPassword(param))
+                weakSelf.loginVM.login(param)
                     .subscribe(onNext: { (response) in
                         HUD.hideLoading()
                          let rootVC = TabBarController()

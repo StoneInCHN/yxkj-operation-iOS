@@ -1,5 +1,5 @@
 //
-//  CounterTableViewCell.swift
+//  ContainerTableViewCell.swift
 //  ContainerButler
 //
 //  Created by lieon on 2017/9/19.
@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class CounterTableViewCell: UITableViewCell, ViewNameReusable {
+class ContainerTableViewCell: UITableViewCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
     var itemdidSelected: ((String) -> Void)?
     fileprivate lazy  var numberLabel: UILabel = {
@@ -30,7 +30,7 @@ class CounterTableViewCell: UITableViewCell, ViewNameReusable {
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.bounces = false
-        collectionView.register(CounterCollectionCell.self, forCellWithReuseIdentifier: "CounterCollectionCell")
+        collectionView.register(ContainerCollectionCell.self, forCellWithReuseIdentifier: "ContainerCollectionCell")
         return collectionView
         }()
     
@@ -70,7 +70,7 @@ class CounterTableViewCell: UITableViewCell, ViewNameReusable {
         items.asObservable()
             .bind(to: collectionView.rx.items) { (collectionView, row, element) in
                 let indexPath = IndexPath(row: row, section: 0)
-                let cell: CounterCollectionCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                let cell: ContainerCollectionCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.config("A货柜")
                 if row == items.value.count - 1 {
                      cell.config("中控货", backgroundColor: UIColor(hex: 0xfbc205))
@@ -115,7 +115,7 @@ class CounterTableViewCell: UITableViewCell, ViewNameReusable {
     }
 }
 
-class CounterCollectionCell: UICollectionViewCell, ViewNameReusable {
+class ContainerCollectionCell: UICollectionViewCell, ViewNameReusable {
     
     fileprivate lazy  var numberLabel: UILabel = {
         let descLabel = UILabel()
