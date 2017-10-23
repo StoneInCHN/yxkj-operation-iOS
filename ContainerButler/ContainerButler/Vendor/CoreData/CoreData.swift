@@ -62,7 +62,7 @@ class CoreDataManager {
     // iOS-10
     @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Live")
+        let container = NSPersistentContainer(name: "ContainerButler")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 

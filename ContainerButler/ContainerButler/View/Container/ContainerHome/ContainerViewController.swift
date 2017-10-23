@@ -10,8 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import MJRefresh
 
 class ContainerViewController: BaseViewController {
+    fileprivate lazy var containerVM: ContainerViewModel = ContainerViewModel()
     lazy var replenishmentView: ReplenishmentView = {
         let animator = ReplenishmentView()
         animator.replenishAction = { [weak self] in
@@ -28,11 +30,41 @@ class ContainerViewController: BaseViewController {
         taleView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
         return taleView
     }()
-    
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Container>>(
+        configureCell: { (_, tv, indexPath, element) in
+            let cell = tv.dequeueReusableCell(withIdentifier: "ContainerTableViewCell")!
+            return cell
+     }
+    )
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupRX()
+        
+        containerVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .beingHeaderRefresh:
+                self?.tableView.mj_header.beginRefreshing()
+            case .endHeaderRefresh:
+                self?.tableView.mj_header.endRefreshing()
+            case .beingFooterRefresh:
+                self?.tableView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                self?.tableView.mj_footer.endRefreshing()
+            case .noMoreData:
+                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+            default:
+                break
+            }
+        }).disposed(by: disposeBag)
+        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[unowned self] in
+            self.containerVM.requestCommand.onNext(true)
+        })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.containerVM.requestCommand.onNext(false)
+        })
+        self.containerVM.requestCommand.onNext(true)
     }
 }
 
@@ -66,38 +98,24 @@ extension ContainerViewController {
     }
     
     fileprivate func setupRX() {
-     tableView.dataSource = self
-        
         tableView.rx
             .setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        let items = containerVM.models.asObservable()
+        items
+            .bind(to: tableView.rx.items(cellIdentifier: "ContainerTableViewCell", cellType: ContainerTableViewCell.self)) { [weak self] (row, element, cell) in
+                cell.itemdidSelected = { [weak self] model in
+                    guard let weakSelf = self else { return }
+                    HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
+                        weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+                    })
+                }
+            }
             .disposed(by: disposeBag)
     }
 }
 
-extension ContainerViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ContainerTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.itemdidSelected = { [weak self] model in
-            guard let weakSelf = self else { return }
-            HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
-                weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
-            })
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-}
 extension ContainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: ContainerSectionHeaderView = tableView.dequeueReusableHeaderFooter()
@@ -112,7 +130,11 @@ extension ContainerViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 220
+        if indexPath.section < containerVM.cellHeights.count {
+            let cells = containerVM.cellHeights[indexPath.section]
+            return cells[indexPath.row]
+        }
+       return 0.0
     }
 }
 

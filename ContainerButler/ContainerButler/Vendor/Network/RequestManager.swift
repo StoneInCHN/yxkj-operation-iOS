@@ -49,7 +49,7 @@ class RequestManager {
         requst.responseString(completionHandler: { (response) in
             switch response.result {
             case .success(let value):
-                print(value)
+//                print(value)
                 guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSONString: value) else {
                     observer.on(.completed)
                     return
@@ -57,6 +57,7 @@ class RequestManager {
                 if responseObj.status == .success {
                     if let obj = Mapper<T>().map(JSONString: value) {
                         observer.on(.next(obj))
+                        observer.onCompleted()
                     } else {
                         appError.message = "Data Parase Error"
                         observer.on(.error(appError))

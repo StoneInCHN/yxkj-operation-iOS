@@ -32,7 +32,7 @@ class Scence: Model {
 }
 
 class ScenceGroup: Model {
-    var containers: [String]?
+    var containers: [Container]?
     
     override func mapping(map: Map) {
         containers <- map["vendingContainers"]

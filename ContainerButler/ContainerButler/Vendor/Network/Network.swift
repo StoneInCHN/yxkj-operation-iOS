@@ -102,3 +102,15 @@ class UserSessionParam: Model {
         verificationCode <- map["verificationCode"]
     }
 }
+
+class ContainerHomeParam: Model {
+    var userId: Int64 = CoreDataManager.sharedInstance.getUserInfo()?.userId ?? -1
+    var pageNo: Int = 1
+    var pageSize: Int = 20
+    
+    override func mapping(map: Map) {
+        userId <- map["userId"]
+        pageNo <- map["pageNo"]
+        pageSize <- map["pageSize"]
+    }
+}

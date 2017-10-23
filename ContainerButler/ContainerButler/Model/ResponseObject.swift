@@ -28,3 +28,6 @@ class BaseResponseObject<T: Mappable>: Mappable {
 }
 
 class NullDataResponse: BaseResponseObject<Model> {}
+
+/// 获取货柜待补情况
+class ContainerHomeResponse: BaseResponseObject<ContainerHome> {}
