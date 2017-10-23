@@ -9,7 +9,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import YYText
 
 class CaptchaLoginVC: BaseViewController {
     var phoneNumber: String?

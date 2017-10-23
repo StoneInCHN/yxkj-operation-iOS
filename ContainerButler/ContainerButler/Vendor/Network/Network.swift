@@ -73,6 +73,18 @@ enum UserSession: UserEndPointProtocol {
     }
 }
 
+enum ContainerSession: UserEndPointProtocol{
+    // 获取货柜待补情况
+    case getWaitSupplyState
+    
+    var endpoint: String {
+        switch self {
+        case .getWaitSupplyState:
+            return "/getWaitSupplyState"
+        }
+    }
+}
+
 class UserSessionParam: Model {
     var phoneNum: String?
     var newPwd: String?

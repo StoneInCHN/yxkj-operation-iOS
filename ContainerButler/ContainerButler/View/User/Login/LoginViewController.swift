@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
-import YYText
 
 class LoginViewController: BaseViewController {
     fileprivate lazy var loginVM: UserSessionViewModel = UserSessionViewModel()
@@ -59,7 +58,7 @@ class LoginViewController: BaseViewController {
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-                textField.text = "18212341234"
+                textField.text = "18012341234"
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
