@@ -88,31 +88,6 @@
 		CDD0D5081F9D9CA10056B6F1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D5071F9D9C960056B6F1 /* CoreFoundation.framework */; };
 		CDD0D5091F9D9CAB0056B6F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D5061F9D9C890056B6F1 /* UIKit.framework */; };
 		CDD0D50B1F9D9CB50056B6F1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D50A1F9D9CB10056B6F1 /* CoreText.framework */; };
-		CDD0D50F1F9D9D000056B6F1 /* YYText.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4BA1F9D9C0B0056B6F1 /* YYText.h */; };
-		CDD0D5101F9D9D000056B6F1 /* YYTextSelectionView.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4BD1F9D9C0B0056B6F1 /* YYTextSelectionView.h */; };
-		CDD0D5111F9D9D000056B6F1 /* YYTextLine.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4BE1F9D9C0B0056B6F1 /* YYTextLine.h */; };
-		CDD0D5121F9D9D000056B6F1 /* YYTextLayout.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4C01F9D9C0B0056B6F1 /* YYTextLayout.h */; };
-		CDD0D5131F9D9D000056B6F1 /* YYTextKeyboardManager.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4C11F9D9C0B0056B6F1 /* YYTextKeyboardManager.h */; };
-		CDD0D5141F9D9D000056B6F1 /* YYTextDebugOption.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4C41F9D9C0B0056B6F1 /* YYTextDebugOption.h */; };
-		CDD0D5151F9D9D000056B6F1 /* YYTextMagnifier.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4C71F9D9C0B0056B6F1 /* YYTextMagnifier.h */; };
-		CDD0D5161F9D9D000056B6F1 /* YYTextEffectWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4CA1F9D9C0B0056B6F1 /* YYTextEffectWindow.h */; };
-		CDD0D5171F9D9D000056B6F1 /* YYTextContainerView.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4CB1F9D9C0B0056B6F1 /* YYTextContainerView.h */; };
-		CDD0D5181F9D9D000056B6F1 /* YYTextInput.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4CD1F9D9C0B0056B6F1 /* YYTextInput.h */; };
-		CDD0D5191F9D9D000056B6F1 /* YYTextView.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D01F9D9C0B0056B6F1 /* YYTextView.h */; };
-		CDD0D51A1F9D9D000056B6F1 /* YYTextAttribute.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D21F9D9C0B0056B6F1 /* YYTextAttribute.h */; };
-		CDD0D51B1F9D9D000056B6F1 /* YYTextRubyAnnotation.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D51F9D9C0B0056B6F1 /* YYTextRubyAnnotation.h */; };
-		CDD0D51C1F9D9D000056B6F1 /* YYTextArchiver.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D61F9D9C0B0056B6F1 /* YYTextArchiver.h */; };
-		CDD0D51D1F9D9D000056B6F1 /* YYTextRunDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D71F9D9C0B0056B6F1 /* YYTextRunDelegate.h */; };
-		CDD0D51E1F9D9D000056B6F1 /* YYTextParser.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4D91F9D9C0B0056B6F1 /* YYTextParser.h */; };
-		CDD0D51F1F9D9D000056B6F1 /* YYLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4DC1F9D9C0B0056B6F1 /* YYLabel.h */; };
-		CDD0D5201F9D9D000056B6F1 /* UIView+YYText.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E11F9D9C0B0056B6F1 /* UIView+YYText.h */; };
-		CDD0D5211F9D9D000056B6F1 /* YYTextTransaction.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E21F9D9C0B0056B6F1 /* YYTextTransaction.h */; };
-		CDD0D5221F9D9D000056B6F1 /* YYTextWeakProxy.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E41F9D9C0B0056B6F1 /* YYTextWeakProxy.h */; };
-		CDD0D5231F9D9D000056B6F1 /* YYTextAsyncLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E51F9D9C0B0056B6F1 /* YYTextAsyncLayer.h */; };
-		CDD0D5241F9D9D000056B6F1 /* YYTextUtilities.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E61F9D9C0B0056B6F1 /* YYTextUtilities.h */; };
-		CDD0D5251F9D9D000056B6F1 /* NSAttributedString+YYText.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4E91F9D9C0B0056B6F1 /* NSAttributedString+YYText.h */; };
-		CDD0D5261F9D9D000056B6F1 /* NSParagraphStyle+YYText.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4EA1F9D9C0B0056B6F1 /* NSParagraphStyle+YYText.h */; };
-		CDD0D5271F9D9D000056B6F1 /* UIPasteboard+YYText.h in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D4ED1F9D9C0B0056B6F1 /* UIPasteboard+YYText.h */; };
 		CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDDBD27B1F94B646004F5526 /* juic.jpg */; };
 		CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */; };
 		CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD2801F95004A004F5526 /* ContainerViewController.swift */; };
@@ -1286,31 +1261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD0D50F1F9D9D000056B6F1 /* YYText.h in Sources */,
-				CDD0D5101F9D9D000056B6F1 /* YYTextSelectionView.h in Sources */,
-				CDD0D5111F9D9D000056B6F1 /* YYTextLine.h in Sources */,
-				CDD0D5121F9D9D000056B6F1 /* YYTextLayout.h in Sources */,
-				CDD0D5131F9D9D000056B6F1 /* YYTextKeyboardManager.h in Sources */,
-				CDD0D5141F9D9D000056B6F1 /* YYTextDebugOption.h in Sources */,
-				CDD0D5151F9D9D000056B6F1 /* YYTextMagnifier.h in Sources */,
-				CDD0D5161F9D9D000056B6F1 /* YYTextEffectWindow.h in Sources */,
-				CDD0D5171F9D9D000056B6F1 /* YYTextContainerView.h in Sources */,
-				CDD0D5181F9D9D000056B6F1 /* YYTextInput.h in Sources */,
-				CDD0D5191F9D9D000056B6F1 /* YYTextView.h in Sources */,
-				CDD0D51A1F9D9D000056B6F1 /* YYTextAttribute.h in Sources */,
-				CDD0D51B1F9D9D000056B6F1 /* YYTextRubyAnnotation.h in Sources */,
-				CDD0D51C1F9D9D000056B6F1 /* YYTextArchiver.h in Sources */,
-				CDD0D51D1F9D9D000056B6F1 /* YYTextRunDelegate.h in Sources */,
-				CDD0D51E1F9D9D000056B6F1 /* YYTextParser.h in Sources */,
-				CDD0D51F1F9D9D000056B6F1 /* YYLabel.h in Sources */,
-				CDD0D5201F9D9D000056B6F1 /* UIView+YYText.h in Sources */,
-				CDD0D5211F9D9D000056B6F1 /* YYTextTransaction.h in Sources */,
-				CDD0D5221F9D9D000056B6F1 /* YYTextWeakProxy.h in Sources */,
-				CDD0D5231F9D9D000056B6F1 /* YYTextAsyncLayer.h in Sources */,
-				CDD0D5241F9D9D000056B6F1 /* YYTextUtilities.h in Sources */,
-				CDD0D5251F9D9D000056B6F1 /* NSAttributedString+YYText.h in Sources */,
-				CDD0D5261F9D9D000056B6F1 /* NSParagraphStyle+YYText.h in Sources */,
-				CDD0D5271F9D9D000056B6F1 /* UIPasteboard+YYText.h in Sources */,
 				CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */,
 				CDFF58DA1F989FED00605761 /* UpdatePasswordVC.swift in Sources */,
 				CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */,

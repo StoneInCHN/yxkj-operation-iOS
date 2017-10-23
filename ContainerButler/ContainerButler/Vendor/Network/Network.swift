@@ -73,7 +73,7 @@ enum UserSession: UserEndPointProtocol {
     }
 }
 
-enum ContainerSession: UserEndPointProtocol{
+enum ContainerSession: UserEndPointProtocol {
     // 获取货柜待补情况
     case getWaitSupplyState
     
