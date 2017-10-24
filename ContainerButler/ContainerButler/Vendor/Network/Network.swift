@@ -124,7 +124,7 @@ class UserSessionParam: Model {
         verificationCode <- map["verificationCode"]
         verifyCodeType <- map["type"]
         oldPassword <- map["oldePwd"]
-        newPassword <- map["NewPwd"]
+        newPassword <- map["newPwd"]
     }
 }
 

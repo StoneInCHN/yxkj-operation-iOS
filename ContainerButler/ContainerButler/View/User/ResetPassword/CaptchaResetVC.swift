@@ -198,7 +198,7 @@ extension CaptchaResetVC {
             .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 4 }
+            .map { $0.characters.count >= 6 }
             .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
@@ -210,7 +210,7 @@ extension CaptchaResetVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 4 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
+                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -260,14 +260,10 @@ extension CaptchaResetVC {
                 param.verificationCode = self?.pwdTF.text
                 let chaptchVM = UserSessionViewModel()
                 chaptchVM.handle(with: .verifyForgetPwdCaptchCode(param))
-                    .subscribe(onNext: { (response) in
-                        let rootVC = TabBarController()
-                        UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
-                            weakSelf.view.removeFromSuperview()
-                            UIApplication.shared.keyWindow?.addSubview(rootVC.view)
-                        }, completion: { _ in
-                            UIApplication.shared.keyWindow?.rootViewController = rootVC
-                        })
+                    .subscribe(onNext: { [weak self](response) in
+                        let vcc = ResetPasswordVC()
+                        vcc.phoneNumber = self?.phoneNumber
+                        self?.navigationController?.pushViewController(vcc, animated: true)
                     }, onError: { [weak self](error) in
                         if let error = error as? AppError {
                             HUD.hideLoading()

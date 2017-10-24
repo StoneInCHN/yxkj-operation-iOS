@@ -522,7 +522,7 @@ extension String {
         let chars = "!@#$%+-,\\.;'"
         let regex = "^((?=.*?\\d)(?=.*?[A-Za-z])|(?=.*?\\d)(?=.*?[\(chars)])|(?=.*?[A-Za-z])(?=.*?[\(chars)]))[\\dA-Za-z\(chars)]{6,16}$"
         let passPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", regex)
-        //        print(passPredicate.evaluate(with: self))
+                print(passPredicate.evaluate(with: self))
         return passPredicate.evaluate(with:self)
     }
     

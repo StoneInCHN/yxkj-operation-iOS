@@ -107,6 +107,46 @@ class ResetPasswordVC: BaseViewController {
         return loginBtn
     }()
     
+    fileprivate lazy  var visiableBtn: UIButton = {
+        let loginBtn = UIButton()
+        loginBtn.setImage(UIImage(named: "eye"), for: .selected)
+        loginBtn.setImage(UIImage(named: "eye_grey"), for: .normal)
+        return loginBtn
+    }()
+    
+    fileprivate lazy var newPwdError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "密码格式错误")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
+    
+    fileprivate lazy var againPwdError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "两次密码不一致")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -132,6 +172,10 @@ extension ResetPasswordVC {
         view.addSubview(line2)
         view.addSubview(descPwdLabel)
         view.addSubview(enterBtn)
+        view.addSubview(newPwdError)
+        view.addSubview(againPwdError)
+        view.addSubview(visiableBtn)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: enterBtn)
         descPwdLabel0.snp.makeConstraints { (maker) in
             maker.top.equalTo(26 + 64)
@@ -160,10 +204,19 @@ extension ResetPasswordVC {
             maker.top.equalTo(line0.snp.bottom).offset(22)
             maker.width.equalTo(20)
         }
-        
+        visiableBtn.snp.makeConstraints { (maker) in
+            maker.size.equalTo(CGSize(width: 25, height: 15))
+            maker.right.equalTo(line0.snp.right)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
+        }
+        newPwdError.snp.makeConstraints { (maker) in
+            maker.right.equalTo(visiableBtn.snp.left)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
+            maker.width.equalTo(100.0.fitWidth)
+        }
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(phoneNumTF.snp.right)
+            maker.right.equalTo(newPwdError.snp.left).offset(-8)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         
@@ -173,16 +226,22 @@ extension ResetPasswordVC {
             maker.right.equalTo(line0.snp.right)
             maker.height.equalTo(1)
         }
-        
+ 
         pwdIconAgain.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.left)
             maker.top.equalTo(line1.snp.bottom).offset(20)
             maker.width.equalTo(20)
         }
         
+        againPwdError.snp.makeConstraints { (maker) in
+            maker.left.equalTo(newPwdError.snp.left)
+            maker.centerY.equalTo(pwdIconAgain.snp.centerY)
+            maker.width.equalTo(120.0.fitWidth)
+        }
+        
         pwdTFAgain.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(phoneNumTF.snp.right)
+            maker.right.equalTo(againPwdError.snp.left).offset(-8)
             maker.centerY.equalTo(pwdIconAgain.snp.centerY)
         }
         
@@ -208,19 +267,47 @@ extension ResetPasswordVC {
     }
     
      fileprivate func setupRx() {
-        let usernameValid = pwdTFAgain.rx.text.orEmpty
-            .map { $0.characters.count >= 8}
-            .share(replay: 1)
-        
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 8 }
+            .map { text -> Bool in
+                if text.isEmpty {
+                    return true
+                }
+                return text.validatePassword()
+            }
             .share(replay: 1)
         
-        let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
+        let againPasswordValid = pwdTFAgain.rx.text.orEmpty
+            .map {[weak self] (text) -> Bool in
+                if text.isEmpty {
+                    return true
+                }
+                if text != self?.pwdTF.text {
+                    return false
+                }
+                return true
+        }.share(replay: 1)
+        
+        let everythingValid = Observable.combineLatest(passwordValid, againPasswordValid) { $0 && $1 }
             .share(replay: 1)
+        
+        passwordValid
+            .bind(to: newPwdError.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        againPasswordValid
+            .bind(to: againPwdError.rx.isHidden)
+            .disposed(by: disposeBag)
         
          everythingValid
             .bind(to: enterBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        visiableBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let weakSelf = self else {    return      }
+                weakSelf.visiableBtn.isSelected = !weakSelf.visiableBtn.isSelected
+                self?.pwdTF.isSecureTextEntry = !weakSelf.visiableBtn.isSelected
+            })
             .disposed(by: disposeBag)
         
         enterBtn.rx.tap
