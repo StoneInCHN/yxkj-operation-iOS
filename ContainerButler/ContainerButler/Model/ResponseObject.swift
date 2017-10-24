@@ -28,4 +28,3 @@ class BaseResponseObject<T: Mappable>: Mappable {
 }
 
 class NullDataResponse: BaseResponseObject<Model> {}
-

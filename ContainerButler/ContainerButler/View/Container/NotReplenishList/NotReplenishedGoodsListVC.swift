@@ -12,12 +12,12 @@ import RxSwift
 import pop
 
 class NotReplenishedGoodsListVC: BaseViewController {
+    fileprivate lazy var listVM: ContainerManageViewModel = ContainerManageViewModel()
     fileprivate lazy  var addressLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.sizeToFit(with: 14)
         descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "A货柜"
         return descLabel
     }()
     
@@ -96,7 +96,6 @@ extension NotReplenishedGoodsListVC {
         view.addSubview(pageTitleView)
         view.addSubview(tableView)
         view.addSubview(doneBtn)
-        pageTitleView.setTitles(["全部", "水果牛奶", " 饼干蛋糕", "全部", "水果牛奶", " 饼干蛋糕"])
         let line = UIView()
         line.backgroundColor = UIColor(hex: 0xcccccc)
         pageTitleView.addSubview(line)
@@ -153,24 +152,33 @@ extension NotReplenishedGoodsListVC {
         })
         .disposed(by: disposeBag)
         
-        let items = Observable.just(
-            (0..<20).map { "\($0)" }
-        )
-        
+       let items =  listVM.scenceList.asObservable()
         items
             .bind(to: optiontableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.font = UIFont.sizeToFit(with: 13.5)
                 cell.textLabel?.textColor = UIColor(hex: 0x333333)
-                cell.textLabel?.text = "香年广场T2"
+                cell.textLabel?.text = element.name
             }
             .disposed(by: disposeBag)
         
         optiontableView.rx
-            .modelSelected(String.self)
+            .modelSelected(Scence.self)
             .subscribe(onNext: {[weak self] value in
+                self?.addressLabel.text = value.name
                 self?.hideOptionChooseView()
             })
             .disposed(by: disposeBag)
+        
+        listVM.goodsCategory.asObservable()
+            .subscribe(onNext: { (list) in
+                var titles = [String]()
+                for cate in list {
+                    if let title = cate.cateName {
+                        titles.append(title)
+                    }
+                }
+                self.pageTitleView.setTitles(titles)
+            }).disposed(by: disposeBag)
     }
     
     private func showOptionChooseView() {

@@ -24,7 +24,6 @@
 		CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */; };
 		CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */; };
 		CD3CDCD71F9EE45E00E22DEC /* CenteralContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCD61F9EE45E00E22DEC /* CenteralContainerVC.swift */; };
-		CD3CDCDA1F9EE8BE00E22DEC /* NotReplenishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */; };
 		CD3CDCDD1F9EEABD00E22DEC /* ContainerManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCDC1F9EEABD00E22DEC /* ContainerManage.swift */; };
 		CD44DF771F99E5D200539122 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF761F99E5D200539122 /* UserInfo.swift */; };
 		CD44DF7A1F99FB0900539122 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF791F99FB0900539122 /* Container.swift */; };
@@ -62,6 +61,7 @@
 		CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466611F74A96C00C85D7B /* MessageCell.swift */; };
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
+		CDB9C67E1F9F17FE002B87EA /* ContainerManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */; };
 		CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */; };
 		CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */; };
 		CDD0D4B81F9D94DE0056B6F1 /* complete_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */; };
@@ -217,7 +217,6 @@
 		CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDownAnimationVC.swift; sourceTree = "<group>"; };
 		CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmationAnimator.swift; sourceTree = "<group>"; };
 		CD3CDCD61F9EE45E00E22DEC /* CenteralContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteralContainerVC.swift; sourceTree = "<group>"; };
-		CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotReplenishViewModel.swift; path = ContainerButler/ViewModel/NotReplenishViewModel.swift; sourceTree = SOURCE_ROOT; };
 		CD3CDCDC1F9EEABD00E22DEC /* ContainerManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManage.swift; sourceTree = "<group>"; };
 		CD44DF761F99E5D200539122 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		CD44DF791F99FB0900539122 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -260,6 +259,7 @@
 		CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
+		CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageViewModel.swift; sourceTree = "<group>"; };
 		CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaResetVC.swift; sourceTree = "<group>"; };
 		CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete_goods@3x.png"; sourceTree = "<group>"; };
@@ -634,7 +634,7 @@
 		CD3CDCD81F9EE86900E22DEC /* ContainerManage */ = {
 			isa = PBXGroup;
 			children = (
-				CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */,
+				CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */,
 			);
 			path = ContainerManage;
 			sourceTree = "<group>";
@@ -1330,6 +1330,7 @@
 				CD3BAD761F72580200902F91 /* YBPopupMenu.m in Sources */,
 				CDD0D4F91F9D9C0B0056B6F1 /* YYTextRunDelegate.m in Sources */,
 				CD8DA7C71F95D72900C5C010 /* UserSessionViewModel.swift in Sources */,
+				CDB9C67E1F9F17FE002B87EA /* ContainerManageViewModel.swift in Sources */,
 				CD3BAD771F72580200902F91 /* YBPopupMenuPath.m in Sources */,
 				CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */,
 				CDD0D5051F9D9C0C0056B6F1 /* YYTextWeakProxy.m in Sources */,
@@ -1354,7 +1355,6 @@
 				CDD0D4F81F9D9C0B0056B6F1 /* YYLabel.m in Sources */,
 				CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */,
 				CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */,
-				CD3CDCDA1F9EE8BE00E22DEC /* NotReplenishViewModel.swift in Sources */,
 				CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */,
 				CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */,
 				CD78F0921F67C66E00D50B7B /* NavigationController.swift in Sources */,

@@ -82,6 +82,3 @@ class WaitSupplySence: Model {
         sceneName <- map["sceneName"]
     }
 }
-
-
-

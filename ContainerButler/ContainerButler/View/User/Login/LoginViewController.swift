@@ -130,6 +130,7 @@ class LoginViewController: BaseViewController {
         setupUI()
         setupRx()
         loadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -276,11 +277,14 @@ extension LoginViewController {
                 HUD.showLoading()
                 let param = UserSessionParam()
                 param.phoneNum = weakSelf.phoneNumTF.text
-                param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.loginVM.rsaPublickey ?? "")
+                if let key = weakSelf.loginVM.rsaPublickey {
+                    param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: key)
+                }
                 weakSelf.loginVM.login(param)
-                    .subscribe(onNext: { (response) in
+                    .subscribe(onNext: { [weak self] (response) in
                         HUD.hideLoading()
                          let rootVC = TabBarController()
+                         guard let weakSelf = self else { return }
                         UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
                             weakSelf.view.removeFromSuperview()
                              UIApplication.shared.keyWindow?.addSubview(rootVC.view)

@@ -49,7 +49,7 @@ class RequestManager {
         requst.responseString(completionHandler: { (response) in
             switch response.result {
             case .success(let value):
-//                print(value)
+                print(value)
                 guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSONString: value) else {
                     observer.on(.completed)
                     return
