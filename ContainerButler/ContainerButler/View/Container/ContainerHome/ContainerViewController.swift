@@ -22,10 +22,11 @@ class ContainerViewController: BaseViewController {
         return animator
     }()
     fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
+        let taleView = UITableView(frame: .zero, style: UITableViewStyle.grouped)
         taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
+        taleView.backgroundColor =  UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.allowsSelection = false
+        taleView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         taleView.register(ContainerTableViewCell.self, forCellReuseIdentifier: "ContainerTableViewCell")
         taleView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
         return taleView
@@ -66,6 +67,11 @@ extension ContainerViewController {
     fileprivate func setupUI() {
         title = "货柜"
         view.addSubview(tableView)
+        let tableviewHeader = UIView()
+        tableviewHeader.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        tableviewHeader.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: 12)
+        tableView.tableHeaderView = tableviewHeader
+        tableView.tableFooterView = UIView()
         replenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
         view.addSubview(replenishmentView)
         tableView.snp.makeConstraints { (maker) in
@@ -139,12 +145,22 @@ extension ContainerViewController: UITableViewDelegate {
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view  = UIView()
+        view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
          let scence = containerVM.models.value[section]
         if let groups = scence.groups, !groups.isEmpty {
              return 92
         }
-         return 0.0
+         return 0.0001
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

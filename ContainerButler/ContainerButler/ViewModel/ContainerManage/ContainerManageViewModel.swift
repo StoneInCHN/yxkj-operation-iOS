@@ -21,11 +21,11 @@ class ContainerManageViewModel {
         reuestWaitSuppltScencelist()
     }
     /// 获取待补优享空间
-  fileprivate  func reuestWaitSuppltScencelist() -> Observable<[Scence]> {
+  fileprivate  func reuestWaitSuppltScencelist() {
         let param = ContainerSessionParam()
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
         let listObverable: Observable<BaseResponseObject<ScenceList>> = RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplySceneList, param: param))
-        return listObverable.map {$0.object?.groups ?? []}
+        listObverable.map {$0.object?.groups ?? []}.bind(to: scenceList).disposed(by: disposeBag)
     }
     
     /// 获取待补商品类别列表
