@@ -51,7 +51,7 @@ class UserSessionViewModel {
     }
     
     /// 获取验证码
-    func getLoginVerificationCode(_ param: UserSessionParam) {
+    func getVerificationCode(_ param: UserSessionParam) {
         let codeObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getVerificationCode, param: param), needToken: .true)
         codeObserable.subscribe(onNext: {_ in    }).disposed(by: disposeBag)
 

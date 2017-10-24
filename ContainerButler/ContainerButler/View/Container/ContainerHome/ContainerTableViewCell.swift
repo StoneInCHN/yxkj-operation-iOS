@@ -12,7 +12,8 @@ import RxSwift
 
 class ContainerTableViewCell: UITableViewCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
-    var itemdidSelected: ((String) -> Void)?
+    var itemdidSelected: ((Container) -> Void)?
+    fileprivate  var items = Variable([Container]())
     fileprivate lazy  var numberLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: 13)
@@ -26,10 +27,8 @@ class ContainerTableViewCell: UITableViewCell, ViewNameReusable {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = UIColor.white
-        collectionView.isPagingEnabled = true
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.bounces = false
         collectionView.register(ContainerCollectionCell.self, forCellWithReuseIdentifier: "ContainerCollectionCell")
         return collectionView
         }()
@@ -66,19 +65,20 @@ class ContainerTableViewCell: UITableViewCell, ViewNameReusable {
             maker.bottom.equalTo(bgView.snp.bottom)
         }
 
-         let items = Variable((0..<6).map { "\($0)" })
         items.asObservable()
             .bind(to: collectionView.rx.items) { (collectionView, row, element) in
                 let indexPath = IndexPath(row: row, section: 0)
                 let cell: ContainerCollectionCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-                cell.config("A货柜")
-                if row == items.value.count - 1 {
+                cell.config( (element.number ?? "0") + "货柜")
+                cell.badgeView.badgeValue = element.waitSupplyCount
+                if element.isCentralContainer {
                      cell.config("中控货", backgroundColor: UIColor(hex: 0xfbc205))
                 }
                 return cell
             }
             .disposed(by: disposeBag)
-           collectionView.rx.modelSelected(String.self)
+        
+           collectionView.rx.modelSelected(Container.self)
             .subscribe(onNext: { [weak self] (model) in
                 self?.itemdidSelected?(model)
             })
@@ -108,6 +108,11 @@ class ContainerTableViewCell: UITableViewCell, ViewNameReusable {
             height: 45.0.fitHeight
         )
         collectionView.collectionViewLayout = layout
+    }
+    
+    func config(_ containers: [Container], index: Int) {
+        items.value = containers
+        numberLabel.text = "\(index)" + "组"
     }
     
     required init?(coder aDecoder: NSCoder) {

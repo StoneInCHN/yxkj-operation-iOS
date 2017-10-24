@@ -20,11 +20,12 @@ enum RefreshStatus {
 }
 
 class ContainerViewModel {
-    fileprivate  let disposeBag: DisposeBag = DisposeBag()
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
     var models = Variable<[Scence]>([])
     var refreshStatus = Variable<RefreshStatus>(.none)
     var cellHeights: [[CGFloat]] = [[]]
+    fileprivate  let disposeBag: DisposeBag = DisposeBag()
+    fileprivate  var moreData: [Scence] = []
     fileprivate var param: ContainerHomeParam = ContainerHomeParam()
     
     init() {
@@ -44,10 +45,17 @@ class ContainerViewModel {
                         } else {
                             if !scences.isEmpty {
                                 self.models.value =  self.models.value + scences
+                                self.moreData.removeAll()
+                                self.moreData.append(contentsOf: scences)
                             } else {
                                 self.param.pageNo = self.param.pageNo - 1
+                                self.moreData.removeAll()
                             }
                         }
+                    }
+                    print("scence count:\(self.models.value.count)")
+                    for scence in self.models.value {
+                        print("container group count:\(scence.groups?.count ?? 0)")
                     }
                    self.cellHeights = self.caculateCellHeights()
                     break
@@ -57,7 +65,15 @@ class ContainerViewModel {
                     }
                     break
                 case .completed:
-                    self.refreshStatus.value = isReloadData ? .endHeaderRefresh : .endFooterRefresh
+                    if isReloadData {
+                        self.refreshStatus.value =  .endHeaderRefresh
+                    } else {
+                            if self.moreData.isEmpty {
+                                self.refreshStatus.value = .noMoreData
+                            } else {
+                                self.refreshStatus.value =  .endFooterRefresh
+                            }
+                    }
                     break
                 }
             }).disposed(by: self.disposeBag)
@@ -67,29 +83,34 @@ class ContainerViewModel {
     }
     
 fileprivate func caculateCellHeights() -> [[CGFloat]] {
-        var scenceHeights: [[CGFloat]] = [[]]
-         var heights = [CGFloat]()
-        models.value.forEach { scence in
-            var height: CGFloat = 0
-            let bgViewInset: CGFloat = 12
-            let labelTop: CGFloat = 12
-            let labelHeight: CGFloat = 16
-            let labelBottom: CGFloat = 20
-            scence.groups?.forEach { group in
-                let topInset: CGFloat = 12.0.fitHeight
-                let bottomInset: CGFloat = 22.0.fitHeight
-                let itemHeight: CGFloat = 45.0.fitHeight
-                if let conatiners = group.containers {
-                    let rows: Int = Int(ceil(Double (conatiners.count) / 3.0 ))
+    var scenceHeights: [[CGFloat]] = [[]]
+    for scence in models.value { // 每个场景
+        var sectionCellHeights: [CGFloat] = []
+        if let groups = scence.groups {
+            var cellHeight: CGFloat = 0.0
+            for group in groups {
+                // 开始算cell的高度
+                if let containers = group.containers {
+                    let rows: Int = Int(ceil(Double (containers.count) / 3.0 )) // 总行数
                     let minimumLineSpacing: CGFloat = 12.0.fitHeight
-                     height = (itemHeight + minimumLineSpacing) * CGFloat(rows)
+                     let itemHeight: CGFloat = 45.0.fitHeight
+                    let topInset: CGFloat = 12.0.fitHeight
+                    let bottomInset: CGFloat = 12.0.fitHeight
+                    let bgViewTopInset: CGFloat = 12
+                    let labelTop: CGFloat = 12
+                    let labelHeight: CGFloat = 16
+                    let labelBottom: CGFloat = 20
+                    cellHeight =  (itemHeight + minimumLineSpacing) * CGFloat(rows) + topInset + bottomInset + labelBottom + labelHeight + labelTop + bgViewTopInset
                 }
-                height = height + topInset + bottomInset
-                height = height + bgViewInset + labelTop + labelHeight + labelBottom
-                heights.append(height)
+                sectionCellHeights.append(cellHeight)
             }
-            scenceHeights.append(heights)
+            if !sectionCellHeights.isEmpty {
+                scenceHeights.append(sectionCellHeights)
+            }
         }
-       return scenceHeights
+    }
+    
+      print("scenceHeights.count:\(scenceHeights.filter {!$0.isEmpty})")
+       return scenceHeights.filter {!$0.isEmpty}
     }
 }

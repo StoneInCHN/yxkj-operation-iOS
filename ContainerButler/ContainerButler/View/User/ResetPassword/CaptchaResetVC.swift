@@ -237,8 +237,9 @@ extension CaptchaResetVC {
                     enterAction: {
                         let param = UserSessionParam()
                         param.phoneNum = self?.phoneNumTF.text
+                        param.verifyCodeType = .resetPassword
                         let chaptchVM = UserSessionViewModel()
-                        chaptchVM.getLoginVerificationCode(param)
+                        chaptchVM.getVerificationCode(param)
                         weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                 }, cancleAction: nil)
             })

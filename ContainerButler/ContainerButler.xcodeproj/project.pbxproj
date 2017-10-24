@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */; };
 		CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C17901F74126100A96A81 /* MessageHomeVC.swift */; };
+		CD11CF801F9E154D004A46D2 /* Test.json in Resources */ = {isa = PBXBuildFile; fileRef = CD11CF7F1F9E154D004A46D2 /* Test.json */; };
 		CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E2F1F736A05008A3092 /* PageContentView.swift */; };
 		CD1D1E361F736C4F008A3092 /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E351F736C4F008A3092 /* PageTitleView.swift */; };
 		CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1D1E3F1F73A19F008A3092 /* DZNPhotoEditorViewController.m */; };
@@ -191,6 +192,7 @@
 		CD0FEDE91F73A6E9003DF9F0 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		CD0FEDEA1F73A6E9003DF9F0 /* SnapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SnapKit.h; sourceTree = "<group>"; };
 		CD0FEDEB1F73A6E9003DF9F0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
+		CD11CF7F1F9E154D004A46D2 /* Test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Test.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		CD1D1E2F1F736A05008A3092 /* PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
 		CD1D1E351F736C4F008A3092 /* PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		CD1D1E3E1F73A19F008A3092 /* DZNPhotoEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZNPhotoEditorViewController.h; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				CD92CD1A1F973D0F0077C78F /* Counter */,
 				CD92CD171F973CD50077C78F /* Common */,
 				CD84469A1F70E82600D50722 /* UserCenter */,
+				CD11CF7F1F9E154D004A46D2 /* Test.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1149,6 +1152,7 @@
 				CDF727C51F7F7D9F00CDCC75 /* loginBtn_normal@3x.png in Resources */,
 				CD92CD1C1F973D1B0077C78F /* delete@3x.png in Resources */,
 				CD92CD191F973CE20077C78F /* navigation_back@3x.png in Resources */,
+				CD11CF801F9E154D004A46D2 /* Test.json in Resources */,
 				CDF727BA1F7F72CD00CDCC75 /* error_warning@3x.png in Resources */,
 				CDF727BB1F7F72CD00CDCC75 /* sms@3x.png in Resources */,
 				CDF727BC1F7F72CD00CDCC75 /* user_center_account@3x.png in Resources */,

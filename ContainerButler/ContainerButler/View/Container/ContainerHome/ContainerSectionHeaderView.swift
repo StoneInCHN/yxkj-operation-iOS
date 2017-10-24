@@ -11,8 +11,9 @@ import RxSwift
 import RxCocoa
 
 class ContainerSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable {
-    var listTapAction: (() -> Void)?
+    var listTapAction: ((Scence) -> Void)?
     let disposeBag: DisposeBag = DisposeBag()
+    fileprivate var model: Scence?
     fileprivate lazy  var numberLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: 11)
@@ -41,8 +42,10 @@ class ContainerSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable 
         let tap = UITapGestureRecognizer()
         descLabel.addGestureRecognizer(tap)
         tap.rx.event
-            .subscribe(onNext: { (_) in
-                self?.listTapAction?()
+            .subscribe(onNext: { [weak self](_) in
+                if let model = self?.model {
+                    self?.listTapAction?(model)
+                }
             }).disposed(by: disposeBag)
         return descLabel
     }()
@@ -80,6 +83,12 @@ class ContainerSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable 
             maker.centerY.equalTo(bgView.snp.centerY)
         }
         
+    }
+    
+    func config(_ model: Scence) {
+        numberLabel.text = "编号" + (model.number ?? "")
+        nameLabel.text = model.name ?? ""
+        self.model = model
     }
     
     required init?(coder aDecoder: NSCoder) {

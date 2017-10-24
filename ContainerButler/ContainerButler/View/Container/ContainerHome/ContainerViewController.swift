@@ -30,17 +30,11 @@ class ContainerViewController: BaseViewController {
         taleView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
         return taleView
     }()
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Container>>(
-        configureCell: { (_, tv, indexPath, element) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "ContainerTableViewCell")!
-            return cell
-     }
-    )
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupRX()
-        
         containerVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
             switch status {
             case .beingHeaderRefresh:
@@ -98,41 +92,64 @@ extension ContainerViewController {
     }
     
     fileprivate func setupRX() {
+        tableView.dataSource = self
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        
-        let items = containerVM.models.asObservable()
-        items
-            .bind(to: tableView.rx.items(cellIdentifier: "ContainerTableViewCell", cellType: ContainerTableViewCell.self)) { [weak self] (row, element, cell) in
-                cell.itemdidSelected = { [weak self] model in
-                    guard let weakSelf = self else { return }
-                    HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
-                        weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
-                    })
-                }
-            }
-            .disposed(by: disposeBag)
+        containerVM.models.asObservable().subscribe(onNext: { [weak self](_) in
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
     }
 }
 
+extension ContainerViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+          return containerVM.models.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return containerVM.models.value[section].groups?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ContainerTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        if let containers = containerVM.models.value[indexPath.section].groups?[indexPath.row].containers {
+            cell.config(containers, index: indexPath.row + 1)
+        }
+        cell.itemdidSelected = { [weak self] model in
+            guard let weakSelf = self else { return }
+            HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
+                weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
+            })
+        }
+        return cell
+    }
+}
 extension ContainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: ContainerSectionHeaderView = tableView.dequeueReusableHeaderFooter()
-        headerView.listTapAction = {
+        let scence = containerVM.models.value[section]
+        headerView.config(scence)
+        headerView.listTapAction = {[unowned self] model in
             
         }
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 92
+         let scence = containerVM.models.value[section]
+        if let groups = scence.groups, !groups.isEmpty {
+             return 92
+        }
+         return 0.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section < containerVM.cellHeights.count {
-            let cells = containerVM.cellHeights[indexPath.section]
-            return cells[indexPath.row]
+          let rowHeights = containerVM.cellHeights[indexPath.section]
+            if indexPath.row < rowHeights.count {
+                return rowHeights[indexPath.row]
+            }
         }
        return 0.0
     }

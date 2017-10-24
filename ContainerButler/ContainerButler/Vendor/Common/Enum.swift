@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum CaptchaCodeType: String {
+    case login = "login"
+    case resetPassword = "resetPwd"
+}
+
 enum StatusType: String {
     case loginInValid = "1003201"
     case error404 = "-1011"

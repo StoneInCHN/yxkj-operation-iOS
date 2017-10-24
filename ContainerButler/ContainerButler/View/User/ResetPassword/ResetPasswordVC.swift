@@ -226,7 +226,13 @@ extension ResetPasswordVC {
         enterBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let weakSelf = self else {    return      }
-                weakSelf.navigationController?.popToRootViewController(animated: true)
+                let restVM = UserSessionViewModel()
+                let param = UserSessionParam()
+                param.phoneNum = weakSelf.phoneNumber
+                param.newPassword = weakSelf.pwdTF.text
+                restVM.handle(with: .resetPasswod(param)).subscribe(onNext: { URLResponse in
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }).disposed(by: weakSelf.disposeBag)
             })
             .disposed(by: disposeBag)
     }
