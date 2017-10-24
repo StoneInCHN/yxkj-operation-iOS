@@ -23,6 +23,9 @@
 		CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD751F7257CA00902F91 /* YBRectConst.m */; };
 		CD3BAD7D1F72616300902F91 /* PopDownAnimationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */; };
 		CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */; };
+		CD3CDCD71F9EE45E00E22DEC /* CenteralContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCD61F9EE45E00E22DEC /* CenteralContainerVC.swift */; };
+		CD3CDCDA1F9EE8BE00E22DEC /* NotReplenishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */; };
+		CD3CDCDD1F9EEABD00E22DEC /* ContainerManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3CDCDC1F9EEABD00E22DEC /* ContainerManage.swift */; };
 		CD44DF771F99E5D200539122 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF761F99E5D200539122 /* UserInfo.swift */; };
 		CD44DF7A1F99FB0900539122 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF791F99FB0900539122 /* Container.swift */; };
 		CD44DF7C1F9A001200539122 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF7B1F9A001200539122 /* Transform.swift */; };
@@ -213,6 +216,9 @@
 		CD3BAD751F7257CA00902F91 /* YBRectConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		CD3BAD7C1F72616300902F91 /* PopDownAnimationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDownAnimationVC.swift; sourceTree = "<group>"; };
 		CD3BAD801F72700C00902F91 /* TransmationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmationAnimator.swift; sourceTree = "<group>"; };
+		CD3CDCD61F9EE45E00E22DEC /* CenteralContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteralContainerVC.swift; sourceTree = "<group>"; };
+		CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotReplenishViewModel.swift; path = ContainerButler/ViewModel/NotReplenishViewModel.swift; sourceTree = SOURCE_ROOT; };
+		CD3CDCDC1F9EEABD00E22DEC /* ContainerManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManage.swift; sourceTree = "<group>"; };
 		CD44DF761F99E5D200539122 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		CD44DF791F99FB0900539122 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		CD44DF7B1F9A001200539122 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
@@ -625,6 +631,22 @@
 			path = Aniamations;
 			sourceTree = "<group>";
 		};
+		CD3CDCD81F9EE86900E22DEC /* ContainerManage */ = {
+			isa = PBXGroup;
+			children = (
+				CD3CDCD91F9EE8BE00E22DEC /* NotReplenishViewModel.swift */,
+			);
+			path = ContainerManage;
+			sourceTree = "<group>";
+		};
+		CD3CDCDB1F9EEAAB00E22DEC /* ContainerManage */ = {
+			isa = PBXGroup;
+			children = (
+				CD3CDCDC1F9EEABD00E22DEC /* ContainerManage.swift */,
+			);
+			path = ContainerManage;
+			sourceTree = "<group>";
+		};
 		CD44DF781F99FAB900539122 /* Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +716,7 @@
 		CD69C4721F66888D00623B91 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CD3CDCD81F9EE86900E22DEC /* ContainerManage */,
 				CDE2029B1F71186800CB0145 /* Container */,
 				CD8DA7C31F95D69500C5C010 /* User */,
 			);
@@ -802,6 +825,7 @@
 				CD44DF7B1F9A001200539122 /* Transform.swift */,
 				CD844C7D1F70E8F900D50722 /* Model.swift */,
 				CD844C7E1F70E8F900D50722 /* ResponseObject.swift */,
+				CD3CDCDB1F9EEAAB00E22DEC /* ContainerManage */,
 				CD44DF781F99FAB900539122 /* Container */,
 				CD319ED31F95E89D007BF050 /* User */,
 			);
@@ -986,6 +1010,7 @@
 				CDDBD28C1F95004A004F5526 /* GoodListCell.swift */,
 				CDDBD28D1F95004A004F5526 /* ContainerManageVC.swift */,
 				CD92CD151F972F0F0077C78F /* ReplenishedDoneView.swift */,
+				CD3CDCD61F9EE45E00E22DEC /* CenteralContainerVC.swift */,
 			);
 			path = ContainerManage;
 			sourceTree = "<group>";
@@ -1295,6 +1320,7 @@
 				CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */,
 				CDD0D5001F9D9C0B0056B6F1 /* NSAttributedString+YYText.m in Sources */,
 				CD44DF7A1F99FB0900539122 /* Container.swift in Sources */,
+				CD3CDCDD1F9EEABD00E22DEC /* ContainerManage.swift in Sources */,
 				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */,
 				CDD0D4FD1F9D9C0B0056B6F1 /* YYTextRubyAnnotation.m in Sources */,
@@ -1328,6 +1354,7 @@
 				CDD0D4F81F9D9C0B0056B6F1 /* YYLabel.m in Sources */,
 				CD844C821F70F23A00D50722 /* CaptchaLoginVC.swift in Sources */,
 				CD844C801F70E8F900D50722 /* ResponseObject.swift in Sources */,
+				CD3CDCDA1F9EE8BE00E22DEC /* NotReplenishViewModel.swift in Sources */,
 				CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */,
 				CD1D1E301F736A05008A3092 /* PageContentView.swift in Sources */,
 				CD78F0921F67C66E00D50B7B /* NavigationController.swift in Sources */,
@@ -1357,6 +1384,7 @@
 				CDD0D4F21F9D9C0B0056B6F1 /* YYTextInput.m in Sources */,
 				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
 				CDD0D5011F9D9C0B0056B6F1 /* UIPasteboard+YYText.m in Sources */,
+				CD3CDCD71F9EE45E00E22DEC /* CenteralContainerVC.swift in Sources */,
 				CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */,
 				CDF6B5101F68D136000A1915 /* Enum.swift in Sources */,
 				CD69C47A1F668EDF00623B91 /* Protocol.swift in Sources */,

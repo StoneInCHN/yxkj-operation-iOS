@@ -118,6 +118,9 @@ extension ContainerViewController: UITableViewDataSource {
         }
         cell.itemdidSelected = { [weak self] model in
             guard let weakSelf = self else { return }
+            if model.isCentralContainer {
+               weakSelf.navigationController?.pushViewController(CenteralContainerVC(), animated: true)
+            }
             HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
                 weakSelf.navigationController?.pushViewController(ContainerManageVC(), animated: true)
             })

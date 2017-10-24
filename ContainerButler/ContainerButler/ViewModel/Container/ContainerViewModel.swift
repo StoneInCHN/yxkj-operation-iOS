@@ -26,7 +26,13 @@ class ContainerViewModel {
     var cellHeights: [[CGFloat]] = [[]]
     fileprivate  let disposeBag: DisposeBag = DisposeBag()
     fileprivate  var moreData: [Scence] = []
-    fileprivate var param: ContainerHomeParam = ContainerHomeParam()
+    fileprivate lazy var param: ContainerSessionParam = {
+        let param = ContainerSessionParam()
+        param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId ?? -1
+        param.pageNo = 1
+        param.pageSize = 20
+        return param
+    }()
     
     init() {
         requestList()
@@ -34,8 +40,8 @@ class ContainerViewModel {
     
    fileprivate func requestList() {
         requestCommand.subscribe(onNext: { [unowned self](isReloadData) in
-            self.param.pageNo = isReloadData ? 1: self.param.pageNo + 1
-            let homerObservable: Observable<ContainerHomeResponse> =  RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplyState, param: self.param), needToken: .true)
+            self.param.pageNo = isReloadData ? 1: (self.param.pageNo ?? 1) + 1
+            let homerObservable: Observable< BaseResponseObject<ContainerHome>> =  RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplyState, param: self.param), needToken: .true)
             homerObservable.subscribe({ (event) in
                 switch event {
                 case  .next( let response):
@@ -48,7 +54,7 @@ class ContainerViewModel {
                                 self.moreData.removeAll()
                                 self.moreData.append(contentsOf: scences)
                             } else {
-                                self.param.pageNo = self.param.pageNo - 1
+                                self.param.pageNo = (self.param.pageNo ?? 2) - 1
                                 self.moreData.removeAll()
                             }
                         }
@@ -94,13 +100,13 @@ fileprivate func caculateCellHeights() -> [[CGFloat]] {
                     let rows: Int = Int(ceil(Double (containers.count) / 3.0 )) // 总行数
                     let minimumLineSpacing: CGFloat = 12.0.fitHeight
                      let itemHeight: CGFloat = 45.0.fitHeight
+                    let bottomInset: CGFloat = 22.0.fitHeight
                     let topInset: CGFloat = 12.0.fitHeight
-                    let bottomInset: CGFloat = 12.0.fitHeight
-                    let bgViewTopInset: CGFloat = 12
+                    let bgViewBottomInset: CGFloat = 12
                     let labelTop: CGFloat = 12
                     let labelHeight: CGFloat = 16
                     let labelBottom: CGFloat = 20
-                    cellHeight =  (itemHeight + minimumLineSpacing) * CGFloat(rows) + topInset + bottomInset + labelBottom + labelHeight + labelTop + bgViewTopInset
+                    cellHeight =  (itemHeight + minimumLineSpacing) * CGFloat(rows) + bottomInset + topInset + labelBottom + labelHeight + labelTop + bgViewBottomInset
                 }
                 sectionCellHeights.append(cellHeight)
             }

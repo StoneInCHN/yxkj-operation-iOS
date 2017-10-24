@@ -76,11 +76,30 @@ enum UserSession: UserEndPointProtocol {
 enum ContainerSession: UserEndPointProtocol {
     // 获取货柜待补情况
     case getWaitSupplyState
-    
+   //  获取待补优享空间
+    case getWaitSupplySceneList
+    // 获取待补商品类别列表
+    case getWaitSupplyGoodsCategoryList
+    // 获取待补商品清单
+    case getWaitSupplyGoodsList
+    // 获取待补商品详情
+    case getWaitSupplyGoodsDetails
+    // 获取货柜待补商品
+    case getWaitSupplyContainerGoodsList
     var endpoint: String {
         switch self {
         case .getWaitSupplyState:
             return "/getWaitSupplyState"
+        case .getWaitSupplySceneList:
+            return "/getWaitSupplySceneList"
+        case .getWaitSupplyGoodsCategoryList:
+            return "/getWaitSupplyGoodsCategoryList"
+        case .getWaitSupplyGoodsList:
+            return "/getWaitSupplyGoodsList"
+        case .getWaitSupplyGoodsDetails:
+            return "/getWaitSupplyGoodsDetails"
+        case .getWaitSupplyContainerGoodsList:
+            return "/getWaitSupplyContainerGoodsList"
         }
     }
 }
@@ -109,14 +128,22 @@ class UserSessionParam: Model {
     }
 }
 
-class ContainerHomeParam: Model {
-    var userId: Int64 = CoreDataManager.sharedInstance.getUserInfo()?.userId ?? -1
-    var pageNo: Int = 1
-    var pageSize: Int = 20
+class ContainerSessionParam: Model {
+    var userId: Int64?
+    var pageNo: Int?
+    var pageSize: Int?
+    var sceneSn: String?
+    var cateId: Int?
+    var goodSn: String?
+    var cntrId: String?
     
     override func mapping(map: Map) {
         userId <- map["userId"]
         pageNo <- map["pageNo"]
         pageSize <- map["pageSize"]
+        sceneSn <- map["sceneSn"]
+        cateId <- map["cateId"]
+        goodSn <- map["goodSn"]
+        cntrId <- map["cntrId"]
     }
 }
