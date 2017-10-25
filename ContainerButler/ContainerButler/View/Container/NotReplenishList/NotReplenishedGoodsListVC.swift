@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import pop
+import MJRefresh
 
 class NotReplenishedGoodsListVC: BaseViewController {
     fileprivate lazy var listVM: ContainerManageViewModel = ContainerManageViewModel()
@@ -18,6 +19,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
         descLabel.font = UIFont.sizeToFit(with: 14)
         descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
+        descLabel.text = "全部"
         return descLabel
     }()
     
@@ -68,10 +70,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
     }()
     fileprivate lazy  var doneBtn: UIButton = {
         let loginBtn = UIButton()
-        loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
-        loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
-        loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
+        loginBtn.setImage(UIImage(named: "complete_goods"), for: .normal)
         return loginBtn
     }()
     override func viewDidLoad() {
@@ -96,16 +95,14 @@ extension NotReplenishedGoodsListVC {
         view.addSubview(pageTitleView)
         view.addSubview(tableView)
         view.addSubview(doneBtn)
-        let line = UIView()
-        line.backgroundColor = UIColor(hex: 0xcccccc)
-        pageTitleView.addSubview(line)
+    
          pageTitleView.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
         notreplenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
         view.addSubview(notreplenishmentView)
         optiontableView.frame = CGRect(x: 0, y: -(view.bounds.height - 45), width: UIScreen.width, height: view.bounds.height - 45)
-        view.insertSubview(optiontableView, aboveSubview: tableView)
+        view.insertSubview(optiontableView, aboveSubview: doneBtn)
         
         optionChooseView.snp.makeConstraints { (maker) in
             maker.left.equalTo(0)
@@ -126,12 +123,6 @@ extension NotReplenishedGoodsListVC {
             maker.centerY.equalTo(optionChooseView.snp.centerY)
             maker.height.equalTo(36)
         }
-        line.snp.makeConstraints { (maker) in
-            maker.left.equalTo(0)
-            maker.right.equalTo(0)
-            maker.bottom.equalTo(0)
-            maker.height.equalTo(0.5)
-        }
         doneBtn.snp.makeConstraints {
             $0.right.equalTo(-15)
             $0.width.equalTo(48)
@@ -151,7 +142,7 @@ extension NotReplenishedGoodsListVC {
             self?.showOptionChooseView()
         })
         .disposed(by: disposeBag)
-        
+      
        let items =  listVM.scenceList.asObservable()
         items
             .bind(to: optiontableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { (row, element, cell) in
@@ -170,15 +161,54 @@ extension NotReplenishedGoodsListVC {
             .disposed(by: disposeBag)
         
         listVM.goodsCategory.asObservable()
-            .subscribe(onNext: { (list) in
+            .subscribe(onNext: {[weak self] (list) in
                 var titles = [String]()
                 for cate in list {
                     if let title = cate.cateName {
                         titles.append(title)
                     }
                 }
-                self.pageTitleView.setTitles(titles)
+                self?.pageTitleView.setTitles(titles)
+                let line0 = UIView()
+                line0.backgroundColor = UIColor(hex: 0xcccccc)
+                line0.frame = CGRect(x: 0, y: 44 - 0.5, width: UIScreen.main.bounds.width, height: 0.5)
+                if let weakSelf = self {
+                    weakSelf.pageTitleView.addSubview(line0)
+                }
             }).disposed(by: disposeBag)
+        
+        listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+
+        listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .beingHeaderRefresh:
+                self?.tableView.mj_header.beginRefreshing()
+            case .endHeaderRefresh:
+                self?.tableView.mj_header.endRefreshing()
+            case .beingFooterRefresh:
+                self?.tableView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                self?.tableView.mj_footer.endRefreshing()
+            case .noMoreData:
+                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+            default:
+                break
+            }
+        }).disposed(by: disposeBag)
+
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[weak self] in
+            if let weakSelf = self {
+                weakSelf.listVM.requestCommand.onNext(true)
+            }
+        })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
+            if let weakSelf = self {
+                weakSelf.listVM.requestCommand.onNext(false)
+            }
+        })
+        listVM.requestCommand.onNext(true)
     }
     
     private func showOptionChooseView() {
@@ -208,7 +238,7 @@ extension NotReplenishedGoodsListVC: UITableViewDelegate {
 
 extension NotReplenishedGoodsListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return listVM.models.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

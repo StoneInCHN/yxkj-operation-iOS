@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import MGSwipeTableCell
+import Kingfisher
 
 class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
@@ -31,16 +32,6 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     }()
     fileprivate lazy  var remainReplenishLabel: YYLabel = {
         let descLabel = YYLabel()
-        var text = NSMutableAttributedString()
-        let text0 = NSMutableAttributedString(string: "剩余数量:")
-        text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
-        text0.yy_color = UIColor(hex: 0x666666)
-        let text1 = NSMutableAttributedString(string: "22")
-        text1.yy_font = UIFont.boldSystemFont(ofSize: 16)
-        text1.yy_color = UIColor(hex: 0x30C7AC)
-        text.append(text0)
-        text.append(text1)
-        descLabel.attributedText = text
         return descLabel
     }()
     fileprivate lazy  var nameLabel: UILabel = {
@@ -166,6 +157,33 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
 }
 
 extension GoodListCell {
+    func configGoods(_ goods: Goods) {
+        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""))
+        nameLabel.text = goods.goodsName
+        numberLabel.text = goods.goodsSn
+        let text = NSMutableAttributedString()
+        let text0 = NSMutableAttributedString(string: "剩余数量:")
+        text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text0.yy_color = UIColor(hex: 0x666666)
+        let text1 = NSMutableAttributedString(string: "22")
+        text1.yy_font = UIFont.boldSystemFont(ofSize: 16)
+        text1.yy_color = UIColor(hex: 0x30C7AC)
+        text.append(text0)
+        text.append(text1)
+        remainReplenishLabel.attributedText = text
+        
+        let text2 = NSMutableAttributedString()
+        let text3 = NSMutableAttributedString(string: "待补货数:")
+        text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text3.yy_color = UIColor(hex: 0x666666)
+        let text4 = NSMutableAttributedString(string: "\(goods.waitSupplyCount)")
+        text4.yy_font = UIFont.boldSystemFont(ofSize: 16)
+        text4.yy_color = UIColor(hex: CustomKey.Color.mainOrangeColor)
+        text2.append(text3)
+        text2.append(text4)
+        descLabel.attributedText = text2
+    }
+    
     func showCover(_ count: Int) {
         coverView.isHidden = false
     }

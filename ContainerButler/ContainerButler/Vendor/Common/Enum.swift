@@ -8,6 +8,15 @@
 
 import Foundation
 
+enum RefreshStatus {
+    case none
+    case beingHeaderRefresh
+    case endHeaderRefresh
+    case beingFooterRefresh
+    case endFooterRefresh
+    case noMoreData
+}
+
 enum CaptchaCodeType: String {
     case login = "login"
     case resetPassword = "resetPwd"

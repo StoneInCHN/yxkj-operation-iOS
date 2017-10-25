@@ -36,30 +36,6 @@ class ContainerViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupRX()
-        containerVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
-            switch status {
-            case .beingHeaderRefresh:
-                self?.tableView.mj_header.beginRefreshing()
-            case .endHeaderRefresh:
-                self?.tableView.mj_header.endRefreshing()
-            case .beingFooterRefresh:
-                self?.tableView.mj_footer.beginRefreshing()
-            case .endFooterRefresh:
-                self?.tableView.mj_footer.endRefreshing()
-            case .noMoreData:
-                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
-            default:
-                break
-            }
-        }).disposed(by: disposeBag)
-        
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[unowned self] in
-            self.containerVM.requestCommand.onNext(true)
-        })
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            self.containerVM.requestCommand.onNext(false)
-        })
-        self.containerVM.requestCommand.onNext(true)
     }
 }
 
@@ -102,9 +78,35 @@ extension ContainerViewController {
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+        
         containerVM.models.asObservable().subscribe(onNext: { [weak self](_) in
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)
+        
+        containerVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .beingHeaderRefresh:
+                self?.tableView.mj_header.beginRefreshing()
+            case .endHeaderRefresh:
+                self?.tableView.mj_header.endRefreshing()
+            case .beingFooterRefresh:
+                self?.tableView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                self?.tableView.mj_footer.endRefreshing()
+            case .noMoreData:
+                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+            default:
+                break
+            }
+        }).disposed(by: disposeBag)
+        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[unowned self] in
+            self.containerVM.requestCommand.onNext(true)
+        })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.containerVM.requestCommand.onNext(false)
+        })
+        self.containerVM.requestCommand.onNext(true)
     }
 }
 
@@ -154,13 +156,13 @@ extension ContainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
          let scence = containerVM.models.value[section]
         if let groups = scence.groups, !groups.isEmpty {
-             return 92
+             return 72
         }
-         return 0.0001
+         return 0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
+        return 0.0001
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

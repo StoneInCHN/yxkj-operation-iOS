@@ -10,18 +10,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum RefreshStatus {
-    case none
-    case beingHeaderRefresh
-    case endHeaderRefresh
-    case beingFooterRefresh
-    case endFooterRefresh
-    case noMoreData
-}
+
 
 class ContainerViewModel {
+   var models = Variable<[Scence]>([])
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
-    var models = Variable<[Scence]>([])
     var refreshStatus = Variable<RefreshStatus>(.none)
     var cellHeights: [[CGFloat]] = [[]]
     fileprivate  let disposeBag: DisposeBag = DisposeBag()
@@ -68,6 +61,7 @@ class ContainerViewModel {
                 case .error( let error):
                     if let error = error as? AppError {
                         HUD.showError(error.message)
+                        self.refreshStatus.value = isReloadData ? .endHeaderRefresh: .endFooterRefresh
                     }
                     break
                 case .completed:

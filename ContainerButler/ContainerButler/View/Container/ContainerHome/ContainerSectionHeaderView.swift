@@ -67,7 +67,7 @@ class ContainerSectionHeaderView: UITableViewHeaderFooterView, ViewNameReusable 
         bgView.addSubview(listLabel)
         bgView.snp.makeConstraints { (maker) in
             maker.top.equalTo(0)
-            maker.left.top.equalTo(12)
+            maker.left.equalTo(12)
             maker.right.equalTo(-12)
             maker.bottom.equalTo(-12)
         }
