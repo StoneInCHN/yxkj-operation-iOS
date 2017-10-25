@@ -157,6 +157,13 @@ extension NotReplenishedGoodsListVC {
             .subscribe(onNext: {[weak self] value in
                 self?.addressLabel.text = value.name
                 self?.hideOptionChooseView()
+                guard let weakSelf = self else {
+                    return
+                }
+                let selectedScence = value
+                weakSelf.listVM.param.sceneSn = selectedScence.number
+                weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
+                weakSelf.listVM.refreshStatus.value = .endFooterRefresh
             })
             .disposed(by: disposeBag)
         
@@ -208,7 +215,16 @@ extension NotReplenishedGoodsListVC {
                 weakSelf.listVM.requestCommand.onNext(false)
             }
         })
-        listVM.requestCommand.onNext(true)
+        pageTitleView.titleTapAction = {[weak self]index in
+            guard let weakSelf = self else {
+                return
+            }
+            let selectedCate = weakSelf.listVM.goodsCategory.value[index]
+            weakSelf.listVM.param.cateId = selectedCate.cateId
+            weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
+             weakSelf.listVM.refreshStatus.value = .endFooterRefresh
+        }
+        weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
     }
     
     private func showOptionChooseView() {
@@ -243,6 +259,9 @@ extension NotReplenishedGoodsListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        if indexPath.row < listVM.models.value.count {
+            cell.configWaitSupplyGoods(listVM.models.value[indexPath.row])
+        }
         return cell
     }
 }

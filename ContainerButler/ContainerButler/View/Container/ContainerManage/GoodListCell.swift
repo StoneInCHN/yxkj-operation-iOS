@@ -121,17 +121,17 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
             maker.left.equalTo(nameLabel.snp.left)
         }
         
-        remainReplenishLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(numberLabel.snp.bottom).offset(12)
-            maker.left.equalTo(nameLabel.snp.left)
-             maker.bottom.equalTo(bgView.snp.bottom).offset(-10)
+        notReplenishLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(numberLabel.snp.bottom).offset(10)
+            maker.right.equalTo(-12)
+            
         }
         
-        notReplenishLabel.snp.makeConstraints { (maker) in
-            maker.centerY.equalTo(remainReplenishLabel.snp.centerY)
-            maker.right.equalTo(-12)
-    
+        remainReplenishLabel.snp.makeConstraints { (maker) in
+            maker.centerY.equalTo(notReplenishLabel.snp.centerY)
+            maker.left.equalTo(nameLabel.snp.left)
         }
+        
         coverView.snp.makeConstraints {
             $0.left.equalTo(bgView.snp.left)
             $0.right.equalTo(bgView.snp.right)
@@ -143,7 +143,7 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
             $0.centerY.equalTo(bgView.snp.centerY)
         }
          descLabel.sizeToFit()
-        coverView.isHidden = true
+         coverView.isHidden = true
     }
     
     override func layoutSubviews() {
@@ -157,10 +157,12 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
 }
 
 extension GoodListCell {
-    func configGoods(_ goods: Goods) {
-        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""))
+    func configWaitSupplyGoods(_ goods: Goods) { // drink@2x
+        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"))
         nameLabel.text = goods.goodsName
-        numberLabel.text = goods.goodsSn
+        numberLabel.textColor = UIColor(hex: 0x999999)
+        numberLabel.font = UIFont.systemFont(ofSize: 12)
+        numberLabel.text = "商品条码：" + (goods.goodsSn ?? "")
         let text = NSMutableAttributedString()
         let text0 = NSMutableAttributedString(string: "剩余数量:")
         text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
@@ -173,7 +175,7 @@ extension GoodListCell {
         remainReplenishLabel.attributedText = text
         
         let text2 = NSMutableAttributedString()
-        let text3 = NSMutableAttributedString(string: "待补货数:")
+        let text3 = NSMutableAttributedString(string: "待补货数:  ")
         text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
         text3.yy_color = UIColor(hex: 0x666666)
         let text4 = NSMutableAttributedString(string: "\(goods.waitSupplyCount)")
@@ -181,7 +183,8 @@ extension GoodListCell {
         text4.yy_color = UIColor(hex: CustomKey.Color.mainOrangeColor)
         text2.append(text3)
         text2.append(text4)
-        descLabel.attributedText = text2
+        remainReplenishLabel.attributedText = text2
+        notReplenishLabel.isHidden = true
     }
     
     func showCover(_ count: Int) {

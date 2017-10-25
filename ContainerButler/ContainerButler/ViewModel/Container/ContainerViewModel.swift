@@ -10,8 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
-
 class ContainerViewModel {
    var models = Variable<[Scence]>([])
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()

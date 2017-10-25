@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ContainerManageViewModel {
-     var models = Variable<[Goods]>([])
+    var models = Variable<[Goods]>([])
     var goodsCategory = Variable([GoodsCategory]())
     var scenceList = Variable([Scence]())
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
@@ -39,7 +39,6 @@ class ContainerManageViewModel {
             .map { response -> [Scence] in
                 let whole = Scence()
                 whole.name = "全部"
-                whole.number = "0"
                 if var groups = response.object?.groups {
                       groups.insert(whole, at: 0)
                     return groups

@@ -34,7 +34,7 @@ class WaitSupplyGoodsList: Model {
 }
 
 class GoodsCategory: Model {
-    var cateId: Int = 0
+    var cateId: Int?
     var cateName: String?
     
     override func mapping(map: Map) {
