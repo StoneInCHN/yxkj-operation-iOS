@@ -160,7 +160,7 @@ extension NotReplenishedGoodsListVC {
                 }
                 let selectedScence = value
                 weakSelf.listVM.param.sceneSn = selectedScence.number
-                weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
+                weakSelf.listVM.requestCommand.onNext(true)
                 weakSelf.listVM.refreshStatus.value = .endFooterRefresh
             })
             .disposed(by: disposeBag)
@@ -188,10 +188,6 @@ extension NotReplenishedGoodsListVC {
 
         listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
             switch status {
-            case .beingHeaderRefresh:
-                self?.tableView.mj_header.beginRefreshing()
-            case .endHeaderRefresh:
-                self?.tableView.mj_header.endRefreshing()
             case .beingFooterRefresh:
                 self?.tableView.mj_footer.beginRefreshing()
             case .endFooterRefresh:
@@ -203,11 +199,6 @@ extension NotReplenishedGoodsListVC {
             }
         }).disposed(by: disposeBag)
 
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[weak self] in
-            if let weakSelf = self {
-                weakSelf.listVM.requestCommand.onNext(true)
-            }
-        })
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
             if let weakSelf = self {
                 weakSelf.listVM.requestCommand.onNext(false)
@@ -219,10 +210,10 @@ extension NotReplenishedGoodsListVC {
             }
             let selectedCate = weakSelf.listVM.goodsCategory.value[index]
             weakSelf.listVM.param.cateId = selectedCate.cateId
-            weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
+            weakSelf.listVM.requestCommand.onNext(true)
              weakSelf.listVM.refreshStatus.value = .endFooterRefresh
         }
-        listVM.refreshStatus.value = .beingHeaderRefresh
+        listVM.requestCommand.onNext(true)
     }
     
     private func showOptionChooseView() {

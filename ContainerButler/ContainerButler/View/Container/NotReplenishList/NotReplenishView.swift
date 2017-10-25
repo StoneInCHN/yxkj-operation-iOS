@@ -17,7 +17,7 @@ class NotReplenishView: UIView {
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     fileprivate lazy var pageControl: UIPageControl = {
         let view = UIPageControl()
-        view.currentPageIndicatorTintColor =  UIColor(hex: 0x30C7AC)
+        view.currentPageIndicatorTintColor =  UIColor(hex: 0x989898)
         view.pageIndicatorTintColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
         view.numberOfPages = 1
         return view

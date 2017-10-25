@@ -156,23 +156,12 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
 }
 
 extension GoodListCell {
-    func configWaitSupplyGoods(_ goods: Goods) { // drink@2x
-        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"))
+    func configWaitSupplyGoods(_ goods: Goods) {
+        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
         nameLabel.text = goods.goodsName
         numberLabel.textColor = UIColor(hex: 0x999999)
         numberLabel.font = UIFont.systemFont(ofSize: 12)
         numberLabel.text = "商品条码：" + (goods.goodsSn ?? "")
-        let text = NSMutableAttributedString()
-        let text0 = NSMutableAttributedString(string: "剩余数量:")
-        text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
-        text0.yy_color = UIColor(hex: 0x666666)
-        let text1 = NSMutableAttributedString(string: "22")
-        text1.yy_font = UIFont.boldSystemFont(ofSize: 16)
-        text1.yy_color = UIColor(hex: 0x30C7AC)
-        text.append(text0)
-        text.append(text1)
-        remainReplenishLabel.attributedText = text
-        
         let text2 = NSMutableAttributedString()
         let text3 = NSMutableAttributedString(string: "待补货数:  ")
         text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
