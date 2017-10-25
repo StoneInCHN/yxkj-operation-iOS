@@ -46,6 +46,7 @@ enum Router: URLRequestConvertible {
             let result: (path: String, parameters: [String: Any]?) = (path.URL(), params)
             let URL = Foundation.URL(string: result.path)!
             var URLRequest = Foundation.URLRequest(url: URL)
+            URLRequest.timeoutInterval = 10
             URLRequest.httpMethod = path.method.rawValue
             if path.method == .post {
                 return try JSONEncoding.default.encode(URLRequest, with: result.parameters).urlRequest!

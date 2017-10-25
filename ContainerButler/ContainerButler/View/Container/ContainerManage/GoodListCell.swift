@@ -4,7 +4,7 @@
 //
 //  Created by lieon on 2017/9/21.
 //  Copyright © 2017年 QuanChengShouWei. All rights reserved.
-//
+// swiftlint:disable empty_count
 
 import UIKit
 import RxCocoa
@@ -73,7 +73,6 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     
     fileprivate lazy var badgeView: GIBadgeView = {
         let badgeView = GIBadgeView()
-        badgeView.badgeValue = 50
         badgeView.rightOffset = 10
         badgeView.backgroundColor = UIColor.lightGray
         return badgeView
@@ -187,8 +186,15 @@ extension GoodListCell {
         notReplenishLabel.isHidden = true
     }
     
-    func showCover(_ count: Int) {
+    func showCover(_ count: Int, text: String? = "已补货") {
+        descLabel.text = text
         coverView.isHidden = false
+        if count <= 0 {
+           badgeView.isHidden = true
+        } else {
+            badgeView.isHidden = false
+            badgeView.badgeValue = count
+        }
     }
     
     func hiddenCover() {

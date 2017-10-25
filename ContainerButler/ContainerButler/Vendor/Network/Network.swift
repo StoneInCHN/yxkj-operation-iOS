@@ -134,7 +134,7 @@ class ContainerSessionParam: Model {
     var pageSize: Int?
     var sceneSn: String?
     var cateId: Int?
-    var goodSn: String?
+    var goodsSn: String?
     var cntrId: String?
     
     override func mapping(map: Map) {
@@ -143,7 +143,7 @@ class ContainerSessionParam: Model {
         pageSize <- map["pageSize"]
         sceneSn <- map["sceneSn"]
         cateId <- map["cateId"]
-        goodSn <- map["goodSn"]
+        goodsSn <- map["goodsSn"]
         cntrId <- map["cntrId"]
     }
 }

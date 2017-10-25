@@ -49,6 +49,7 @@ class Goods: Model {
     var goodsPic: String?
     var waitSupplyCount: Int = 0
     var channelSn: String?
+    var isSupplied: Bool = false
     
     override func mapping(map: Map) {
         goodsSn <- map["goodsSn"]
@@ -74,7 +75,7 @@ class GoodsDetail: Model {
 }
 
 class WaitSupplySence: Model {
-    var waitSupplyCount: String?
+    var waitSupplyCount: Int = 0
     var sceneName: String?
     
     override func mapping(map: Map) {

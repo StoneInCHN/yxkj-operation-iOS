@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import pop
 import MJRefresh
+import MGSwipeTableCell
 
 class NotReplenishedGoodsListVC: BaseViewController {
     fileprivate lazy var listVM: ContainerManageViewModel = ContainerManageViewModel()
@@ -40,9 +41,6 @@ class NotReplenishedGoodsListVC: BaseViewController {
     
     lazy var notreplenishmentView: NotReplenishView = {
         let animator = NotReplenishView()
-        animator.replenishAction = { [weak self] in
-            
-        }
         return animator
     }()
     
@@ -100,7 +98,7 @@ extension NotReplenishedGoodsListVC {
         tableView.dataSource = self
         tableView.delegate = self
         notreplenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-        view.addSubview(notreplenishmentView)
+         UIApplication.shared.keyWindow?.addSubview(notreplenishmentView)
         optiontableView.frame = CGRect(x: 0, y: -(view.bounds.height - 45), width: UIScreen.width, height: view.bounds.height - 45)
         view.insertSubview(optiontableView, aboveSubview: doneBtn)
         
@@ -224,7 +222,7 @@ extension NotReplenishedGoodsListVC {
             weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
              weakSelf.listVM.refreshStatus.value = .endFooterRefresh
         }
-        weakSelf.listVM.refreshStatus.value = .beingHeaderRefresh
+        listVM.refreshStatus.value = .beingHeaderRefresh
     }
     
     private func showOptionChooseView() {
@@ -245,7 +243,33 @@ extension NotReplenishedGoodsListVC {
 
 extension NotReplenishedGoodsListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         notreplenishmentView.show()
+        let param = ContainerSessionParam()
+        param.goodsSn = listVM.models.value[indexPath.row].goodsSn
+        HUD.showLoading()
+        listVM.requestWaitSupplyGoodsDetail(param)
+            .subscribe(onNext: {[weak self] (detail) in
+               self?.notreplenishmentView.config(detail)
+               self?.notreplenishmentView.show()
+            }, onError: { (error) in
+                if let error = error as? AppError {
+                    HUD.hideLoading()
+                    HUD.showError(error.message)
+                }
+            }, onCompleted: {
+                 HUD.hideLoading()
+            })
+        .disposed(by: disposeBag)
+        notreplenishmentView.replenishAction = { [weak self] count in
+            guard let weakSelf = self else {
+                return
+            }
+            let selectedGoods = weakSelf.listVM.models.value[indexPath.row]
+            selectedGoods.waitSupplyCount =  selectedGoods.waitSupplyCount - count
+            selectedGoods.isSupplied = true
+            weakSelf.listVM.models.value.remove(at: indexPath.row)
+            weakSelf.listVM.models.value.append(selectedGoods)
+            tableView.reloadData()
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 107
@@ -259,9 +283,33 @@ extension NotReplenishedGoodsListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.delegate = self
         if indexPath.row < listVM.models.value.count {
             cell.configWaitSupplyGoods(listVM.models.value[indexPath.row])
         }
+        let goods = listVM.models.value[indexPath.row]
+        if goods.isSupplied {
+            cell.showCover(goods.waitSupplyCount, text: "完成取货")
+        } else {
+            cell.hiddenCover()
+        }
         return cell
+    }
+}
+
+extension NotReplenishedGoodsListVC: MGSwipeTableCellDelegate {
+    func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
+        guard let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell)  else {
+            return nil
+        }
+        if direction == .rightToLeft {
+            let doneBtn = UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
+            doneBtn[0].rx.tap
+                .subscribe(onNext: { [weak self] _ in
+                    
+                }).disposed(by: disposeBag)
+            return doneBtn
+        }
+        return nil
     }
 }
