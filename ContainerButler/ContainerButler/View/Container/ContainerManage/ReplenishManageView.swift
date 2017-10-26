@@ -178,3 +178,13 @@ extension ReplenishManageView {
         }
     }
 }
+
+extension ReplenishManageView {
+    func config(_ goods: Goods) {
+        nameLabel.text = goods.goodsName
+        numberLabel.text = "商品条码: " + (goods.goodsSn ?? "000")
+        realDeliveryGoodsInputTF.text = "\(goods.waitSupplyCount)"
+        totalNotReplenishLabel.text = "总待补数: " + "\(goods.waitSupplyCount)"
+  
+    }
+}

@@ -77,12 +77,12 @@ class NotReplenishedGoodsListVC: BaseViewController {
         loginBtn.setImage(UIImage(named: "complete_goods"), for: .normal)
         return loginBtn
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupRX()
     }
-
 }
 
 extension NotReplenishedGoodsListVC {
@@ -104,7 +104,7 @@ extension NotReplenishedGoodsListVC {
         tableView.dataSource = self
         tableView.delegate = self
         notreplenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-         UIApplication.shared.keyWindow?.addSubview(notreplenishmentView)
+        UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(notreplenishmentView)
         optiontableView.frame = CGRect(x: 0, y: -(view.bounds.height - 45), width: UIScreen.width, height: view.bounds.height - 45)
         view.insertSubview(optiontableView, aboveSubview: doneBtn)
         
@@ -189,6 +189,7 @@ extension NotReplenishedGoodsListVC {
             }).disposed(by: disposeBag)
         
         listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
+            HUD.hideLoading()
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)
 
@@ -219,6 +220,7 @@ extension NotReplenishedGoodsListVC {
             weakSelf.listVM.requestCommand.onNext(true)
              weakSelf.listVM.refreshStatus.value = .endFooterRefresh
         }
+         HUD.showLoading()
         listVM.requestCommand.onNext(true)
     }
     

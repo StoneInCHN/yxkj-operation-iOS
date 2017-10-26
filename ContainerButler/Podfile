@@ -18,4 +18,5 @@ target 'ContainerButler' do
  pod 'pop', :git => 'https://github.com/facebook/pop.git'
  pod 'MGSwipeTableCell'
  pod 'MJRefresh'
+ pod 'Closures'
 end

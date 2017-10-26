@@ -88,6 +88,7 @@ extension ContainerViewController {
             case .beingHeaderRefresh:
                 self?.tableView.mj_header.beginRefreshing()
             case .endHeaderRefresh:
+                 HUD.hideLoading()
                 self?.tableView.mj_header.endRefreshing()
             case .beingFooterRefresh:
                 self?.tableView.mj_footer.beginRefreshing()
@@ -106,7 +107,8 @@ extension ContainerViewController {
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.containerVM.requestCommand.onNext(false)
         })
-        containerVM.requestCommand.onNext(true)
+        HUD.showLoading()
+        containerVM.refreshStatus.value = .beingHeaderRefresh
     }
 }
 

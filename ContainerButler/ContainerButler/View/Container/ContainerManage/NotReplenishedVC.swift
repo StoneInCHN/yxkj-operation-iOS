@@ -88,7 +88,12 @@ class NotReplenishedVC: BaseViewController {
         super.viewDidLoad()
         setupUI()
     }
-
+  
+    override func viewWillAppear(_ animated: Bool) {
+        if listVM.models.value.isEmpty {
+            HUD.showLoading()
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -131,7 +136,7 @@ extension NotReplenishedVC {
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 64, right: 0)
         replenishManageView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
         replenishDoneView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-        UIApplication.shared.keyWindow?.addSubview(replenishManageView)
+        UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(replenishManageView)
         UIApplication.shared.keyWindow?.addSubview(replenishDoneView)
         view.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         UIApplication.shared.keyWindow?.addSubview(pictureOptionView)
@@ -185,6 +190,7 @@ extension NotReplenishedVC {
             }).disposed(by: disposeBag)
         
         listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
+            HUD.hideLoading()
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)
         
@@ -206,7 +212,6 @@ extension NotReplenishedVC {
                 weakSelf.listVM.requestCommand.onNext(false)
             }
         })
-        
         listVM.requestCommand.onNext(true)
     }
 }
@@ -217,11 +222,12 @@ extension NotReplenishedVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         replenishManageView.show()
-         replenishManageView.replenishAction = { [weak self] in
-            tableView.reloadData()
-        }
         tableView.deselectRow(at: indexPath, animated: true)
+         replenishManageView.replenishAction = { [weak self] in
+            self?.tableView.reloadData()
+        }
+        replenishManageView.config(listVM.models.value[indexPath.row])
+        replenishManageView.show()
     }
     
 }

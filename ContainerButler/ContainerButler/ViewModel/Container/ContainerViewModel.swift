@@ -64,10 +64,9 @@ class ContainerViewModel {
                     break
                 case .completed:
                     if isReloadData {
+                        self.refreshStatus.value =  .endHeaderRefresh
                         if self.models.value.count < 20 {
                             self.refreshStatus.value = .noMoreData
-                        } else {
-                            self.refreshStatus.value =  .endHeaderRefresh
                         }
                     } else {
                             if self.moreData.isEmpty {

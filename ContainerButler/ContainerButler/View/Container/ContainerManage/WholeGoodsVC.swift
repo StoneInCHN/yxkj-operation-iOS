@@ -16,7 +16,7 @@ class WholeGoodsVC: BaseViewController {
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
+        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         return taleView
     }()
