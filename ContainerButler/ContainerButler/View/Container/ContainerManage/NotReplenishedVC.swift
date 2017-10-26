@@ -4,18 +4,23 @@
 //
 //  Created by lieon on 2017/9/21.
 //  Copyright © 2017年 QuanChengShouWei. All rights reserved.
-//  待补商品
+//  货柜待补商品
 
 import UIKit
 import RxSwift
 import RxCocoa
 import MGSwipeTableCell
+import MJRefresh
 
 class NotReplenishedVC: BaseViewController {
-    fileprivate lazy var datas: [Bool] = {
-        let datas: [Bool] = [true, false, false, true, true, false, false, false, false, false]
-        return datas
+    var containerId: Int = 0
+    fileprivate lazy var listVM: ContainerManageViewModel = {[unowned self] in
+        let viewModel =  ContainerManageViewModel()
+        viewModel.param.cntrId = self.containerId
+        viewModel.requestWaitSupplyContainerGoodsList()
+        return viewModel
     }()
+    
    fileprivate lazy var replenishManageView: ReplenishManageView = {
         let animator = ReplenishManageView()
         return animator
@@ -178,6 +183,31 @@ extension NotReplenishedVC {
                 self?.replenishDoneView.dismiss()
                 self?.navigationController?.popToRootViewController(animated: true)
             }).disposed(by: disposeBag)
+        
+        listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+        
+        listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .beingFooterRefresh:
+                self?.tableView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                self?.tableView.mj_footer.endRefreshing()
+            case .noMoreData:
+                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+            default:
+                break
+            }
+        }).disposed(by: disposeBag)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
+            if let weakSelf = self {
+                weakSelf.listVM.requestCommand.onNext(false)
+            }
+        })
+        
+        listVM.requestCommand.onNext(true)
     }
 }
 
@@ -189,7 +219,6 @@ extension NotReplenishedVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          replenishManageView.show()
          replenishManageView.replenishAction = { [weak self] in
-            self?.datas[indexPath.row] = true
             tableView.reloadData()
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -199,17 +228,13 @@ extension NotReplenishedVC: UITableViewDelegate {
 
 extension NotReplenishedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
+        return listVM.models.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.delegate = self
-        if datas[indexPath.row] {
-            cell.showCover(3)
-        } else {
-            cell.hiddenCover()
-        }
+        cell.configContainerWaitSupplyGoods(listVM.models.value[indexPath.row])
         return cell
     }
 }
@@ -219,7 +244,7 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
         guard let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell)  else {
             return nil
         }
-        if datas[indexPath.row], direction == .rightToLeft {
+        if direction == .rightToLeft {
             swipeSettings.transition = .border
             return  UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
         }
@@ -228,8 +253,7 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         guard  let indexPath = tableView.indexPath(for: cell) else { return true    }
-        if direction == .rightToLeft && datas[indexPath.row] == true && index == 0 {
-            datas[indexPath.row] = false
+        if direction == .rightToLeft && index == 0 {
             tableView.reloadData()
         }
         return true

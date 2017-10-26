@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ContainerManageVC: BaseViewController {
+    var containerId: Int = 0
     fileprivate lazy var pageTitleView: PageTitleView = {
         let pvc = PageTitleView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
         pvc.backgroundColor = .white
@@ -20,6 +21,8 @@ class ContainerManageVC: BaseViewController {
         var childVCs = [UIViewController]()
         let notReplenishVC = NotReplenishedVC()
         let wholeGoodsVC = WholeGoodsVC()
+        notReplenishVC.containerId = self.containerId
+        wholeGoodsVC.containerId = self.containerId
         childVCs.append(notReplenishVC)
         childVCs.append(wholeGoodsVC)
         let pageContenView = PageContentView(frame: CGRect(x: 0, y: 44, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 44 - 64), childVCs: childVCs, parentVC: self)

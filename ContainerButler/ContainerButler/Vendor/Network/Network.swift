@@ -135,7 +135,7 @@ class ContainerSessionParam: Model {
     var sceneSn: String?
     var cateId: Int?
     var goodsSn: String?
-    var cntrId: String?
+    var cntrId: Int?
     
     override func mapping(map: Map) {
         userId <- map["userId"]

@@ -14,7 +14,13 @@ import MJRefresh
 import MGSwipeTableCell
 
 class NotReplenishedGoodsListVC: BaseViewController {
-    fileprivate lazy var listVM: ContainerManageViewModel = ContainerManageViewModel()
+    fileprivate lazy var listVM: ContainerManageViewModel = {
+        let viewModel =  ContainerManageViewModel()
+        viewModel.requestWaitSupplyGoodsCategoryList()
+        viewModel.reuestWaitSuppltScencelist()
+        viewModel.requestWaitSupplyGoodsList()
+        return viewModel
+    }()
     fileprivate lazy  var addressLabel: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.sizeToFit(with: 14)
@@ -290,7 +296,7 @@ extension NotReplenishedGoodsListVC: UITableViewDataSource {
 
 extension NotReplenishedGoodsListVC: MGSwipeTableCellDelegate {
     func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
-        guard let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell)  else {
+        guard let cell = cell as? GoodListCell else {
             return nil
         }
         if direction == .rightToLeft {

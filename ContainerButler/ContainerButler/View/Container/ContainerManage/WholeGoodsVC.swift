@@ -12,6 +12,7 @@ import RxCocoa
 import MGSwipeTableCell
 
 class WholeGoodsVC: BaseViewController {
+      var containerId: Int = 0
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
