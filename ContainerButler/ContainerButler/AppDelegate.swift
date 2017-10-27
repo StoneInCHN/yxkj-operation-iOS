@@ -50,8 +50,13 @@ extension AppDelegate {
     fileprivate func chooseRootVC() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-//        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
-         window?.rootViewController = TabBarController()
+        var rootVC: UIViewController?
+        if let token = CoreDataManager.sharedInstance.getSessionInfo()?.token, !token.isEmpty {
+            rootVC = TabBarController()
+        } else {/// 没有token进行登录
+            rootVC = NavigationController(rootViewController: LoginViewController())
+        }
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
     

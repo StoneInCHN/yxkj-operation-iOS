@@ -157,7 +157,7 @@ extension NotReplenishView {
             maker.left.equalTo(40.0.fitWidth)
             maker.right.equalTo(-40.0.fitWidth)
             maker.top.equalTo(80.0.fitHeight)
-            maker.bottom.equalTo(-146.0.fitHeight)
+            maker.bottom.equalTo(-136.0.fitHeight)
         }
         
         goodsIcon.snp.makeConstraints { (maker) in
@@ -185,23 +185,23 @@ extension NotReplenishView {
             maker.top.equalTo(numberLabel.snp.bottom)
             maker.left.equalTo(numberLabel.snp.left)
             maker.right.equalTo(goodsIcon.snp.right).offset(-25)
-            maker.height.equalTo(80.0.fitHeight)
+            maker.height.equalTo(70)
         }
         pageControl.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(collectionView.snp.centerX)
             maker.bottom.equalTo(collectionView.snp.bottom)
         }
         totalNotReplenishLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(nameLabel.snp.left)
+            maker.right.equalTo(contanierView.snp.centerX).offset(-4)
             maker.top.equalTo(collectionView.snp.bottom).offset(0)
         }
         realDeliveryGoodsLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(contanierView.snp.centerX).offset(4)
             maker.centerY.equalTo(totalNotReplenishLabel.snp.centerY)
-            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(21)
         }
         realDeliveryGoodsInputTF.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(realDeliveryGoodsLabel.snp.centerY)
-            maker.left.equalTo(realDeliveryGoodsLabel.snp.right).offset(8)
+            maker.left.equalTo(realDeliveryGoodsLabel.snp.right).offset(2)
             maker.size.equalTo(CGSize(width: 40, height: 30))
         }
         line0.snp.makeConstraints { (maker) in
@@ -236,7 +236,7 @@ extension NotReplenishView {
     override func layoutSubviews() {
         super.layoutSubviews()
         let minimumInteritemSpacing: CGFloat = 12
-        let minimumLineSpacing: CGFloat = 12.0
+        let minimumLineSpacing: CGFloat = 12
         let leftInset: CGFloat = 0
         let rightInset: CGFloat = 0
         let topInset: CGFloat = 12.0
@@ -250,10 +250,7 @@ extension NotReplenishView {
                                            left: leftInset,
                                            bottom: bottomInset,
                                            right: rightInset)
-        layout.itemSize = CGSize(
-            width: (UIScreen.width - 40.0.fitWidth * 2 - 25 - 25 - 25 - 25  - minimumInteritemSpacing - leftInset * 2) / 2,
-            height: (80.0.fitHeight - minimumInteritemSpacing - bottomInset - topInset) / 2
-        )
+        layout.itemSize = CGSize(width: 100, height: (70 - topInset - minimumLineSpacing - bottomInset) / 2)
         collectionView.collectionViewLayout = layout
     }
 }
