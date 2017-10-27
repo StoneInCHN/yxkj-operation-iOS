@@ -126,6 +126,8 @@ extension ContainerViewController: UITableViewDataSource {
         if let containers = containerVM.models.value[indexPath.section].groups?[indexPath.row].containers {
             cell.config(containers, index: indexPath.row + 1)
         }
+        let scence = containerVM.models.value[indexPath.section]
+        
         cell.itemdidSelected = { [weak self] model in
             guard let weakSelf = self else { return }
             if model.isCentralContainer {
@@ -135,6 +137,7 @@ extension ContainerViewController: UITableViewDataSource {
                 HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
                     let vcc =  ContainerManageVC()
                     vcc.containerId = model.containerId
+                    vcc.currentScence = scence
                     weakSelf.navigationController?.pushViewController(vcc, animated: true)
                 })
             }

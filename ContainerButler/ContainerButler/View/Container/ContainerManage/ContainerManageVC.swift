@@ -12,6 +12,7 @@ import RxSwift
 
 class ContainerManageVC: BaseViewController {
     var containerId: Int = 0
+   var currentScence: Scence?
     fileprivate lazy var pageTitleView: PageTitleView = {
         let pvc = PageTitleView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
         pvc.backgroundColor = .white
@@ -22,6 +23,7 @@ class ContainerManageVC: BaseViewController {
         let notReplenishVC = NotReplenishedVC()
         let wholeGoodsVC = WholeGoodsVC()
         notReplenishVC.containerId = self.containerId
+        notReplenishVC.currentScence = self.currentScence
         wholeGoodsVC.containerId = self.containerId
         childVCs.append(notReplenishVC)
         childVCs.append(wholeGoodsVC)

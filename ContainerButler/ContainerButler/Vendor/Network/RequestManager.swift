@@ -87,8 +87,9 @@ class RequestManager {
          return   Observable<T>.create { (observer) -> Disposable in
             Alamofire.upload(multipartFormData: { multipartFormData in
                 fileData.forEach { (data) in
-                    multipartFormData.append(data, withName: "image[]", fileName: "image.jpg", mimeType: "image/jpeg")
+                    multipartFormData.append(data, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
                 }
+                print(multipartFormData)
                 if let dic = param.toJSON() as? [String: String] {
                     for (key, value) in dic {
                         multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)

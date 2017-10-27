@@ -11,9 +11,11 @@ import RxSwift
 import RxCocoa
 import MGSwipeTableCell
 import MJRefresh
+import Closures
 
 class NotReplenishedVC: BaseViewController {
     var containerId: Int = 0
+    var currentScence: Scence?
     fileprivate lazy var listVM: ContainerManageViewModel = {[unowned self] in
         let viewModel =  ContainerManageViewModel()
         viewModel.param.cntrId = self.containerId
@@ -53,9 +55,11 @@ class NotReplenishedVC: BaseViewController {
         loginBtn.setTitle("暂停补货", for: .normal)
         loginBtn.setTitleColor(UIColor.white, for: .normal)
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
+        loginBtn.setTitleColor(UIColor.gray, for: .disabled)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
         loginBtn.layer.cornerRadius = 20
         loginBtn.layer.masksToBounds = true
+        loginBtn.isEnabled = true
         return loginBtn
     }()
     fileprivate lazy  var descPwdLabel: UILabel = {
@@ -166,11 +170,33 @@ extension NotReplenishedVC {
             })
             .disposed(by: disposeBag)
         
-        stopBtn.rx.tap
-            .subscribe(onNext: { [weak self]_ in
-                 self?.navigationController?.popToRootViewController(animated: true)
+        stopBtn.onTap { [weak self] in
+            guard let weakSelf = self else {
+                return
+            }
+            let param = ContainerSessionParam()
+            param.sceneSn = weakSelf.currentScence?.number
+            var recordsArray = [SuplementRecord]()
+             print(weakSelf.listVM.selectedSenceModels.value)
+            let selectedArray = weakSelf.listVM.selectedContainerModels.value
+            for selectedGoods in selectedArray {
+                let suppplyParam = SuplementRecord()
+                suppplyParam.supplementId = selectedGoods.supplementId
+                suppplyParam.supplyCount = selectedGoods.supplyCount
+                recordsArray.append(suppplyParam)
+                print(weakSelf.listVM.selectedSenceModels.value)
+            }
+            param.suplementRecords = recordsArray
+            HUD.showLoading()
+            weakSelf.listVM.requestSupplementRecord(param)
+                .subscribe(onNext: { (response) in
+                HUD.showSuccess("提交成功")
+                  weakSelf.navigationController?.popToRootViewController(animated: true)
+            }, onCompleted: {
+                HUD.hideLoading()
             })
-            .disposed(by: disposeBag)
+                .disposed(by: weakSelf.disposeBag)
+        }
         
         replenishDoneView.closeBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
@@ -185,14 +211,34 @@ extension NotReplenishedVC {
         
         replenishDoneView.doneBtn.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.replenishDoneView.dismiss()
-                self?.navigationController?.popToRootViewController(animated: true)
+                guard let weakSelf = self else {    return  }
+                weakSelf.replenishDoneView.dismiss()
+                let param = ContainerSessionParam()
+                param.cntrId = weakSelf.containerId
+                if let image = weakSelf.replenishDoneView.imageView.image,
+                    let data = UIImageJPEGRepresentation(image, 0.01) {
+                    HUD.showLoading()
+                    self?.listVM.uploadSupplementPicture(param, file: data).subscribe(onError: { (error) in
+                        if let error = error as? AppError {
+                            HUD.showError(error.message)
+                        }
+                    }, onCompleted: {
+                        HUD.showSuccess("提交完成")
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }).disposed(by: weakSelf.disposeBag)
+                }
             }).disposed(by: disposeBag)
         
         listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
             HUD.hideLoading()
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)
+        
+        listVM.selectedContainerModels
+            .asObservable()
+            .map {!$0.isEmpty}
+            .bind(to: stopBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
         
         listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
             switch status {
@@ -231,6 +277,7 @@ extension NotReplenishedVC: UITableViewDelegate {
                 }
                 let selectedModel = weakSelf.listVM.models.value[indexPath.row]
                 selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
+                selectedModel.supplyCount  = inputCount
                 weakSelf.listVM.models.value.remove(at: indexPath.row)
                 weakSelf.listVM.selectedContainerModels.value.append(selectedModel)
                 weakSelf.tableView.reloadData()

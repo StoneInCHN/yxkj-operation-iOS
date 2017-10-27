@@ -128,7 +128,6 @@ extension ContainerManageViewModel {
                         case .next(let group):
                             if isReloadData {
                                 weakSelf.models.value = group
-//                                weakSelf.fileterSelected()
                             } else {
                                 if !group.isEmpty {
                                     weakSelf.models.value =  weakSelf.models.value + group
@@ -179,15 +178,6 @@ extension ContainerManageViewModel {
         }
     }
     
-    fileprivate func fileterSelected() {
-        var filterArray = [Goods]()
-        for selectedGoods in selectedSenceModels.value {
-            filterArray = models.value.filter { $0.goodsSn == selectedGoods.goodsSn }
-        }
-        if !filterArray.isEmpty {
-            models.value = filterArray
-        }
-    }
 }
 
 extension ContainerManageViewModel {

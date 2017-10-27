@@ -159,12 +159,4 @@ class ContainerSessionParam: Model {
     }
 }
 
-class SuplementRecord: Model {
-    var supplementId: Int = 0
-    var supplyCount: Int = 0
-    
-    override func mapping(map: Map) {
-        supplementId <- map["supplementId"]
-        supplyCount <- map["supplyCount"]
-    }
-}
+
