@@ -47,9 +47,10 @@ class Goods: Model {
     var goodsSn: String?
     var goodsName: String?
     var goodsPic: String?
-    var waitSupplyCount: Int = 0
+    var waitSupplyCount: Int = 1000
     var channelSn: String?
     var isSupplied: Bool = false
+    var remainCount: Int = 0
     
     override func mapping(map: Map) {
         goodsSn <- map["goodsSn"]
@@ -57,7 +58,9 @@ class Goods: Model {
         goodsPic <- map["goodsPic"]
         waitSupplyCount <- map["waitSupplyCount"]
         channelSn <- map["channelSn"]
+         remainCount <- map["remainCount"]
     }
+    
 }
 
 class GoodsDetail: Model {

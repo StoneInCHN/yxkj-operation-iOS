@@ -217,30 +217,55 @@ extension NotReplenishedVC {
 }
 
 extension NotReplenishedVC: UITableViewDelegate {
+   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 107
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-         replenishManageView.replenishAction = { [weak self] in
-            self?.tableView.reloadData()
+        if indexPath.section == 0 {
+            replenishManageView.replenishAction = { [weak self] inputCount in
+                guard let weakSelf = self else {
+                    return
+                }
+                let selectedModel = weakSelf.listVM.models.value[indexPath.row]
+                selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
+                weakSelf.listVM.models.value.remove(at: indexPath.row)
+                weakSelf.listVM.selectedContainerModels.value.append(selectedModel)
+                weakSelf.tableView.reloadData()
+            }
+            replenishManageView.config(listVM.models.value[indexPath.row])
+            replenishManageView.show()
         }
-        replenishManageView.config(listVM.models.value[indexPath.row])
-        replenishManageView.show()
     }
     
 }
 
 extension NotReplenishedVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listVM.models.value.count
+        if section == 0 {
+            return listVM .models.value.count
+        } else {
+            return listVM .selectedContainerModels.value.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.delegate = self
-        cell.configContainerWaitSupplyGoods(listVM.models.value[indexPath.row])
+        if indexPath.section == 0 {
+            cell.configContainerWaitSupplyGoods(listVM.models.value[indexPath.row])
+            cell.hiddenCover()
+            return cell
+        } else {
+              cell.delegate = self
+              cell.configContainerWaitSupplyGoods(listVM.selectedContainerModels.value[indexPath.row])
+              cell.showCover(listVM.selectedContainerModels.value[indexPath.row].waitSupplyCount)
+        }
         return cell
     }
 }
@@ -250,7 +275,7 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
         guard let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell)  else {
             return nil
         }
-        if direction == .rightToLeft {
+        if indexPath.section == 1, direction == .rightToLeft {
             swipeSettings.transition = .border
             return  UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
         }
@@ -258,8 +283,9 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
     }
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        guard  let indexPath = tableView.indexPath(for: cell) else { return true    }
-        if direction == .rightToLeft && index == 0 {
+        if  let indexPath = tableView.indexPath(for: cell), indexPath.section == 1, direction == .rightToLeft, index == 0 {
+            let selectedModel = listVM.selectedContainerModels.value[indexPath.row]
+            listVM.resetData(selectedModel, index: indexPath.row)
             tableView.reloadData()
         }
         return true

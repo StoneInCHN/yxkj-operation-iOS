@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CachGoods" representedClassName="CachGoods" syncable="YES" codeGenerationType="class">
+        <attribute name="channelSn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="goodsName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="goodsSn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remainCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="waitSupplyCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -7,7 +14,8 @@
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-54" positionY="0" width="128" height="60"/>
         <element name="Session" positionX="-36" positionY="27" width="128" height="60"/>
+        <element name="User" positionX="-54" positionY="0" width="128" height="60"/>
+        <element name="CachGoods" positionX="-45" positionY="18" width="128" height="120"/>
     </elements>
 </model>

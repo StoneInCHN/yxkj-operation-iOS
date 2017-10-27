@@ -65,3 +65,13 @@ extension ViewNameReusable where Self:UIView {
         return String(describing: self)
     }
 }
+
+protocol Copying {
+    init(original: Self)
+}
+
+extension Copying {
+    func copy() -> Self {
+        return Self.init(original: self)
+    }
+}

@@ -185,7 +185,7 @@ extension GoodListCell {
         let text3 = NSMutableAttributedString(string: "剩余数量:  ")
         text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
         text3.yy_color = UIColor(hex: 0x666666)
-        let text4 = NSMutableAttributedString(string: "\(goods.waitSupplyCount)")
+        let text4 = NSMutableAttributedString(string: "\(goods.remainCount)")
         text4.yy_font = UIFont.boldSystemFont(ofSize: 16)
         text4.yy_color = UIColor(hex: 0x30C7AC)
         text2.append(text3)

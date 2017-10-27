@@ -86,6 +86,11 @@ enum ContainerSession: UserEndPointProtocol {
     case getWaitSupplyGoodsDetails
     // 获取货柜待补商品
     case getWaitSupplyContainerGoodsList
+    // 提交补货记录
+    case commitSupplementRecord
+    //   上传补货照片
+    case uploadSupplementPic
+    
     var endpoint: String {
         switch self {
         case .getWaitSupplyState:
@@ -100,6 +105,10 @@ enum ContainerSession: UserEndPointProtocol {
             return "/getWaitSupplyGoodsDetails"
         case .getWaitSupplyContainerGoodsList:
             return "/getWaitSupplyContainerGoodsList"
+        case .commitSupplementRecord:
+            return "/commitSupplementRecord"
+        case .uploadSupplementPic:
+            return "/uploadSupplementPic"
         }
     }
 }
@@ -136,6 +145,7 @@ class ContainerSessionParam: Model {
     var cateId: Int?
     var goodsSn: String?
     var cntrId: Int?
+    var suplementRecords: [SuplementRecord]?
     
     override func mapping(map: Map) {
         userId <- map["userId"]
@@ -145,5 +155,16 @@ class ContainerSessionParam: Model {
         cateId <- map["cateId"]
         goodsSn <- map["goodsSn"]
         cntrId <- map["cntrId"]
+        suplementRecords <- map["SuplementRecords"]
+    }
+}
+
+class SuplementRecord: Model {
+    var supplementId: Int = 0
+    var supplyCount: Int = 0
+    
+    override func mapping(map: Map) {
+        supplementId <- map["supplementId"]
+        supplyCount <- map["supplyCount"]
     }
 }

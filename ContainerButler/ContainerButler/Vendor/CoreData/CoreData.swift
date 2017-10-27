@@ -179,3 +179,42 @@ extension CoreDataManager {
         saveContext()
     }
 }
+
+extension CoreDataManager {
+    func save(goods: Goods) {
+        let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
+         fetchRequest.predicate = NSPredicate(format: "goodsSn=%@", goods.goodsSn ?? "")
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        searchResulst.forEach { history in
+            self.managedObjectContext.delete(history)
+        }
+        
+        guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return  }
+        cachedGoods.goodsSn = goods.goodsSn
+        cachedGoods.goodsName = goods.goodsName
+        cachedGoods.waitSupplyCount = Int16(goods.waitSupplyCount)
+        cachedGoods.remainCount = Int16(goods.remainCount)
+        cachedGoods.channelSn = goods.channelSn
+        saveContext()
+    }
+    
+    func getGoodslist() -> [Goods]? {
+        let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return nil
+        }
+        var goodslist: [Goods] = [Goods]()
+        for cachedGoods in searchResulst  {
+            let goods = Goods()
+            goods.goodsSn = cachedGoods.goodsSn
+            goods.goodsName = cachedGoods.goodsName
+            goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
+            goods.remainCount = Int(cachedGoods.remainCount)
+            goods.channelSn = cachedGoods.channelSn
+            goodslist.append(goods)
+        }
+        return goodslist
+    }
+}

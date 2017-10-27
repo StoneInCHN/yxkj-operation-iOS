@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ReplenishManageView: UIView {
-    var replenishAction: (() -> Void)?
+    var replenishAction: ((Int) -> Void)?
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     fileprivate lazy  var goodsIcon: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "juic.jpg"))
@@ -78,7 +78,7 @@ class ReplenishManageView: UIView {
         if let disposeBag = self?.disposeBag {
             loginBtn.rx.tap.subscribe({ (_) in
                 self?.dismiss()
-                self?.replenishAction?()
+                self?.replenishAction?(Int(self?.realDeliveryGoodsInputTF.text ?? "0") ?? 0)
             }).disposed(by: disposeBag)
         }
         return loginBtn

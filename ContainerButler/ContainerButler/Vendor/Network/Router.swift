@@ -63,7 +63,6 @@ enum Router: URLRequestConvertible {
             let URL = Foundation.URL(string: path.URL())!
             var URLRequest = Foundation.URLRequest(url: URL)
             URLRequest.httpMethod = path.method.rawValue
-            
             head.forEach { (key, value) in
                 URLRequest.setValue(value, forHTTPHeaderField: key)
             }

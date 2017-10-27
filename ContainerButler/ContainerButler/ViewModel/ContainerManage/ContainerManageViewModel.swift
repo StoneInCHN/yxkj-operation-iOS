@@ -11,6 +11,8 @@ import RxCocoa
 import RxSwift
 
 class ContainerManageViewModel {
+    var selectedContainerModels = Variable<[Goods]>([])
+    var selectedSenceModels = Variable<[Goods]>([])
     var models = Variable<[Goods]>([])
     var goodsCategory = Variable([GoodsCategory]())
     var scenceList = Variable([Scence]())
@@ -25,7 +27,13 @@ class ContainerManageViewModel {
     }()
     fileprivate let disposeBag = DisposeBag()
      fileprivate  var moreData: [Goods] = []
-
+    fileprivate var cachedModels: [Goods] {
+        if let list = CoreDataManager.sharedInstance.getGoodslist() {
+            return list
+        }
+        return [Goods]()
+    }
+    
     /// 获取待补优享空间
   func reuestWaitSuppltScencelist() {
         let param = ContainerSessionParam()
@@ -79,6 +87,30 @@ class ContainerManageViewModel {
     func requestWaitSupplyContainerGoodsList() {
          requestWaitSupplyGoods(.getWaitSupplyContainerGoodsList)
     }
+    
+    ///  提交补货记录
+    func requestSupplementRecord(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
+          param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
+        let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(ContainerSession.commitSupplementRecord, param: param))
+        return repsonseObserable
+    }
+    
+    /// 上传补货照片
+    func uploadSupplementPicture(_ param: ContainerSessionParam, file: Data) -> Observable<NullDataResponse> {
+      let  repsonseObserable: Observable<NullDataResponse> =  RequestManager.upload(Router.upload(endpoint: ContainerSession.uploadSupplementPic), param: param,
+                              fileData: [file])
+        return repsonseObserable
+    }
+    
+    func resetData(_ model: Goods, index: Int) {
+        print(cachedModels)
+        for goods in cachedModels {
+            if goods.goodsSn == model.goodsSn {
+                selectedContainerModels.value.remove(at: index)
+                models.value.append(goods)
+            }
+        }
+    }
 }
 
 extension ContainerManageViewModel {
@@ -96,6 +128,7 @@ extension ContainerManageViewModel {
                         case .next(let group):
                             if isReloadData {
                                 weakSelf.models.value = group
+//                                weakSelf.fileterSelected()
                             } else {
                                 if !group.isEmpty {
                                     weakSelf.models.value =  weakSelf.models.value + group
@@ -106,11 +139,18 @@ extension ContainerManageViewModel {
                                     weakSelf.moreData.removeAll()
                                 }
                             }
+                            weakSelf.cacheModel()
+                             print(weakSelf.cachedModels)
                             break
                         case .error( let error):
                             if let error = error as? AppError {
                                 HUD.showError(error.message)
-                                weakSelf.refreshStatus.value = isReloadData ? .endHeaderRefresh: .endFooterRefresh
+                                if isReloadData {
+                                    weakSelf.refreshStatus.value =  .endHeaderRefresh
+                                } else {
+                                     weakSelf.refreshStatus.value =  .endFooterRefresh
+                                     weakSelf.param.pageNo = (weakSelf.param.pageNo ?? 2) - 1
+                                }
                             }
                             break
                         case .completed:
@@ -132,5 +172,24 @@ extension ContainerManageViewModel {
                     }.disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)
     }
+    
+    fileprivate func cacheModel() {
+        models.value.forEach { (goods) in
+           CoreDataManager.sharedInstance.save(goods: goods)
+        }
+    }
+    
+    fileprivate func fileterSelected() {
+        var filterArray = [Goods]()
+        for selectedGoods in selectedSenceModels.value {
+            filterArray = models.value.filter { $0.goodsSn == selectedGoods.goodsSn }
+        }
+        if !filterArray.isEmpty {
+            models.value = filterArray
+        }
+    }
 }
 
+extension ContainerManageViewModel {
+ 
+}

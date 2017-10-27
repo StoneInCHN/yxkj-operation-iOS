@@ -102,11 +102,8 @@ extension  PageTitleView {
         let labelY: CGFloat = 0.0
         for (index, title) in titles.enumerated() {
             let label = UILabel()
-            if UIScreen.main.bounds.width <= 320 {
-                label.font = UIFont.systemFont(ofSize: 13.0)
-            } else {
-                label.font = UIFont.systemFont(ofSize: 15.0)
-            }
+     
+            label.font = UIFont.sizeToFit(with: 12.5)
             label.textColor = UIColor(red: normalColor.0 / 255.0, green: normalColor.1 / 255.0, blue: normalColor.2 / 255.0, alpha: 1)
             label.tag = index
             label.textAlignment = .center
