@@ -36,6 +36,7 @@ enum StatusType: String {
     case resetPasswordError = "005"
 }
 
+
 /// 登录类型
 enum UserSessionHandleType {
     case loginWithPassword(UserSessionParam)

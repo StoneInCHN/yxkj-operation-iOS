@@ -18,15 +18,17 @@ class ContainerManageViewModel {
     var scenceList = Variable([Scence]())
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
     var refreshStatus = Variable<RefreshStatus>(.none)
-   lazy var param: ContainerSessionParam = {
+    lazy var param: ContainerSessionParam = {
         let param = ContainerSessionParam()
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId ?? -1
         param.pageNo = 1
         param.pageSize = 20
         return param
     }()
+    var supplyRecords =  Variable<[SuplementRecord]>([])
+    fileprivate var moreSupplyRecords: [SuplementRecord] = []
     fileprivate let disposeBag = DisposeBag()
-     fileprivate  var moreData: [Goods] = []
+    fileprivate  var moreData: [Goods] = []
     fileprivate var cachedModels: [Goods] {
         if let list = CoreDataManager.sharedInstance.getGoodslist() {
             return list
@@ -111,6 +113,70 @@ class ContainerManageViewModel {
             }
         }
     }
+
+    /// 总补货记录
+    func requestSupplyRecords() {
+        requestCommand
+            .subscribe(onNext: {  [weak self](isReloadData) in
+                guard let weakSelf = self else { return }
+                weakSelf.param.pageNo = isReloadData ? 1: (weakSelf.param.pageNo ?? 1) + 1
+                let listObverable: Observable<BaseResponseObject<SuplementRecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementSumRecord, param: weakSelf.param))
+                listObverable
+                    .map {$0.object?.groups ?? []}
+                    .subscribe {[weak self] (event) in
+                        guard let weakSelf = self else { return }
+                        switch event {
+                        case .next(let group):
+                            if isReloadData {
+                                weakSelf.supplyRecords.value = group
+                            } else {
+                                if !group.isEmpty {
+                                    weakSelf.supplyRecords.value =  weakSelf.supplyRecords.value + group
+                                    weakSelf.moreSupplyRecords.removeAll()
+                                    weakSelf.moreSupplyRecords.append(contentsOf: group)
+                                } else {
+                                    weakSelf.param.pageNo = (weakSelf.param.pageNo ?? 2) - 1
+                                    weakSelf.moreSupplyRecords.removeAll()
+                                }
+                            }
+                            break
+                        case .error( let error):
+                            if let error = error as? AppError {
+                                HUD.showError(error.message)
+                                if isReloadData {
+                                    weakSelf.refreshStatus.value =  .endHeaderRefresh
+                                } else {
+                                    weakSelf.refreshStatus.value =  .endFooterRefresh
+                                    weakSelf.param.pageNo = (weakSelf.param.pageNo ?? 2) - 1
+                                }
+                            }
+                            break
+                        case .completed:
+                            if isReloadData {
+                                if weakSelf.models.value.count < 20 {
+                                    weakSelf.refreshStatus.value = .noMoreData
+                                } else {
+                                    weakSelf.refreshStatus.value =  .endHeaderRefresh
+                                }
+                            } else {
+                                if weakSelf.moreSupplyRecords.isEmpty {
+                                    weakSelf.refreshStatus.value = .noMoreData
+                                } else {
+                                    weakSelf.refreshStatus.value =  .endFooterRefresh
+                                }
+                            }
+                            break
+                        }
+                    }.disposed(by: weakSelf.disposeBag)
+            }).disposed(by: disposeBag)
+    }
+    
+    ///  查看补货记录详情
+    func requestSupplementRecordDetails(_ param: ContainerSessionParam) -> Observable<BaseResponseObject<ContainerSupplyRecordGroup>> {
+        param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
+        let repsonseObserable: Observable<BaseResponseObject<ContainerSupplyRecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementRecordDetails, param: param))
+        return repsonseObserable
+    }
 }
 
 extension ContainerManageViewModel {
@@ -174,7 +240,7 @@ extension ContainerManageViewModel {
     
     fileprivate func cacheModel() {
         models.value.forEach { (goods) in
-           CoreDataManager.sharedInstance.save(goods: goods)
+          _ = CoreDataManager.sharedInstance.save(goods: goods)
         }
     }
     

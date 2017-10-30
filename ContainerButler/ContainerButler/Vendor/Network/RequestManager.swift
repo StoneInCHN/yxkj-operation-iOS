@@ -40,7 +40,7 @@ class RequestManager {
             }
         }
         let requst = Alamofire.request(urlRequest!)
-        let body = try? JSONSerialization.jsonObject(with: (requst.request?.httpBody) ?? Data(), options: JSONSerialization.ReadingOptions.allowFragments)
+        let body = try? JSONSerialization.jsonObject(with: (requst.request?.httpBody) ?? Data(), options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
         print("******Header*******\(requst.request?.allHTTPHeaderFields ?? [:])")
         print("******RequestURL*******\(urlRequest!.url?.absoluteString ?? "")")
         print("******Method*******\(urlRequest!.httpMethod ?? "")")

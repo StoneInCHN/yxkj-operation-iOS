@@ -76,7 +76,7 @@ enum UserSession: UserEndPointProtocol {
 enum ContainerSession: UserEndPointProtocol {
     // 获取货柜待补情况
     case getWaitSupplyState
-   //  获取待补优享空间
+    // 获取待补优享空间
     case getWaitSupplySceneList
     // 获取待补商品类别列表
     case getWaitSupplyGoodsCategoryList
@@ -88,8 +88,16 @@ enum ContainerSession: UserEndPointProtocol {
     case getWaitSupplyContainerGoodsList
     // 提交补货记录
     case commitSupplementRecord
-    //   上传补货照片
+    // 上传补货照片
     case uploadSupplementPic
+    // 开始补货
+    case startSupplyGoods
+    // 完成补货
+    case finishSupplyGoods
+    // 查看总补货记录
+    case getSupplementSumRecord
+    // 补货记录详情
+    case getSupplementRecordDetails
     
     var endpoint: String {
         switch self {
@@ -109,6 +117,14 @@ enum ContainerSession: UserEndPointProtocol {
             return "/commitSupplementRecord"
         case .uploadSupplementPic:
             return "/uploadSupplementPic"
+        case .startSupplyGoods:
+            return "/startSupplyGoods"
+        case .finishSupplyGoods:
+            return "/finishSupplyGoods"
+        case .getSupplementSumRecord:
+            return "/getSupplementSumRecord"
+        case .getSupplementRecordDetails:
+            return "/getSupplementRecordDetails"
         }
     }
 }
@@ -145,7 +161,7 @@ class ContainerSessionParam: Model {
     var cateId: Int?
     var goodsSn: String?
     var cntrId: Int?
-    var suplementRecords: [SuplementRecord]?
+    var suplementRecords: [SuplementRecordParam]?
     
     override func mapping(map: Map) {
         userId <- map["userId"]
@@ -155,8 +171,16 @@ class ContainerSessionParam: Model {
         cateId <- map["cateId"]
         goodsSn <- map["goodsSn"]
         cntrId <- map["cntrId"]
-        suplementRecords <- map["SuplementRecords"]
+        suplementRecords <- map["supplementRecords"]
     }
 }
 
-
+class SuplementRecordParam: Model {
+    var supplementId: Int = 0
+    var supplyCount: Int = 0
+    
+    override func mapping(map: Map) {
+        supplementId <- map["supplementId"]
+        supplyCount <- map["supplyCount"]
+    }
+}

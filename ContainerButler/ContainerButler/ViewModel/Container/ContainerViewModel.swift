@@ -29,7 +29,24 @@ class ContainerViewModel {
         requestList()
     }
     
-   fileprivate func requestList() {
+    ///  开始补货
+    func startSupplyGoods(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
+        param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
+        let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(ContainerSession.startSupplyGoods, param: param))
+        return repsonseObserable
+    }
+  
+    /// 完成补货
+    func finishSupplyGoods(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
+         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
+        let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(ContainerSession.finishSupplyGoods, param: param))
+        return repsonseObserable
+    }
+}
+
+extension ContainerViewModel {
+    
+    fileprivate func requestList() {
         requestCommand.subscribe(onNext: { [unowned self](isReloadData) in
             self.param.pageNo = isReloadData ? 1: (self.param.pageNo ?? 1) + 1
             let homerObservable: Observable< BaseResponseObject<ContainerHome>> =  RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplyState, param: self.param), needToken: .true)
@@ -38,7 +55,7 @@ class ContainerViewModel {
                 case  .next( let response):
                     if let scences =  response.object?.scences {
                         if isReloadData {
-                             self.models.value = scences
+                            self.models.value = scences
                         } else {
                             if !scences.isEmpty {
                                 self.models.value =  self.models.value + scences
@@ -54,7 +71,7 @@ class ContainerViewModel {
                     for scence in self.models.value {
                         print("container group count:\(scence.groups?.count ?? 0)")
                     }
-                   self.cellHeights = self.caculateCellHeights()
+                    self.cellHeights = self.caculateCellHeights()
                     break
                 case .error( let error):
                     if let error = error as? AppError {
@@ -69,49 +86,49 @@ class ContainerViewModel {
                             self.refreshStatus.value = .noMoreData
                         }
                     } else {
-                            if self.moreData.isEmpty {
-                                self.refreshStatus.value = .noMoreData
-                            } else {
-                                self.refreshStatus.value =  .endFooterRefresh
-                            }
+                        if self.moreData.isEmpty {
+                            self.refreshStatus.value = .noMoreData
+                        } else {
+                            self.refreshStatus.value =  .endFooterRefresh
+                        }
                     }
                     break
                 }
             }).disposed(by: self.disposeBag)
             
         })
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
-fileprivate func caculateCellHeights() -> [[CGFloat]] {
-    var scenceHeights: [[CGFloat]] = [[]]
-    for scence in models.value { // 每个场景
-        var sectionCellHeights: [CGFloat] = []
-        if let groups = scence.groups {
-            var cellHeight: CGFloat = 0.0
-            for group in groups {
-                // 开始算cell的高度
-                if let containers = group.containers {
-                    let rows: Int = Int(ceil(Double (containers.count) / 3.0 )) // 总行数
-                    let minimumLineSpacing: CGFloat = 12.0.fitHeight
-                     let itemHeight: CGFloat = 45.0.fitHeight
-                    let bottomInset: CGFloat = 22.0.fitHeight
-                    let topInset: CGFloat = 12.0.fitHeight
-                    let bgViewBottomInset: CGFloat = 12
-                    let labelTop: CGFloat = 12
-                    let labelHeight: CGFloat = 16
-                    let labelBottom: CGFloat = 20
-                    cellHeight =  (itemHeight + minimumLineSpacing) * CGFloat(rows) + bottomInset + topInset + labelBottom + labelHeight + labelTop + bgViewBottomInset
+    fileprivate func caculateCellHeights() -> [[CGFloat]] {
+        var scenceHeights: [[CGFloat]] = [[]]
+        for scence in models.value { // 每个场景
+            var sectionCellHeights: [CGFloat] = []
+            if let groups = scence.groups {
+                var cellHeight: CGFloat = 0.0
+                for group in groups {
+                    // 开始算cell的高度
+                    if let containers = group.containers {
+                        let rows: Int = Int(ceil(Double (containers.count) / 3.0 )) // 总行数
+                        let minimumLineSpacing: CGFloat = 12.0.fitHeight
+                        let itemHeight: CGFloat = 45.0.fitHeight
+                        let bottomInset: CGFloat = 22.0.fitHeight
+                        let topInset: CGFloat = 12.0.fitHeight
+                        let bgViewBottomInset: CGFloat = 12
+                        let labelTop: CGFloat = 12
+                        let labelHeight: CGFloat = 16
+                        let labelBottom: CGFloat = 20
+                        cellHeight =  (itemHeight + minimumLineSpacing) * CGFloat(rows) + bottomInset + topInset + labelBottom + labelHeight + labelTop + bgViewBottomInset
+                    }
+                    sectionCellHeights.append(cellHeight)
                 }
-                sectionCellHeights.append(cellHeight)
-            }
-            if !sectionCellHeights.isEmpty {
-                scenceHeights.append(sectionCellHeights)
+                if !sectionCellHeights.isEmpty {
+                    scenceHeights.append(sectionCellHeights)
+                }
             }
         }
-    }
-    
-      print("scenceHeights.count:\(scenceHeights.filter {!$0.isEmpty})")
-       return scenceHeights.filter {!$0.isEmpty}
+        
+        print("scenceHeights.count:\(scenceHeights.filter {!$0.isEmpty})")
+        return scenceHeights.filter {!$0.isEmpty}
     }
 }

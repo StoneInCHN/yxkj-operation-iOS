@@ -176,11 +176,11 @@ extension NotReplenishedVC {
             }
             let param = ContainerSessionParam()
             param.sceneSn = weakSelf.currentScence?.number
-            var recordsArray = [SuplementRecord]()
+            var recordsArray = [SuplementRecordParam]()
              print(weakSelf.listVM.selectedSenceModels.value)
             let selectedArray = weakSelf.listVM.selectedContainerModels.value
             for selectedGoods in selectedArray {
-                let suppplyParam = SuplementRecord()
+                let suppplyParam = SuplementRecordParam()
                 suppplyParam.supplementId = selectedGoods.supplementId
                 suppplyParam.supplyCount = selectedGoods.supplyCount
                 recordsArray.append(suppplyParam)

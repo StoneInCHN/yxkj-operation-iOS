@@ -91,11 +91,68 @@ class WaitSupplySence: Model {
 }
 
 class SuplementRecord: Model {
-    var supplementId: Int = 0
+    var sceneSn: String?
+    var sceneName: String?
+    var waitSuppTotalCount: Int = 0
+    var suppTotalCount: Int = 0
+    var lackCount: Int = 0
+    var suppEndTime: String?
+    
+    override func mapping(map: Map) {
+        sceneSn <- map["sceneSn"]
+        sceneName <- map["sceneName"]
+        waitSuppTotalCount <- map["waitSuppTotalCount"]
+        suppTotalCount <- map["suppTotalCount"]
+        lackCount <- map["lackCount"]
+        suppEndTime <- map["suppEndTime"]
+    }
+}
+
+class SuplementRecordGroup: Model {
+      var groups: [SuplementRecord]?
+    
+     override func mapping(map: Map) {
+        groups <- map["group"]
+    }
+}
+
+class SuplementRecordDetail: Model {
+    var channelSn: String?
+    var goodsName: String?
+    var goodsPic: String?
+    var waitSupplyCount: Int = 0
     var supplyCount: Int = 0
     
     override func mapping(map: Map) {
-        supplementId <- map["supplementId"]
+        channelSn <- map["channelSn"]
+        goodsName <- map["goodsName"]
+        goodsPic <- map["goodsPic"]
+        waitSupplyCount <- map["waitSupplyCount"]
         supplyCount <- map["supplyCount"]
     }
 }
+
+class ContainerSupplyRecord: Model {
+    var cntrSn: String?
+    var cntrSupplementRecords: [SuplementRecordDetail]?
+    
+    override func mapping(map: Map) {
+        cntrSn <- map["cntrSn"]
+        cntrSupplementRecords <- map["cntrSupplementRecords"]
+    }
+}
+
+class ContainerSupplyRecordGroup: Model {
+    var groups: [ContainerSupplyRecord]?
+
+    override func mapping(map: Map) {
+        groups <- map["groups"]
+    }
+}
+
+
+
+
+
+
+

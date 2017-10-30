@@ -131,14 +131,26 @@ extension ContainerViewController: UITableViewDataSource {
         cell.itemdidSelected = { [weak self] model in
             guard let weakSelf = self else { return }
             if model.isCentralContainer {
-           
                weakSelf.navigationController?.pushViewController(CenteralContainerVC(), animated: true)
             } else {
-                HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: {
-                    let vcc =  ContainerManageVC()
-                    vcc.containerId = model.containerId
-                    vcc.currentScence = scence
-                    weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: { [weak self] in
+                    guard let weakSelf = self else { return }
+                    let param = ContainerSessionParam()
+                    param.sceneSn = scence.number
+                    HUD.showLoading()
+                    weakSelf.containerVM.startSupplyGoods(param)
+                        .subscribe(onNext: { (resonse) in
+                            let vcc =  ContainerManageVC()
+                            vcc.containerId = model.containerId
+                            vcc.currentScence = scence
+                            weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                        }, onError: { (error) in
+                            if let error = error as? AppError {
+                                HUD.showError(error.message)
+                            }
+                        }, onCompleted: {
+                            HUD.hideLoading()
+                        }).disposed(by: weakSelf.disposeBag)
                 })
             }
         }
@@ -151,7 +163,19 @@ extension ContainerViewController: UITableViewDelegate {
         let scence = containerVM.models.value[section]
         headerView.config(scence)
         headerView.listTapAction = {[unowned self] model in
-            
+            let param = ContainerSessionParam()
+            param.sceneSn = scence.number
+            HUD.showLoading()
+            self.containerVM.finishSupplyGoods(param)
+                .subscribe(onNext: { (resonse) in
+                    HUD.showSuccess("完成补货")
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }, onCompleted: {
+                    HUD.hideLoading()
+                }).disposed(by: self.disposeBag)
         }
         return headerView
     }

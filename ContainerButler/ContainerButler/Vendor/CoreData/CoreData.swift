@@ -181,23 +181,24 @@ extension CoreDataManager {
 }
 
 extension CoreDataManager {
-    func save(goods: Goods) {
+    func save(goods: Goods) -> CachGoods? {
         let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
          fetchRequest.predicate = NSPredicate(format: "goodsSn=%@", goods.goodsSn ?? "")
         guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
-            return
+            return nil
         }
         searchResulst.forEach { history in
             self.managedObjectContext.delete(history)
         }
         
-        guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return  }
+        guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return nil }
         cachedGoods.goodsSn = goods.goodsSn
         cachedGoods.goodsName = goods.goodsName
         cachedGoods.waitSupplyCount = Int16(goods.waitSupplyCount)
         cachedGoods.remainCount = Int16(goods.remainCount)
         cachedGoods.channelSn = goods.channelSn
         saveContext()
+        return cachedGoods
     }
     
     func getGoodslist() -> [Goods]? {
@@ -206,7 +207,7 @@ extension CoreDataManager {
             return nil
         }
         var goodslist: [Goods] = [Goods]()
-        for cachedGoods in searchResulst  {
+        for cachedGoods in searchResulst {
             let goods = Goods()
             goods.goodsSn = cachedGoods.goodsSn
             goods.goodsName = cachedGoods.goodsName
@@ -216,5 +217,36 @@ extension CoreDataManager {
             goodslist.append(goods)
         }
         return goodslist
+    }
+}
+
+extension CoreDataManager {
+    func saveWaitSupply(cateId: Int, sceneSn: String, goodsArray: [Goods]) {
+        let fetchRequest: NSFetchRequest<Supply> = Supply.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "sceneSn=%@&&catedId=%d", sceneSn, cateId)
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return
+        }
+        searchResulst.forEach { history in
+            self.managedObjectContext.delete(history)
+        }
+        guard let cacheSupply: Supply = NSEntityDescription.insertNewObject(forEntityName: "Supply", into: self.managedObjectContext) as? Supply else {  return  }
+        for goods in goodsArray {
+            if  let cachedGoods = save(goods: goods) {
+                 cacheSupply.addToCachedGoods(cachedGoods)
+            }
+        }
+        cacheSupply.cateId = Int16(cateId)
+        cacheSupply.sceneSn = sceneSn
+        saveContext()
+    }
+    
+    func getWaitSupply(catedId: Int, sceneSn: String) -> Supply? {
+        let fetchRequest: NSFetchRequest<Supply> = Supply.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "sceneSn=%@&&catedId=%d", sceneSn, catedId)
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+            return nil
+        }
+        return searchResulst.last
     }
 }
