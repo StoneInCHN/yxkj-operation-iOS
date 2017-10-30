@@ -32,4 +32,8 @@ class ReplenishHistoryDetailTableHeader: UITableViewHeaderFooterView, ViewNameRe
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func config(_ model: ContainerSupplyRecord) {
+        dateLabel.text = (model.cntrSn ?? "") + "货柜"
+    }
 }

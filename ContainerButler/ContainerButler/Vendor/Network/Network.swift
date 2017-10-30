@@ -207,7 +207,7 @@ class SuplementRecordParam: Model {
 
 class MessageSessionParam: Model {
     var userId: Int64?
-    var type: MessageType?
+    var type: MessageType = .none
     override func mapping(map: Map) {
          userId <- map["userId"]
          type <- map["type"]

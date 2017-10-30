@@ -97,7 +97,11 @@ extension ReplenishHistoryVC: UITableViewDataSource {
 }
 extension ReplenishHistoryVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ReplenishHistoryDetailVC(), animated: true)
+        if let model = historyVM.supplyRecordGroups.value[indexPath.section].supplementList?[indexPath.row] {
+            let vcc = ReplenishHistoryDetailVC()
+            vcc.scenceSn = model.sceneSn
+            navigationController?.pushViewController(vcc, animated: true)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

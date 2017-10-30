@@ -20,7 +20,8 @@ class ReplenishHistoryViewModel {
         param.pageSize = 20
         return param
     }()
-    var supplyRecordGroups =  Variable<[SuplementRecordGroup]>([])
+    var supplyRecordGroups = Variable<[SuplementRecordGroup]>([])
+     var supplyRecordDetailGroups =  Variable<[ContainerSupplyRecord]>([])
     fileprivate var moreSupplyRecordGroupss: [SuplementRecordGroup] = []
     fileprivate let disposeBag = DisposeBag()
     
@@ -80,10 +81,13 @@ class ReplenishHistoryViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func requestSupplementRecordDetails(_ param: ContainerSessionParam) -> Observable<BaseResponseObject<ContainerSupplyRecordGroup>> {
+    func requestSupplementRecordDetails(_ param: ContainerSessionParam) {
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
         let repsonseObserable: Observable<BaseResponseObject<ContainerSupplyRecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementRecordDetails, param: param))
-        return repsonseObserable
+        repsonseObserable
+            .map {$0.object?.groups ?? []}
+            .bind(to: supplyRecordDetailGroups)
+            .disposed(by: disposeBag)
     }
     
 }

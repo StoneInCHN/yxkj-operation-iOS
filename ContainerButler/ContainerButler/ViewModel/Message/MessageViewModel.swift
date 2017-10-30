@@ -26,7 +26,6 @@ class MessageViewModel {
     }
     
     func requestMessageDetail(_ param: MessageSessionParam) {
-        let param = MessageSessionParam()
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
         let resposeeObj: Observable<BaseResponseObject<MessageDetailGroup>> = RequestManager.reqeust(.endpoint(MessageSession.getMessageDetails, param: param))
         resposeeObj

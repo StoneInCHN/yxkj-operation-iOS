@@ -139,4 +139,27 @@ class ReplenishHistoryDetailCell: MGSwipeTableCell, ViewNameReusable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func config(_ model: SuplementRecordDetail) {
+        let text2 = NSMutableAttributedString()
+        let text3 = NSMutableAttributedString(string: "应补数量:  ")
+        text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text3.yy_color = UIColor(hex: 0x666666)
+        let text4 = NSMutableAttributedString(string: "\(model.waitSupplyCount)")
+        text4.yy_font = UIFont.boldSystemFont(ofSize: 16)
+        text4.yy_color = UIColor(hex: 0x30C7AC)
+        text2.append(text3)
+        text2.append(text4)
+        remainReplenishLabel.attributedText = text2
+        
+        let text = NSMutableAttributedString()
+        let text0 = NSMutableAttributedString(string: "待补货数:  ")
+        text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text0.yy_color = UIColor(hex: 0x666666)
+        let text1 = NSMutableAttributedString(string: "\(model.supplyCount)")
+        text1.yy_font = UIFont.boldSystemFont(ofSize: 16)
+        text1.yy_color = UIColor(hex: CustomKey.Color.mainOrangeColor)
+        text.append(text0)
+        text.append(text1)
+        notReplenishLabel.attributedText = text
+    }
 }

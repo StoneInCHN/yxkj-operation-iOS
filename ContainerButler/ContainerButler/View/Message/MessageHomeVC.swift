@@ -47,7 +47,7 @@ extension MessageHomeVC {
         HUD.showLoading()
         messageVM.requestMessages()
         messageVM.messages.asObservable()
-            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {[weak self] (row, element, cell) in
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {(row, element, cell) in
                 HUD.hideLoading()
                 cell.config(element)
             }
@@ -57,7 +57,10 @@ extension MessageHomeVC {
 
 extension MessageHomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(MessageDetailVC(), animated: true)
+        let vcc = MessageDetailVC()
+        let messageType = messageVM.messages.value[indexPath.section].type
+        vcc.messageType = messageType
+        navigationController?.pushViewController(vcc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

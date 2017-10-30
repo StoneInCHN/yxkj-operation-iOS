@@ -12,6 +12,11 @@ import RxSwift
 import RxCocoa
 
 class MessageDetailVC: BaseViewController {
+    var messageType: MessageType = .none
+    fileprivate lazy var messageVM: MessageViewModel = {[unowned self] in
+        let messageVM = MessageViewModel()
+        return messageVM
+    }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
          taleView.separatorStyle = .none
@@ -30,7 +35,7 @@ class MessageDetailVC: BaseViewController {
 
 extension MessageDetailVC {
     fileprivate func setupUI() {
-        title = "补货通知"
+        title = messageType.title
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
@@ -38,13 +43,15 @@ extension MessageDetailVC {
     }
     
     fileprivate func setupRX() {
+        let param = MessageSessionParam()
+        param.type = messageType
+        messageVM.requestMessageDetail(param)
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        
-        let items = Observable.just(
-            (0..<20).map { "\($0)" }
-        )
+
+        let items = messageVM.messageDetails.asObservable()
         items
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) { (row, element, cell) in
             }
@@ -54,7 +61,6 @@ extension MessageDetailVC {
 
 extension MessageDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ReplenishHistoryDetailVC(), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

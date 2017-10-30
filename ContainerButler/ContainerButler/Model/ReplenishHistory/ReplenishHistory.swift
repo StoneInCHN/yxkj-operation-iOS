@@ -82,8 +82,3 @@ class ContainerSupplyRecordGroup: Model {
         groups <- map["groups"]
     }
 }
-
-
-
-
-

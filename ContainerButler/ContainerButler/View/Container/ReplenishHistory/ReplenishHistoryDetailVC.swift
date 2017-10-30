@@ -12,6 +12,15 @@ import RxSwift
 import RxDataSources
 
 class ReplenishHistoryDetailVC: BaseViewController {
+    var scenceSn: String?
+    
+    fileprivate lazy var detailVM: ReplenishHistoryViewModel = { [unowned self] in
+        let viewModel = ReplenishHistoryViewModel()
+        let param = ContainerSessionParam()
+        param.sceneSn = self.scenceSn
+        viewModel.requestSupplementRecordDetails(param)
+        return viewModel
+    }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -39,38 +48,32 @@ extension ReplenishHistoryDetailVC {
     }
     
     fileprivate func setupRX() {
-        let items = Variable<[SectionModel<String, Double>]>([])
-        
-        items.value = [
-            SectionModel(model: "货道A", items: [
-                1.0,
-                2.0,
-                3.0
-                ]),
-            SectionModel(model: "货道A", items: [
-                1.0,
-                2.0,
-                3.0
-                ]),
-            SectionModel(model: "货道A", items: [
-                1.0,
-                2.0,
-                3.0
-                ])
-        ]
-        
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(configureCell: { [unowned  self](_, tableView, indexPath, element) in
-            let cell: ReplenishHistoryDetailCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            debugPrint(self.description)
-            return cell
-        })
-        
-        items.asObservable()
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        detailVM.supplyRecordDetailGroups.asObservable().subscribe(onNext: { [weak self](_) in
+            HUD.hideLoading()
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+        tableView.dataSource = self
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+    }
+}
+
+extension ReplenishHistoryDetailVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return detailVM.supplyRecordDetailGroups.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return detailVM.supplyRecordDetailGroups.value[section].cntrSupplementRecords?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ReplenishHistoryDetailCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        if let model = detailVM.supplyRecordDetailGroups.value[indexPath.section].cntrSupplementRecords?[indexPath.row] {
+            cell.config(model)
+        }
+        return cell
     }
 }
 
@@ -78,6 +81,8 @@ extension ReplenishHistoryDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: ReplenishHistoryDetailTableHeader = tableView.dequeueReusableHeaderFooter()
+         let model = detailVM.supplyRecordDetailGroups.value[section]
+        headerView.config(model)
         return headerView
     }
     
