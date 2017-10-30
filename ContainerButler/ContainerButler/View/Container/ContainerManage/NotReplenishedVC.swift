@@ -20,6 +20,7 @@ class NotReplenishedVC: BaseViewController {
         let viewModel =  ContainerManageViewModel()
         viewModel.param.cntrId = self.containerId
         viewModel.requestWaitSupplyContainerGoodsList()
+        viewModel.loadSelectedContainerGoods()
         return viewModel
     }()
     
@@ -275,12 +276,15 @@ extension NotReplenishedVC: UITableViewDelegate {
                 guard let weakSelf = self else {
                     return
                 }
-                let selectedModel = weakSelf.listVM.models.value[indexPath.row]
-                selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
-                selectedModel.supplyCount  = inputCount
-                weakSelf.listVM.models.value.remove(at: indexPath.row)
-                weakSelf.listVM.selectedContainerModels.value.append(selectedModel)
-                weakSelf.tableView.reloadData()
+                if indexPath.row < weakSelf.listVM.models.value.count {
+                    let selectedModel = weakSelf.listVM.models.value[indexPath.row]
+                    selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
+                    selectedModel.supplyCount  = inputCount
+                    weakSelf.listVM.models.value.remove(at: indexPath.row)
+                    weakSelf.listVM.cacheSelectedContainerGoods(selectedModel)
+                    weakSelf.tableView.reloadData()
+                }
+         
             }
             replenishManageView.config(listVM.models.value[indexPath.row])
             replenishManageView.show()

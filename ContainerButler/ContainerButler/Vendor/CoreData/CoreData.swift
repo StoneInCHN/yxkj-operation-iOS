@@ -181,28 +181,20 @@ extension CoreDataManager {
 }
 
 extension CoreDataManager {
-    func save(goods: Goods) -> CachGoods? {
-        let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
-         fetchRequest.predicate = NSPredicate(format: "goodsSn=%@", goods.goodsSn ?? "")
-        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
-            return nil
-        }
-        searchResulst.forEach { history in
-            self.managedObjectContext.delete(history)
-        }
-        
-        guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return nil }
+    func save(goods: Goods, containerId: Int) {
+        guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return }
         cachedGoods.goodsSn = goods.goodsSn
         cachedGoods.goodsName = goods.goodsName
         cachedGoods.waitSupplyCount = Int16(goods.waitSupplyCount)
         cachedGoods.remainCount = Int16(goods.remainCount)
         cachedGoods.channelSn = goods.channelSn
+        cachedGoods.containerId = Int16(containerId)
         saveContext()
-        return cachedGoods
     }
     
-    func getGoodslist() -> [Goods]? {
+    func getGoodsList(containerId: Int) -> [Goods]? {
         let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
+       fetchRequest.predicate = NSPredicate(format: "containerId=%d", containerId)
         guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
             return nil
         }
@@ -218,35 +210,32 @@ extension CoreDataManager {
         }
         return goodslist
     }
+    
+    func deleteGoods(containerId: Int, goodsSn: String?) {
+       let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
+        if let goodsSn =  goodsSn {
+        let predicate1 =  NSPredicate(format: "containerId=%@", "\(containerId)")
+        let predicate2 =  NSPredicate(format: "goodsSn=%@", goodsSn)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [predicate1, predicate2])
+            guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+                return
+            }
+            print(searchResulst)
+            searchResulst.forEach {
+                managedObjectContext.delete($0)
+            }
+
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "containerId=%d", containerId)
+            guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
+                return
+            }
+            searchResulst.forEach {managedObjectContext.delete($0)}
+        }
+        saveContext()
+    }
 }
 
 extension CoreDataManager {
-    func saveWaitSupply(cateId: Int, sceneSn: String, goodsArray: [Goods]) {
-        let fetchRequest: NSFetchRequest<Supply> = Supply.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "sceneSn=%@&&catedId=%d", sceneSn, cateId)
-        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
-            return
-        }
-        searchResulst.forEach { history in
-            self.managedObjectContext.delete(history)
-        }
-        guard let cacheSupply: Supply = NSEntityDescription.insertNewObject(forEntityName: "Supply", into: self.managedObjectContext) as? Supply else {  return  }
-        for goods in goodsArray {
-            if  let cachedGoods = save(goods: goods) {
-                 cacheSupply.addToCachedGoods(cachedGoods)
-            }
-        }
-        cacheSupply.cateId = Int16(cateId)
-        cacheSupply.sceneSn = sceneSn
-        saveContext()
-    }
     
-    func getWaitSupply(catedId: Int, sceneSn: String) -> Supply? {
-        let fetchRequest: NSFetchRequest<Supply> = Supply.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "sceneSn=%@&&catedId=%d", sceneSn, catedId)
-        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
-            return nil
-        }
-        return searchResulst.last
-    }
 }

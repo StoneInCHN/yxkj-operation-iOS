@@ -36,7 +36,6 @@ enum StatusType: String {
     case resetPasswordError = "005"
 }
 
-
 /// 登录类型
 enum UserSessionHandleType {
     case loginWithPassword(UserSessionParam)
@@ -57,6 +56,19 @@ enum UserSessionHandleType {
             return .endpoint(UserSession.forgetPwd, param: param)
         case .resetPasswod(let param):
             return .endpoint(UserSession.resetPwd, param: param)
+        }
+    }
+}
+
+enum MessageType: String {
+    case lackGoods = "LACK"
+    case none = "none"
+    var title: String {
+        switch self {
+        case .lackGoods:
+            return "补货通知"
+        default:
+            return "none"
         }
     }
 }

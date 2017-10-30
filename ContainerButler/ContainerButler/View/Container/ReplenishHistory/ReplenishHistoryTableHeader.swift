@@ -45,4 +45,45 @@ class ReplenishHistoryTableHeader: UITableViewHeaderFooterView, ViewNameReusable
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func config(_ model: SuplementRecordGroup) {
+        if let date = model.date, date.characters.count >= 5 {
+            let text = NSMutableAttributedString()
+            let index = date.index(of: ".") ?? date.endIndex
+            let beginning = date[..<index]
+            let monthText = NSMutableAttributedString(string:  String(beginning) + ".")
+            monthText.yy_font = UIFont.boldSystemFont(ofSize: 10)
+            monthText.yy_color = UIColor(hex: 0x333333)
+            let dayText = NSMutableAttributedString(string:  String(date[index..<date.endIndex]) + " ")
+            dayText.yy_font = UIFont.boldSystemFont(ofSize: 18)
+            dayText.yy_color = UIColor(hex: 0x333333)
+            text.append(monthText)
+            text.append(dayText)
+            dateLabel.attributedText = text
+        }
+      
+        let text2 = NSMutableAttributedString()
+        let text3 = NSMutableAttributedString(string: "总待补数: ")
+        text3.yy_font = UIFont.systemFont(ofSize: 14)
+        text3.yy_color = UIColor(hex: 0x333333)
+        let text4 = NSMutableAttributedString(string: "\(model.sumWaitSupplyCount)")
+        text4.yy_font = UIFont.boldSystemFont(ofSize: 14)
+        text4.yy_color = UIColor(hex: 0x333333)
+        text2.append(text3)
+        text2.append(text4)
+        goodsCountLabel.attributedText = text2
+        
+        let text5 = NSMutableAttributedString(string: "      ")
+        let text6 = NSMutableAttributedString(string: "总补货数: ")
+        text6.yy_font = UIFont.systemFont(ofSize: 14)
+        text6.yy_color = UIColor(hex: 0x333333)
+        let text7 = NSMutableAttributedString(string: "\(model.sumSupplyCount)")
+        text7.yy_font = UIFont.boldSystemFont(ofSize: 14)
+        text7.yy_color = UIColor(hex: 0x333333)
+        text2.append(text5)
+        text2.append(text6)
+        text2.append(text7)
+        goodsCountLabel.attributedText = text2
+        
+    }
 }

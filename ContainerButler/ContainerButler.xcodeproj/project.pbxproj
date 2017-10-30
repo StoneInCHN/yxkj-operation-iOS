@@ -30,6 +30,8 @@
 		CD44DF771F99E5D200539122 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF761F99E5D200539122 /* UserInfo.swift */; };
 		CD44DF7A1F99FB0900539122 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF791F99FB0900539122 /* Container.swift */; };
 		CD44DF7C1F9A001200539122 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF7B1F9A001200539122 /* Transform.swift */; };
+		CD62C38C1FA6D180007D4918 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD62C38B1FA6D180007D4918 /* MessageViewModel.swift */; };
+		CD62C38E1FA6D324007D4918 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD62C38D1FA6D324007D4918 /* Message.swift */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
 		CD69C4631F66874000623B91 /* ContainerButler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4611F66874000623B91 /* ContainerButler.xcdatamodeld */; };
 		CD69C4651F66874000623B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD69C4641F66874000623B91 /* Assets.xcassets */; };
@@ -117,6 +119,8 @@
 		CDDE38481FA1CD0600B28873 /* round@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDE38471FA1CD0600B28873 /* round@3x.png */; };
 		CDDE384A1FA1CE6300B28873 /* CentralContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDE38491FA1CE6300B28873 /* CentralContainerViewModel.swift */; };
 		CDE2029D1F71187800CB0145 /* ContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2029C1F71187800CB0145 /* ContainerViewModel.swift */; };
+		CDEA96521FA7600A00A72020 /* ReplenishHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA96511FA7600A00A72020 /* ReplenishHistoryViewModel.swift */; };
+		CDEA96551FA765BE00A72020 /* ReplenishHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA96541FA765BE00A72020 /* ReplenishHistory.swift */; };
 		CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B5091F68C44A000A1915 /* Network.swift */; };
 		CDF6B50C1F68C4A6000A1915 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50B1F68C4A6000A1915 /* Router.swift */; };
 		CDF6B50E1F68C88D000A1915 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6B50D1F68C88D000A1915 /* RequestManager.swift */; };
@@ -231,6 +235,8 @@
 		CD44DF761F99E5D200539122 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		CD44DF791F99FB0900539122 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		CD44DF7B1F9A001200539122 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		CD62C38B1FA6D180007D4918 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		CD62C38D1FA6D324007D4918 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD69C45A1F66874000623B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD69C4621F66874000623B91 /* ContainerButler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerButler.xcdatamodel; sourceTree = "<group>"; };
@@ -351,6 +357,8 @@
 		CDDE38471FA1CD0600B28873 /* round@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "round@3x.png"; sourceTree = "<group>"; };
 		CDDE38491FA1CE6300B28873 /* CentralContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralContainerViewModel.swift; sourceTree = "<group>"; };
 		CDE2029C1F71187800CB0145 /* ContainerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewModel.swift; sourceTree = "<group>"; };
+		CDEA96511FA7600A00A72020 /* ReplenishHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishHistoryViewModel.swift; sourceTree = "<group>"; };
+		CDEA96541FA765BE00A72020 /* ReplenishHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishHistory.swift; sourceTree = "<group>"; };
 		CDF6B5091F68C44A000A1915 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CDF6B50B1F68C4A6000A1915 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CDF6B50D1F68C88D000A1915 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -672,6 +680,22 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
+		CD62C3851FA6D0FE007D4918 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CD62C38D1FA6D324007D4918 /* Message.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		CD62C3861FA6D116007D4918 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CD62C38B1FA6D180007D4918 /* MessageViewModel.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		CD69C44E1F66874000623B91 = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +757,8 @@
 		CD69C4721F66888D00623B91 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CDEA96501FA75FFC00A72020 /* ReplenishHistory */,
+				CD62C3861FA6D116007D4918 /* Message */,
 				CD3CDCD81F9EE86900E22DEC /* ContainerManage */,
 				CDE2029B1F71186800CB0145 /* Container */,
 				CD8DA7C31F95D69500C5C010 /* User */,
@@ -843,6 +869,8 @@
 				CD44DF7B1F9A001200539122 /* Transform.swift */,
 				CD844C7D1F70E8F900D50722 /* Model.swift */,
 				CD844C7E1F70E8F900D50722 /* ResponseObject.swift */,
+				CDEA96531FA765B200A72020 /* ReplenishHistory */,
+				CD62C3851FA6D0FE007D4918 /* Message */,
 				CD3CDCDB1F9EEAAB00E22DEC /* ContainerManage */,
 				CD44DF781F99FAB900539122 /* Container */,
 				CD319ED31F95E89D007BF050 /* User */,
@@ -1060,6 +1088,22 @@
 				CDE2029C1F71187800CB0145 /* ContainerViewModel.swift */,
 			);
 			path = Container;
+			sourceTree = "<group>";
+		};
+		CDEA96501FA75FFC00A72020 /* ReplenishHistory */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA96511FA7600A00A72020 /* ReplenishHistoryViewModel.swift */,
+			);
+			path = ReplenishHistory;
+			sourceTree = "<group>";
+		};
+		CDEA96531FA765B200A72020 /* ReplenishHistory */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA96541FA765BE00A72020 /* ReplenishHistory.swift */,
+			);
+			path = ReplenishHistory;
 			sourceTree = "<group>";
 		};
 		CDF727B51F7F72B200CDCC75 /* Login */ = {
@@ -1326,6 +1370,7 @@
 				CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */,
 				CDFF58DA1F989FED00605761 /* UpdatePasswordVC.swift in Sources */,
 				CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */,
+				CD62C38E1FA6D324007D4918 /* Message.swift in Sources */,
 				CDDBD2931F9500AF004F5526 /* ContainerSectionHeaderView.swift in Sources */,
 				CDD0D4EE1F9D9C0B0056B6F1 /* YYTextView.m in Sources */,
 				CDD0D4F71F9D9C0B0056B6F1 /* YYTextDebugOption.m in Sources */,
@@ -1370,6 +1415,7 @@
 				CD3BAD781F72580200902F91 /* YBRectConst.m in Sources */,
 				CD3BAD6E1F72560A00902F91 /* GIBadgeView.m in Sources */,
 				CDFE07A31F70BEB500C89CA9 /* LoginViewController.swift in Sources */,
+				CD62C38C1FA6D180007D4918 /* MessageViewModel.swift in Sources */,
 				CD3BAD811F72700C00902F91 /* TransmationAnimator.swift in Sources */,
 				CD92CD141F96FF4E0077C78F /* PictureChooseOptionView.swift in Sources */,
 				CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */,
@@ -1382,6 +1428,7 @@
 				CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
 				CDD0D4F51F9D9C0B0056B6F1 /* YYTextSelectionView.m in Sources */,
+				CDEA96551FA765BE00A72020 /* ReplenishHistory.swift in Sources */,
 				CD84AD3D1FA1C48D003666E4 /* LabelButtonCell.swift in Sources */,
 				CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */,
 				CD78F0941F67C6B000D50B7B /* TabBarController.swift in Sources */,
@@ -1417,6 +1464,7 @@
 				CDD0D4F11F9D9C0B0056B6F1 /* YYTextEffectWindow.m in Sources */,
 				CDD0D4F21F9D9C0B0056B6F1 /* YYTextInput.m in Sources */,
 				CD9466621F74A96C00C85D7B /* MessageCell.swift in Sources */,
+				CDEA96521FA7600A00A72020 /* ReplenishHistoryViewModel.swift in Sources */,
 				CDD0D5011F9D9C0B0056B6F1 /* UIPasteboard+YYText.m in Sources */,
 				CD3CDCD71F9EE45E00E22DEC /* CenteralContainerVC.swift in Sources */,
 				CD319ED51F95E8B2007BF050 /* UserSessionInfo.swift in Sources */,

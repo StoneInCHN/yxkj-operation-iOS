@@ -24,7 +24,7 @@ class MessageCell: UITableViewCell, ViewNameReusable {
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "补货通知"
+        descLabel.text = ""
         return descLabel
     }()
     
@@ -96,4 +96,11 @@ class MessageCell: UITableViewCell, ViewNameReusable {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+   
+    func config(_ model: Message) {
+        messageTitleLabel.text = model.type.title
+        messageBodyLabel.text = model.content ?? ""
+        timeLabel.text = model.noticeTime ?? ""
+    }
+    
 }

@@ -98,6 +98,8 @@ enum ContainerSession: UserEndPointProtocol {
     case getSupplementSumRecord
     // 补货记录详情
     case getSupplementRecordDetails
+    // 获取货柜待补商品清单
+    case getContainerGoodsList
     
     var endpoint: String {
         switch self {
@@ -125,10 +127,28 @@ enum ContainerSession: UserEndPointProtocol {
             return "/getSupplementSumRecord"
         case .getSupplementRecordDetails:
             return "/getSupplementRecordDetails"
+        case .getContainerGoodsList:
+            return "/getContainerGoodsList"
         }
     }
 }
 
+enum MessageSession: UserEndPointProtocol {
+    // 查看消息
+    case getMessage
+    // 查看消息详情
+    case getMessageDetails
+    
+    var endpoint: String {
+        switch self {
+        case .getMessage:
+            return "/getMsg"
+        case .getMessageDetails:
+            return "/getMsgDetails"
+        }
+    }
+
+}
 class UserSessionParam: Model {
     var phoneNum: String?
     var newPwd: String?
@@ -182,5 +202,14 @@ class SuplementRecordParam: Model {
     override func mapping(map: Map) {
         supplementId <- map["supplementId"]
         supplyCount <- map["supplyCount"]
+    }
+}
+
+class MessageSessionParam: Model {
+    var userId: Int64?
+    var type: MessageType?
+    override func mapping(map: Map) {
+         userId <- map["userId"]
+         type <- map["type"]
     }
 }

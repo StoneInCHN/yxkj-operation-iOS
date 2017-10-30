@@ -10,9 +10,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MGSwipeTableCell
+import MJRefresh
 
 class WholeGoodsVC: BaseViewController {
       var containerId: Int = 0
+     fileprivate lazy var listVM: ContainerManageViewModel = {[unowned self] in
+        let viewModel =  ContainerManageViewModel()
+        viewModel.param.cntrId = self.containerId
+        viewModel.requestAllGoods()
+        return viewModel
+        }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -26,7 +33,7 @@ class WholeGoodsVC: BaseViewController {
         setupUI()
         setupRX()
     }
-
+    
 }
 
 extension WholeGoodsVC {
@@ -42,14 +49,36 @@ extension WholeGoodsVC {
     }
     
     fileprivate func setupRX() {
-        let items = Observable.just(
-            (0..<20).map { "\($0)" }
-        )
+        let items = listVM.models.asObservable()
         items
-            .bind(to: tableView.rx.items(cellIdentifier: "GoodListCell", cellType: GoodListCell.self)) { (row, element, cell) in
-                cell.delegate = self
+            .bind(to: tableView.rx.items(cellIdentifier: "GoodListCell", cellType: GoodListCell.self)) {[weak self] (row, element, cell) in
+                if let weakSelf = self {
+                    cell.delegate = weakSelf
+                    cell.configContainerWaitSupplyGoods(element)
+                    cell.hiddenCover()
+                }
             }
             .disposed(by: disposeBag)
+        
+        listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .beingFooterRefresh:
+                self?.tableView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                self?.tableView.mj_footer.endRefreshing()
+            case .noMoreData:
+                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+            default:
+                break
+            }
+        }).disposed(by: disposeBag)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
+            if let weakSelf = self {
+                weakSelf.listVM.requestCommand.onNext(false)
+            }
+        })
+        listVM.requestCommand.onNext(true)
     }
 }
 

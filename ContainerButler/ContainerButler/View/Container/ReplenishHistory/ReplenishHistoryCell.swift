@@ -69,13 +69,12 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         return descLabel
     }()
     
-    fileprivate lazy  var stockoutLabel: UILabel = {
-        let descLabel = UILabel()
+    fileprivate lazy  var stockoutLabel: YYLabel = {
+        let descLabel = YYLabel()
         descLabel.font = UIFont.systemFont(ofSize: 11.5)
         descLabel.textColor =  UIColor(hex: 0x555555)
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
-        descLabel.text = "缺货数：13"
         return descLabel
     }()
     
@@ -163,5 +162,45 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func config(_ model: SuplementRecord) {
+        addressLabel.text = model.sceneName
+        numberLabel.text = "编号(\(model.sceneSn ?? ""))"
+        timeLabel.text = model.supplyTime ?? ""
+        
+        let text = NSMutableAttributedString()
+        let text0 = NSMutableAttributedString(string: "总待补数:  ")
+        text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text0.yy_color = UIColor(hex: 0x555555)
+        let text1 = NSMutableAttributedString(string: "\(model.waitSupplyCount)")
+        text1.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: CustomKey.Color.mainGreenColor)
+        text.append(text0)
+        text.append(text1)
+        totalNotReplenishLabel.attributedText = text
+        
+        let text2 = NSMutableAttributedString()
+        let text3 = NSMutableAttributedString(string: "总补货数: ")
+        text3.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text3.yy_color = UIColor(hex: 0x555555)
+        let text4 = NSMutableAttributedString(string: "\(model.supplyCount)")
+        text4.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text4.yy_color = UIColor(hex: 0xfbc205)
+        text2.append(text3)
+        text2.append(text4)
+        totalReplenishLabel.attributedText = text2
+        
+        let text5 = NSMutableAttributedString()
+        let text6 = NSMutableAttributedString(string: "缺货数: ")
+        text6.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text6.yy_color = UIColor(hex: 0x555555)
+        let text7 = NSMutableAttributedString(string: "\(model.lackCount)")
+        text7.yy_font = UIFont.boldSystemFont(ofSize: 12)
+        text7.yy_color = UIColor(hex: 0xf0282b)
+        text5.append(text6)
+        text5.append(text7)
+        stockoutLabel.attributedText = text5
+        
     }
 }

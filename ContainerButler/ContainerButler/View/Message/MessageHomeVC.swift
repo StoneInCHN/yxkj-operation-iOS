@@ -11,6 +11,10 @@ import RxSwift
 import RxCocoa
 
 class MessageHomeVC: BaseViewController {
+    fileprivate lazy var messageVM: MessageViewModel = {
+        let messageVM = MessageViewModel()
+        return messageVM
+    }()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -40,12 +44,12 @@ extension MessageHomeVC {
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        
-        let items = Observable.just(
-            (0..<20).map { "\($0)" }
-        )
-        items
-            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) { (row, element, cell) in
+        HUD.showLoading()
+        messageVM.requestMessages()
+        messageVM.messages.asObservable()
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {[weak self] (row, element, cell) in
+                HUD.hideLoading()
+                cell.config(element)
             }
             .disposed(by: disposeBag)
     }
