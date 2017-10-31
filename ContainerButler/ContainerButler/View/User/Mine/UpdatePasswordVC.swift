@@ -239,7 +239,7 @@ extension UpdatePasswordVC {
             maker.top.equalTo(forgetBtn.snp.bottom).offset(46.5 .fitHeight)
             maker.left.equalTo(32)
             maker.right.equalTo(-32)
-            maker.height.equalTo(50)
+            maker.height.equalTo(50.0.fitHeight)
         }
     }
     

@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupUI()
         chooseRootVC()
         startLocate()
+        addNotification() 
         loadRSAPublickey()
         return true
     }
@@ -69,8 +70,7 @@ extension AppDelegate {
         Location.share.startLocate()
     }
     
-    /// 获取公钥
-    func loadRSAPublickey() {
+  fileprivate  func loadRSAPublickey() {
         let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
         keyOberable.subscribe(onNext: {[weak self] (response) in
             if let obj = response.object {
@@ -78,5 +78,22 @@ extension AppDelegate {
             }
         })
             .disposed(by: disposeBag)
+    }
+    
+    fileprivate func addNotification() {
+        NotificationCenter.default.rx
+            .notification(CustomKey.NotificationName.loginInvalid)
+            .subscribe(onNext: { _ in
+                guard let view = self.window else { return }
+                let rootVC = NavigationController(rootViewController: LoginViewController())
+                UIView.transition(with: view, duration: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                    self.window?.rootViewController?.view.removeFromSuperview()
+                }, completion: { (_) in
+                    UIApplication.shared.keyWindow?.rootViewController = rootVC
+                })
+                
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

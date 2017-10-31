@@ -152,7 +152,6 @@ extension LoginViewController {
         view.backgroundColor = .white
         view.addSubview(companyIcon)
         view.addSubview(userIcon)
-        view.addSubview(phoneNumTF)
         view.addSubview(line0)
         view.addSubview(pwdIcon)
         view.addSubview(pwdTF)
@@ -162,6 +161,7 @@ extension LoginViewController {
         view.addSubview(captchdBtn)
         view.addSubview(phoneError)
         view.addSubview(pwdError)
+        view.addSubview(phoneNumTF)
         companyIcon.snp.makeConstraints { (maker) in
             maker.left.right.top.equalTo(0)
             maker.height.equalTo(185.5.fitHeight)
@@ -169,18 +169,18 @@ extension LoginViewController {
         
         userIcon.snp.makeConstraints { (maker) in
             maker.top.equalTo(companyIcon.snp.bottom).offset(55)
-            maker.left.equalTo(30)
+            maker.left.equalTo(30.0.fitWidth)
             maker.width.equalTo(20)
         }
         phoneError.snp.makeConstraints { (maker) in
-            maker.width.equalTo(150.0.fitWidth)
+            maker.width.equalTo(180.0.fitWidth)
             maker.centerY.equalTo(userIcon.snp.centerY)
             maker.right.equalTo(-10)
         }
         phoneNumTF.snp.makeConstraints { (maker) in
-            maker.left.equalTo(userIcon.snp.right).offset(20)
+            maker.left.equalTo(userIcon.snp.right).offset(15.0.fitWidth)
             maker.centerY.equalTo(userIcon.snp.centerY)
-            maker.right.equalTo(phoneError.snp.left).offset(-20)
+            maker.right.equalTo(phoneError.snp.left).offset(0)
         }
         
         line0.snp.makeConstraints { (maker) in
@@ -214,17 +214,17 @@ extension LoginViewController {
             maker.top.equalTo(line2.snp.bottom).offset(50)
             maker.left.equalTo(30)
             maker.right.equalTo(-30)
-            maker.height.equalTo(50)
+            maker.height.equalTo(50.0.fitHeight)
         }
         captchdBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(loginBtn.snp.bottom).offset(120.0.fitHeight)
+            maker.bottom.equalTo(forgetPwdBtn.snp.top).offset(-32.0.fitHeight)
             maker.centerX.equalTo(loginBtn.snp.centerX)
             maker.height.equalTo(30)
         }
         forgetPwdBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(captchdBtn.snp.bottom).offset(32.0.fitHeight)
             maker.centerX.equalTo(loginBtn.snp.centerX)
             maker.height.equalTo(30)
+            maker.bottom.equalTo(-30.0.fitHeight)
         }
     }
     

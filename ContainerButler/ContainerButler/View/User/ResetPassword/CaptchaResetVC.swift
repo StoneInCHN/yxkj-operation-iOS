@@ -186,9 +186,9 @@ extension CaptchaResetVC {
         
         loginBtn.snp.makeConstraints { (maker) in
             maker.top.equalTo(line2.snp.bottom).offset(50)
-            maker.left.equalTo(10)
-            maker.right.equalTo(-10)
-            maker.height.equalTo(50)
+            maker.left.equalTo(30)
+            maker.right.equalTo(-30)
+            maker.height.equalTo(50.0.fitHeight)
         }
     }
     

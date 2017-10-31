@@ -262,7 +262,7 @@ extension ResetPasswordVC {
             maker.top.equalTo(descPwdLabel.snp.bottom).offset(46.5 .fitHeight)
             maker.left.equalTo(30)
             maker.right.equalTo(-30)
-            maker.height.equalTo(50)
+            maker.height.equalTo(50.0.fitHeight)
         }
     }
     

@@ -23,7 +23,7 @@ enum CaptchaCodeType: String {
 }
 
 enum StatusType: String {
-    case loginInValid = "1003201"
+    case loginInValid = "0008"
     case error404 = "-1011"
     case timeout = "-1001"
     case disconnect = "-1009"

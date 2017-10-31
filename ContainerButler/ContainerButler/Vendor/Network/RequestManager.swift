@@ -68,6 +68,7 @@ class RequestManager {
                     if responseObj.status == .loginInValid {  /// 通知重新登录
                         appError.message = "Data Parase Error"
                         observer.on(.error(appError))
+                         NotificationCenter.default.post(name: CustomKey.NotificationName.loginInvalid, object: self)
                     } else {
                         appError.message = responseObj.description ?? "Error"
                         observer.on(.error(appError))
@@ -122,6 +123,7 @@ class RequestManager {
                             if responseObj.status == .loginInValid {  /// 通知重新登录
                                 appError.message = "Data Parase Error"
                                 observer.on(.error(appError))
+                                NotificationCenter.default.post(name: CustomKey.NotificationName.loginInvalid, object: nil)
                             }
                         case .failure(let error):
                              debugPrint("****************uploadImageResult:\(error.localizedDescription)***********")
