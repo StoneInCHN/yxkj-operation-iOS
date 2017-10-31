@@ -43,7 +43,7 @@ enum UserSessionHandleType {
     case getVerifedCode(UserSessionParam)
     case verifyForgetPwdCaptchCode(UserSessionParam)
     case resetPasswod(UserSessionParam)
-    
+    case updatePasswod(UserSessionParam)
     var router: Router {
         switch self {
         case .loginWithPassword(let param):
@@ -56,6 +56,8 @@ enum UserSessionHandleType {
             return .endpoint(UserSession.forgetPwd, param: param)
         case .resetPasswod(let param):
             return .endpoint(UserSession.resetPwd, param: param)
+        case .updatePasswod(let param):
+            return .endpoint(UserSession.updatePwd, param: param)
         }
     }
 }

@@ -87,9 +87,7 @@ class RequestManager {
          return   Observable<T>.create { (observer) -> Disposable in
             Alamofire.upload(multipartFormData: { multipartFormData in
                 fileData.forEach { (data) in
-//                    print("*********data********\(data.base64EncodedString())")
-//                    multipartFormData.append(data, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
-                    multipartFormData.append(data, withName: "file")
+                    multipartFormData.append(data, withName: "suppPic", fileName: "image.jpg", mimeType: "image/jpeg")
                 }
                 if let dic = param.toJSON() as? [String: String] {
                     for (key, value) in dic {
@@ -101,12 +99,9 @@ class RequestManager {
             }, with: router) { result in
                var appError = AppError()
                 switch result {
-                case .success(request: let upload, streamingFromDisk: let fileDisk, streamFileURL: let fileURL):
-                    print(upload.request?.url)
-                    print(fileDisk)
-                    print(fileURL?.absoluteString)
+                case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                    print(upload.request?.url?.absoluteString ?? "")
                     upload.validate().responseString(completionHandler: { (response) in
-                        debugPrint("****************uploadImageResult:\(response.result)***********")
                         switch response.result {
                         case .success(let value):
                             print(value)

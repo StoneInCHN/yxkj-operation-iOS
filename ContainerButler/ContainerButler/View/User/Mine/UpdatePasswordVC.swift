@@ -23,6 +23,7 @@ class UpdatePasswordVC: BaseViewController {
     var phoneNumber: String?
     fileprivate lazy  var phoneNumTF: UITextField = {
         let textField = UITextField()
+        textField.isSecureTextEntry = true
         textField.placeholder = "请输入旧密码"
         textField.font = UIFont.sizeToFit(with: 15)
         textField.textColor = UIColor(hex: 0x222222)
@@ -114,6 +115,23 @@ class UpdatePasswordVC: BaseViewController {
         return loginBtn
     }()
     
+    fileprivate lazy var againPwdError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "两次密码不一致")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -143,6 +161,7 @@ extension UpdatePasswordVC {
         view.addSubview(descPwdLabel)
         view.addSubview(enterBtn)
         view.addSubview(forgetBtn)
+         view.addSubview(againPwdError)
         
         userIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(40)
@@ -187,11 +206,15 @@ extension UpdatePasswordVC {
             maker.top.equalTo(line1.snp.bottom).offset(22)
             maker.width.equalTo(20)
         }
-        
+        againPwdError.snp.makeConstraints { (maker) in
+            maker.centerY.equalTo(pwdIconAgain.snp.centerY)
+            maker.right.equalTo(-20)
+            maker.width.equalTo(120.0.fitWidth)
+        }
         pwdTFAgain.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(phoneNumTF.snp.right)
-           maker.centerY.equalTo(pwdIconAgain.snp.centerY)
+            maker.right.equalTo(againPwdError.snp.left)
+            maker.centerY.equalTo(pwdIconAgain.snp.centerY)
             maker.height.equalTo(35)
         }
         
@@ -221,25 +244,50 @@ extension UpdatePasswordVC {
     }
     
     fileprivate func setupRx() {
-        let usernameValid = pwdTFAgain.rx.text.orEmpty
-            .map { $0.characters.count >= 8}
-            .share(replay: 1)
+        let repeatPasswordValid = pwdTFAgain.rx.text.orEmpty
+            .map {[weak self] (text) -> Bool in
+                if text == self?.pwdTF.text {
+                    return true
+                } else if !text.characters.isEmpty {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
             .map { $0.characters.count >= 8 }
             .share(replay: 1)
         
-        let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
+        let everythingValid = Observable.combineLatest(repeatPasswordValid, passwordValid) { $0 && $1 }
             .share(replay: 1)
         
         everythingValid
             .bind(to: enterBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        repeatPasswordValid
+            .bind(to: againPwdError.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         enterBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let weakSelf = self else {    return      }
-                weakSelf.navigationController?.popToRootViewController(animated: true)
+                let param = UserSessionParam()
+                param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
+                param.oldPwd = weakSelf.phoneNumTF.text
+                param.newPwd = weakSelf.pwdTF.text
+                let sessionVM = UserSessionViewModel()
+                sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
+                    .subscribe(onNext: {response in
+                        weakSelf.navigationController?.popToRootViewController(animated: true)
+                    }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }).disposed(by: weakSelf.disposeBag)
+                
             })
             .disposed(by: disposeBag)
         
