@@ -46,9 +46,15 @@ extension MessageHomeVC {
             .disposed(by: disposeBag)
         HUD.showLoading()
         messageVM.requestMessages()
+        messageVM.messages.asObservable().subscribe(onNext: { messgaes in
+            HUD.hideLoading()
+        }, onError: { (error) in
+            if let error = error as? AppError {
+                HUD.showError(error.message)
+            }
+        }).disposed(by: disposeBag)
         messageVM.messages.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {(row, element, cell) in
-                HUD.hideLoading()
                 cell.config(element)
             }
             .disposed(by: disposeBag)

@@ -59,6 +59,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
     
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
+        taleView.allowsSelection = false
         taleView.separatorStyle = .none
         taleView.contentInset = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
         taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
@@ -75,6 +76,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
     }()
     fileprivate lazy  var doneBtn: UIButton = {
         let loginBtn = UIButton()
+        loginBtn.isHidden = true
         loginBtn.setImage(UIImage(named: "complete_goods"), for: .normal)
         return loginBtn
     }()

@@ -49,6 +49,7 @@ class HUD {
         SVProgressHUD.setRingNoTextRadius(10)
         SVProgressHUD.show()
         
+        
     }
     
     static func hideLoading() {

@@ -18,7 +18,7 @@ public class Header: Model {
     public var contentType: String = "application/json"
     
     public override func mapping(map: Map) {
-        token <- map["token"]
+        token <- map["X-Auth-Token"]
         contentType <- map["Content-Type"]
     }
 }
@@ -162,7 +162,6 @@ class UserSessionParam: Model {
     
     override func mapping(map: Map) {
         phoneNum <- map["cellPhoneNum"]
-        newPwd <- map["cellPhoneNum"]
         oldPwd <- map["oldPwd"]
         password <- map["password"]
         userName <- map["userName"]

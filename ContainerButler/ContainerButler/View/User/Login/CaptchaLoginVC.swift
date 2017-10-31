@@ -210,7 +210,7 @@ extension CaptchaLoginVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
+                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)

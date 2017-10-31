@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class ResetPasswordVC: BaseViewController {
+      var phoneNumber: String?
     fileprivate lazy  var descPwdLabel0: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: CGFloat(22.5))
@@ -20,15 +21,14 @@ class ResetPasswordVC: BaseViewController {
         descLabel.textAlignment = .center
         return descLabel
     }()
-    var phoneNumber: String?
-    fileprivate lazy  var phoneNumTF: UITextField = {
+    fileprivate lazy  var phoneNumTF: UITextField = {[unowned self] in
         let textField = UITextField()
         textField.placeholder = "请输入您的手机号"
         textField.font = UIFont.sizeToFit(with: 14)
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-        textField.isEnabled = false
+        textField.text = self.phoneNumber
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
@@ -316,10 +316,19 @@ extension ResetPasswordVC {
                 let restVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = weakSelf.phoneNumber
-                param.newPassword = weakSelf.pwdTF.text
-                restVM.handle(with: .resetPasswod(param)).subscribe(onNext: { URLResponse in
-                    weakSelf.navigationController?.popToRootViewController(animated: true)
-                }).disposed(by: weakSelf.disposeBag)
+                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: restVM.rsaPublickey ?? "")
+                HUD.showLoading()
+                restVM.handle(with: .resetPasswod(param))
+                    .subscribe(onNext: { URLResponse in
+                      weakSelf.navigationController?.popToRootViewController(animated: true)
+                    }, onError: { (error) in
+                        if let error = error as? AppError {
+                            HUD.showError(error.message)
+                        }
+                    }, onCompleted: {
+                        HUD.hideLoading()
+                    })
+                    .disposed(by: weakSelf.disposeBag)
             })
             .disposed(by: disposeBag)
     }

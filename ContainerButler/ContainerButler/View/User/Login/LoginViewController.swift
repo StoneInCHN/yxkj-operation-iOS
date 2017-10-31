@@ -129,8 +129,6 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupRx()
-        loadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -299,10 +297,6 @@ extension LoginViewController {
                     })
                     .disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)
-    }
-    
-    fileprivate func loadData() {
-        loginVM.loadRSAPublickey()
     }
     
     private func showError(_ status: StatusType) {

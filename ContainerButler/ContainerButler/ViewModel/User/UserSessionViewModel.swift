@@ -12,7 +12,9 @@ import RxSwift
 import ObjectMapper
 
 class UserSessionViewModel {
-    var rsaPublickey: String?
+    var rsaPublickey: String? {
+        return (UIApplication.shared.delegate as? AppDelegate)?.rsaPublickey
+    }
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     
     func saveUserInfo(_ info: BaseResponseObject<UserInfo>, phoneNum: String) {
@@ -31,16 +33,6 @@ class UserSessionViewModel {
             CoreDataManager.sharedInstance.save(userSession: session)
         }
     }
-    /// 获取公钥
-    func loadRSAPublickey() {
-        let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
-        keyOberable.subscribe(onNext: {[weak self] (response) in
-            if let obj = response.object {
-                self?.rsaPublickey = obj.key
-            }
-        })
-        .disposed(by: disposeBag)
-    }
     
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
         let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
@@ -58,7 +50,6 @@ class UserSessionViewModel {
         }
     }
     
-    /// 获取验证码
     func getVerificationCode(_ param: UserSessionParam) {
         let codeObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getVerificationCode, param: param), needToken: .true)
         codeObserable.subscribe(onNext: {_ in    }).disposed(by: disposeBag)

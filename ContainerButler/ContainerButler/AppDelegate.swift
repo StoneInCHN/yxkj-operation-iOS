@@ -9,16 +9,21 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import RxCocoa
+import RxSwift
+import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
+    var rsaPublickey: String?
+    fileprivate let disposeBag = DisposeBag()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupUI()
         chooseRootVC()
         startLocate()
+        loadRSAPublickey()
         return true
     }
 
@@ -62,5 +67,16 @@ extension AppDelegate {
     
     fileprivate func startLocate() {
         Location.share.startLocate()
+    }
+    
+    /// 获取公钥
+    func loadRSAPublickey() {
+        let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
+        keyOberable.subscribe(onNext: {[weak self] (response) in
+            if let obj = response.object {
+                self?.rsaPublickey = obj.key
+            }
+        })
+            .disposed(by: disposeBag)
     }
 }

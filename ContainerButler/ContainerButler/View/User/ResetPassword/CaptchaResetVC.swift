@@ -210,7 +210,7 @@ extension CaptchaResetVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 4)]))
+                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -253,8 +253,7 @@ extension CaptchaResetVC {
                     weakSelf.pwdTF.shake()
                     return
                 }
-                let vcc = ResetPasswordVC()
-                vcc.phoneNumber = self?.phoneNumTF.text
+               
                 let param = UserSessionParam()
                 param.phoneNum = self?.phoneNumTF.text
                 param.verificationCode = self?.pwdTF.text
@@ -262,7 +261,7 @@ extension CaptchaResetVC {
                 chaptchVM.handle(with: .verifyForgetPwdCaptchCode(param))
                     .subscribe(onNext: { [weak self](response) in
                         let vcc = ResetPasswordVC()
-                        vcc.phoneNumber = self?.phoneNumber
+                        vcc.phoneNumber = self?.phoneNumTF.text
                         self?.navigationController?.pushViewController(vcc, animated: true)
                     }, onError: { [weak self](error) in
                         if let error = error as? AppError {

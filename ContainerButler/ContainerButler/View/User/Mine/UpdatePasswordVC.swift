@@ -274,11 +274,11 @@ extension UpdatePasswordVC {
         enterBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let weakSelf = self else {    return      }
+                   let sessionVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
-                param.oldPwd = weakSelf.phoneNumTF.text
-                param.newPwd = weakSelf.pwdTF.text
-                let sessionVM = UserSessionViewModel()
+                param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
+                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
                 sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
                     .subscribe(onNext: {response in
                         weakSelf.navigationController?.popToRootViewController(animated: true)
