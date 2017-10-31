@@ -94,14 +94,6 @@ class NotReplenishedVC: BaseViewController {
         setupUI()
     }
   
-    override func viewWillAppear(_ animated: Bool) {
-        if listVM.models.value.isEmpty {
-            HUD.showLoading()
-        }
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 }
 
 extension NotReplenishedVC {

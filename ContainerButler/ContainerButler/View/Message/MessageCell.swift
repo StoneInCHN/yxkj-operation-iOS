@@ -103,4 +103,9 @@ class MessageCell: UITableViewCell, ViewNameReusable {
         timeLabel.text = model.noticeTime ?? ""
     }
     
+    func config(_ model: MessageDetail) {
+        messageTitleLabel.text = model.title ?? ""
+        messageBodyLabel.text = model.content ?? ""
+        timeLabel.text = model.sendDate ?? ""
+    }
 }

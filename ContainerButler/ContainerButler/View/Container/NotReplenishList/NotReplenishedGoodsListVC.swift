@@ -14,6 +14,7 @@ import MJRefresh
 import MGSwipeTableCell
 
 class NotReplenishedGoodsListVC: BaseViewController {
+    var supplyMessage: MessageDetail?
     fileprivate lazy var listVM: ContainerManageViewModel = {
         let viewModel =  ContainerManageViewModel()
         viewModel.requestWaitSupplyGoodsCategoryList()
@@ -86,6 +87,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
 }
 
 extension NotReplenishedGoodsListVC {
+  
     fileprivate func setupUI() {
         title = "待补清单"
         let optionChooseView = UIView()
@@ -221,7 +223,11 @@ extension NotReplenishedGoodsListVC {
              weakSelf.listVM.refreshStatus.value = .endFooterRefresh
         }
          HUD.showLoading()
-        listVM.requestCommand.onNext(true)
+        if let selectedMessage = supplyMessage {
+            addressLabel.text = selectedMessage.title
+            listVM.param.sceneSn = selectedMessage.sceneSn
+        }
+          listVM.requestCommand.onNext(true)
     }
     
     private func showOptionChooseView() {

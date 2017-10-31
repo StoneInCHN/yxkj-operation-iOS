@@ -15,12 +15,12 @@ class UserSessionViewModel {
     var rsaPublickey: String?
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     
-    func saveUserInfo(_ info: BaseResponseObject<UserInfo>) {
+    func saveUserInfo(_ info: BaseResponseObject<UserInfo>, phoneNum: String) {
         if  info.status == .success, let token = info.token, !token.isEmpty, let userInfo = info.object {
             let session = UserSessionInfo()
             session.token = token
             CoreDataManager.sharedInstance.save(userSession: session)
-            CoreDataManager.sharedInstance.save(userInfo: userInfo)
+            CoreDataManager.sharedInstance.save(userInfo: userInfo, phoneNum: phoneNum)
         }
     }
     
@@ -53,7 +53,7 @@ class UserSessionViewModel {
     func login(_ param: UserSessionParam) -> Observable<BaseResponseObject<UserInfo>> {
         let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.loginByPwd, param: param), needToken: .false)
          return loginObserable.map {  [weak self] (response) -> BaseResponseObject<UserInfo> in
-            self?.saveUserInfo(response)
+            self?.saveUserInfo(response, phoneNum: param.phoneNum ?? "")
             return response
         }
     }

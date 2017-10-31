@@ -136,18 +136,19 @@ extension CoreDataManager {
 
 // Save UserInfo
 extension CoreDataManager {
-    func save(userInfo: UserInfo) {
+    func save(userInfo: UserInfo, phoneNum: String) {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
             return
         }
-        if searchResulst.isEmpty {
-            guard let sessionInfo: User = NSEntityDescription.insertNewObject(forEntityName: "User", into: self.managedObjectContext) as? User else {  return  }
-            sessionInfo.userId = userInfo.userId
-        } else {
+        if !searchResulst.isEmpty {
             for info in searchResulst {
-                info.userId = userInfo.userId
+                managedObjectContext.delete(info)
             }
+        } else {
+            guard let info: User = NSEntityDescription.insertNewObject(forEntityName: "User", into: self.managedObjectContext) as? User else {  return  }
+            info.userId = userInfo.userId
+            info.phoneNum = phoneNum
         }
         saveContext()
     }
@@ -162,6 +163,7 @@ extension CoreDataManager {
         }
         let userInfo = UserInfo()
         userInfo.userId = info.userId
+         userInfo.phoneNum = info.phoneNum
         return userInfo
     }
     

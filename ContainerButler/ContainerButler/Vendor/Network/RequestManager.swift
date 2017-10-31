@@ -87,33 +87,37 @@ class RequestManager {
          return   Observable<T>.create { (observer) -> Disposable in
             Alamofire.upload(multipartFormData: { multipartFormData in
                 fileData.forEach { (data) in
-                    multipartFormData.append(data, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+//                    print("*********data********\(data.base64EncodedString())")
+//                    multipartFormData.append(data, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+                    multipartFormData.append(data, withName: "file")
                 }
-                print(multipartFormData)
                 if let dic = param.toJSON() as? [String: String] {
                     for (key, value) in dic {
                         multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
                     }
                 }
+                 print(param)
+                print(multipartFormData.contentLength)
             }, with: router) { result in
                var appError = AppError()
                 switch result {
-                case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
-                    upload.validate().responseJSON(completionHandler: { (response) in
+                case .success(request: let upload, streamingFromDisk: let fileDisk, streamFileURL: let fileURL):
+                    print(upload.request?.url)
+                    print(fileDisk)
+                    print(fileURL?.absoluteString)
+                    upload.validate().responseString(completionHandler: { (response) in
                         debugPrint("****************uploadImageResult:\(response.result)***********")
                         switch response.result {
                         case .success(let value):
-                            guard let responseJson = value as? [String: Any] else {
-                                observer.on(.completed)
-                                return
-                            }
-                            guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSON: responseJson) else {
+                            print(value)
+                            guard let responseObj = Mapper<BaseResponseObject<T>>().map(JSONString: value) else {
                                 observer.on(.completed)
                                 return
                             }
                             if responseObj.status == .success {
-                                if let obj = Mapper<T>().map(JSON: responseJson) {
+                                if let obj = Mapper<T>().map(JSONString: value) {
                                     observer.on(.next(obj))
+                                    observer.on(.completed)
                                 } else {
                                     appError.message = "Data Parase Error"
                                     observer.on(.error(appError))

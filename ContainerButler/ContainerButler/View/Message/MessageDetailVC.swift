@@ -54,6 +54,7 @@ extension MessageDetailVC {
         let items = messageVM.messageDetails.asObservable()
         items
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) { (row, element, cell) in
+                cell.config(element)
             }
             .disposed(by: disposeBag)
     }
@@ -61,6 +62,11 @@ extension MessageDetailVC {
 
 extension MessageDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if  indexPath.row < messageVM.messageDetails.value.count {
+            let vcc = NotReplenishedGoodsListVC()
+            vcc.supplyMessage = messageVM.messageDetails.value[indexPath.row]
+            navigationController?.pushViewController(vcc, animated: true)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

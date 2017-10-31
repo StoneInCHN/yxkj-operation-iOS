@@ -86,6 +86,7 @@ class ContainerManageViewModel {
     }
     
     func uploadSupplementPicture(_ param: ContainerSessionParam, file: Data) -> Observable<NullDataResponse> {
+        param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
       let  repsonseObserable: Observable<NullDataResponse> =  RequestManager.upload(Router.upload(endpoint: ContainerSession.uploadSupplementPic), param: param,
                               fileData: [file])
         return repsonseObserable

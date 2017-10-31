@@ -58,7 +58,7 @@ class LoginViewController: BaseViewController {
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-                textField.text = "18012341234"
+//                textField.text = "18012341234"
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
@@ -69,7 +69,7 @@ class LoginViewController: BaseViewController {
         pwdTF.font = UIFont.sizeToFit(with: 14)
         pwdTF.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         pwdTF.returnKeyType = .done
-        pwdTF.text = "111111"
+//        pwdTF.text = "111111"
         return pwdTF
     }()
     fileprivate lazy  var userIcon: UIImageView = {

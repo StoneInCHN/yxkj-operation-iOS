@@ -11,6 +11,7 @@ import ObjectMapper
 
 class UserInfo: Model {
     var userId: Int64 = 0
+    var phoneNum: String?
     
     override func mapping(map: Map) {
         userId <- map["id"]
