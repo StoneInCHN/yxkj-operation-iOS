@@ -141,7 +141,7 @@ extension ContainerViewController: UITableViewDataSource {
                     weakSelf.containerVM.startSupplyGoods(param)
                         .subscribe(onNext: { (resonse) in
                             let vcc =  ContainerManageVC()
-                            vcc.containerId = model.containerId
+                            vcc.container = model
                             vcc.currentScence = scence
                             weakSelf.navigationController?.pushViewController(vcc, animated: true)
                         }, onError: { (error) in

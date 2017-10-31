@@ -22,9 +22,9 @@ class NotReplenishedVC: BaseViewController {
         viewModel.requestWaitSupplyContainerGoodsList()
         viewModel.loadSelectedContainerGoods()
         return viewModel
-    }()
+        }()
     
-   fileprivate lazy var replenishManageView: ReplenishManageView = {
+    fileprivate lazy var replenishManageView: ReplenishManageView = {
         let animator = ReplenishManageView()
         return animator
     }()
@@ -45,6 +45,7 @@ class NotReplenishedVC: BaseViewController {
         loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 13)
         loginBtn.setTitle("拍照完成", for: .normal)
         loginBtn.setTitleColor(UIColor.white, for: .normal)
+        loginBtn.setTitleColor(UIColor.gray, for: .disabled)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainGreenColor)
         loginBtn.layer.cornerRadius = 20
         loginBtn.layer.masksToBounds = true
@@ -81,7 +82,7 @@ class NotReplenishedVC: BaseViewController {
     fileprivate lazy var pictureOptionView: PictureChooseOptionView = {[unowned self] in
         let view = PictureChooseOptionView(frame: CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: UIScreen.height ))
         return view
-    }()
+        }()
     lazy  var cover: UIButton = {
         let cover = UIButton()
         cover.frame = UIScreen.main.bounds
@@ -93,7 +94,7 @@ class NotReplenishedVC: BaseViewController {
         super.viewDidLoad()
         setupUI()
     }
-  
+    
 }
 
 extension NotReplenishedVC {
@@ -139,18 +140,18 @@ extension NotReplenishedVC {
         UIApplication.shared.keyWindow?.addSubview(pictureOptionView)
         pictureOptionView.cameraBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
-                 self?.dismissPictureOptionView()
+                self?.dismissPictureOptionView()
                 self?.openMedia(.camera)
             })
-        .disposed(by: disposeBag)
-
+            .disposed(by: disposeBag)
+        
         pictureOptionView.photoBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
                 self?.dismissPictureOptionView()
                 self?.openMedia(.photoLibrary)
             })
             .disposed(by: disposeBag)
-
+        
         pictureOptionView.cancleBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
                 self?.dismissPictureOptionView()
@@ -167,28 +168,15 @@ extension NotReplenishedVC {
             guard let weakSelf = self else {
                 return
             }
-            let param = ContainerSessionParam()
-            param.sceneSn = weakSelf.currentScence?.number
-            var recordsArray = [SuplementRecordParam]()
-             print(weakSelf.listVM.selectedSenceModels.value)
-            let selectedArray = weakSelf.listVM.selectedContainerModels.value
-            for selectedGoods in selectedArray {
-                let suppplyParam = SuplementRecordParam()
-                suppplyParam.supplementId = selectedGoods.supplementId
-                suppplyParam.supplyCount = selectedGoods.supplyCount
-                recordsArray.append(suppplyParam)
-                print(weakSelf.listVM.selectedSenceModels.value)
-            }
-            param.suplementRecords = recordsArray
-            HUD.showLoading()
-            weakSelf.listVM.requestSupplementRecord(param)
+            weakSelf.commitSupplyRecord()
                 .subscribe(onNext: { (response) in
-                HUD.showSuccess("提交成功")
-                  weakSelf.navigationController?.popToRootViewController(animated: true)
-            }, onCompleted: {
-                HUD.hideLoading()
-            })
-                .disposed(by: weakSelf.disposeBag)
+                    HUD.showSuccess(response.description ?? "")
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }).disposed(by: weakSelf.disposeBag)
         }
         
         replenishDoneView.closeBtn.rx.tap
@@ -198,7 +186,7 @@ extension NotReplenishedVC {
         
         replenishDoneView.rechooseBtn.rx.tap
             .subscribe(onNext: { [weak self]_ in
-                 self?.replenishDoneView.dismiss()
+                self?.replenishDoneView.dismiss()
                 self?.openMedia(.camera)
             }).disposed(by: disposeBag)
         
@@ -206,20 +194,19 @@ extension NotReplenishedVC {
             .subscribe(onNext: { [weak self] _ in
                 guard let weakSelf = self else {    return  }
                 weakSelf.replenishDoneView.dismiss()
-                let param = ContainerSessionParam()
-                param.cntrId = weakSelf.containerId
-                if let image = weakSelf.replenishDoneView.imageView.image,
-                    let data = UIImageJPEGRepresentation(image, 0.01) {
-                    HUD.showLoading()
-                    self?.listVM.uploadSupplementPicture(param, file: data).subscribe(onError: { (error) in
-                        if let error = error as? AppError {
-                            HUD.showError(error.message)
-                        }
-                    }, onCompleted: {
-                        HUD.showSuccess("提交完成")
-                        self?.navigationController?.popToRootViewController(animated: true)
-                    }).disposed(by: weakSelf.disposeBag)
-                }
+                HUD.showLoading()
+                //                weakSelf.commitSupplyRecord().subscribe(onNext: { (response) in
+                //                }).disposed(by: weakSelf.disposeBag)
+                weakSelf.uploadPic().subscribe(onNext: { (response) in
+                    HUD.showSuccess(response.description ?? "")
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }, onError: { error in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }).disposed(by: weakSelf.disposeBag)
+                }, onCompleted: {
+                    HUD.hideLoading()
             }).disposed(by: disposeBag)
         
         listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
@@ -231,6 +218,12 @@ extension NotReplenishedVC {
             .asObservable()
             .map {!$0.isEmpty}
             .bind(to: stopBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        listVM.selectedContainerModels
+            .asObservable()
+            .map {!$0.isEmpty}
+            .bind(to: doneBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
         listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
@@ -256,7 +249,7 @@ extension NotReplenishedVC {
 }
 
 extension NotReplenishedVC: UITableViewDelegate {
-   
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 107
     }
@@ -276,7 +269,7 @@ extension NotReplenishedVC: UITableViewDelegate {
                     weakSelf.listVM.cacheSelectedContainerGoods(selectedModel)
                     weakSelf.tableView.reloadData()
                 }
-         
+                
             }
             replenishManageView.config(listVM.models.value[indexPath.row])
             replenishManageView.show()
@@ -305,9 +298,9 @@ extension NotReplenishedVC: UITableViewDataSource {
             cell.hiddenCover()
             return cell
         } else {
-              cell.delegate = self
-              cell.configContainerWaitSupplyGoods(listVM.selectedContainerModels.value[indexPath.row])
-              cell.showCover(listVM.selectedContainerModels.value[indexPath.row].waitSupplyCount)
+            cell.delegate = self
+            cell.configContainerWaitSupplyGoods(listVM.selectedContainerModels.value[indexPath.row])
+            cell.showCover(listVM.selectedContainerModels.value[indexPath.row].waitSupplyCount)
         }
         return cell
     }
@@ -335,6 +328,31 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
     }
 }
 extension NotReplenishedVC {
+    fileprivate func commitSupplyRecord() -> Observable<NullDataResponse> {
+        let param = ContainerSessionParam()
+        param.sceneSn = currentScence?.number
+        var recordsArray = [SuplementRecordParam]()
+        let selectedArray = listVM.selectedContainerModels.value
+        for selectedGoods in selectedArray {
+            let suppplyParam = SuplementRecordParam()
+            suppplyParam.supplementId = selectedGoods.supplementId
+            suppplyParam.supplyCount = selectedGoods.supplyCount
+            recordsArray.append(suppplyParam)
+        }
+        param.suplementRecords = recordsArray
+        return  listVM.requestSupplementRecord(param)
+    }
+    
+    fileprivate func uploadPic() -> Observable<NullDataResponse> {
+        let param = ContainerSessionParam()
+        param.cntrId = containerId
+        if let image = replenishDoneView.imageView.image,
+            let data = UIImageJPEGRepresentation(image, 0.01) {
+            return  listVM.uploadSupplementPicture(param, file: data)
+        }
+        return Observable.of(NullDataResponse(JSON: [:])!)
+    }
+    
     fileprivate func doneAction() {
         UIApplication.shared.keyWindow?.insertSubview(cover, belowSubview: pictureOptionView)
         UIView.animate(withDuration: 0.25, animations: {[unowned self] in
@@ -348,7 +366,7 @@ extension NotReplenishedVC {
         }
         
     }
-  
+    
     fileprivate func dismissPictureOptionView() {
         UIView.animate(withDuration: 0.25, animations: { [unowned self] in
             self.pictureOptionView.transform = .identity
@@ -361,7 +379,7 @@ extension NotReplenishedVC {
     }
     
     fileprivate func openMedia(_ type: UIImagePickerControllerSourceType) {
-       
+        
         if !UIImagePickerController.isSourceTypeAvailable(type) {
             return
         }
@@ -381,3 +399,4 @@ extension NotReplenishedVC: UIImagePickerControllerDelegate, UINavigationControl
         dismiss(animated: true, completion: nil)
     }
 }
+

@@ -191,6 +191,8 @@ extension CoreDataManager {
         cachedGoods.remainCount = Int16(goods.remainCount)
         cachedGoods.channelSn = goods.channelSn
         cachedGoods.containerId = Int16(containerId)
+        cachedGoods.supplementId = Int16(goods.supplementId)
+        cachedGoods.supplyCount = Int16(goods.supplyCount)
         saveContext()
     }
     
@@ -208,6 +210,8 @@ extension CoreDataManager {
             goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
             goods.remainCount = Int(cachedGoods.remainCount)
             goods.channelSn = cachedGoods.channelSn
+            goods.supplementId = Int(cachedGoods.supplementId)
+            goods.supplyCount = Int(cachedGoods.supplyCount)
             goodslist.append(goods)
         }
         return goodslist

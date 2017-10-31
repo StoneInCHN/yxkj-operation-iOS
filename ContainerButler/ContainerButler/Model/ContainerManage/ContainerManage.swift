@@ -52,7 +52,7 @@ class Goods: Model {
     var isSupplied: Bool = false
     var remainCount: Int = 0
     var supplyCount: Int = 0
-     var supplementId: Int = 0
+    var supplementId: Int = 0
     
     override func mapping(map: Map) {
         goodsSn <- map["goodsSn"]

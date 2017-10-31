@@ -89,19 +89,20 @@ class RequestManager {
                 fileData.forEach { (data) in
                     multipartFormData.append(data, withName: "suppPic", fileName: "image.jpg", mimeType: "image/jpeg")
                 }
-                if let dic = param.toJSON() as? [String: String] {
-                    for (key, value) in dic {
-                        multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-                    }
+                let dic = param.toJSON()
+                for (key, value) in dic {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key)
                 }
-                 print(param)
+                print("*****body*******\(dic)")
                 print(multipartFormData.contentLength)
             }, with: router) { result in
                var appError = AppError()
                 switch result {
                 case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
                     print(upload.request?.url?.absoluteString ?? "")
+                    print(upload.request?.allHTTPHeaderFields ?? [:])
                     upload.validate().responseString(completionHandler: { (response) in
+                        debugPrint("****************uploadImageResult:\(response.result)***********")
                         switch response.result {
                         case .success(let value):
                             print(value)
@@ -123,6 +124,7 @@ class RequestManager {
                                 observer.on(.error(appError))
                             }
                         case .failure(let error):
+                             debugPrint("****************uploadImageResult:\(error.localizedDescription)***********")
                             appError.message = error.localizedDescription
                             observer.on(.error(appError))
                         }

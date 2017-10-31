@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ContainerManageVC: BaseViewController {
-    var containerId: Int = 0
+    var container: Container?
    var currentScence: Scence?
     fileprivate lazy var pageTitleView: PageTitleView = {
         let pvc = PageTitleView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44), titles: ["待补商品", "全部商品"])
@@ -22,9 +22,9 @@ class ContainerManageVC: BaseViewController {
         var childVCs = [UIViewController]()
         let notReplenishVC = NotReplenishedVC()
         let wholeGoodsVC = WholeGoodsVC()
-        notReplenishVC.containerId = self.containerId
+        notReplenishVC.containerId = self.container?.containerId ?? 0
         notReplenishVC.currentScence = self.currentScence
-        wholeGoodsVC.containerId = self.containerId
+        wholeGoodsVC.containerId = self.container?.containerId ?? 0
         childVCs.append(notReplenishVC)
         childVCs.append(wholeGoodsVC)
         let pageContenView = PageContentView(frame: CGRect(x: 0, y: 44, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 44 - 64), childVCs: childVCs, parentVC: self)
@@ -42,7 +42,7 @@ class ContainerManageVC: BaseViewController {
 extension ContainerManageVC {
     private  func setupUI() {
         automaticallyAdjustsScrollViewInsets = false
-        title = "A货柜管理"
+        title = "\(container?.name ?? "")" +  "管理"
         view.addSubview(pageTitleView)
         view.addSubview(pageContenView)
         let centerLine = UIView()
