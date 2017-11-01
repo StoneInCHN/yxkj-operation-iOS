@@ -5,6 +5,7 @@
         <attribute name="channelSn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="containerId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="goodsName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="goodsPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="goodsSn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remainCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sceneSn" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,7 +21,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CachGoods" positionX="-479" positionY="324" width="128" height="195"/>
+        <element name="CachGoods" positionX="-479" positionY="324" width="128" height="210"/>
         <element name="Session" positionX="-36" positionY="27" width="128" height="60"/>
         <element name="User" positionX="-38" positionY="-108" width="128" height="75"/>
     </elements>

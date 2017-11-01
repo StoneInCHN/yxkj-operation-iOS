@@ -187,6 +187,7 @@ extension CoreDataManager {
         guard let cachedGoods: CachGoods = NSEntityDescription.insertNewObject(forEntityName: "CachGoods", into: self.managedObjectContext) as? CachGoods else {  return }
         cachedGoods.goodsSn = goods.goodsSn
         cachedGoods.goodsName = goods.goodsName
+        cachedGoods.goodsPic = goods.goodsPic
         cachedGoods.waitSupplyCount = Int16(goods.waitSupplyCount)
         cachedGoods.remainCount = Int16(goods.remainCount)
         cachedGoods.channelSn = goods.channelSn
@@ -207,6 +208,7 @@ extension CoreDataManager {
             let goods = Goods()
             goods.goodsSn = cachedGoods.goodsSn
             goods.goodsName = cachedGoods.goodsName
+             goods.goodsPic = cachedGoods.goodsPic
             goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
             goods.remainCount = Int(cachedGoods.remainCount)
             goods.channelSn = cachedGoods.channelSn
@@ -215,6 +217,25 @@ extension CoreDataManager {
             goodslist.append(goods)
         }
         return goodslist
+    }
+    func getGoods(containerId: Int, supplementId: Int) -> Goods? {
+        let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
+        let predicate1 =  NSPredicate(format: "containerId=%@", "\(containerId)")
+        let predicate2 =  NSPredicate(format: "supplementId=%@", "\(supplementId)")
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [predicate1, predicate2])
+        guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest), let cachedGoods = searchResulst.last else {
+            return nil
+        }
+        let goods = Goods()
+        goods.goodsSn = cachedGoods.goodsSn
+        goods.goodsName = cachedGoods.goodsName
+       goods.goodsPic = cachedGoods.goodsPic
+        goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
+        goods.remainCount = Int(cachedGoods.remainCount)
+        goods.channelSn = cachedGoods.channelSn
+        goods.supplementId = Int(cachedGoods.supplementId)
+        goods.supplyCount = Int(cachedGoods.supplyCount)
+        return goods
     }
     
     func deleteGoods(containerId: Int, goodsSn: String?) {
@@ -226,9 +247,9 @@ extension CoreDataManager {
             guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
                 return
             }
-            print(searchResulst)
             searchResulst.forEach {
                 managedObjectContext.delete($0)
+                print("containerId:\($0.containerId), goodsName:\($0.goodsName ?? "")")
             }
 
         } else {

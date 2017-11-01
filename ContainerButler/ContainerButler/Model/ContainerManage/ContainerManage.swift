@@ -43,13 +43,12 @@ class GoodsCategory: Model {
     }
 }
 
-class Goods: Model {
+class Goods: Model, NSCopying {
     var goodsSn: String?
     var goodsName: String?
     var goodsPic: String?
     var waitSupplyCount: Int = 1000
     var channelSn: String?
-    var isSupplied: Bool = false
     var remainCount: Int = 0
     var supplyCount: Int = 0
     var supplementId: Int = 0
@@ -60,8 +59,21 @@ class Goods: Model {
         goodsPic <- map["goodsPic"]
         waitSupplyCount <- map["waitSupplyCount"]
         channelSn <- map["channelSn"]
-       remainCount <- map["remainCount"]
-      supplementId <- map["id"]
+        remainCount <- map["remainCount"]
+        supplementId <- map["id"]
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let goods = Goods()
+        goods.goodsSn = self.goodsSn
+        goods.goodsName = self.goodsName
+        goods.goodsPic = self.goodsPic
+        goods.waitSupplyCount = self.waitSupplyCount
+        goods.channelSn = self.channelSn
+        goods.remainCount = self.remainCount
+        goods.supplyCount = self.supplyCount
+        goods.supplementId = self.supplementId
+        return goods
     }
     
 }

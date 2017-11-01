@@ -272,7 +272,6 @@ extension NotReplenishedGoodsListVC: UITableViewDelegate {
             }
             let selectedGoods = weakSelf.listVM.models.value[indexPath.row]
             selectedGoods.waitSupplyCount =  selectedGoods.waitSupplyCount - count
-            selectedGoods.isSupplied = true
             weakSelf.listVM.models.value.remove(at: indexPath.row)
             weakSelf.listVM.models.value.append(selectedGoods)
             tableView.reloadData()
@@ -295,11 +294,7 @@ extension NotReplenishedGoodsListVC: UITableViewDataSource {
             cell.configWaitSupplyGoods(listVM.models.value[indexPath.row])
         }
         let goods = listVM.models.value[indexPath.row]
-        if goods.isSupplied {
-            cell.showCover(goods.waitSupplyCount, text: "完成取货")
-        } else {
-            cell.hiddenCover()
-        }
+        cell.hiddenCover()
         return cell
     }
 }

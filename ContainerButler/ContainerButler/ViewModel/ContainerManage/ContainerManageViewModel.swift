@@ -29,6 +29,7 @@ class ContainerManageViewModel {
     fileprivate var moreSupplyRecords: [SuplementRecord] = []
     fileprivate let disposeBag = DisposeBag()
     fileprivate  var moreData: [Goods] = []
+    fileprivate  var orginalGoodsArray: [Goods] = []
     
    func reuestWaitSuppltScencelist() {
         let param = ContainerSessionParam()
@@ -108,6 +109,12 @@ class ContainerManageViewModel {
     func resetData(_ model: Goods, index: Int) {
         CoreDataManager.sharedInstance.deleteGoods(containerId: param.cntrId ?? 0, goodsSn: model.goodsSn ?? "")
         loadSelectedContainerGoods()
+        for orginalGoods in orginalGoodsArray {
+            if orginalGoods.supplementId == model.supplementId,
+                let copyGoods = orginalGoods.copy() as? Goods {
+                models.value.append(copyGoods)
+            }
+        }
     }
     
 }
@@ -136,6 +143,10 @@ extension ContainerManageViewModel {
                                     weakSelf.param.pageNo = (weakSelf.param.pageNo ?? 2) - 1
                                     weakSelf.moreData.removeAll()
                                 }
+                            }
+                            if path == .getWaitSupplyContainerGoodsList {
+                                weakSelf.orginalGoodsArray = weakSelf.models.value.map {($0.copy() as? Goods) ?? Goods() }
+                                weakSelf.filterSelectedGoods()
                             }
                             break
                         case .error( let error):
@@ -170,8 +181,19 @@ extension ContainerManageViewModel {
             }).disposed(by: disposeBag)
     }
     
+    fileprivate func filterSelectedGoods() {
+        for currentGoods in models.value {
+            if  let cacheGoods = CoreDataManager.sharedInstance.getGoods(containerId: self.param.cntrId ?? 0, supplementId: currentGoods.supplementId),
+                 let index = self.models.value.index(where: {$0.supplementId == cacheGoods.supplementId}) {
+                self.models.value.remove(at: index)
+            }
+        }
+        print(models.value)
+        print(orginalGoodsArray)
+    }
+    
 }
 
 extension ContainerManageViewModel {
- 
+    
 }

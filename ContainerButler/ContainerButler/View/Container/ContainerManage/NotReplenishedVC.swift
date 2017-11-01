@@ -404,4 +404,3 @@ extension NotReplenishedVC: UIImagePickerControllerDelegate, UINavigationControl
         dismiss(animated: true, completion: nil)
     }
 }
-
