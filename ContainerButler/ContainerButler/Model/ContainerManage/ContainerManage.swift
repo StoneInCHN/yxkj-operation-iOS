@@ -52,6 +52,7 @@ class Goods: Model, NSCopying {
     var remainCount: Int = 0
     var supplyCount: Int = 0
     var supplementId: Int = 0
+    var isSaleOutTest: Bool = false
     
     override func mapping(map: Map) {
         goodsSn <- map["goodsSn"]

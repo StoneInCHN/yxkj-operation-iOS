@@ -56,6 +56,7 @@ extension WholeGoodsVC {
                     cell.delegate = weakSelf
                     cell.configContainerWaitSupplyGoods(element)
                     cell.hiddenCover()
+                    cell.loadingView.isHidden = !element.isSaleOutTest
                 }
             }
             .disposed(by: disposeBag)
@@ -94,17 +95,28 @@ extension WholeGoodsVC: MGSwipeTableCellDelegate {
     }
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        if let indexPath = tableView.indexPath(for: cell), direction == .rightToLeft, index == 0 {
-            let param = ContainerSessionParam()
-              param.channelId = "\(listVM.models.value[indexPath.row].supplementId)"
-            listVM.requestSalesOutTest(param)
-                .subscribe(onNext: { (response) in
-                    
-                }, onError: { (error) in
-                    
-                }, onCompleted: {
-                    
-                }).disposed(by: disposeBag)
+        if let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell), direction == .rightToLeft, index == 0 {
+            cell.loadingView.isHidden = false
+            listVM.models.value[indexPath.row].isSaleOutTest = true
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0, execute: { [weak self] in
+                guard let weakSelf = self else { return }
+                let param = ContainerSessionParam()
+                param.channelId = "\(weakSelf.listVM.models.value[indexPath.row].supplementId)"
+                weakSelf.listVM.requestSalesOutTest(param)
+                    .subscribe(onNext: { (response) in
+                          cell.loadingView.isHidden = true
+                        weakSelf.listVM.models.value[indexPath.row].isSaleOutTest = false
+                        weakSelf.tableView.reloadData()
+                        HUD.showAlert(from: weakSelf, title: "出货成功", message: "\((weakSelf.parent as? ContainerManageVC)?.container?.name ?? "")货柜 货道号：\(weakSelf.listVM.models.value[indexPath.row].channelSn ?? "")\n \(weakSelf.listVM.models.value[indexPath.row].goodsName ?? "")", enterTitle: "确定", isHiddenCancleTitle: true, cancleTitle: nil, enterAction: nil, cancleAction: nil)
+                    }, onError: { (error) in
+                        if let error = error as? AppError {
+                            HUD.showError(error.message)
+                        }
+                    }, onCompleted: {
+                        
+                    }).disposed(by: weakSelf.disposeBag)
+            })
+       
         }
         return true
     }

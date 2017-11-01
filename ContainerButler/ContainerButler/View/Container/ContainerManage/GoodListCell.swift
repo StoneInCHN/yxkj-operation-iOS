@@ -16,6 +16,11 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     let disposeBag: DisposeBag = DisposeBag()
     var rightPanAction: (() -> Void)?
     var itemdidSelected: PublishSubject<String> = PublishSubject<String> ()
+   lazy var loadingView: LoadingView = {
+        let view = LoadingView()
+        view.isHidden = true
+        return view
+    }()
     fileprivate lazy  var notReplenishLabel: YYLabel = {
         let descLabel = YYLabel()
         var text = NSMutableAttributedString()
@@ -98,9 +103,17 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         bgView.addSubview(coverView)
         coverView.addSubview(badgeView)
         coverView.addSubview(descLabel)
+        bgView.addSubview(loadingView)
         badgeView.topOffset = 40
         badgeView.rightOffset = UIScreen.width - 52
       
+        loadingView.snp.makeConstraints { (maker) in
+            maker.left.equalTo(bgView.snp.left)
+            maker.top.equalTo(bgView.snp.top)
+            maker.right.equalTo(bgView.snp.right)
+            maker.bottom.equalTo(bgView.snp.bottom)
+        }
+        
         bgView.snp.makeConstraints { (maker) in
             maker.left.equalTo(0)
             maker.top.equalTo(5)
@@ -221,4 +234,56 @@ extension GoodListCell {
     func hiddenCover() {
         coverView.isHidden = true
     }
+}
+
+class LoadingView: UIView {
+    fileprivate lazy var progressViewHorizontal: M13ProgressViewSegmentedBar = {
+        let view = M13ProgressViewSegmentedBar()
+        view.primaryColor = UIColor.white
+        view.secondaryColor = .clear
+        view.segmentSeparation = 7
+        view.indeterminate = true
+        return view
+    }()
+    fileprivate lazy  var descLabel: UILabel = {
+        let descLabel = UILabel()
+        descLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        descLabel.textColor = UIColor.white
+        descLabel.numberOfLines = 1
+        descLabel.text = "正在出货"
+        return descLabel
+    }()
+    
+    fileprivate lazy  var coverView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "gradation"))
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(coverView)
+        addSubview(progressViewHorizontal)
+        addSubview(descLabel)
+        
+        coverView.snp.makeConstraints { (maker) in
+            maker.left.right.bottom.top.equalTo(0)
+        }
+        
+        descLabel.snp.makeConstraints { (maker) in
+            maker.centerY.equalTo(self.snp.centerY)
+            maker.left.equalTo(30)
+        }
+        progressViewHorizontal.snp.makeConstraints { (maker) in
+            maker.centerY.equalTo(descLabel.snp.centerY)
+            maker.left.equalTo(descLabel.snp.right).offset(8)
+            maker.width.equalTo(50)
+            maker.height.equalTo(2)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

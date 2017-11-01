@@ -71,6 +71,8 @@
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
 		CDB9C67E1F9F17FE002B87EA /* ContainerManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */; };
 		CDB9EBE01FA9C8670041E5C6 /* gradation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB9EBDF1FA9C8670041E5C6 /* gradation@3x.png */; };
+		CDB9EBE41FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB9EBE31FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.m */; };
+		CDB9EBE71FA9D4A40041E5C6 /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB9EBE61FA9D4A40041E5C6 /* M13ProgressView.m */; };
 		CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */; };
 		CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */; };
 		CDD0D4B81F9D94DE0056B6F1 /* complete_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */; };
@@ -282,6 +284,10 @@
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
 		CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageViewModel.swift; sourceTree = "<group>"; };
 		CDB9EBDF1FA9C8670041E5C6 /* gradation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradation@3x.png"; sourceTree = "<group>"; };
+		CDB9EBE21FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedBar.h; sourceTree = "<group>"; };
+		CDB9EBE31FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedBar.m; sourceTree = "<group>"; };
+		CDB9EBE51FA9D4A30041E5C6 /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
+		CDB9EBE61FA9D4A40041E5C6 /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
 		CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaResetVC.swift; sourceTree = "<group>"; };
 		CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete_goods@3x.png"; sourceTree = "<group>"; };
@@ -801,6 +807,7 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CDB9EBE11FA9D4470041E5C6 /* SegmentedBar */,
 				CDD0D4B91F9D9C0B0056B6F1 /* YYText */,
 				CDDBD2A01F9501F3004F5526 /* MGSwipeButton */,
 				CD8C5B531F8F044D00E2E7B5 /* RSA */,
@@ -927,6 +934,17 @@
 				CD92CD2C1F9752660077C78F /* add@3x.png */,
 			);
 			path = Counter;
+			sourceTree = "<group>";
+		};
+		CDB9EBE11FA9D4470041E5C6 /* SegmentedBar */ = {
+			isa = PBXGroup;
+			children = (
+				CDB9EBE51FA9D4A30041E5C6 /* M13ProgressView.h */,
+				CDB9EBE61FA9D4A40041E5C6 /* M13ProgressView.m */,
+				CDB9EBE21FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.h */,
+				CDB9EBE31FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.m */,
+			);
+			path = SegmentedBar;
 			sourceTree = "<group>";
 		};
 		CDCED5B71F8B4D890038C1F3 /* ResetPassword */ = {
@@ -1376,6 +1394,7 @@
 				CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */,
 				CD62C38E1FA6D324007D4918 /* Message.swift in Sources */,
 				CDDBD2931F9500AF004F5526 /* ContainerSectionHeaderView.swift in Sources */,
+				CDB9EBE71FA9D4A40041E5C6 /* M13ProgressView.m in Sources */,
 				CDD0D4EE1F9D9C0B0056B6F1 /* YYTextView.m in Sources */,
 				CDD0D4F71F9D9C0B0056B6F1 /* YYTextDebugOption.m in Sources */,
 				CDDBD2941F9500AF004F5526 /* ContainerTableViewCell.swift in Sources */,
@@ -1404,6 +1423,7 @@
 				CDF727C11F7F7B7D00CDCC75 /* UIView+Shake.m in Sources */,
 				CD1D1E451F73A1B8008A3092 /* DZNPhotoEditorViewController.m in Sources */,
 				CDD0D4FD1F9D9C0B0056B6F1 /* YYTextRubyAnnotation.m in Sources */,
+				CDB9EBE41FA9D4470041E5C6 /* M13ProgressViewSegmentedBar.m in Sources */,
 				CD1D1E471F73A1B8008A3092 /* DZNPhotoPickerControllerConstants.m in Sources */,
 				CD1D1E491F73A1B8008A3092 /* UIImagePickerController+Edit.m in Sources */,
 				CDD0D4FF1F9D9C0B0056B6F1 /* NSParagraphStyle+YYText.m in Sources */,
