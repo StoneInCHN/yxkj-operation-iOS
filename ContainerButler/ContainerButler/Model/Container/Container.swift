@@ -54,3 +54,12 @@ class Container: Model {
         waitSupplyCount <- map["waitSupplyCount"]
     }
 }
+
+
+class Command: Model {
+    var volume: String?
+    
+    override func mapping(map: Map) {
+         volume <- map["volume"]
+    }
+}

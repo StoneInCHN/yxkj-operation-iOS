@@ -15,7 +15,8 @@ class VolumeTableViewCell: UITableViewCell, ViewNameReusable {
         view.setThumbImage(UIImage(named: "round"), for: .highlighted)
         view.minimumTrackTintColor = UIColor(hex: 0x30C7AC)
         view.maximumTrackTintColor = UIColor(hex: 0xcccccc)
-        
+        view.minimumValue = 0
+        view.maximumValue = 100
         return view
     }()
     

@@ -15,6 +15,7 @@ class HUD {
                               title: String?,
                               message: String?,
                               enterTitle: String?,
+                              isHiddenCancleTitle: Bool = false,
                               cancleTitle: String? = "取消",
                               enterAction: (() -> Void)?,
                               cancleAction: (() -> Void)?) {
@@ -29,18 +30,21 @@ class HUD {
             messageText.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor(hex: 0x333333)], range: NSMakeRange(0, message.characters.count))
             alertVC.setValue(messageText, forKey: "attributedMessage")
         }
-        let cancleAction = UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
-            cancleAction?()
-        })
-       cancleAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
         if let enter = enterTitle, !enter.isEmpty {
             let enterAction = UIAlertAction(title: enter, style: .default, handler: { (_) in
                 enterAction?()
             })
             alertVC.addAction(enterAction)
-          enterAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
+            enterAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
         }
-         alertVC.addAction(cancleAction)
+        
+        if !isHiddenCancleTitle {
+            let cancleAction = UIAlertAction(title: cancleTitle, style: .default, handler: { (_) in
+                cancleAction?()
+            })
+            cancleAction.setValue(UIColor(hex: 0x333333), forKey: "titleTextColor")
+            alertVC.addAction(cancleAction)
+        }
         currentVC.present(alertVC, animated: true, completion: nil)
     }
     
@@ -48,8 +52,6 @@ class HUD {
         UIApplication.shared.keyWindow?.isUserInteractionEnabled = false
         SVProgressHUD.setRingNoTextRadius(10)
         SVProgressHUD.show()
-        
-        
     }
     
     static func hideLoading() {

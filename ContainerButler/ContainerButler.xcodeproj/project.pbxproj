@@ -70,6 +70,7 @@
 		CD9466641F74AF2F00C85D7B /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9466631F74AF2F00C85D7B /* MessageDetailVC.swift */; };
 		CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */; };
 		CDB9C67E1F9F17FE002B87EA /* ContainerManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */; };
+		CDB9EBE01FA9C8670041E5C6 /* gradation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB9EBDF1FA9C8670041E5C6 /* gradation@3x.png */; };
 		CDCED5BA1F8B4DBC0038C1F3 /* CaptchaResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */; };
 		CDCED5BB1F8B4E060038C1F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */; };
 		CDD0D4B81F9D94DE0056B6F1 /* complete_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */; };
@@ -280,6 +281,7 @@
 		CDB99FD71F70C9A900C68D72 /* UIButton+CountDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CountDown.h"; sourceTree = "<group>"; };
 		CDB99FD81F70C9A900C68D72 /* UIButton+CountDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CountDown.m"; sourceTree = "<group>"; };
 		CDB9C67D1F9F17FE002B87EA /* ContainerManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManageViewModel.swift; sourceTree = "<group>"; };
+		CDB9EBDF1FA9C8670041E5C6 /* gradation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradation@3x.png"; sourceTree = "<group>"; };
 		CDCED5B81F8B4D890038C1F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		CDCED5B91F8B4DBC0038C1F3 /* CaptchaResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaResetVC.swift; sourceTree = "<group>"; };
 		CDD0D4B71F9D94DE0056B6F1 /* complete_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete_goods@3x.png"; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 		CD92CD1A1F973D0F0077C78F /* Counter */ = {
 			isa = PBXGroup;
 			children = (
+				CDB9EBDF1FA9C8670041E5C6 /* gradation@3x.png */,
 				CDDE38471FA1CD0600B28873 /* round@3x.png */,
 				CD84AD401FA1C7DC003666E4 /* volume_big@3x.png */,
 				CD84AD411FA1C7DC003666E4 /* volume_small@3x.png */,
@@ -1261,6 +1264,7 @@
 				CDFF58D81F989D9600605761 /* logo@3x.png in Resources */,
 				CD69C4651F66874000623B91 /* Assets.xcassets in Resources */,
 				CD84AD431FA1C7DC003666E4 /* volume_small@3x.png in Resources */,
+				CDB9EBE01FA9C8670041E5C6 /* gradation@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

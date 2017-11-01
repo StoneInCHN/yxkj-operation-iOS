@@ -131,7 +131,9 @@ extension ContainerViewController: UITableViewDataSource {
         cell.itemdidSelected = { [weak self] model in
             guard let weakSelf = self else { return }
             if model.isCentralContainer {
-               weakSelf.navigationController?.pushViewController(CenteralContainerVC(), animated: true)
+                let vcc = CenteralContainerVC()
+                vcc.deviceNum = model.number
+               weakSelf.navigationController?.pushViewController(vcc, animated: true)
             } else {
                 HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: { [weak self] in
                     guard let weakSelf = self else { return }
@@ -140,10 +142,14 @@ extension ContainerViewController: UITableViewDataSource {
                     HUD.showLoading()
                     weakSelf.containerVM.startSupplyGoods(param)
                         .subscribe(onNext: { (resonse) in
-                            let vcc =  ContainerManageVC()
-                            vcc.container = model
-                            vcc.currentScence = scence
-                            weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                            if let scence = resonse.object, let name = scence.name, !name.isEmpty {
+                                HUD.showAlert(from: weakSelf, title: "系统提示", message: "您尚未完成\(name)优享空间的补货，请完成后再对下一个优享空间进行补货", enterTitle: "确定", isHiddenCancleTitle: true, cancleTitle: nil, enterAction: nil, cancleAction: nil)
+                            } else {
+                                let vcc =  ContainerManageVC()
+                                vcc.container = model
+                                vcc.currentScence = scence
+                                weakSelf.navigationController?.pushViewController(vcc, animated: true)
+                            }
                         }, onError: { (error) in
                             if let error = error as? AppError {
                                 HUD.showError(error.message)

@@ -149,6 +149,34 @@ enum MessageSession: UserEndPointProtocol {
     }
 
 }
+
+enum CentralSession: UserEndPointProtocol {
+    // 重启设备
+    case rebootSystem
+    // 测试出货接口
+    case salesOutTest
+    // 调节音量大小
+    case updateAudioVolume
+    // 获取当前设备音量
+    case getCurrentVolume
+    
+    var path: String {
+        return "/cmd"
+    }
+    
+    var endpoint: String {
+        switch self {
+        case .rebootSystem:
+            return "/rebootSystem"
+        case .salesOutTest:
+            return "/salesOutTest"
+        case .updateAudioVolume:
+            return "/updateAudioVolume"
+        case .getCurrentVolume:
+            return "/getCurrentVolume"
+        }
+    }
+}
 class UserSessionParam: Model {
     var phoneNum: String?
     var newPwd: String?
@@ -181,6 +209,9 @@ class ContainerSessionParam: Model {
     var goodsSn: String?
     var cntrId: Int?
     var suplementRecords: [SuplementRecordParam]?
+    var deviceNo: String?
+    var volume: String?
+    var channelId: String?
     
     override func mapping(map: Map) {
         userId <- map["userId"]
@@ -191,6 +222,9 @@ class ContainerSessionParam: Model {
         goodsSn <- map["goodsSn"]
         cntrId <- map["cntrId"]
         suplementRecords <- map["supplementRecords"]
+        deviceNo <- map["deviceNo"]
+        volume <- map["volume"]
+        channelId <- map["channelId"]
     }
 }
 

@@ -120,6 +120,11 @@ class ContainerManageViewModel {
     func clearCachedGoods() {
         CoreDataManager.sharedInstance.deleteGoods(containerId: param.cntrId ?? 0, supplementId: nil)
     }
+    
+    func requestSalesOutTest(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
+        let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(CentralSession.salesOutTest, param: param))
+        return repsonseObserable
+    }
 }
 
 extension ContainerManageViewModel {

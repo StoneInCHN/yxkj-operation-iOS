@@ -13,6 +13,7 @@ import RxDataSources
 import Closures
 
 class CenteralContainerVC: BaseViewController {
+    var deviceNum: String?
     fileprivate var centralViewModel: CentralContainerViewModel = CentralContainerViewModel()
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
@@ -30,6 +31,7 @@ class CenteralContainerVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadData()
     }
     
 }
@@ -43,6 +45,21 @@ extension CenteralContainerVC {
             maker.left.right.bottom.top.equalTo(0)
         }
     }
+    
+    fileprivate func loadData() {
+        let param = ContainerSessionParam()
+        param.deviceNo = deviceNum
+        centralViewModel.getCurrentVolume(param)
+            .subscribe(onNext: {[weak self] _ in
+                self?.tableView.reloadData()
+            }, onError: { (error) in
+                if let error = error as? AppError {
+                    HUD.showError(error.message)
+                }
+            }, onCompleted: {
+                 HUD.hideLoading()
+            }).disposed(by: disposeBag)
+    }
 }
 
 extension CenteralContainerVC: UITableViewDataSource {
@@ -54,9 +71,10 @@ extension CenteralContainerVC: UITableViewDataSource {
         let element = items.value[indexPath.row]
         if element == "音量" {
             let cell: VolumeTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.slider.value = Float(centralViewModel.currentVolume.value) ?? 0
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            cell.slider.onChange(handler: { value in
-                print(value)
+            cell.slider.on(.touchUpInside, handler: { (slider, _) in
+                print(".......")
             })
             return cell
         }
@@ -65,8 +83,17 @@ extension CenteralContainerVC: UITableViewDataSource {
             cell.leftLabel.text = "货柜重启"
             cell.rightBtn.setTitle("重启", for: .normal)
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            cell.rightBtn.onTap {
-                print("--------")
+            cell.rightBtn.onTap {[weak self] in
+                guard let weakSelf = self else { return }
+                let param = ContainerSessionParam()
+                param.deviceNo = weakSelf.deviceNum
+                weakSelf.centralViewModel.rebootDevice(param).subscribe(onError: {  (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }, onCompleted: {
+                    HUD.hideLoading()
+                }).disposed(by: weakSelf.disposeBag)
             }
             return cell
         }

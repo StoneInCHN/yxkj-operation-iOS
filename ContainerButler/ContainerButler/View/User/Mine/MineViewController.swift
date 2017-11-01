@@ -63,8 +63,13 @@ extension MineViewController: UITableViewDataSource {
 
 extension MineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(UpdatePasswordVC(), animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
+          tableView.deselectRow(at: indexPath, animated: true)
+        let title = datas[indexPath.row]
+        if  title == "用户" {
+            return
+        } else if title == "密码" {
+           navigationController?.pushViewController(UpdatePasswordVC(), animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

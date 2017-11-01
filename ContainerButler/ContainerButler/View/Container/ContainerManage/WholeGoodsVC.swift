@@ -94,8 +94,17 @@ extension WholeGoodsVC: MGSwipeTableCellDelegate {
     }
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        if direction == .rightToLeft, index == 0 {
-
+        if let indexPath = tableView.indexPath(for: cell), direction == .rightToLeft, index == 0 {
+            let param = ContainerSessionParam()
+              param.channelId = "\(listVM.models.value[indexPath.row].supplementId)"
+            listVM.requestSalesOutTest(param)
+                .subscribe(onNext: { (response) in
+                    
+                }, onError: { (error) in
+                    
+                }, onCompleted: {
+                    
+                }).disposed(by: disposeBag)
         }
         return true
     }

@@ -29,14 +29,12 @@ class ContainerViewModel {
         requestList()
     }
     
-    ///  开始补货
-    func startSupplyGoods(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
+    func startSupplyGoods(_ param: ContainerSessionParam) -> Observable<BaseResponseObject<Scence>> {
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
-        let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(ContainerSession.startSupplyGoods, param: param))
+        let repsonseObserable: Observable<BaseResponseObject<Scence>> = RequestManager.reqeust(.endpoint(ContainerSession.startSupplyGoods, param: param))
         return repsonseObserable
     }
   
-    /// 完成补货
     func finishSupplyGoods(_ param: ContainerSessionParam) -> Observable<NullDataResponse> {
          param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
         let repsonseObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(ContainerSession.finishSupplyGoods, param: param))
@@ -76,7 +74,13 @@ extension ContainerViewModel {
                 case .error( let error):
                     if let error = error as? AppError {
                         HUD.showError(error.message)
-                        self.refreshStatus.value = isReloadData ? .endHeaderRefresh: .endFooterRefresh
+                        if isReloadData {
+                            self.refreshStatus.value =  .endHeaderRefresh
+                            self.param.pageNo = 0
+                        } else {
+                            self.refreshStatus.value =  .endFooterRefresh
+                            self.param.pageNo = (self.param.pageNo ?? 2) - 1
+                        }
                     }
                     break
                 case .completed:
