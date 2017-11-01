@@ -102,13 +102,11 @@ extension  PageTitleView {
         let labelY: CGFloat = 0.0
         for (index, title) in titles.enumerated() {
             let label = UILabel()
-     
-            label.font = UIFont.sizeToFit(with: 12.5)
             label.textColor = UIColor(red: normalColor.0 / 255.0, green: normalColor.1 / 255.0, blue: normalColor.2 / 255.0, alpha: 1)
             label.tag = index
             label.textAlignment = .center
             label.text = title
-            label.font = UIFont.systemFont(ofSize: 16)
+            label.font = UIFont.systemFont(ofSize: 13)
             let labelX = labelW * CGFloat(index)
             label.frame = CGRect(x: labelX, y: labelY, width: labelW, height: labelH)
             scrollView.addSubview(label)
@@ -163,7 +161,7 @@ extension  PageTitleView {
     private func caculatetextWidth(text: String) -> CGFloat {
         let nsstr = NSString(string: text)
         let maxSize = CGSize(width: frame.width / CGFloat(labelCountPerPage), height: 40)
-        let size = nsstr.boundingRect(with: maxSize, options: .usesDeviceMetrics, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)], context: nil)
+        let size = nsstr.boundingRect(with: maxSize, options: .usesDeviceMetrics, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], context: nil)
         return size.width + 10
     }
 }
