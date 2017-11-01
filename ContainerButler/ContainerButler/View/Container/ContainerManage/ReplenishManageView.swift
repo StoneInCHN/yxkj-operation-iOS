@@ -9,6 +9,8 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Kingfisher
+import Closures
 
 class ReplenishManageView: UIView {
     var replenishAction: ((Int) -> Void)?
@@ -62,6 +64,7 @@ class ReplenishManageView: UIView {
         pwdTF.font = UIFont.sizeToFit(with: 14)
         pwdTF.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         pwdTF.returnKeyType = .done
+        pwdTF.textAlignment = .center
         return pwdTF
     }()
     
@@ -95,6 +98,12 @@ class ReplenishManageView: UIView {
         return imageView
     }()
     
+    fileprivate lazy  var closeBtn: UIButton = {
+        let loginBtn = UIButton()
+        loginBtn.setBackgroundImage(UIImage(named: "delete"), for: .normal)
+        return loginBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -124,6 +133,11 @@ extension ReplenishManageView {
         contanierView.addSubview(bgView)
         addSubview(replenishBtn)
         addSubview(contanierView)
+        addSubview(closeBtn)
+        closeBtn.snp.makeConstraints { (maker) in
+            maker.right.equalTo(contanierView.snp.right)
+            maker.bottom.equalTo(contanierView.snp.top).offset(-5)
+        }
         contanierView.snp.makeConstraints { (maker) in
             maker.left.equalTo(40.0.fitWidth)
             maker.right.equalTo(-40.0.fitWidth)
@@ -144,7 +158,7 @@ extension ReplenishManageView {
             maker.height.equalTo(goodsIcon.snp.height)
         }
         nameLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(goodsIcon.snp.left).offset(25)
+            maker.left.equalTo(goodsIcon.snp.left).offset(25.0.fitWidth)
             maker.top.equalTo(goodsIcon.snp.bottom).offset(12)
         }
         numberLabel.snp.makeConstraints { (maker) in
@@ -153,16 +167,16 @@ extension ReplenishManageView {
         }
         totalNotReplenishLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(nameLabel.snp.left)
-            maker.top.equalTo(numberLabel.snp.bottom).offset(24)
+            maker.bottom.equalTo(-30.0.fitHeight)
         }
         realDeliveryGoodsLabel.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(totalNotReplenishLabel.snp.centerY)
-            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(21)
+            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(15.0.fitWidth)
         }
         realDeliveryGoodsInputTF.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(realDeliveryGoodsLabel.snp.centerY)
-            maker.left.equalTo(realDeliveryGoodsLabel.snp.right).offset(8)
-            maker.size.equalTo(CGSize(width: 40, height: 30))
+            maker.left.equalTo(realDeliveryGoodsLabel.snp.right)
+            maker.size.equalTo(CGSize(width: 30, height: 30))
         }
         line0.snp.makeConstraints { (maker) in
             maker.left.equalTo(realDeliveryGoodsInputTF.snp.left).offset(-5)
@@ -171,11 +185,15 @@ extension ReplenishManageView {
             maker.top.equalTo(realDeliveryGoodsInputTF.snp.bottom)
         }
         replenishBtn.snp.makeConstraints { (maker) in
-            maker.top.equalTo(contanierView.snp.bottom).offset(30)
+            maker.top.equalTo(contanierView.snp.bottom).offset(30.0.fitHeight)
             maker.centerX.equalTo(contanierView.snp.centerX)
             maker.height.equalTo(40)
             maker.width.equalTo(200.0.fitWidth)
         }
+        closeBtn.onTap {[unowned self] in
+            self.dismiss()
+        }
+        
     }
 }
 
@@ -185,6 +203,6 @@ extension ReplenishManageView {
         numberLabel.text = "商品条码: " + (goods.goodsSn ?? "000")
         realDeliveryGoodsInputTF.text = "\(goods.waitSupplyCount)"
         totalNotReplenishLabel.text = "总待补数: " + "\(goods.waitSupplyCount)"
-  
+        goodsIcon.kf.setImage(with: URL(string: CustomKey.URLKey.baseImageUrl + (goods.goodsPic ?? "")), placeholder: UIImage(named: "juic.jpg"))
     }
 }

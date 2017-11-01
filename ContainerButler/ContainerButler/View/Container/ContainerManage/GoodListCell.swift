@@ -87,6 +87,8 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        let selectedView = UIView()
+        selectedBackgroundView = selectedView
         contentView.addSubview(bgView)
         bgView.addSubview(notReplenishLabel)
         bgView.addSubview(remainReplenishLabel)
@@ -98,6 +100,7 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         coverView.addSubview(descLabel)
         badgeView.topOffset = 40
         badgeView.rightOffset = UIScreen.width - 52
+      
         bgView.snp.makeConstraints { (maker) in
             maker.left.equalTo(0)
             maker.top.equalTo(5)

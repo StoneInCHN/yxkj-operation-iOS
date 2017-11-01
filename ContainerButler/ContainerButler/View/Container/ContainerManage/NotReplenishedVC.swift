@@ -47,7 +47,7 @@ class NotReplenishedVC: BaseViewController {
         loginBtn.setTitleColor(UIColor.white, for: .normal)
         loginBtn.setTitleColor(UIColor.gray, for: .disabled)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainGreenColor)
-        loginBtn.layer.cornerRadius = 20
+        loginBtn.layer.cornerRadius = 20.0.fitHeight
         loginBtn.layer.masksToBounds = true
         return loginBtn
     }()
@@ -59,7 +59,7 @@ class NotReplenishedVC: BaseViewController {
         loginBtn.setTitleColor(UIColor.gray, for: .highlighted)
         loginBtn.setTitleColor(UIColor.gray, for: .disabled)
         loginBtn.backgroundColor = UIColor(hex: CustomKey.Color.mainOrangeColor)
-        loginBtn.layer.cornerRadius = 20
+        loginBtn.layer.cornerRadius = 20.0.fitHeight
         loginBtn.layer.masksToBounds = true
         loginBtn.isEnabled = true
         return loginBtn
@@ -76,7 +76,7 @@ class NotReplenishedVC: BaseViewController {
     
     fileprivate lazy  var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+        view.backgroundColor = UIColor.white
         return view
     }()
     fileprivate lazy var pictureOptionView: PictureChooseOptionView = {[unowned self] in
@@ -118,13 +118,13 @@ extension NotReplenishedVC {
             maker.centerX.equalTo(containerView.snp.centerX).offset(70)
             maker.bottom.equalTo(descPwdLabel.snp.top).offset(-16.0.fitHeight)
             maker.width.equalTo(100.0.fitWidth)
-            maker.height.equalTo(40)
+            maker.height.equalTo(40.0.fitHeight)
         }
         doneBtn.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(containerView.snp.centerX).offset(-70)
             maker.top.equalTo(stopBtn.snp.top)
             maker.width.equalTo(100.0.fitWidth)
-            maker.height.equalTo(40)
+            maker.height.equalTo(40.0.fitHeight)
         }
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.equalTo(0)
@@ -195,15 +195,20 @@ extension NotReplenishedVC {
                 guard let weakSelf = self else {    return  }
                 weakSelf.replenishDoneView.dismiss()
                 HUD.showLoading()
-                //                weakSelf.commitSupplyRecord().subscribe(onNext: { (response) in
-                //                }).disposed(by: weakSelf.disposeBag)
-                weakSelf.uploadPic().subscribe(onNext: { (response) in
-                    HUD.showSuccess(response.description ?? "")
-                    weakSelf.navigationController?.popToRootViewController(animated: true)
-                }, onError: { error in
-                    if let error = error as? AppError {
-                        HUD.showError(error.message)
+                Observable.combineLatest(weakSelf.commitSupplyRecord(), weakSelf.uploadPic(), resultSelector: { (obj1, obj2) -> Bool in
+                    if obj1.status == .success && obj2.status == .success {
+                        return true
                     }
+                    return false
+                }).subscribe(onNext: { (isSuccess) in
+                    if isSuccess {
+                        HUD.showSuccess("提交成功")
+                        weakSelf.navigationController?.popToRootViewController(animated: true)
+                    } else {
+                         HUD.showError("提交失败")
+                    }
+                }, onError: { (error) in
+                    HUD.showError(error.localizedDescription)
                 }).disposed(by: weakSelf.disposeBag)
                 }, onCompleted: {
                     HUD.hideLoading()
