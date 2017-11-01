@@ -193,7 +193,7 @@ extension ContainerManageViewModel {
         for currentGoods in models.value {
             if  let cacheGoods = CoreDataManager.sharedInstance.getGoods(containerId: self.param.cntrId ?? 0, supplementId: currentGoods.supplementId),
                  let index = self.models.value.index(where: {$0.supplementId == cacheGoods.supplementId}) {
-                self.models.value.remove(at: index)
+                models.value.remove(at: index)
             }
         }
         print(models.value)

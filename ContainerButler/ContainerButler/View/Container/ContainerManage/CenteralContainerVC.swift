@@ -73,8 +73,15 @@ extension CenteralContainerVC: UITableViewDataSource {
             let cell: VolumeTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.slider.value = Float(centralViewModel.currentVolume.value) ?? 0
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            cell.slider.on(.touchUpInside, handler: { (slider, _) in
-                print(".......")
+            cell.slider.on(.touchUpInside, handler: {[unowned self] (_, _) in
+                let param = ContainerSessionParam()
+                param.volume = "\(Int(cell.slider.value))"
+                param.deviceNo = self.deviceNum
+                self.centralViewModel.updateAduionVolume(param).subscribe( onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+                }).disposed(by: self.disposeBag)
             })
             return cell
         }
@@ -87,12 +94,14 @@ extension CenteralContainerVC: UITableViewDataSource {
                 guard let weakSelf = self else { return }
                 let param = ContainerSessionParam()
                 param.deviceNo = weakSelf.deviceNum
-                weakSelf.centralViewModel.rebootDevice(param).subscribe(onError: {  (error) in
-                    if let error = error as? AppError {
-                        HUD.showError(error.message)
-                    }
-                }, onCompleted: {
-                    HUD.hideLoading()
+                weakSelf.centralViewModel.rebootDevice(param)
+                    .subscribe(onNext: {  _ in
+                                HUD.showSuccess("重启成功")
+                            },
+                        onError: {  (error) in
+                            if let error = error as? AppError {
+                                HUD.showError(error.message)
+                            }
                 }).disposed(by: weakSelf.disposeBag)
             }
             return cell
