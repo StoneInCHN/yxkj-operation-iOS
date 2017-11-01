@@ -250,6 +250,30 @@ extension NotReplenishedVC {
             }
         })
         listVM.requestCommand.onNext(true)
+        let backBtn = UIButton()
+        backBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        backBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -44, bottom: 5, right: 0)
+        backBtn.setImage(UIImage(named: "navigation_back"), for: .normal)
+       parent?.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
+        backBtn
+            .rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                if let weakSelf = self, !weakSelf.listVM.selectedContainerModels.value.isEmpty {
+                    HUD.showAlert(from: weakSelf, title: "温馨提示", message: "您尚未完成补货，是否要暂停补货", enterTitle: "取消", cancleTitle: "确定", enterAction: nil, cancleAction: {
+                        weakSelf.commitSupplyRecord()
+                               .subscribe(onNext: { (response) in
+                                HUD.showSuccess(response.description ?? "")
+                                weakSelf.navigationController?.popToRootViewController(animated: true)
+                            }, onError: { (error) in
+                                if let error = error as? AppError {
+                                    HUD.showError(error.message)
+                                }
+                            }).disposed(by: weakSelf.disposeBag)
+                    })
+                } else {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+        }).disposed(by: disposeBag)
     }
 }
 

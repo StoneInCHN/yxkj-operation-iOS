@@ -128,7 +128,7 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
        
         bgView.snp.makeConstraints { (maker) in
             maker.left.equalTo(dotView.snp.right).offset(20)
-            maker.right.equalTo(-20)
+            maker.right.equalTo(-12)
             maker.bottom.equalTo(0)
             maker.top.equalTo(12)
         }
@@ -151,11 +151,11 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
             maker.top.equalTo(addressLabel.snp.bottom).offset(24)
         }
         totalReplenishLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(17.5)
+            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(15.0.fitWidth)
             maker.top.equalTo(totalNotReplenishLabel.snp.top)
         }
         stockoutLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalReplenishLabel.snp.right).offset(23)
+            maker.left.equalTo(totalReplenishLabel.snp.right).offset(15.0.fitWidth)
             maker.top.equalTo(totalReplenishLabel.snp.top)
         }
     }

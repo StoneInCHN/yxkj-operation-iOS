@@ -35,6 +35,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
         let loginBtn = UIButton()
         loginBtn.titleLabel?.font = UIFont.sizeToFit(with: 12)
         loginBtn.setTitle("选择优享空间", for: .normal)
+        loginBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 0)
         loginBtn.setTitleColor(UIColor(hex: 0x666666), for: .normal)
         loginBtn.setTitleColor(UIColor(hex: CustomKey.Color.mainOrangeColor), for: .highlighted)
         return loginBtn
@@ -71,6 +72,7 @@ class NotReplenishedGoodsListVC: BaseViewController {
         let taleView = UITableView()
         taleView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 65, right: 0)
         taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        taleView.separatorInset = UIEdgeInsets(top: 0, left: 1000000, bottom: 0, right: 0)
         taleView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         return taleView
     }()
@@ -123,13 +125,14 @@ extension NotReplenishedGoodsListVC {
             maker.centerY.equalTo(optionChooseView.snp.centerY)
         }
         triangleIcon.snp.makeConstraints { (maker) in
-            maker.right.equalTo(-27)
+            maker.right.equalTo(chooseBtn.snp.right)
             maker.centerY.equalTo(optionChooseView.snp.centerY)
         }
         chooseBtn.snp.makeConstraints { (maker) in
-            maker.right.equalTo(triangleIcon.snp.left).offset(-17)
+            maker.right.equalTo(-27)
             maker.centerY.equalTo(optionChooseView.snp.centerY)
             maker.height.equalTo(36)
+            maker.width.equalTo(100)
         }
         doneBtn.snp.makeConstraints {
             $0.right.equalTo(-15)
@@ -145,18 +148,23 @@ extension NotReplenishedGoodsListVC {
     }
     
     fileprivate func setupRX() {
-        chooseBtn.rx.tap
-            .subscribe(onNext: {[weak self] _ in
-            self?.showOptionChooseView()
-        })
-        .disposed(by: disposeBag)
-      
+
+        chooseBtn.onTap { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.chooseBtn.isSelected = !weakSelf.chooseBtn.isSelected
+            if weakSelf.chooseBtn.isSelected {
+                weakSelf.showOptionChooseView()
+            } else {
+                weakSelf.hideOptionChooseView()
+            }
+        }
        let items =  listVM.scenceList.asObservable()
         items
             .bind(to: optiontableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.font = UIFont.sizeToFit(with: 13.5)
                 cell.textLabel?.textColor = UIColor(hex: 0x333333)
                 cell.textLabel?.text = element.name
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
             .disposed(by: disposeBag)
         
@@ -172,6 +180,7 @@ extension NotReplenishedGoodsListVC {
                 weakSelf.listVM.param.sceneSn = selectedScence.number
                 weakSelf.listVM.requestCommand.onNext(true)
                 weakSelf.listVM.refreshStatus.value = .endFooterRefresh
+                weakSelf.chooseBtn.isSelected = false
             })
             .disposed(by: disposeBag)
         

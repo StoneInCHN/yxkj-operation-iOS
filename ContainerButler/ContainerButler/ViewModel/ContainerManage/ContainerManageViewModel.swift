@@ -107,7 +107,7 @@ class ContainerManageViewModel {
     }
     
     func resetData(_ model: Goods, index: Int) {
-        CoreDataManager.sharedInstance.deleteGoods(containerId: param.cntrId ?? 0, goodsSn: model.goodsSn ?? "")
+        CoreDataManager.sharedInstance.deleteGoods(containerId: param.cntrId ?? 0, supplementId: model.supplementId)
         loadSelectedContainerGoods()
         for orginalGoods in orginalGoodsArray {
             if orginalGoods.supplementId == model.supplementId,
@@ -117,6 +117,9 @@ class ContainerManageViewModel {
         }
     }
     
+    func clearCachedGoods() {
+        CoreDataManager.sharedInstance.deleteGoods(containerId: param.cntrId ?? 0, supplementId: nil)
+    }
 }
 
 extension ContainerManageViewModel {

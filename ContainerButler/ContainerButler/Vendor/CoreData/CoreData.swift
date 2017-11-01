@@ -208,7 +208,7 @@ extension CoreDataManager {
             let goods = Goods()
             goods.goodsSn = cachedGoods.goodsSn
             goods.goodsName = cachedGoods.goodsName
-             goods.goodsPic = cachedGoods.goodsPic
+            goods.goodsPic = cachedGoods.goodsPic
             goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
             goods.remainCount = Int(cachedGoods.remainCount)
             goods.channelSn = cachedGoods.channelSn
@@ -229,7 +229,7 @@ extension CoreDataManager {
         let goods = Goods()
         goods.goodsSn = cachedGoods.goodsSn
         goods.goodsName = cachedGoods.goodsName
-       goods.goodsPic = cachedGoods.goodsPic
+        goods.goodsPic = cachedGoods.goodsPic
         goods.waitSupplyCount = Int(cachedGoods.waitSupplyCount)
         goods.remainCount = Int(cachedGoods.remainCount)
         goods.channelSn = cachedGoods.channelSn
@@ -238,11 +238,11 @@ extension CoreDataManager {
         return goods
     }
     
-    func deleteGoods(containerId: Int, goodsSn: String?) {
+    func deleteGoods(containerId: Int, supplementId: Int?) {
        let fetchRequest: NSFetchRequest<CachGoods> = CachGoods.fetchRequest()
-        if let goodsSn =  goodsSn {
+        if let supplementId =  supplementId {
         let predicate1 =  NSPredicate(format: "containerId=%@", "\(containerId)")
-        let predicate2 =  NSPredicate(format: "goodsSn=%@", goodsSn)
+        let predicate2 =  NSPredicate(format: "supplementId=%@", "\(supplementId)")
         fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [predicate1, predicate2])
             guard let searchResulst = try? self.managedObjectContext.fetch(fetchRequest) else {
                 return
