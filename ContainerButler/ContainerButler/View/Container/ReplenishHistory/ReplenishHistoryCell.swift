@@ -9,6 +9,22 @@
 import UIKit
 
 class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
+    fileprivate lazy var shadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 4.0
+        view.layer.shadowOffset = CGSize(width: 8, height: 8)
+        return view
+    }()
+    
+    fileprivate lazy var cornerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
     fileprivate lazy  var line0: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: 0xcccccc)
@@ -99,6 +115,7 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         contentView.addSubview(dotView)
         contentView.addSubview(line0)
         contentView.addSubview(line1)
+        contentView.addSubview(shadowView)
         contentView.addSubview(bgView)
         bgView.addSubview(addressLabel)
         bgView.addSubview(numberLabel)
@@ -129,10 +146,15 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         bgView.snp.makeConstraints { (maker) in
             maker.left.equalTo(dotView.snp.right).offset(20)
             maker.right.equalTo(-12)
-            maker.bottom.equalTo(0)
+            maker.bottom.equalTo(-6)
+            maker.top.equalTo(6)
+        }
+        shadowView.snp.makeConstraints { (maker) in
+            maker.left.equalTo(dotView.snp.right).offset(25)
+            maker.right.equalTo(-17)
+            maker.bottom.equalTo(-11)
             maker.top.equalTo(12)
         }
-        
         addressLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(18)
             maker.top.equalTo(17)
@@ -203,4 +225,6 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         stockoutLabel.attributedText = text5
         
     }
+    
+
 }

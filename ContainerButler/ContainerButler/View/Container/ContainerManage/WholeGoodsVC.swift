@@ -54,7 +54,7 @@ extension WholeGoodsVC {
             .bind(to: tableView.rx.items(cellIdentifier: "GoodListCell", cellType: GoodListCell.self)) {[weak self] (row, element, cell) in
                 if let weakSelf = self {
                     cell.delegate = weakSelf
-                    cell.configContainerWaitSupplyGoods(element)
+                    cell.configContainerWholeGoods(element)
                     cell.hiddenCover()
                     cell.loadingView.isHidden = !element.isSaleOutTest
                 }
@@ -90,8 +90,11 @@ extension WholeGoodsVC: UITableViewDelegate {
 }
 extension WholeGoodsVC: MGSwipeTableCellDelegate {
     func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
-        swipeSettings.transition = .border
-        return  UIButton.createButtons(with: ["出货测试"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
+        if direction == .rightToLeft {
+            swipeSettings.transition = .border
+            return  UIButton.createButtons(with: ["出货测试"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
+        }
+          return nil
     }
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {

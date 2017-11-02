@@ -24,7 +24,13 @@ class TitleLabelTableViewCell: UITableViewCell, ViewNameReusable {
         return view
     }()
     
-    fileprivate lazy  var arrowIcon: UIImageView = {
+    lazy  var icon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "password"))
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
+     lazy  var arrowIcon: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "arrow"))
         imageView.contentMode = .center
         return imageView
@@ -36,9 +42,14 @@ class TitleLabelTableViewCell: UITableViewCell, ViewNameReusable {
         contentView.addSubview(titleLabel)
         contentView.addSubview(line0)
         contentView.addSubview(arrowIcon)
+        contentView.addSubview(icon)
         
-        titleLabel.snp.makeConstraints { (maker) in
+        icon.snp.makeConstraints { (maker) in
             maker.left.equalTo(14.5)
+            maker.centerY.equalTo(contentView.snp.centerY)
+        }
+        titleLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(icon.snp.right).offset(14.5)
             maker.centerY.equalTo(contentView.snp.centerY)
         }
         arrowIcon.snp.makeConstraints { (maker) in

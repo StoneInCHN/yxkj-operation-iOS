@@ -11,13 +11,14 @@ import RxSwift
 import RxCocoa
 
 class MineViewController: BaseViewController {
-    fileprivate lazy var datas: [String] = ["用户", "密码"]
+    fileprivate lazy var datas: [String] = ["用户", "密码", "退出登录"]
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
         taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         taleView.register(TitleLabelTableViewCell.self, forCellReuseIdentifier: "TitleLabelTableViewCell")
         taleView.register(UserHeaderCell.self, forCellReuseIdentifier: "UserHeaderCell")
+        taleView.register(CenterLabelTableViewCell.self, forCellReuseIdentifier: "CenterLabelTableViewCell")
         return taleView
     }()
     
@@ -50,12 +51,15 @@ extension MineViewController: UITableViewDataSource {
         if  title == "用户" {
             let cell: UserHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.userLog.image = UIImage(named: "logo")
-            cell.titleLabel.text = "用户: s12312312"
+            cell.titleLabel.text = title + (CoreDataManager.sharedInstance.getUserInfo()?.phoneNum ?? "9527")
             return cell
         } else if title == "密码" {
             let cell: TitleLabelTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.titleLabel.text = "密码"
+            cell.titleLabel.text = title
              return cell
+        } else if title == "退出登录" {
+            let cell: CenterLabelTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+             cell.centerLabel.text = title
         }
         return UITableViewCell()
     }
@@ -77,6 +81,8 @@ extension MineViewController: UITableViewDelegate {
         if  title == "用户" {
             return 88
         } else if title == "密码" {
+            return 45
+        } else if title == "退出登录" {
             return 45
         }
         return 0

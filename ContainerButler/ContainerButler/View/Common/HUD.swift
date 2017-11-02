@@ -67,6 +67,7 @@ class HUD {
     
     static func showSuccess(_ message: String) {
         UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
+        SVProgressHUD.setMaximumDismissTimeInterval(2)
         SVProgressHUD.showSuccess(withStatus: message)
     }
     

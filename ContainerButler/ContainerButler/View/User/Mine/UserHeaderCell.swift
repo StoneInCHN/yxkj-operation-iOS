@@ -28,6 +28,10 @@ class UserHeaderCell: UITableViewCell, ViewNameReusable {
     
     fileprivate lazy  var bgView: UIView = {
         let view = UIView()
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 4.0
+        view.layer.shadowOffset = CGSize(width: 2, height: 2)
         view.backgroundColor = UIColor.white
         return view
     }()

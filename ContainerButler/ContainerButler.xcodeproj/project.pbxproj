@@ -30,6 +30,9 @@
 		CD44DF771F99E5D200539122 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF761F99E5D200539122 /* UserInfo.swift */; };
 		CD44DF7A1F99FB0900539122 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF791F99FB0900539122 /* Container.swift */; };
 		CD44DF7C1F9A001200539122 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44DF7B1F9A001200539122 /* Transform.swift */; };
+		CD532DE61FAAB920008F3D10 /* CenterLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD532DE51FAAB920008F3D10 /* CenterLabelTableViewCell.swift */; };
+		CD532DE81FAABF45008F3D10 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD532DE71FAABF45008F3D10 /* logo@3x.png */; };
+		CD532DEA1FAABF58008F3D10 /* password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD532DE91FAABF57008F3D10 /* password@3x.png */; };
 		CD62C38C1FA6D180007D4918 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD62C38B1FA6D180007D4918 /* MessageViewModel.swift */; };
 		CD62C38E1FA6D324007D4918 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD62C38D1FA6D324007D4918 /* Message.swift */; };
 		CD69C45B1F66874000623B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C45A1F66874000623B91 /* AppDelegate.swift */; };
@@ -143,7 +146,6 @@
 		CDFF58D21F98955D00605761 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D11F98955D00605761 /* MineViewController.swift */; };
 		CDFF58D41F98968C00605761 /* TitleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */; };
 		CDFF58D61F98985700605761 /* UserHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D51F98985700605761 /* UserHeaderCell.swift */; };
-		CDFF58D81F989D9600605761 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDFF58D71F989D9200605761 /* logo@3x.png */; };
 		CDFF58DA1F989FED00605761 /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF58D91F989FED00605761 /* UpdatePasswordVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -238,6 +240,9 @@
 		CD44DF761F99E5D200539122 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		CD44DF791F99FB0900539122 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		CD44DF7B1F9A001200539122 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		CD532DE51FAAB920008F3D10 /* CenterLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLabelTableViewCell.swift; sourceTree = "<group>"; };
+		CD532DE71FAABF45008F3D10 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		CD532DE91FAABF57008F3D10 /* password@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password@3x.png"; sourceTree = "<group>"; };
 		CD62C38B1FA6D180007D4918 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		CD62C38D1FA6D324007D4918 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CD69C4571F66874000623B91 /* ContainerButler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContainerButler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -387,7 +392,6 @@
 		CDFF58D11F98955D00605761 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabelTableViewCell.swift; sourceTree = "<group>"; };
 		CDFF58D51F98985700605761 /* UserHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderCell.swift; sourceTree = "<group>"; };
-		CDFF58D71F989D9200605761 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		CDFF58D91F989FED00605761 /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
 		EC8ADA43DAE0B71D795C61A5 /* Pods_ContainerButler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContainerButler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -800,6 +804,7 @@
 				CD92CD131F96FF4E0077C78F /* PictureChooseOptionView.swift */,
 				CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */,
 				CD84AD3C1FA1C48D003666E4 /* LabelButtonCell.swift */,
+				CD532DE51FAAB920008F3D10 /* CenterLabelTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -866,7 +871,6 @@
 		CD84469A1F70E82600D50722 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
-				CDFF58D71F989D9200605761 /* logo@3x.png */,
 				CDF727B51F7F72B200CDCC75 /* Login */,
 			);
 			path = UserCenter;
@@ -1130,6 +1134,8 @@
 		CDF727B51F7F72B200CDCC75 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				CD532DE91FAABF57008F3D10 /* password@3x.png */,
+				CD532DE71FAABF45008F3D10 /* logo@3x.png */,
 				CD0A42BA1F9F31E00019D91C /* eye@3x.png */,
 				CD0A42BC1F9F31E80019D91C /* eye_grey@3x.png */,
 				CD92CD1E1F974B440077C78F /* bg.png */,
@@ -1277,11 +1283,12 @@
 				CD0BFCA61FA066D800AC10F3 /* drink@2x.png in Resources */,
 				CDD0D4B81F9D94DE0056B6F1 /* complete_goods@3x.png in Resources */,
 				CD8A0A2E1F9878A4004F6661 /* triangle@3x.png in Resources */,
+				CD532DEA1FAABF58008F3D10 /* password@3x.png in Resources */,
 				CDF727BD1F7F72CD00CDCC75 /* user_center_pwd@3x.png in Resources */,
 				CD2CD60A1F66DE8B00C22166 /* .swiftlint.yml in Resources */,
-				CDFF58D81F989D9600605761 /* logo@3x.png in Resources */,
 				CD69C4651F66874000623B91 /* Assets.xcassets in Resources */,
 				CD84AD431FA1C7DC003666E4 /* volume_small@3x.png in Resources */,
+				CD532DE81FAABF45008F3D10 /* logo@3x.png in Resources */,
 				CDB9EBE01FA9C8670041E5C6 /* gradation@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1446,6 +1453,7 @@
 				CD78F09C1F67D97300D50B7B /* CoreData.swift in Sources */,
 				CDF6B50A1F68C44A000A1915 /* Network.swift in Sources */,
 				CDFF58D61F98985700605761 /* UserHeaderCell.swift in Sources */,
+				CD532DE61FAAB920008F3D10 /* CenterLabelTableViewCell.swift in Sources */,
 				CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */,
 				CDD0D4F41F9D9C0B0056B6F1 /* YYTextLine.m in Sources */,
 				CDD0D4F31F9D9C0B0056B6F1 /* YYTextLayout.m in Sources */,
