@@ -9,9 +9,20 @@
 import UIKit
 
 class NavigationController: UINavigationController {
-
+    fileprivate lazy  var panGes = UIPanGestureRecognizer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        addPopbackGesture()
+    }
+    
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if self.viewControllers.isEmpty == false {
+            viewController.hidesBottomBarWhenPushed = true
+        }
+        super.pushViewController(viewController, animated: animated)
+    }
+    
+    func addPopbackGesture() {
         guard let systemGes = interactivePopGestureRecognizer else { return }
         guard let gesView = systemGes.view else { return }
         let targets = systemGes.value(forKey: "_targets") as? [NSObject]
@@ -22,15 +33,14 @@ class NavigationController: UINavigationController {
         gesView.addGestureRecognizer(panGes)
         panGes.addTarget(target, action: action)
         panGes.delegate = self
+        self.panGes = panGes
     }
     
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if self.viewControllers.isEmpty == false {
-            viewController.hidesBottomBarWhenPushed = true
-        }
-        super.pushViewController(viewController, animated: animated)
+    func reomvePopbackGesture() {
+        guard let systemGes = interactivePopGestureRecognizer else { return }
+        guard let gesView = systemGes.view else { return }
+        gesView.removeGestureRecognizer(panGes)
     }
-    
 }
 
 extension NavigationController: UIGestureRecognizerDelegate {

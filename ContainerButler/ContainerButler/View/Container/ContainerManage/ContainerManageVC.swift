@@ -32,10 +32,32 @@ class ContainerManageVC: BaseViewController {
         return pageContenView
         }()
     
+    deinit {
+        debugPrint("dsfa")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         tapAction()
+      
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let navi = navigationController as? NavigationController {
+            navi.reomvePopbackGesture()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let navi = navigationController as? NavigationController {
+            navi.addPopbackGesture()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+       
     }
 }
 

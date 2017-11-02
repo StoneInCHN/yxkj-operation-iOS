@@ -48,7 +48,7 @@ extension ContainerViewModel {
         requestCommand.subscribe(onNext: { [unowned self](isReloadData) in
             self.param.pageNo = isReloadData ? 1: (self.param.pageNo ?? 1) + 1
             let homerObservable: Observable< BaseResponseObject<ContainerHome>> =  RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplyState, param: self.param), needToken: .true)
-            homerObservable.subscribe({ (event) in
+            homerObservable.retry(3).subscribe({ (event) in
                 switch event {
                 case  .next( let response):
                     if let scences =  response.object?.scences {

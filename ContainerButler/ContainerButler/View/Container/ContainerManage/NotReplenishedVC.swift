@@ -93,6 +93,7 @@ class NotReplenishedVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+      
     }
     
 }
@@ -171,6 +172,7 @@ extension NotReplenishedVC {
             weakSelf.commitSupplyRecord()
                 .subscribe(onNext: { (response) in
                     HUD.showSuccess(response.description ?? "")
+                    weakSelf.listVM.clearCachedGoods()
                     weakSelf.navigationController?.popToRootViewController(animated: true)
                 }, onError: { (error) in
                     if let error = error as? AppError {
@@ -263,6 +265,7 @@ extension NotReplenishedVC {
                         weakSelf.commitSupplyRecord()
                                .subscribe(onNext: { (response) in
                                 HUD.showSuccess(response.description ?? "")
+                                weakSelf.listVM.clearCachedGoods()
                                 weakSelf.navigationController?.popToRootViewController(animated: true)
                             }, onError: { (error) in
                                 if let error = error as? AppError {
