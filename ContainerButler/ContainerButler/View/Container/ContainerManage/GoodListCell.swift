@@ -80,15 +80,8 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         return descLabel
     }()
     
-    fileprivate lazy var badgeView: GIBadgeView = {
-        let badgeView = GIBadgeView()
-        badgeView.rightOffset = 10
-        badgeView.backgroundColor = UIColor.lightGray
-        return badgeView
-    }()
-    
     fileprivate lazy  var icon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "user_center_paizza@3x"))
+        let imageView = UIImageView(image: UIImage(named: "user_center_paizza"))
         imageView.contentMode = .center
         return imageView
     }()
@@ -105,11 +98,8 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         bgView.addSubview(icon)
         bgView.addSubview(numberLabel)
         bgView.addSubview(coverView)
-        coverView.addSubview(badgeView)
         coverView.addSubview(descLabel)
         bgView.addSubview(loadingView)
-        badgeView.topOffset = 40
-        badgeView.rightOffset = UIScreen.width - 52
       
         loadingView.snp.makeConstraints { (maker) in
             maker.left.equalTo(bgView.snp.left)
@@ -165,6 +155,22 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
         }
          descLabel.sizeToFit()
          coverView.isHidden = true
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+            bgView.backgroundColor = UIColor.white
+        }
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if highlighted {
+         contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+            bgView.backgroundColor = UIColor.white
+        }
     }
     
     override func layoutSubviews() {
@@ -258,12 +264,6 @@ extension GoodListCell {
     func showCover(_ count: Int, text: String? = "已补货") {
         descLabel.text = text
         coverView.isHidden = false
-        if count <= 0 {
-           badgeView.isHidden = true
-        } else {
-            badgeView.isHidden = false
-            badgeView.badgeValue = count
-        }
     }
     
     func hiddenCover() {
