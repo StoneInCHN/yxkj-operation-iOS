@@ -117,6 +117,7 @@ class UpdatePasswordVC: BaseViewController {
     
     fileprivate lazy var againPwdError: YYLabel = {
         let label = YYLabel()
+        label.backgroundColor = UIColor.white
         let  text = NSMutableAttributedString()
         let image = UIImage(named: "error_warning")
         let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
@@ -161,7 +162,7 @@ extension UpdatePasswordVC {
         view.addSubview(descPwdLabel)
         view.addSubview(enterBtn)
         view.addSubview(forgetBtn)
-         view.addSubview(againPwdError)
+        view.addSubview(againPwdError)
         
         userIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(40)
@@ -207,13 +208,14 @@ extension UpdatePasswordVC {
             maker.width.equalTo(20)
         }
         againPwdError.snp.makeConstraints { (maker) in
-            maker.centerY.equalTo(pwdIconAgain.snp.centerY)
-            maker.right.equalTo(-20)
-            maker.width.equalTo(120.0.fitWidth)
+            maker.left.equalTo(pwdTFAgain.snp.left)
+            maker.right.equalTo(pwdTFAgain.snp.right)
+            maker.top.equalTo(pwdTFAgain.snp.top)
+            maker.bottom.equalTo(pwdTFAgain.snp.bottom)
         }
         pwdTFAgain.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(againPwdError.snp.left)
+            maker.right.equalTo(-20)
             maker.centerY.equalTo(pwdIconAgain.snp.centerY)
             maker.height.equalTo(35)
         }
@@ -245,19 +247,12 @@ extension UpdatePasswordVC {
     
     fileprivate func setupRx() {
         let repeatPasswordValid = pwdTFAgain.rx.text.orEmpty
-            .map {[weak self] (text) -> Bool in
-                if text == self?.pwdTF.text {
-                    return true
-                } else if !text.characters.isEmpty {
-                    return false
-                } else {
-                    return true
-                }
-            }
+            .map { $0.characters.count >= 8 }
+            .share(replay: 1)
         .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 8 }
+            .map { $0.validatePassword()}
             .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(repeatPasswordValid, passwordValid) { $0 && $1 }
@@ -267,14 +262,17 @@ extension UpdatePasswordVC {
             .bind(to: enterBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        repeatPasswordValid
-            .bind(to: againPwdError.rx.isHidden)
-            .disposed(by: disposeBag)
-        
         enterBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let weakSelf = self else {    return      }
-                   let sessionVM = UserSessionViewModel()
+                if weakSelf.pwdTFAgain.text != weakSelf.pwdTF.text {
+                    weakSelf.againPwdError.isHidden = false
+                    weakSelf.againPwdError.shake(30, withDelta: 1, speed: 0.03, completion: {
+                          weakSelf.againPwdError.isHidden = true
+                    })
+                    return
+                }
+                let sessionVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
                 param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")

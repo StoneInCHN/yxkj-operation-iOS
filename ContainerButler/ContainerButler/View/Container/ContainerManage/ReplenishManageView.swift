@@ -35,7 +35,7 @@ class ReplenishManageView: UIView {
         descLabel.font = UIFont.boldSystemFont(ofSize: 13)
         descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "实际取货数："
+        descLabel.text = "实际补货数："
         return descLabel
     }()
     
