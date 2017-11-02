@@ -107,11 +107,14 @@ extension WholeGoodsVC: MGSwipeTableCellDelegate {
                 param.channelId = "\(weakSelf.listVM.models.value[indexPath.row].supplementId)"
                 weakSelf.listVM.requestSalesOutTest(param)
                     .subscribe(onNext: { (response) in
-                          cell.loadingView.isHidden = true
+                        cell.loadingView.isHidden = true
                         weakSelf.listVM.models.value[indexPath.row].isSaleOutTest = false
                         weakSelf.tableView.reloadData()
-                        HUD.showAlert(from: weakSelf, title: "出货成功", message: "\((weakSelf.parent as? ContainerManageVC)?.container?.name ?? "")货柜 货道号：\(weakSelf.listVM.models.value[indexPath.row].channelSn ?? "")\n \(weakSelf.listVM.models.value[indexPath.row].goodsName ?? "")", enterTitle: "确定", isHiddenCancleTitle: true, cancleTitle: nil, enterAction: nil, cancleAction: nil)
+                        HUD.showAlert(from: weakSelf, title: "测试完成", message: "\((weakSelf.parent as? ContainerManageVC)?.container?.name ?? "")货柜 货道号：\(weakSelf.listVM.models.value[indexPath.row].channelSn ?? "")\n \(weakSelf.listVM.models.value[indexPath.row].goodsName ?? "")", enterTitle: "确定", isHiddenCancleTitle: true, cancleTitle: nil, enterAction: nil, cancleAction: nil)
                     }, onError: { (error) in
+                        cell.loadingView.isHidden = true
+                        weakSelf.listVM.models.value[indexPath.row].isSaleOutTest = false
+                        weakSelf.tableView.reloadData()
                         if let error = error as? AppError {
                             HUD.showError(error.message)
                         }
