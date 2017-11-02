@@ -179,8 +179,6 @@ extension ContainerViewController: UITableViewDelegate {
                     if let error = error as? AppError {
                         HUD.showError(error.message)
                     }
-                }, onCompleted: {
-                    HUD.hideLoading()
                 }).disposed(by: self.disposeBag)
         }
         return headerView

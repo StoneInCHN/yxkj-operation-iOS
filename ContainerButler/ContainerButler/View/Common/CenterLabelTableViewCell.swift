@@ -22,16 +22,36 @@ class CenterLabelTableViewCell: UITableViewCell, ViewNameReusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(centerLabel)
         contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        contentView.addSubview(centerLabel)
         centerLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(contentView.snp.left)
-            maker.right.equalTo(contentView.snp.right)
+            maker.left.equalTo(0)
+            maker.right.equalTo(0)
             maker.bottom.equalTo(0)
             maker.top.equalTo(8)
         }
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        let color = centerLabel.backgroundColor
+        let textColor = centerLabel.textColor
+        
+        super.setSelected(selected, animated: animated)
+        if selected {
+            centerLabel.textColor = textColor
+            centerLabel.backgroundColor = color
+        }
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let color = centerLabel.backgroundColor
+        let textColor = centerLabel.textColor
+        super.setHighlighted(highlighted, animated: animated)
+        if highlighted {
+            centerLabel.textColor = textColor
+            centerLabel.backgroundColor = color
+        }
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

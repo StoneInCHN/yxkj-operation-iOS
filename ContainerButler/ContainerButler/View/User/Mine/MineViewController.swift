@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class MineViewController: BaseViewController {
-    fileprivate lazy var datas: [String] = ["用户", "密码", "退出登录"]
+    fileprivate lazy var  datas: [String] = ["用户", "密码", "退出登录"]
     fileprivate lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -51,7 +51,7 @@ extension MineViewController: UITableViewDataSource {
         if  title == "用户" {
             let cell: UserHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.userLog.image = UIImage(named: "logo")
-            cell.titleLabel.text = title + (CoreDataManager.sharedInstance.getUserInfo()?.phoneNum ?? "9527")
+            cell.titleLabel.text = title + ": " + (CoreDataManager.sharedInstance.getUserInfo()?.phoneNum ?? "9527")
             return cell
         } else if title == "密码" {
             let cell: TitleLabelTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -60,6 +60,7 @@ extension MineViewController: UITableViewDataSource {
         } else if title == "退出登录" {
             let cell: CenterLabelTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
              cell.centerLabel.text = title
+            return cell
         }
         return UITableViewCell()
     }
@@ -67,24 +68,37 @@ extension MineViewController: UITableViewDataSource {
 
 extension MineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          tableView.deselectRow(at: indexPath, animated: true)
+      
         let title = datas[indexPath.row]
         if  title == "用户" {
-            return
+            
         } else if title == "密码" {
            navigationController?.pushViewController(UpdatePasswordVC(), animated: true)
+        } else if title == "退出登录" {
+            HUD.hideLoading()
+            let rootVC = NavigationController(rootViewController: LoginViewController())
+            UIView.transition(with: self.view, duration: 0.25, options: .curveEaseInOut, animations: { [weak self] in
+               guard let weakSelf = self else { return }
+                CoreDataManager.sharedInstance.clearUserInfo()
+                CoreDataManager.sharedInstance.clearSessionInfo()
+                weakSelf.view.removeFromSuperview()
+                UIApplication.shared.keyWindow?.addSubview(rootVC.view)
+            }, completion: { _ in
+                UIApplication.shared.keyWindow?.rootViewController = rootVC
+            })
         }
+         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let title = datas[indexPath.row]
         if  title == "用户" {
-            return 88
+            return 100
         } else if title == "密码" {
             return 45
         } else if title == "退出登录" {
             return 45
         }
-        return 0
+        return 45
     }
 }

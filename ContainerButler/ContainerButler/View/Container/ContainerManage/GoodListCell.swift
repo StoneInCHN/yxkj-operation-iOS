@@ -63,16 +63,20 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
     }()
     fileprivate lazy  var coverView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0x000000, alpha: 0.4)
+        view.backgroundColor = UIColor(hex: 0x30c7ac, alpha: 0.1)
         return view
     }()
     
     fileprivate lazy  var descLabel: UILabel = {
         let descLabel = UILabel()
-        descLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        descLabel.textColor = UIColor.white
+        descLabel.font = UIFont.systemFont(ofSize: 11)
+        descLabel.backgroundColor = UIColor(hex: 0x30c7ac, alpha: 1)
+        descLabel.textColor = .white
         descLabel.numberOfLines = 1
-        descLabel.text = "已补货"
+        descLabel.text = "已补货  "
+        descLabel.textAlignment = .center
+        descLabel.layer.cornerRadius = 14
+        descLabel.layer.masksToBounds = true
         return descLabel
     }()
     
@@ -154,8 +158,10 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
             $0.bottom.equalTo(bgView.snp.bottom)
         }
         descLabel.snp.makeConstraints {
-            $0.centerX.equalTo(UIScreen.width * 0.5)
+            $0.right.equalTo(10)
             $0.centerY.equalTo(bgView.snp.centerY)
+            $0.height.equalTo(28)
+            $0.width.equalTo(64)
         }
          descLabel.sizeToFit()
          coverView.isHidden = true
