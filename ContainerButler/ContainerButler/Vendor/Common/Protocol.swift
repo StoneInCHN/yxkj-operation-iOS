@@ -24,9 +24,7 @@ extension EndPointProtocol {
     }
     
     var baseURL: String {
-        // http://106.14.7.117:8080
-        return "http://106.14.7.117:8080"
-//        return (Bundle.main.infoDictionary?["BasseURL"] as? String) ?? ""
+        return CustomKey.URLKey.baseURL
     }
     
     func URL() -> String {

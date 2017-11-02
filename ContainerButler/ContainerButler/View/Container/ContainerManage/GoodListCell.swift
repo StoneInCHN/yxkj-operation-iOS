@@ -185,7 +185,7 @@ class GoodListCell: MGSwipeTableCell, ViewNameReusable {
 
 extension GoodListCell {
     func configWaitSupplyGoods(_ goods: Goods) {
-        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
+        icon.kf.setImage(with: URL(string: CustomKey.URLKey.baseImageUrl + ( goods.goodsPic ?? "")), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
         nameLabel.text = goods.goodsName
         numberLabel.textColor = UIColor(hex: 0x999999)
         numberLabel.font = UIFont.systemFont(ofSize: 12)
@@ -204,7 +204,7 @@ extension GoodListCell {
     }
     
     func configContainerWaitSupplyGoods(_ goods: Goods) {
-        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
+        icon.kf.setImage(with: URL(string: CustomKey.URLKey.baseImageUrl + (goods.goodsPic ?? "")), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
         nameLabel.text = goods.goodsName
         numberLabel.textColor = UIColor(hex: 0x000000)
         numberLabel.font = UIFont.systemFont(ofSize: 14)
@@ -233,7 +233,7 @@ extension GoodListCell {
     }
     
     func configContainerWholeGoods(_ goods: Goods) {
-        icon.kf.setImage(with: URL(string: goods.goodsPic ?? ""), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
+        icon.kf.setImage(with: URL(string:  CustomKey.URLKey.baseImageUrl + (goods.goodsPic ?? "")), placeholder: UIImage(named: "drink"), options: nil, progressBlock: nil, completionHandler: nil)
         nameLabel.text = goods.goodsName
         numberLabel.textColor = UIColor(hex: 0x000000)
         numberLabel.font = UIFont.systemFont(ofSize: 14)

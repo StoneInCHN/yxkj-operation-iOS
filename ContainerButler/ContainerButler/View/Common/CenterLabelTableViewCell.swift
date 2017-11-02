@@ -20,10 +20,25 @@ class CenterLabelTableViewCell: UITableViewCell, ViewNameReusable {
         return descLabel
     }()
     
+    fileprivate lazy  var line0: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: 0xcccccc)
+        return view
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         contentView.addSubview(centerLabel)
+        contentView.addSubview(line0)
+        
+        line0.snp.makeConstraints { (maker) in
+            maker.left.equalTo(0)
+            maker.right.equalTo(0)
+            maker.height.equalTo(0.5)
+            maker.bottom.equalTo(centerLabel.snp.top)
+        }
+        
         centerLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(0)
             maker.right.equalTo(0)
