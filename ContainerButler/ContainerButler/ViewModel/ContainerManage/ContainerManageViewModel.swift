@@ -115,6 +115,8 @@ class ContainerManageViewModel {
             if orginalGoods.supplementId == model.supplementId,
                 let copyGoods = orginalGoods.copy() as? Goods {
                 model.supplyCount = copyGoods.supplyCount
+                model.remainCount = copyGoods.remainCount
+                model.waitSupplyCount = copyGoods.waitSupplyCount
                 model.isSupplied = false
                 break
 //                models.value.append(copyGoods)

@@ -302,6 +302,7 @@ extension NotReplenishedVC: UITableViewDelegate {
                     selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
                     selectedModel.supplyCount  = inputCount
                     selectedModel.isSupplied = true
+                    selectedModel.remainCount = selectedModel.remainCount + inputCount
                     weakSelf.listVM.cacheSelectedContainerGoods(selectedModel)
                     weakSelf.tableView.reloadData()
                 }
