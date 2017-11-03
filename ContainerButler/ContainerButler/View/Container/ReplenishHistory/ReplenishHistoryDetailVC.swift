@@ -48,6 +48,7 @@ extension ReplenishHistoryDetailVC {
     }
     
     fileprivate func setupRX() {
+        HUD.showLoading()
         detailVM.supplyRecordDetailGroups.asObservable().subscribe(onNext: { [weak self](_) in
             HUD.hideLoading()
             self?.tableView.reloadData()
