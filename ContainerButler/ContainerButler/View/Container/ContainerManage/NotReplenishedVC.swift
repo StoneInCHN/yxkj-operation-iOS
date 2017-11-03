@@ -172,9 +172,11 @@ extension NotReplenishedVC {
             }
             weakSelf.commitSupplyRecord()
                 .subscribe(onNext: { (response) in
-                    HUD.showSuccess(response.description ?? "")
                     weakSelf.listVM.clearCachedGoods()
-                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                    HUD.showSuccess(response.description ?? "", completed: {
+                        weakSelf.navigationController?.popToRootViewController(animated: true)
+                    })
+                    
                 }, onError: { (error) in
                     if let error = error as? AppError {
                         HUD.showError(error.message)
@@ -205,17 +207,16 @@ extension NotReplenishedVC {
                     return false
                 }).subscribe(onNext: {  (isSuccess) in
                     if isSuccess {
-                        HUD.showSuccess("提交成功")
                         weakSelf.listVM.clearCachedGoods()
-                        weakSelf.navigationController?.popToRootViewController(animated: true)
+                        HUD.showSuccess("提交成功", completed: {
+                            weakSelf.navigationController?.popToRootViewController(animated: true)
+                        })
                     } else {
                          HUD.showError("提交失败")
                     }
                 }, onError: { (error) in
                     HUD.showError(error.localizedDescription)
                 }).disposed(by: weakSelf.disposeBag)
-                }, onCompleted: {
-                    HUD.hideLoading()
             }).disposed(by: disposeBag)
         
         listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
@@ -266,9 +267,10 @@ extension NotReplenishedVC {
                     HUD.showAlert(from: weakSelf, title: "温馨提示", message: "您尚未完成补货，是否要暂停补货", enterTitle: "取消", cancleTitle: "确定", enterAction: nil, cancleAction: {
                         weakSelf.commitSupplyRecord()
                                .subscribe(onNext: { (response) in
-                                HUD.showSuccess(response.description ?? "")
-                                weakSelf.listVM.clearCachedGoods()
-                                weakSelf.navigationController?.popToRootViewController(animated: true)
+                                  weakSelf.listVM.clearCachedGoods()
+                                 HUD.showSuccess(response.description ?? "", completed: {
+                                     weakSelf.navigationController?.popToRootViewController(animated: true)
+                                })
                             }, onError: { (error) in
                                 if let error = error as? AppError {
                                     HUD.showError(error.message)
@@ -299,7 +301,7 @@ extension NotReplenishedVC: UITableViewDelegate {
                     let selectedModel = weakSelf.listVM.models.value[indexPath.row]
                     selectedModel.waitSupplyCount = selectedModel.waitSupplyCount - inputCount
                     selectedModel.supplyCount  = inputCount
-                    weakSelf.listVM.models.value.remove(at: indexPath.row)
+                    selectedModel.isSupplied = true
                     weakSelf.listVM.cacheSelectedContainerGoods(selectedModel)
                     weakSelf.tableView.reloadData()
                 }
@@ -320,27 +322,22 @@ extension NotReplenishedVC: UITableViewDelegate {
 
 extension NotReplenishedVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return listVM .models.value.count
-        } else {
-            return listVM .selectedContainerModels.value.count
-        }
+         return listVM .models.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        if indexPath.section == 0 {
-            cell.configContainerWaitSupplyGoods(listVM.models.value[indexPath.row])
-            cell.hiddenCover()
-            return cell
-        } else {
+        let model = listVM.models.value[indexPath.row]
+        cell.configContainerWaitSupplyGoods(model)
+        if model.isSupplied {
             cell.delegate = self
-            cell.configContainerWaitSupplyGoods(listVM.selectedContainerModels.value[indexPath.row])
-            cell.showCover(listVM.selectedContainerModels.value[indexPath.row].waitSupplyCount)
+            cell.showCover(model.waitSupplyCount)
+        } else {
+            cell.hiddenCover()
         }
         return cell
     }
@@ -351,7 +348,8 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
         guard let cell = cell as? GoodListCell, let indexPath = tableView.indexPath(for: cell)  else {
             return nil
         }
-        if indexPath.section == 1, direction == .rightToLeft {
+        let model = listVM.models.value[indexPath.row]
+        if model.isSupplied, direction == .rightToLeft {
             swipeSettings.transition = .border
             return  UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
         }
@@ -359,8 +357,8 @@ extension NotReplenishedVC: MGSwipeTableCellDelegate {
     }
     
     func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        if  let indexPath = tableView.indexPath(for: cell), indexPath.section == 1, direction == .rightToLeft, index == 0 {
-            let selectedModel = listVM.selectedContainerModels.value[indexPath.row]
+        if  let indexPath = tableView.indexPath(for: cell), direction == .rightToLeft, index == 0 {
+            let selectedModel = listVM.models.value[indexPath.row]
             listVM.resetData(selectedModel, index: indexPath.row)
             tableView.reloadData()
         }
