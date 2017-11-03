@@ -144,27 +144,23 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         }
        
         bgView.snp.makeConstraints { (maker) in
-            maker.left.equalTo(dotView.snp.right).offset(20)
+            maker.left.equalTo(dotView.snp.right).offset(12)
             maker.right.equalTo(-12)
             maker.bottom.equalTo(-6)
             maker.top.equalTo(6)
         }
         shadowView.snp.makeConstraints { (maker) in
-            maker.left.equalTo(dotView.snp.right).offset(25)
+            maker.left.equalTo(dotView.snp.right).offset(17)
             maker.right.equalTo(-17)
             maker.bottom.equalTo(-11)
             maker.top.equalTo(12)
         }
         addressLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(18)
+            maker.left.equalTo(12.0.fitWidth)
             maker.top.equalTo(17)
         }
-        numberLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(addressLabel.snp.right).offset(27)
-            maker.top.equalTo(addressLabel.snp.top)
-        }
         timeLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(-30)
+            maker.left.equalTo(stockoutLabel.snp.left)
             maker.top.equalTo(addressLabel.snp.top)
         }
         
@@ -173,12 +169,17 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
             maker.top.equalTo(addressLabel.snp.bottom).offset(24)
         }
         totalReplenishLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(15.0.fitWidth)
+            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(12.0.fitWidth)
             maker.top.equalTo(totalNotReplenishLabel.snp.top)
         }
+        numberLabel.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(totalReplenishLabel.snp.centerX)
+            maker.top.equalTo(addressLabel.snp.top)
+        }
         stockoutLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalReplenishLabel.snp.right).offset(15.0.fitWidth)
+            maker.left.equalTo(totalReplenishLabel.snp.right).offset(12.0.fitWidth)
             maker.top.equalTo(totalReplenishLabel.snp.top)
+            maker.right.equalTo(-8.0.fitWidth)
         }
     }
     
@@ -200,6 +201,7 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         text1.yy_color = UIColor(hex: CustomKey.Color.mainGreenColor)
         text.append(text0)
         text.append(text1)
+        text.yy_alignment = .center
         totalNotReplenishLabel.attributedText = text
         
         let text2 = NSMutableAttributedString()
@@ -225,6 +227,4 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         stockoutLabel.attributedText = text5
         
     }
-    
-
 }

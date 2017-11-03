@@ -187,6 +187,7 @@ class UserSessionParam: Model {
     var verifyCodeType: CaptchaCodeType?
     var oldPassword: String?
     var newPassword: String?
+    var userId: Int64?
     
     override func mapping(map: Map) {
         phoneNum <- map["cellPhoneNum"]
@@ -197,6 +198,7 @@ class UserSessionParam: Model {
         verifyCodeType <- map["type"]
         oldPassword <- map["oldePwd"]
         newPassword <- map["newPwd"]
+        userId <- map["userId"]
     }
 }
 

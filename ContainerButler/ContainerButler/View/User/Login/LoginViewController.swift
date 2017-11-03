@@ -137,15 +137,6 @@ class LoginViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
-    @available(iOS 11.0, *)
-    override func viewSafeAreaInsetsDidChange() {
-        if UIDevice.current.modelName == "iPhone X" {
-             companyIcon.snp.updateConstraints {  $0.top.equalTo(-64) }
-        }
-       
-    }
-    
 }
 
 extension LoginViewController {
@@ -307,15 +298,19 @@ extension LoginViewController {
             phoneError.isHidden = false
             pwdError.isHidden = true
             phoneError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
-                guard let weakSelf = self else {    return  }
-                weakSelf.phoneError.isHidden = true
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                       guard let weakSelf = self else {    return  }
+                       weakSelf.phoneError.isHidden = true
+                })
             })
         case .passwordError:
             pwdError.isHidden = false
             phoneError.isHidden = true
             pwdError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
-                guard let weakSelf = self else {    return  }
-                weakSelf.pwdError.isHidden = true
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    guard let weakSelf = self else {    return  }
+                    weakSelf.pwdError.isHidden = true
+                })
             })
         default:
             break

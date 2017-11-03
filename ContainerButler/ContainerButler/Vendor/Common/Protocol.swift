@@ -58,7 +58,7 @@ extension FileUploadProtocol {
     }
 }
 
-protocol ViewNameReusable:class { }
+protocol ViewNameReusable: class { }
 
 extension ViewNameReusable where Self:UIView {
     static var reuseIdentifier: String {

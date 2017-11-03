@@ -5,6 +5,7 @@
 //  Created by lieon on 2017/9/21.
 //  Copyright © 2017年 QuanChengShouWei. All rights reserved.
 //  货柜待补商品
+// swiftlint:disable force_unwrapping
 
 import UIKit
 import RxSwift

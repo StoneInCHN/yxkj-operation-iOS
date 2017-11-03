@@ -72,7 +72,7 @@ extension AppDelegate {
     
   fileprivate  func loadRSAPublickey() {
         let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
-        keyOberable.subscribe(onNext: {[weak self] (response) in
+        keyOberable.retry(10).subscribe(onNext: {[weak self] (response) in
             if let obj = response.object {
                 self?.rsaPublickey = obj.key
             }

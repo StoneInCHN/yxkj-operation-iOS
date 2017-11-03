@@ -298,7 +298,10 @@ extension ResetPasswordVC {
                 if weakSelf.pwdTFAgain.text != weakSelf.pwdTF.text {
                     weakSelf.againPwdError.isHidden = false
                     weakSelf.againPwdError.shake(30, withDelta: 1, speed: 0.03, completion: {
-                        weakSelf.againPwdError.isHidden = true
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                            guard let weakSelf = self else {    return  }
+                             weakSelf.againPwdError.isHidden = true
+                        })
                     })
                     return
                 }
@@ -307,15 +310,21 @@ extension ResetPasswordVC {
                 param.phoneNum = weakSelf.phoneNumber
                 param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: restVM.rsaPublickey ?? "")
                 HUD.showLoading()
-                restVM.handle(with: .resetPasswod(param))
-                    .subscribe(onNext: { URLResponse in
-                      weakSelf.navigationController?.popToRootViewController(animated: true)
+                restVM.resetPassword(param)
+                    .subscribe(onNext: {  _ in
+                        HUD.showSuccess("密码设置成功", completed: {
+                            guard let view = weakSelf.view else { return }
+                            let rootVC = TabBarController()
+                            UIView.transition(with: view, duration: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                                UIApplication.shared.keyWindow?.rootViewController?.view.removeFromSuperview()
+                            }, completion: { (_) in
+                                UIApplication.shared.keyWindow?.rootViewController = rootVC
+                            })
+                        })
                     }, onError: { (error) in
                         if let error = error as? AppError {
                             HUD.showError(error.message)
                         }
-                    }, onCompleted: {
-                        HUD.hideLoading()
                     })
                     .disposed(by: weakSelf.disposeBag)
             })

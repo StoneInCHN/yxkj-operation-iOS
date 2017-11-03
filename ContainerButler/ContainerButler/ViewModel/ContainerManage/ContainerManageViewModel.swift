@@ -39,6 +39,7 @@ class ContainerManageViewModel {
             .map { response -> [Scence] in
                 let whole = Scence()
                 whole.name = "全部"
+                whole.number = ""
                 if var groups = response.object?.groups {
                       groups.insert(whole, at: 0)
                     return groups
@@ -57,6 +58,7 @@ class ContainerManageViewModel {
             .map { response -> [GoodsCategory] in
                 let whole = GoodsCategory()
                 whole.cateName = "全部"
+                whole.cateId = 0
                 if var groups = response.object?.groups {
                     groups.insert(whole, at: 0)
                     return groups

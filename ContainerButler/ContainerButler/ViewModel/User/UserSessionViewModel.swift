@@ -35,7 +35,14 @@ class UserSessionViewModel {
     }
     
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
-        let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: .false)
+        var needToken: NeedToken = .false
+        switch type {
+        case .updatePasswod(_):
+              needToken = .true
+        default:
+            needToken = .false
+        }
+        let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: needToken)
         return loginObserable.map { [weak self](response) -> NullDataResponse in
              self?.saveSessionInfo(response)
               return response
@@ -46,6 +53,19 @@ class UserSessionViewModel {
         let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.loginByPwd, param: param), needToken: .false)
          return loginObserable.map {  [weak self] (response) -> BaseResponseObject<UserInfo> in
             self?.saveUserInfo(response, phoneNum: param.phoneNum ?? "")
+            return response
+        }
+    }
+    
+    func resetPassword(_ param: UserSessionParam) -> Observable<BaseResponseObject<UserInfo>> {
+        let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.resetPwd, param: param), needToken: .false)
+        return loginObserable.map { (response) -> BaseResponseObject<UserInfo> in
+            if  let token = response.token, !token.isEmpty, let userInfo = response.object {
+                let session = UserSessionInfo()
+                session.token = token
+                CoreDataManager.sharedInstance.save(userSession: session)
+                CoreDataManager.sharedInstance.save(userInfo: userInfo, phoneNum: param.phoneNum ?? "")
+            }
             return response
         }
     }

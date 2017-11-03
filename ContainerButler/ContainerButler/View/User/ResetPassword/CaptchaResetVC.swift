@@ -307,15 +307,19 @@ extension CaptchaResetVC {
             pwdError.isHidden = false
             phoneError.isHidden = true
             pwdError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
-                guard let weakSelf = self else {    return  }
-                weakSelf.pwdError.isHidden = true
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    guard let weakSelf = self else {    return  }
+                    weakSelf.pwdError.isHidden = true
+                })
             })
         } else  if error.status == .phoneNumError {
             pwdError.isHidden = true
             phoneError.isHidden = false
             phoneError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
-                guard let weakSelf = self else {    return  }
-                weakSelf.phoneError.isHidden = true
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    guard let weakSelf = self else {    return  }
+                    weakSelf.phoneError.isHidden = true
+                })
             })
         }
     }

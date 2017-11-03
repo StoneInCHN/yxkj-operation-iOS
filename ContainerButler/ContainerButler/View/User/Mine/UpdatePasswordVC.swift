@@ -289,13 +289,16 @@ extension UpdatePasswordVC {
                 if weakSelf.pwdTFAgain.text != weakSelf.pwdTF.text {
                     weakSelf.againPwdError.isHidden = false
                     weakSelf.againPwdError.shake(30, withDelta: 1, speed: 0.03, completion: {
-                          weakSelf.againPwdError.isHidden = true
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                            weakSelf.againPwdError.isHidden = true
+                        })
                     })
                     return
                 }
                 let sessionVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
+                param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
                 param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
                 param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
                 sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))

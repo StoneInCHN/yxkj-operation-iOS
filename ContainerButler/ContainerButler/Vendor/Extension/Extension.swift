@@ -149,6 +149,9 @@ public extension UIDevice {
     var isiPhone6p: Bool {
         return isPhone && UIScreen.maxLength  == 736.0
     }
+    var isiPhoneX: Bool {
+        return isPhone && UIScreen.maxLength  == 812.0
+    }
 }
 
 fileprivate let dateFormatter: DateFormatter = {
@@ -699,8 +702,8 @@ extension Double {
              height =  667.0
         } else if UIDevice.current.isiPhone6p {
              height =  736.0
-        } else {
-             height =  1024.0
+        } else  if UIDevice.current.isiPhoneX {
+             height =  812.0
         }
         let scale = height / desigHeight
         return CGFloat(self * scale)
@@ -717,8 +720,8 @@ extension Double {
             width =  375
         } else if UIDevice.current.isiPhone6p {
             width =  375
-        } else {
-            width =  768
+        } else if UIDevice.current.isiPhoneX {
+            width =  375
         }
         return width / desigWidth
     }

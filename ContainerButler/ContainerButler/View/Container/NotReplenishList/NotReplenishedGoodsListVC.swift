@@ -237,8 +237,11 @@ extension NotReplenishedGoodsListVC {
         if let selectedMessage = supplyMessage {
             addressLabel.text = selectedMessage.title
             listVM.param.sceneSn = selectedMessage.sceneSn
+        } else {
+            listVM.param.sceneSn = ""
         }
-          listVM.requestCommand.onNext(true)
+         listVM.param.cateId = 0
+        listVM.requestCommand.onNext(true)
     }
     
     private func showOptionChooseView() {
@@ -298,29 +301,10 @@ extension NotReplenishedGoodsListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.delegate = self
         if indexPath.row < listVM.models.value.count {
             cell.configWaitSupplyGoods(listVM.models.value[indexPath.row])
         }
-        let goods = listVM.models.value[indexPath.row]
         cell.hiddenCover()
         return cell
-    }
-}
-
-extension NotReplenishedGoodsListVC: MGSwipeTableCellDelegate {
-    func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
-        guard let cell = cell as? GoodListCell else {
-            return nil
-        }
-        if direction == .rightToLeft {
-            let doneBtn = UIButton.createButtons(with: ["取消完成"], backgroudColors: [UIColor(hex: CustomKey.Color.mainOrangeColor)])
-            doneBtn[0].rx.tap
-                .subscribe(onNext: { [weak self] _ in
-                    
-                }).disposed(by: disposeBag)
-            return doneBtn
-        }
-        return nil
     }
 }

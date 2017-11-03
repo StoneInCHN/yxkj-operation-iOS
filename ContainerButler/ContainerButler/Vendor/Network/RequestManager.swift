@@ -29,10 +29,10 @@ class RequestManager {
         var urlRequest = router.urlRequest
         var header = Header().toJSON()
         if case .false = needToken {
-            header.removeValue(forKey: "token")
+            header.removeValue(forKey: "X-Auth-Token")
         }
         if case .default = needToken {
-            header.removeValue(forKey: "token")
+            header.removeValue(forKey: "X-Auth-Token")
         }
         header.forEach { (key, value) in
             if let string = value as? String {

@@ -22,12 +22,12 @@ class HUD {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if let title = title {
             let titleText = NSMutableAttributedString(string: title )
-            titleText.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14.5)], range: NSMakeRange(0, title.characters.count))
+            titleText.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14.5)], range: NSMakeRange(0, title.count))
             alertVC.setValue(titleText, forKey: "attributedTitle")
         }
         if let message = message {
             let messageText = NSMutableAttributedString(string: message )
-            messageText.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor(hex: 0x333333)], range: NSMakeRange(0, message.characters.count))
+            messageText.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor(hex: 0x333333)], range: NSMakeRange(0, message.count))
             alertVC.setValue(messageText, forKey: "attributedMessage")
         }
         if let enter = enterTitle, !enter.isEmpty {
@@ -65,10 +65,18 @@ class HUD {
         SVProgressHUD.showError(withStatus: meessage)
     }
     
+    static func showSuccess(_ message: String, completed: @escaping (() -> Void)) {
+        UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
+        SVProgressHUD.setMaximumDismissTimeInterval(2)
+        SVProgressHUD.showSuccess(withStatus: message)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: completed)
+    }
+    
     static func showSuccess(_ message: String) {
         UIApplication.shared.keyWindow?.isUserInteractionEnabled = true
         SVProgressHUD.setMaximumDismissTimeInterval(2)
         SVProgressHUD.showSuccess(withStatus: message)
+        
     }
     
 }
