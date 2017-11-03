@@ -85,15 +85,6 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         return descLabel
     }()
     
-    fileprivate lazy  var stockoutLabel: YYLabel = {
-        let descLabel = YYLabel()
-        descLabel.font = UIFont.systemFont(ofSize: 11.5)
-        descLabel.textColor =  UIColor(hex: 0x555555)
-        descLabel.numberOfLines = 0
-        descLabel.textAlignment = .center
-        return descLabel
-    }()
-    
     fileprivate lazy  var dotView: UIView = {
         let view = UIView()
         view.layer.cornerRadius =  3
@@ -122,7 +113,6 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         bgView.addSubview(timeLabel)
         bgView.addSubview(totalNotReplenishLabel)
         bgView.addSubview(totalReplenishLabel)
-        bgView.addSubview(stockoutLabel)
         
         dotView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(contentView.snp.centerY)
@@ -160,7 +150,7 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
             maker.top.equalTo(17)
         }
         timeLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(stockoutLabel.snp.left)
+            maker.right.equalTo(-30)
             maker.top.equalTo(addressLabel.snp.top)
         }
         
@@ -169,17 +159,12 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
             maker.top.equalTo(addressLabel.snp.bottom).offset(24)
         }
         totalReplenishLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(12.0.fitWidth)
+            maker.left.equalTo(totalNotReplenishLabel.snp.right).offset(30.0.fitWidth)
             maker.top.equalTo(totalNotReplenishLabel.snp.top)
         }
         numberLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(totalReplenishLabel.snp.centerX)
             maker.top.equalTo(addressLabel.snp.top)
-        }
-        stockoutLabel.snp.makeConstraints { (maker) in
-            maker.left.equalTo(totalReplenishLabel.snp.right).offset(12.0.fitWidth)
-            maker.top.equalTo(totalReplenishLabel.snp.top)
-            maker.right.equalTo(-8.0.fitWidth)
         }
     }
     
@@ -214,17 +199,6 @@ class ReplenishHistoryCell: UITableViewCell, ViewNameReusable {
         text2.append(text3)
         text2.append(text4)
         totalReplenishLabel.attributedText = text2
-        
-        let text5 = NSMutableAttributedString()
-        let text6 = NSMutableAttributedString(string: "缺货数: ")
-        text6.yy_font = UIFont.boldSystemFont(ofSize: 12)
-        text6.yy_color = UIColor(hex: 0x555555)
-        let text7 = NSMutableAttributedString(string: "\(model.lackCount)")
-        text7.yy_font = UIFont.boldSystemFont(ofSize: 12)
-        text7.yy_color = UIColor(hex: 0xf0282b)
-        text5.append(text6)
-        text5.append(text7)
-        stockoutLabel.attributedText = text5
         
     }
 }

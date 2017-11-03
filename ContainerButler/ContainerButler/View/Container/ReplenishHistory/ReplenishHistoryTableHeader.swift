@@ -47,7 +47,7 @@ class ReplenishHistoryTableHeader: UITableViewHeaderFooterView, ViewNameReusable
     }
     
     func config(_ model: SuplementRecordGroup) {
-        if let date = model.date, date.characters.count >= 5 {
+        if let date = model.date, date.count >= 5 {
             let text = NSMutableAttributedString()
             let index = date.index(of: ".") ?? date.endIndex
             let beginning = date[..<index]

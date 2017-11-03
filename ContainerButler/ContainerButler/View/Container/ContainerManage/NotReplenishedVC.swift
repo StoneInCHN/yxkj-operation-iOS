@@ -203,9 +203,10 @@ extension NotReplenishedVC {
                         return true
                     }
                     return false
-                }).subscribe(onNext: { (isSuccess) in
+                }).subscribe(onNext: {  (isSuccess) in
                     if isSuccess {
                         HUD.showSuccess("提交成功")
+                        weakSelf.listVM.clearCachedGoods()
                         weakSelf.navigationController?.popToRootViewController(animated: true)
                     } else {
                          HUD.showError("提交失败")
@@ -306,6 +307,12 @@ extension NotReplenishedVC: UITableViewDelegate {
             }
             replenishManageView.config(listVM.models.value[indexPath.row])
             replenishManageView.show()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: { [weak self] in
+                guard let weakSelf = self else {
+                    return
+                }
+                weakSelf.replenishManageView.realDeliveryGoodsInputTF.becomeFirstResponder()
+            })
         }
     }
     

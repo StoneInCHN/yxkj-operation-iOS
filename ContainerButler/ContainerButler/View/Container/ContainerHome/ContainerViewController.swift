@@ -37,6 +37,11 @@ class ContainerViewController: BaseViewController {
         setupUI()
         setupRX()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         self.containerVM.requestCommand.onNext(true)
+    }
 }
 
 extension ContainerViewController {
@@ -108,7 +113,6 @@ extension ContainerViewController {
             self.containerVM.requestCommand.onNext(false)
         })
         HUD.showLoading()
-        containerVM.refreshStatus.value = .beingHeaderRefresh
     }
 }
 

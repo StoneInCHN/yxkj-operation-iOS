@@ -152,7 +152,7 @@ class ReplenishHistoryDetailCell: MGSwipeTableCell, ViewNameReusable {
         remainReplenishLabel.attributedText = text2
         
         let text = NSMutableAttributedString()
-        let text0 = NSMutableAttributedString(string: "待补货数:  ")
+        let text0 = NSMutableAttributedString(string: "补货数量:  ")
         text0.yy_font = UIFont.boldSystemFont(ofSize: 12)
         text0.yy_color = UIColor(hex: 0x666666)
         let text1 = NSMutableAttributedString(string: "\(model.supplyCount)")

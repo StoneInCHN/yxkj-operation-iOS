@@ -35,7 +35,7 @@ class ReplenishManageView: UIView {
         descLabel.font = UIFont.boldSystemFont(ofSize: 13)
         descLabel.textColor = UIColor(hex: 0x333333)
         descLabel.numberOfLines = 0
-        descLabel.text = "实际补货数："
+        descLabel.text = "实际补货数:"
         return descLabel
     }()
     
@@ -57,7 +57,7 @@ class ReplenishManageView: UIView {
         return descLabel
     }()
     
-    fileprivate lazy   var  realDeliveryGoodsInputTF: UITextField = {
+    lazy   var  realDeliveryGoodsInputTF: UITextField = {
         let pwdTF = UITextField()
         pwdTF.placeholder = "00"
         pwdTF.textColor = UIColor(hex: 0x30C7AC)
@@ -167,7 +167,7 @@ extension ReplenishManageView {
         }
         totalNotReplenishLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(nameLabel.snp.left)
-            maker.bottom.equalTo(-30.0.fitHeight)
+            maker.top.equalTo(numberLabel.snp.bottom).offset(7)
         }
         realDeliveryGoodsLabel.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(totalNotReplenishLabel.snp.centerY)
@@ -180,7 +180,7 @@ extension ReplenishManageView {
         }
         line0.snp.makeConstraints { (maker) in
             maker.left.equalTo(realDeliveryGoodsInputTF.snp.left).offset(-5)
-            maker.width.equalTo(30)
+            maker.width.equalTo(40)
             maker.height.equalTo(2)
             maker.top.equalTo(realDeliveryGoodsInputTF.snp.bottom)
         }
@@ -193,7 +193,11 @@ extension ReplenishManageView {
         closeBtn.onTap {[unowned self] in
             self.dismiss()
         }
-        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+     
     }
 }
 
