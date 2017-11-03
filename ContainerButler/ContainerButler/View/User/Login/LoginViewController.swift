@@ -33,6 +33,7 @@ class LoginViewController: BaseViewController {
         text.append(text1)
         label.isHidden = true
         label.attributedText = text
+        label.backgroundColor = .white
         return label
     }()
     fileprivate lazy var pwdError: YYLabel = {
@@ -49,6 +50,7 @@ class LoginViewController: BaseViewController {
         text.append(text1)
          label.isHidden = true
         label.attributedText = text
+        label.backgroundColor = .white
         return label
     }()
     fileprivate lazy  var phoneNumTF: UITextField = {
@@ -159,9 +161,9 @@ extension LoginViewController {
         view.addSubview(line2)
         view.addSubview(loginBtn)
         view.addSubview(captchdBtn)
+        view.addSubview(phoneNumTF)
         view.addSubview(phoneError)
         view.addSubview(pwdError)
-        view.addSubview(phoneNumTF)
         companyIcon.snp.makeConstraints { (maker) in
             maker.left.right.top.equalTo(0)
             maker.height.equalTo(185.5.fitHeight)
@@ -173,14 +175,14 @@ extension LoginViewController {
             maker.width.equalTo(20)
         }
         phoneError.snp.makeConstraints { (maker) in
-            maker.width.equalTo(180.0.fitWidth)
+            maker.left.equalTo(userIcon.snp.right).offset(15.0.fitWidth)
             maker.centerY.equalTo(userIcon.snp.centerY)
-            maker.right.equalTo(-10)
+            maker.right.equalTo(-20)
         }
         phoneNumTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.right).offset(15.0.fitWidth)
             maker.centerY.equalTo(userIcon.snp.centerY)
-            maker.right.equalTo(phoneError.snp.left).offset(0)
+            maker.right.equalTo(-20)
         }
         
         line0.snp.makeConstraints { (maker) in
@@ -195,13 +197,13 @@ extension LoginViewController {
             maker.width.equalTo(20)
         }
         pwdError.snp.makeConstraints { (maker) in
-            maker.width.equalTo(150.0.fitWidth)
+            maker.left.equalTo(phoneNumTF.snp.left)
+            maker.right.equalTo(phoneNumTF.snp.right)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
-            maker.right.equalTo(-10)
         }
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(pwdError.snp.left)
+            maker.right.equalTo(phoneNumTF.snp.right)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         line2.snp.makeConstraints { (maker) in
@@ -304,11 +306,17 @@ extension LoginViewController {
         case .phoneNumError:
             phoneError.isHidden = false
             pwdError.isHidden = true
-            phoneNumTF.shake()
+            phoneError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
+                guard let weakSelf = self else {    return  }
+                weakSelf.phoneError.isHidden = true
+            })
         case .passwordError:
             pwdError.isHidden = false
             phoneError.isHidden = true
-           pwdTF.shake()
+            pwdError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
+                guard let weakSelf = self else {    return  }
+                weakSelf.pwdError.isHidden = true
+            })
         default:
             break
         }

@@ -105,6 +105,24 @@ class CaptchaResetVC: BaseViewController {
         text.append(text1)
         label.isHidden = true
         label.attributedText = text
+        label.backgroundColor = .white
+        return label
+    }()
+    fileprivate lazy var phoneError: YYLabel = {
+        let label = YYLabel()
+        let  text = NSMutableAttributedString()
+        let image = UIImage(named: "error_warning")
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: image, contentMode: .center, attachmentSize: CGSize(width: 16, height: 16), alignTo: UIFont.systemFont(ofSize: 12), alignment: .center)
+        let padding = NSMutableAttributedString(string: "  ")
+        let text1 = NSMutableAttributedString(string: "用户不存在")
+        text1.yy_font = UIFont.systemFont(ofSize: 12)
+        text1.yy_color = UIColor(hex: 0xBB2C2B)
+        text.append(attach)
+        text.append(padding)
+        text.append(text1)
+        label.isHidden = true
+        label.attributedText = text
+        label.backgroundColor = .white
         return label
     }()
     override func viewDidLoad() {
@@ -131,6 +149,7 @@ extension CaptchaResetVC {
         view.addSubview(line2)
         view.addSubview(loginBtn)
         view.addSubview(pwdError)
+         view.addSubview(phoneError)
         descPwdLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(26 + 64)
             maker.centerX.equalTo(view.snp.centerX)
@@ -159,7 +178,11 @@ extension CaptchaResetVC {
             maker.height.equalTo(30)
             maker.width.equalTo(90)
         }
-        
+        phoneError.snp.makeConstraints { (maker) in
+            maker.left.equalTo(userIcon.snp.right).offset(20)
+            maker.centerY.equalTo(userIcon.snp.centerY)
+            maker.right.equalTo(forgetPwdBtn.snp.left)
+        }
         pwdIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(userIcon.snp.left)
             maker.top.equalTo(line0.snp.bottom).offset(22)
@@ -173,13 +196,13 @@ extension CaptchaResetVC {
             maker.height.equalTo(1)
         }
         pwdError.snp.makeConstraints { (maker) in
+            maker.left.equalTo(phoneNumTF.snp.left)
             maker.right.equalTo(-30)
-            maker.width.equalTo(180.0.fitWidth)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         pwdTF.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(pwdError.snp.left)
+            maker.right.equalTo(-30)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
             
         }
@@ -240,7 +263,13 @@ extension CaptchaResetVC {
                         param.verifyCodeType = .resetPassword
                         let chaptchVM = UserSessionViewModel()
                         chaptchVM.getVerificationCode(param)
-                        weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
+                        chaptchVM.getVerificationCode(param).subscribe(onNext: {  _ in
+                            weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
+                        }, onError: { (error) in
+                            if let error = error as? AppError {
+                                self?.showError(error)
+                            }
+                        }).disposed(by: weakSelf.disposeBag)
                 }, cancleAction: nil)
             })
             .disposed(by: disposeBag)
@@ -276,9 +305,18 @@ extension CaptchaResetVC {
     private func showError(_ error: AppError) {
         if error.status == .capchaError {
             pwdError.isHidden = false
-            pwdTF.shake()
-        } else {
-            HUD.showError(error.message)
+            phoneError.isHidden = true
+            pwdError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
+                guard let weakSelf = self else {    return  }
+                weakSelf.pwdError.isHidden = true
+            })
+        } else  if error.status == .phoneNumError {
+            pwdError.isHidden = true
+            phoneError.isHidden = false
+            phoneError.shake(30, withDelta: 1, speed: 0.03, completion: {[weak self] in
+                guard let weakSelf = self else {    return  }
+                weakSelf.phoneError.isHidden = true
+            })
         }
     }
 }

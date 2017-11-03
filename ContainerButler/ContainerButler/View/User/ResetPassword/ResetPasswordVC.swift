@@ -145,6 +145,7 @@ class ResetPasswordVC: BaseViewController {
         text.append(text1)
         label.isHidden = true
         label.attributedText = text
+        label.backgroundColor = .white
         return label
     }()
     override func viewDidLoad() {
@@ -234,14 +235,14 @@ extension ResetPasswordVC {
         }
         
         againPwdError.snp.makeConstraints { (maker) in
-            maker.left.equalTo(newPwdError.snp.left)
+            maker.left.equalTo(phoneNumTF.snp.left)
+            maker.right.equalTo(-30)
             maker.centerY.equalTo(pwdIconAgain.snp.centerY)
-            maker.width.equalTo(120.0.fitWidth)
         }
         
         pwdTFAgain.snp.makeConstraints { (maker) in
             maker.left.equalTo(phoneNumTF.snp.left)
-            maker.right.equalTo(againPwdError.snp.left).offset(-8)
+            maker.right.equalTo(-30)
             maker.centerY.equalTo(pwdIconAgain.snp.centerY)
         }
         
@@ -267,38 +268,19 @@ extension ResetPasswordVC {
     }
     
      fileprivate func setupRx() {
+        let repeatPasswordValid = pwdTFAgain.rx.text.orEmpty
+            .map { $0.characters.count >= 8 }
+            .share(replay: 1)
+            .share(replay: 1)
+        
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { text -> Bool in
-                if text.isEmpty {
-                    return true
-                }
-                return text.validatePassword()
-            }
+            .map { $0.validatePassword()}
             .share(replay: 1)
         
-        let againPasswordValid = pwdTFAgain.rx.text.orEmpty
-            .map {[weak self] (text) -> Bool in
-                if text.isEmpty {
-                    return true
-                }
-                if text != self?.pwdTF.text {
-                    return false
-                }
-                return true
-        }.share(replay: 1)
-        
-        let everythingValid = Observable.combineLatest(passwordValid, againPasswordValid) { $0 && $1 }
+        let everythingValid = Observable.combineLatest(repeatPasswordValid, passwordValid) { $0 && $1 }
             .share(replay: 1)
         
-        passwordValid
-            .bind(to: newPwdError.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        againPasswordValid
-            .bind(to: againPwdError.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-         everythingValid
+        everythingValid
             .bind(to: enterBtn.rx.isEnabled)
             .disposed(by: disposeBag)
         
@@ -313,6 +295,13 @@ extension ResetPasswordVC {
         enterBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let weakSelf = self else {    return      }
+                if weakSelf.pwdTFAgain.text != weakSelf.pwdTF.text {
+                    weakSelf.againPwdError.isHidden = false
+                    weakSelf.againPwdError.shake(30, withDelta: 1, speed: 0.03, completion: {
+                        weakSelf.againPwdError.isHidden = true
+                    })
+                    return
+                }
                 let restVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = weakSelf.phoneNumber

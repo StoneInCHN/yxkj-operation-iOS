@@ -50,10 +50,9 @@ class UserSessionViewModel {
         }
     }
     
-    func getVerificationCode(_ param: UserSessionParam) {
+    func getVerificationCode(_ param: UserSessionParam) -> Observable<NullDataResponse> {
         let codeObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getVerificationCode, param: param), needToken: .true)
-        codeObserable.subscribe(onNext: {_ in    }).disposed(by: disposeBag)
-
+        return codeObserable
     }
     
 }

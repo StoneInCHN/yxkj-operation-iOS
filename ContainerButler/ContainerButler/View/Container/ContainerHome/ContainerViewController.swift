@@ -135,7 +135,7 @@ extension ContainerViewController: UITableViewDataSource {
                 vcc.deviceNum = model.number
                weakSelf.navigationController?.pushViewController(vcc, animated: true)
             } else {
-                HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对A货柜进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: { [weak self] in
+                HUD.showAlert(from: weakSelf, title: "花样年华T3优享空间", message: "对\(model.name ?? "")进行补货\n补货时，货柜将暂停服务", enterTitle: "取消", cancleTitle: "开始补货", enterAction: nil, cancleAction: { [weak self] in
                     guard let weakSelf = self else { return }
                     let param = ContainerSessionParam()
                     param.sceneSn = scence.number

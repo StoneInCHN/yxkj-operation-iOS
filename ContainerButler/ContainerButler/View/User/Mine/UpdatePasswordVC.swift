@@ -133,6 +133,13 @@ class UpdatePasswordVC: BaseViewController {
         return label
     }()
     
+    fileprivate lazy  var visiableBtn: UIButton = {
+        let loginBtn = UIButton()
+        loginBtn.setImage(UIImage(named: "eye"), for: .selected)
+        loginBtn.setImage(UIImage(named: "eye_grey"), for: .normal)
+        return loginBtn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -163,6 +170,7 @@ extension UpdatePasswordVC {
         view.addSubview(enterBtn)
         view.addSubview(forgetBtn)
         view.addSubview(againPwdError)
+        view.addSubview(visiableBtn)
         
         userIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(40)
@@ -193,6 +201,11 @@ extension UpdatePasswordVC {
             maker.right.equalTo(phoneNumTF.snp.right)
             maker.centerY.equalTo(pwdIcon.snp.centerY)
             maker.height.equalTo(35)
+        }
+        visiableBtn.snp.makeConstraints { (maker) in
+            maker.size.equalTo(CGSize(width: 25, height: 15))
+            maker.right.equalTo(line0.snp.right)
+            maker.centerY.equalTo(pwdIcon.snp.centerY)
         }
         
         line1.snp.makeConstraints { (maker) in
@@ -260,6 +273,14 @@ extension UpdatePasswordVC {
         
         everythingValid
             .bind(to: enterBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        visiableBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let weakSelf = self else {    return      }
+                weakSelf.visiableBtn.isSelected = !weakSelf.visiableBtn.isSelected
+                self?.pwdTF.isSecureTextEntry = !weakSelf.visiableBtn.isSelected
+            })
             .disposed(by: disposeBag)
         
         enterBtn.rx.tap
