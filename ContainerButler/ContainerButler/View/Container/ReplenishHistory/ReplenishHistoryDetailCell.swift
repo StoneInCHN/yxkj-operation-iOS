@@ -140,6 +140,9 @@ class ReplenishHistoryDetailCell: MGSwipeTableCell, ViewNameReusable {
     }
     
     func config(_ model: SuplementRecordDetail) {
+        nameLabel.text = model.goodsName
+        numberLabel.text = model.channelSn
+        icon.kf.setImage(with: URL(string: CustomKey.URLKey.baseImageUrl + (model.goodsPic ?? "")), placeholder: UIImage(named: "drink"))
         let text2 = NSMutableAttributedString()
         let text3 = NSMutableAttributedString(string: "应补数量:  ")
         text3.yy_font = UIFont.boldSystemFont(ofSize: 12)

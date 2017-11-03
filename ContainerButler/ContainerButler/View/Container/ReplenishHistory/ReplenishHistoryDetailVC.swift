@@ -12,12 +12,12 @@ import RxSwift
 import RxDataSources
 
 class ReplenishHistoryDetailVC: BaseViewController {
-    var scenceSn: String?
+    var scence: SuplementRecord?
     
     fileprivate lazy var detailVM: ReplenishHistoryViewModel = { [unowned self] in
         let viewModel = ReplenishHistoryViewModel()
         let param = ContainerSessionParam()
-        param.sceneSn = self.scenceSn
+        param.sceneSn = self.scence?.sceneSn
         viewModel.requestSupplementRecordDetails(param)
         return viewModel
     }()
@@ -40,7 +40,7 @@ class ReplenishHistoryDetailVC: BaseViewController {
 
 extension ReplenishHistoryDetailVC {
     fileprivate func setupUI() {
-        title = "香年广场-编号:01"
+        title = "\(scence?.sceneName ?? "")-编号: \(scence?.sceneSn ?? "")"
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
