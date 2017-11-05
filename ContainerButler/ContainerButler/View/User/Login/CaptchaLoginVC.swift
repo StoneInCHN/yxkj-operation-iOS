@@ -218,11 +218,11 @@ extension CaptchaLoginVC {
     
     fileprivate func setupRx() {
         let usernameValid = phoneNumTF.rx.text.orEmpty
-            .map { $0.characters.count >= 11}
+            .map { $0.count >= 11}
             .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 6 }
+            .map { $0.count >= 6 }
             .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
@@ -234,7 +234,7 @@ extension CaptchaLoginVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
+                return text.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -242,7 +242,7 @@ extension CaptchaLoginVC {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                 return text.characters.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
+                 return text.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
             }
             .share(replay: 1)
             .bind(to: phoneNumTF.rx.text)

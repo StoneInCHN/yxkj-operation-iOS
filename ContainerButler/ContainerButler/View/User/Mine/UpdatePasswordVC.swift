@@ -260,7 +260,7 @@ extension UpdatePasswordVC {
     
     fileprivate func setupRx() {
         let repeatPasswordValid = pwdTFAgain.rx.text.orEmpty
-            .map { $0.characters.count >= 8 }
+            .map { $0.count >= 8 }
             .share(replay: 1)
         .share(replay: 1)
         

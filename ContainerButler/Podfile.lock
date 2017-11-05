@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - Closures (0.3)
   - Differentiator (3.0.1)
-  - IQKeyboardManagerSwift (5.0.4)
+  - IQKeyboardManagerSwift (5.0.5)
   - Kingfisher (4.2.0)
   - MGSwipeTableCell (1.6.1)
   - MJRefresh (3.1.15)
@@ -48,7 +48,7 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Closures: 8962b9c2157fc29a0e88d897c1dc19e50bf83f6f
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
-  IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  IQKeyboardManagerSwift: ee393093cfb41069a72584a8f599ba5519a7febe
   Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   MGSwipeTableCell: 19a1d65dcc1ceaea42eb44bb2adae32101904514
   MJRefresh: 9af70f5f9327a2cf87f0fb5929f35fcc2fa638ea

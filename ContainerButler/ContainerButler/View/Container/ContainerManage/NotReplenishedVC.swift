@@ -109,8 +109,16 @@ extension NotReplenishedVC {
         tableView.dataSource = self
         tableView.delegate = self
         containerView.snp.makeConstraints { (maker) in
-            maker.left.right.bottom.equalTo(0)
+            maker.left.right.equalTo(0)
             maker.height.equalTo(100.0.fitHeight)
+            if #available(iOS 11.0, *) {
+                if UIDevice.current.isiPhoneX {
+                    maker.bottom.equalTo(-34)
+                }
+             
+            } else {
+                 maker.bottom.equalTo(0)
+            }
         }
         descPwdLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(containerView.snp.centerX)

@@ -217,11 +217,11 @@ extension CaptchaResetVC {
     
     fileprivate func setupRx() {
         let usernameValid = phoneNumTF.rx.text.orEmpty
-            .map { $0.characters.count >= 11}
+            .map { $0.count >= 11}
             .share(replay: 1)
         
         let passwordValid = pwdTF.rx.text.orEmpty
-            .map { $0.characters.count >= 6 }
+            .map { $0.count >= 6 }
             .share(replay: 1)
         
         let everythingValid = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
@@ -233,7 +233,7 @@ extension CaptchaResetVC {
         
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
+                return text.count <= 6 ? text: (String(text[ ..<text.index(text.startIndex, offsetBy: 6)]))
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -241,7 +241,7 @@ extension CaptchaResetVC {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
+                return text.count <= 11 ? text: String(text[ ..<text.index(text.startIndex, offsetBy: 11)])
             }
             .share(replay: 1)
             .bind(to: phoneNumTF.rx.text)
@@ -262,7 +262,6 @@ extension CaptchaResetVC {
                         param.phoneNum = self?.phoneNumTF.text
                         param.verifyCodeType = .resetPassword
                         let chaptchVM = UserSessionViewModel()
-                        chaptchVM.getVerificationCode(param)
                         chaptchVM.getVerificationCode(param).subscribe(onNext: {  _ in
                             weakSelf.forgetPwdBtn.start(withTime: 60, title: "发送验证码", countDownTitle: "S", normalColor: UIColor(hex: 0x333333), count: UIColor(hex: CustomKey.Color.mainOrangeColor))
                         }, onError: { (error) in

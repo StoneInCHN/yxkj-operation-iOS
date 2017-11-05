@@ -16,7 +16,6 @@ class LoginViewController: BaseViewController {
     fileprivate lazy  var companyIcon: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "bg"))
         imageView.contentMode = .scaleAspectFit
-    
         return imageView
     }()
     fileprivate lazy var phoneError: YYLabel = {
@@ -156,7 +155,8 @@ extension LoginViewController {
         view.addSubview(phoneError)
         view.addSubview(pwdError)
         companyIcon.snp.makeConstraints { (maker) in
-            maker.left.right.top.equalTo(0)
+            maker.top.equalTo(0)
+             maker.left.right.equalTo(0)
             maker.height.equalTo(185.5.fitHeight)
         }
         
@@ -224,7 +224,7 @@ extension LoginViewController {
     fileprivate func setupRx() {
         pwdTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count < 20 ? text: String(text[..<text.index(text.startIndex, offsetBy: 20)])
+                return text.count < 20 ? text: String(text[..<text.index(text.startIndex, offsetBy: 20)])
             }
             .share(replay: 1)
             .bind(to: pwdTF.rx.text)
@@ -232,7 +232,7 @@ extension LoginViewController {
         
         phoneNumTF.rx.text.orEmpty
             .map { (text) -> String in
-                return text.characters.count <= 11 ? text: String(text[..<text.index(text.startIndex, offsetBy: 11)])
+                return text.count <= 11 ? text: String(text[..<text.index(text.startIndex, offsetBy: 11)])
             }
             .share(replay: 1)
             .bind(to: phoneNumTF.rx.text)

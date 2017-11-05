@@ -306,10 +306,10 @@ extension String {
     }
     
     func implicitPhoneNumFormat() -> String {
-        if self.characters.count != 11 {
+        if self.count != 11 {
             
         }
-        let length = self.characters.count
+        let length = self.count
         let subStr0: String = (self as NSString).substring(with: NSRange(location: 0, length: 3))
         let subStr1: String = (self as NSString).substring(with: NSRange(location: length - 4, length: 4))
         return "\(subStr0)*****\(subStr1)"
@@ -505,13 +505,13 @@ extension String {
     // 保留两位小数
     func  keepTwoPlacesDecimal() -> String {
         
-        let stringCount = self.characters.count
+        let stringCount = self.count
         let nsString = self as NSString
         if self.contains(".") {
             if nsString.substring(from: stringCount-1) == "." {
             } else {
                 let strlocation = nsString.range(of: ".")
-                let decimalCount = nsString.substring(from: strlocation.location).characters.count
+                let decimalCount = nsString.substring(from: strlocation.location).count
                 if decimalCount >= 3 {
                     return  nsString.substring(to: strlocation.location+3)
                 }
