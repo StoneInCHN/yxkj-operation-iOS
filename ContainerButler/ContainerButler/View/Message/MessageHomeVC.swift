@@ -40,6 +40,24 @@ extension MessageHomeVC {
             .setDelegate(self)
             .disposed(by: disposeBag)
        
+        messageVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        messageVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+            self?.messageVM.requestMessages()
+        }
+        
          messageVM.messages
             .asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {(row, element, cell) in

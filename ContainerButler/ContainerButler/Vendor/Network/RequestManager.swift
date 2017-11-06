@@ -76,6 +76,7 @@ class RequestManager {
                 }
             case .failure(let error):
                 appError.message = error.localizedDescription
+                appError.status = StatusType.networkUnavailable
                 observer.on(.error(appError))
                 break
             }

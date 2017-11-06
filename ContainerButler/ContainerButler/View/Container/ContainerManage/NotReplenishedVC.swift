@@ -280,6 +280,25 @@ extension NotReplenishedVC {
                     self?.navigationController?.popViewController(animated: true)
                 }
         }).disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+            HUD.showLoading()
+            self?.listVM.requestCommand.onNext(true)
+        }
     }
 }
 

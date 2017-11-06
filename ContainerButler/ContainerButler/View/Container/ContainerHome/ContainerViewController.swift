@@ -11,16 +11,10 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import MJRefresh
+import DZNEmptyDataSet
 
 class ContainerViewController: BaseViewController {
     fileprivate lazy var containerVM: ContainerViewModel = ContainerViewModel()
-    lazy var replenishmentView: ReplenishmentView = {
-        let animator = ReplenishmentView()
-        animator.replenishAction = { [weak self] in
-            self?.navigationController?.pushViewController(ContainerManageVC(), animated: true)
-        }
-        return animator
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +31,9 @@ class ContainerViewController: BaseViewController {
 extension ContainerViewController {
     fileprivate func setupUI() {
         title = "货柜"
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
         tableView.allowsSelection = false
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         tableView.register(ContainerTableViewCell.self, forCellReuseIdentifier: "ContainerTableViewCell")
@@ -47,8 +44,6 @@ extension ContainerViewController {
         tableviewHeader.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: 12)
         tableView.tableHeaderView = tableviewHeader
         tableView.tableFooterView = UIView()
-        replenishmentView.frame = CGRect(x: 0, y: -UIScreen.height, width: UIScreen.width, height: UIScreen.height)
-        view.addSubview(replenishmentView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
@@ -77,17 +72,42 @@ extension ContainerViewController {
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+
+        containerVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
         
-        containerVM.models.asObservable().subscribe(onNext: { [weak self](_) in
-            self?.tableView.reloadData()
-        }).disposed(by: disposeBag)
+        containerVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
         
-        containerVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+             HUD.showLoading()
+             self?.containerVM.requestCommand.onNext(true)
+        }
+        
+        containerVM
+            .models
+            .asObservable()
+            .subscribe(onNext: { [weak self](_) in
+                HUD.hideLoading()
+                self?.tableView.reloadData()
+        })
+            .disposed(by: disposeBag)
+        
+        containerVM.refreshStatus
+            .asObservable()
+            .subscribe(onNext: {[weak self] (status) in
             switch status {
             case .beingHeaderRefresh:
                 self?.tableView.mj_header.beginRefreshing()
             case .endHeaderRefresh:
-                 HUD.hideLoading()
                 self?.tableView.mj_header.endRefreshing()
             case .beingFooterRefresh:
                 self?.tableView.mj_footer.beginRefreshing()
@@ -98,7 +118,8 @@ extension ContainerViewController {
             default:
                 break
             }
-        }).disposed(by: disposeBag)
+        })
+            .disposed(by: disposeBag)
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {[unowned self] in
             self.containerVM.requestCommand.onNext(true)
@@ -106,7 +127,6 @@ extension ContainerViewController {
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.containerVM.requestCommand.onNext(false)
         })
-        HUD.showLoading()
     }
 }
 

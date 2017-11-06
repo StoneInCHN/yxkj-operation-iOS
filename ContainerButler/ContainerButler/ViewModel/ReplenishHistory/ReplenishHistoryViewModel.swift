@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ReplenishHistoryViewModel {
+     var responseType = Variable<StatusType>(StatusType.none)
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
     var refreshStatus = Variable<RefreshStatus>(.none)
     lazy var param: ContainerSessionParam = {
@@ -26,17 +27,19 @@ class ReplenishHistoryViewModel {
     fileprivate let disposeBag = DisposeBag()
     
     func requestSupplyRecords() {
+        HUD.showLoading()
         requestCommand
             .subscribe(onNext: {  [weak self](isReloadData) in
                 guard let weakSelf = self else { return }
                 weakSelf.param.pageNo = isReloadData ? 1: (weakSelf.param.pageNo ?? 1) + 1
                 let listObverable: Observable<BaseResponseObject<RecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementSumRecord, param: weakSelf.param))
                 listObverable
-                    .map {$0.object?.groups ?? []}
                     .subscribe {[weak self] (event) in
                         guard let weakSelf = self else { return }
                         switch event {
-                        case .next(let groups):
+                        case .next(let response):
+                            guard let groups = response.object?.groups else { return }
+                            weakSelf.responseType.value = response.status
                             if isReloadData {
                                 weakSelf.supplyRecordGroups.value = groups
                             } else {
@@ -52,6 +55,7 @@ class ReplenishHistoryViewModel {
                             break
                         case .error( let error):
                             if let error = error as? AppError {
+                                 weakSelf.responseType.value = error.status
                                 HUD.showError(error.message)
                                 if isReloadData {
                                     weakSelf.refreshStatus.value =  .endHeaderRefresh
@@ -82,14 +86,17 @@ class ReplenishHistoryViewModel {
     }
     
     func requestSupplementRecordDetails(_ param: ContainerSessionParam) {
+        HUD.showLoading()
         param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
         let repsonseObserable: Observable<BaseResponseObject<ContainerSupplyRecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementRecordDetails, param: param))
         repsonseObserable
-            .map {$0.object?.groups ?? []}
-            .subscribe(onNext: {[weak self] (messages) in
-                self?.supplyRecordDetailGroups.value.append(contentsOf: messages)
-                }, onError: { (error) in
+            .subscribe(onNext: {[weak self] (response) in
+                      guard let messages = response.object?.groups else { return }
+                      self?.responseType.value = response.status
+                      self?.supplyRecordDetailGroups.value.append(contentsOf: messages)
+                }, onError: { [weak self]  (error) in
                     if let error = error as? AppError {
+                         self?.responseType.value = error.status
                         HUD.showError(error.message)
                     }
             }).disposed(by: disposeBag)

@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 class ContainerManageViewModel {
+    var responseType = Variable<StatusType>(StatusType.none)
     var selectedContainerModels = Variable<[Goods]>([])
     var selectedSenceModels = Variable<[Goods]>([])
     var models = Variable<[Goods]>([])
@@ -148,17 +149,19 @@ class ContainerManageViewModel {
 
 extension ContainerManageViewModel {
     fileprivate func requestWaitSupplyGoods(_ path: ContainerSession) {
+        HUD.showLoading()
         requestCommand
             .subscribe(onNext: {  [weak self](isReloadData) in
                 guard let weakSelf = self else { return }
                 weakSelf.param.pageNo = isReloadData ? 1: (weakSelf.param.pageNo ?? 1) + 1
                 let listObverable: Observable<BaseResponseObject<WaitSupplyGoodsList>> = RequestManager.reqeust(.endpoint(path, param: weakSelf.param))
                 listObverable
-                    .map {$0.object?.groups ?? []}
                     .subscribe {[weak self] (event) in
                         guard let weakSelf = self else { return }
                         switch event {
-                        case .next(let group):
+                        case .next(let response):
+                            guard let group = response.object?.groups else { return }
+                            weakSelf.responseType.value = response.status
                             if isReloadData {
                                 weakSelf.models.value = group
                             } else {
@@ -178,6 +181,7 @@ extension ContainerManageViewModel {
                             break
                         case .error( let error):
                             if let error = error as? AppError {
+                                weakSelf.responseType.value = error.status
                                 HUD.showError(error.message)
                                 if isReloadData {
                                     weakSelf.refreshStatus.value =  .endHeaderRefresh
@@ -189,6 +193,7 @@ extension ContainerManageViewModel {
                             }
                             break
                         case .completed:
+                            HUD.hideLoading()
                             if isReloadData {
                                 if weakSelf.models.value.count < 20 {
                                      weakSelf.refreshStatus.value = .noMoreData

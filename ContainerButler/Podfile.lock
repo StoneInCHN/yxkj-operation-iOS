@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - Closures (0.3)
   - Differentiator (3.0.1)
+  - DZNEmptyDataSet (1.8.1)
   - IQKeyboardManagerSwift (5.0.6)
   - Kingfisher (4.2.0)
   - MGSwipeTableCell (1.6.1)
@@ -22,6 +23,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Closures
+  - DZNEmptyDataSet
   - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
   - MGSwipeTableCell
@@ -48,6 +50,7 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Closures: 8962b9c2157fc29a0e88d897c1dc19e50bf83f6f
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
   Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   MGSwipeTableCell: 19a1d65dcc1ceaea42eb44bb2adae32101904514
@@ -61,6 +64,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftDate: 131cf2f09b390f0a07f0099e36005ffe2fbf4c7e
 
-PODFILE CHECKSUM: a6b835f54b5a1a7603c2107cc86cedf0164f7d4e
+PODFILE CHECKSUM: 33ca4a465f2cc953835aad5ea8118d5f47ac1040
 
 COCOAPODS: 1.3.1

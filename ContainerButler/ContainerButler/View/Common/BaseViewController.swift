@@ -8,10 +8,12 @@
 
 import UIKit
 import RxSwift
+import ObjectMapper
+import DZNEmptyDataSet
 
 class BaseViewController: UIViewController {
     let disposeBag: DisposeBag = DisposeBag()
-    
+    lazy var emptyContainerView = EmptyView()
     lazy var tableView: UITableView = {
         let taleView = UITableView()
         taleView.separatorStyle = .none
@@ -28,6 +30,8 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackBarButton()
+        setupEmptyView()
+
     }
     
     deinit {
@@ -54,6 +58,14 @@ class BaseViewController: UIViewController {
         backBtn.snp.makeConstraints { (maker) in
             maker.left.equalTo(13)
             maker.top.equalTo(28 + 10)
+        }
+    }
+    
+    func setupEmptyView() {
+        emptyContainerView.isHidden = true
+        view.addSubview(emptyContainerView)
+        emptyContainerView.snp.makeConstraints { (maker) in
+            maker.left.right.bottom.top.equalTo(0)
         }
     }
 }

@@ -41,11 +41,35 @@ extension ReplenishHistoryVC {
     
     fileprivate func setupRX() {
     
-        historyVM.supplyRecordGroups.asObservable().subscribe(onNext: { [weak self](_) in
-            HUD.hideLoading()
-            self?.tableView.reloadData()
-        }).disposed(by: disposeBag)
+        historyVM
+            .supplyRecordGroups
+            .asObservable()
+            .subscribe(onNext: { [weak self](_) in
+                HUD.hideLoading()
+                self?.tableView.reloadData()
+        })
+            .disposed(by: disposeBag)
 
+        historyVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        historyVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+            HUD.showLoading()
+            self?.historyVM.requestCommand.onNext(true)
+        }
+
+        
         historyVM.refreshStatus
             .asObservable()
             .subscribe(onNext: {[weak self] (status) in

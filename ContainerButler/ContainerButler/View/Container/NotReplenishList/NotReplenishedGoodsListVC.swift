@@ -151,7 +151,7 @@ extension NotReplenishedGoodsListVC {
                 weakSelf.hideOptionChooseView()
             }
         }
-       let items =  listVM.scenceList.asObservable()
+        let items =  listVM.scenceList.asObservable()
         items
             .bind(to: optiontableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.font = UIFont.sizeToFit(with: 13.5)
@@ -159,6 +159,36 @@ extension NotReplenishedGoodsListVC {
                 cell.textLabel?.text = element.name
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
+            .disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+            HUD.showLoading()
+            self?.listVM.requestWaitSupplyGoodsCategoryList()
+            self?.listVM.reuestWaitSuppltScencelist()
+            self?.listVM.requestCommand.onNext(true)
+        }
+        
+        listVM
+            .models
+            .asObservable()
+            .subscribe(onNext: { [weak self](_) in
+                HUD.hideLoading()
+                self?.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
         
         optiontableView.rx
@@ -193,11 +223,6 @@ extension NotReplenishedGoodsListVC {
                     weakSelf.pageTitleView.addSubview(line0)
                 }
             }).disposed(by: disposeBag)
-        
-        listVM.models.asObservable().subscribe(onNext: { [weak self](_) in
-            HUD.hideLoading()
-            self?.tableView.reloadData()
-        }).disposed(by: disposeBag)
 
         listVM.refreshStatus.asObservable().subscribe(onNext: {[weak self] (status) in
             switch status {

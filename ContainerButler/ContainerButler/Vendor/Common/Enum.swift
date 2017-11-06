@@ -34,6 +34,7 @@ enum StatusType: String {
     case passwordError = "1002"
     case capchaError = "1003"
     case resetPasswordError = "005"
+    case networkUnavailable = "-12123123"
 }
 
 /// 登录类型

@@ -22,7 +22,6 @@ class ReplenishHistoryDetailVC: BaseViewController {
         return viewModel
     }()
  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -43,12 +42,36 @@ extension ReplenishHistoryDetailVC {
     }
     
     fileprivate func setupRX() {
-        HUD.showLoading()
-        detailVM.supplyRecordDetailGroups.asObservable()
+
+        detailVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.networkUnavailable ? false: true}
+            .bind(to: emptyContainerView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        detailVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        emptyContainerView.reloadBtn.onTap {[weak self] in
+            let param = ContainerSessionParam()
+            param.sceneSn = self?.scence?.sceneSn
+            self?.detailVM.requestSupplementRecordDetails(param)
+        }
+        
+        detailVM
+            .supplyRecordDetailGroups
+            .asObservable()
             .subscribe(onNext: { [weak self](_) in
-            HUD.hideLoading()
-            self?.tableView.reloadData()
-        }).disposed(by: disposeBag)
+              HUD.hideLoading()
+              self?.tableView.reloadData()
+        })
+            .disposed(by: disposeBag)
+        
         tableView.dataSource = self
         tableView.rx
             .setDelegate(self)

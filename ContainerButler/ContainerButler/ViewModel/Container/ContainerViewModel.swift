@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 class ContainerViewModel {
-   var models = Variable<[Scence]>([])
+    var responseType = Variable<StatusType>(StatusType.none)
+    var models = Variable<[Scence]>([])
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
     var refreshStatus = Variable<RefreshStatus>(.none)
     var cellHeights: [[CGFloat]] = [[]]
@@ -45,12 +46,14 @@ class ContainerViewModel {
 extension ContainerViewModel {
     
     fileprivate func requestList() {
+          HUD.showLoading()
         requestCommand.subscribe(onNext: { [unowned self](isReloadData) in
             self.param.pageNo = isReloadData ? 1: (self.param.pageNo ?? 1) + 1
             let homerObservable: Observable< BaseResponseObject<ContainerHome>> =  RequestManager.reqeust(.endpoint(ContainerSession.getWaitSupplyState, param: self.param), needToken: .true)
             homerObservable.retry(3).subscribe({ (event) in
                 switch event {
                 case  .next( let response):
+                     self.responseType.value = response.status
                     if let scences =  response.object?.scences {
                         if isReloadData {
                             self.models.value = scences
@@ -65,14 +68,11 @@ extension ContainerViewModel {
                             }
                         }
                     }
-                    print("scence count:\(self.models.value.count)")
-                    for scence in self.models.value {
-                        print("container group count:\(scence.groups?.count ?? 0)")
-                    }
                     self.cellHeights = self.caculateCellHeights()
                     break
                 case .error( let error):
                     if let error = error as? AppError {
+                       self.responseType.value = error.status
                         HUD.showError(error.message)
                         if isReloadData {
                             self.refreshStatus.value =  .endHeaderRefresh
@@ -84,6 +84,7 @@ extension ContainerViewModel {
                     }
                     break
                 case .completed:
+                     HUD.hideLoading()
                     if isReloadData {
                         self.refreshStatus.value =  .endHeaderRefresh
                         if self.models.value.count < 20 {

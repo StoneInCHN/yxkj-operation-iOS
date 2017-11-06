@@ -42,6 +42,7 @@
 		CD69C47F1F668FE500623B91 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C47E1F668FE500623B91 /* BaseViewController.swift */; };
 		CD69C4811F66908E00623B91 /* CommonWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4801F66908E00623B91 /* CommonWebVC.swift */; };
 		CD69C4831F66916C00623B91 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69C4821F66916C00623B91 /* AppConfig.swift */; };
+		CD7131FE1FB0A539004CC5AF /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7131FD1FB0A539004CC5AF /* EmptyView.swift */; };
 		CD78F08E1F6782AB00D50B7B /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F08D1F6782AB00D50B7B /* HUD.swift */; };
 		CD78F0901F67AE3F00D50B7B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F08F1F67AE3F00D50B7B /* Location.swift */; };
 		CD78F0921F67C66E00D50B7B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78F0911F67C66E00D50B7B /* NavigationController.swift */; };
@@ -267,6 +268,7 @@
 		CD69C47E1F668FE500623B91 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CD69C4801F66908E00623B91 /* CommonWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonWebVC.swift; sourceTree = "<group>"; };
 		CD69C4821F66916C00623B91 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		CD7131FD1FB0A539004CC5AF /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		CD78F08D1F6782AB00D50B7B /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		CD78F08F1F67AE3F00D50B7B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CD78F0911F67C66E00D50B7B /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 				CDFF58D31F98968C00605761 /* TitleLabelTableViewCell.swift */,
 				CD84AD3C1FA1C48D003666E4 /* LabelButtonCell.swift */,
 				CD532DE51FAAB920008F3D10 /* CenterLabelTableViewCell.swift */,
+				CD7131FD1FB0A539004CC5AF /* EmptyView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1372,6 +1375,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ContainerButler/Pods-ContainerButler-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Closures/Closures.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -1390,6 +1394,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Closures.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -1527,6 +1532,7 @@
 				CD0C17911F74126100A96A81 /* MessageHomeVC.swift in Sources */,
 				CD78F09E1F67D97300D50B7B /* UIImagePickerController+RxCreate.swift in Sources */,
 				CDD0D4F51F9D9C0B0056B6F1 /* YYTextSelectionView.m in Sources */,
+				CD7131FE1FB0A539004CC5AF /* EmptyView.swift in Sources */,
 				CDEA96551FA765BE00A72020 /* ReplenishHistory.swift in Sources */,
 				CD84AD3D1FA1C48D003666E4 /* LabelButtonCell.swift in Sources */,
 				CDB99FD91F70C9A900C68D72 /* UIButton+CountDown.m in Sources */,
