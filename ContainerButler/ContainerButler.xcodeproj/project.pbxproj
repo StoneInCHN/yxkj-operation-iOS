@@ -351,6 +351,7 @@
 		CDD0D50C1F9D9CBF0056B6F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDD0D50D1F9D9CC60056B6F1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CDD0D50E1F9D9CCC0056B6F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CDD37D811FB0078600ADD456 /* ContainerButler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContainerButler.entitlements; sourceTree = "<group>"; };
 		CDDBD27B1F94B646004F5526 /* juic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = juic.jpg; sourceTree = "<group>"; };
 		CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentView.swift; sourceTree = "<group>"; };
 		CDDBD2801F95004A004F5526 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -729,6 +730,7 @@
 		CD69C4591F66874000623B91 /* ContainerButler */ = {
 			isa = PBXGroup;
 			children = (
+				CDD37D811FB0078600ADD456 /* ContainerButler.entitlements */,
 				CD69C45A1F66874000623B91 /* AppDelegate.swift */,
 				CD844C7C1F70E8F900D50722 /* Model */,
 				CD69C4711F66888D00623B91 /* View */,
@@ -1235,6 +1237,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = S5AUADUBV2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1623,6 +1630,7 @@
 				BASE_IMAGE_URL = "http://106.14.7.117:8080/upload/goods/";
 				BASE_URL = "http://106.14.7.117:8080";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_ENTITLEMENTS = ContainerButler/ContainerButler.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1674,6 +1682,7 @@
 				BASE_IMAGE_URL = "http://106.14.7.117:8080/upload/goods/";
 				BASE_URL = "http://106.14.7.117:8080";
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_ENTITLEMENTS = ContainerButler/ContainerButler.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

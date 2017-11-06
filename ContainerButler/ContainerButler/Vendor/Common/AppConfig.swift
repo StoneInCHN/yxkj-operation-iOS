@@ -60,7 +60,8 @@ struct CustomKey {
         static let TIMAPPID = "1253899389"
         static let TIMSdkAppId: Int32 = 1400033866
         static let TIMAccountType: String = "13870"
-        
+        static let JPushAppKey = "3bc3c88cb49b6a7add6356a5"
+        static let JPushSecret = "39f7e00ab5782c8302213b28"
     }
     struct Description {
         static let wechatDescription = "Description"

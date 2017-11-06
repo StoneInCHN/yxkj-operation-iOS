@@ -310,7 +310,7 @@ extension ResetPasswordVC {
                 param.phoneNum = weakSelf.phoneNumber
                 param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: restVM.rsaPublickey ?? "")
                 HUD.showLoading()
-                restVM.resetPassword(param)
+                 restVM.handleUserInfoResponse(with: UserSessionHandleType.resetPasswod(param))
                     .subscribe(onNext: {  _ in
                         HUD.showSuccess("密码设置成功", completed: {
                             guard let view = weakSelf.view else { return }

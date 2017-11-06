@@ -57,14 +57,14 @@ class UserSessionViewModel {
         }
     }
     
-    func resetPassword(_ param: UserSessionParam) -> Observable<BaseResponseObject<UserInfo>> {
-        let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.resetPwd, param: param), needToken: .false)
+    func handleUserInfoResponse(with type: UserSessionHandleType) -> Observable<BaseResponseObject<UserInfo>> {
+        let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(type.router, needToken: .false)
         return loginObserable.map { (response) -> BaseResponseObject<UserInfo> in
             if  let token = response.token, !token.isEmpty, let userInfo = response.object {
                 let session = UserSessionInfo()
                 session.token = token
                 CoreDataManager.sharedInstance.save(userSession: session)
-                CoreDataManager.sharedInstance.save(userInfo: userInfo, phoneNum: param.phoneNum ?? "")
+                CoreDataManager.sharedInstance.save(userInfo: userInfo, phoneNum: type.param.phoneNum ?? "")
             }
             return response
         }

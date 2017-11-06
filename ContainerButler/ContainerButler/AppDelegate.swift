@@ -96,4 +96,8 @@ extension AppDelegate {
             .disposed(by: disposeBag)
         
     }
+    
+    fileprivate func  initJPush() {
+        
+    }
 }

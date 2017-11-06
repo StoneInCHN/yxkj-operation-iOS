@@ -199,7 +199,7 @@ extension ContainerManageViewModel {
     fileprivate func filterSelectedGoods() {
         for currentGoods in models.value {
             if  let cacheGoods = CoreDataManager.sharedInstance.getGoods(containerId: self.param.cntrId ?? 0, supplementId: currentGoods.supplementId),
-                 let index = self.models.value.index(where: {$0.supplementId == cacheGoods.supplementId}) {
+                 let _ = self.models.value.index(where: {$0.supplementId == cacheGoods.supplementId}) {
 //                models.value.remove(at: index)
                 currentGoods.isSupplied = true
                 currentGoods.supplyCount = cacheGoods.supplyCount

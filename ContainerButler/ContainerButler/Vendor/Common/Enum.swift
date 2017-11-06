@@ -60,6 +60,23 @@ enum UserSessionHandleType {
             return .endpoint(UserSession.updatePwd, param: param)
         }
     }
+    
+    var param: UserSessionParam {
+        switch self {
+        case .loginWithPassword(let param):
+            return param
+        case .loginWithVerificationCode(let param):
+             return param
+        case .getVerifedCode(let param):
+             return param
+        case .verifyForgetPwdCaptchCode(let param):
+             return param
+        case .resetPasswod(let param):
+             return param
+        case .updatePasswod(let param):
+             return param
+        }
+    }
 }
 
 enum MessageType: String {

@@ -286,7 +286,7 @@ extension CaptchaLoginVC {
                  let param = UserSessionParam()
                 param.phoneNum = self?.phoneNumTF.text
                 param.verificationCode = self?.pwdTF.text
-                self?.chaptchVM.handle(with: .loginWithVerificationCode(param))
+                 self?.chaptchVM.handleUserInfoResponse(with: .loginWithVerificationCode(param))
                     .subscribe(onNext: { (response) in
                         let rootVC = TabBarController()
                         UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {

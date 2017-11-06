@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class UpdatePasswordVC: BaseViewController {
+    fileprivate lazy  var  sessionVM = UserSessionViewModel()
     fileprivate lazy  var descPwdLabel0: UILabel = {
         let descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: CGFloat(22.5))
@@ -27,7 +28,6 @@ class UpdatePasswordVC: BaseViewController {
         textField.placeholder = "请输入旧密码"
         textField.font = UIFont.sizeToFit(with: 15)
         textField.textColor = UIColor(hex: 0x222222)
-        textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
         return textField
     }()
@@ -295,13 +295,12 @@ extension UpdatePasswordVC {
                     })
                     return
                 }
-                let sessionVM = UserSessionViewModel()
                 let param = UserSessionParam()
                 param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
                 param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
-                param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
-                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: sessionVM.rsaPublickey ?? "")
-                sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
+                param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: weakSelf.sessionVM.rsaPublickey ?? "")
+                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.sessionVM.rsaPublickey ?? "")
+                weakSelf.sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
                     .subscribe(onNext: {response in
                         weakSelf.navigationController?.popToRootViewController(animated: true)
                     }, onError: { (error) in
