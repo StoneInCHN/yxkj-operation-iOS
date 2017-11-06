@@ -17,13 +17,6 @@ class MessageDetailVC: BaseViewController {
         let messageVM = MessageViewModel()
         return messageVM
     }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-         taleView.separatorStyle = .none
-          taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
-        return taleView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +29,7 @@ class MessageDetailVC: BaseViewController {
 extension MessageDetailVC {
     fileprivate func setupUI() {
         title = messageType.title
+        tableView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)

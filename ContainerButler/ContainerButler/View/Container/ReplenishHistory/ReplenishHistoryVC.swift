@@ -18,14 +18,6 @@ class ReplenishHistoryVC: BaseViewController {
         viewModel.requestSupplyRecords()
         return viewModel
     }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView(frame: .zero, style: UITableViewStyle.grouped)
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(ReplenishHistoryCell.self, forCellReuseIdentifier: "ReplenishHistoryCell")
-        taleView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
-        return taleView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +29,8 @@ class ReplenishHistoryVC: BaseViewController {
 extension ReplenishHistoryVC {
      fileprivate func setupUI() {
         title = "补货记录"
+        tableView.register(ReplenishHistoryCell.self, forCellReuseIdentifier: "ReplenishHistoryCell")
+        tableView.register(ReplenishHistoryTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryTableHeader")
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)

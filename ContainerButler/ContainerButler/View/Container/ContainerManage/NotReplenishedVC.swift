@@ -33,13 +33,6 @@ class NotReplenishedVC: BaseViewController {
         let animator = ReplenishedDoneView()
         return animator
     }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
-        return taleView
-    }()
     
     fileprivate lazy  var doneBtn: UIButton = {
         let loginBtn = UIButton()
@@ -101,6 +94,7 @@ class NotReplenishedVC: BaseViewController {
 
 extension NotReplenishedVC {
     fileprivate func setupUI() {
+        tableView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         view.addSubview(tableView)
         view.addSubview(containerView)
         containerView.addSubview(doneBtn)
@@ -110,7 +104,6 @@ extension NotReplenishedVC {
         tableView.delegate = self
         containerView.snp.makeConstraints { (maker) in
             maker.left.right.equalTo(0)
-            maker.bottom.equalTo(0)
             maker.height.equalTo(100.0.fitHeight)
             if #available(iOS 11.0, *), UIDevice.current.isiPhoneX {
                  maker.bottom.equalTo(-34)

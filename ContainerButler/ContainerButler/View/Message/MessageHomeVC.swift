@@ -13,14 +13,8 @@ import RxCocoa
 class MessageHomeVC: BaseViewController {
     fileprivate lazy var messageVM: MessageViewModel = {
         let messageVM = MessageViewModel()
+        messageVM.requestMessages()
         return messageVM
-    }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
-        return taleView
     }()
     
     override func viewDidLoad() {
@@ -34,6 +28,7 @@ class MessageHomeVC: BaseViewController {
 extension MessageHomeVC {
     fileprivate func setupUI() {
         title = "消息"
+       tableView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
@@ -44,16 +39,9 @@ extension MessageHomeVC {
         tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        HUD.showLoading()
-        messageVM.requestMessages()
-        messageVM.messages.asObservable().subscribe(onNext: { messgaes in
-            HUD.hideLoading()
-        }, onError: { (error) in
-            if let error = error as? AppError {
-                HUD.showError(error.message)
-            }
-        }).disposed(by: disposeBag)
-        messageVM.messages.asObservable()
+       
+         messageVM.messages
+            .asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)) {(row, element, cell) in
                 cell.config(element)
             }

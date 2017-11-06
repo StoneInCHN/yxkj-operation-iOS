@@ -86,8 +86,13 @@ class ReplenishHistoryViewModel {
         let repsonseObserable: Observable<BaseResponseObject<ContainerSupplyRecordGroup>> = RequestManager.reqeust(.endpoint(ContainerSession.getSupplementRecordDetails, param: param))
         repsonseObserable
             .map {$0.object?.groups ?? []}
-            .bind(to: supplyRecordDetailGroups)
-            .disposed(by: disposeBag)
+            .subscribe(onNext: {[weak self] (messages) in
+                self?.supplyRecordDetailGroups.value.append(contentsOf: messages)
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+            }).disposed(by: disposeBag)
     }
     
 }

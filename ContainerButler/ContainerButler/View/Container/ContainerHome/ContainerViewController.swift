@@ -21,16 +21,6 @@ class ContainerViewController: BaseViewController {
         }
         return animator
     }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView(frame: .zero, style: UITableViewStyle.grouped)
-        taleView.separatorStyle = .none
-        taleView.backgroundColor =  UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.allowsSelection = false
-        taleView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        taleView.register(ContainerTableViewCell.self, forCellReuseIdentifier: "ContainerTableViewCell")
-        taleView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
-        return taleView
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +37,10 @@ class ContainerViewController: BaseViewController {
 extension ContainerViewController {
     fileprivate func setupUI() {
         title = "货柜"
+        tableView.allowsSelection = false
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        tableView.register(ContainerTableViewCell.self, forCellReuseIdentifier: "ContainerTableViewCell")
+        tableView.register(ContainerSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "ContainerSectionHeaderView")
         view.addSubview(tableView)
         let tableviewHeader = UIView()
         tableviewHeader.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)

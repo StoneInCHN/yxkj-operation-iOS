@@ -21,8 +21,14 @@ class MessageViewModel {
         let resposeeObj: Observable<BaseResponseObject<MessageGroup>> = RequestManager.reqeust(.endpoint(MessageSession.getMessage, param: param), needToken: .true)
        resposeeObj
             .map { $0.object?.groups ?? []}
-            .bind(to: messages)
-            .disposed(by: disposeBag)
+            .subscribe(onNext: {[weak self] (messages) in
+                self?.messages.value.append(contentsOf: messages)
+            }, onError: { (error) in
+                if let error = error as? AppError {
+                     HUD.showError(error.message)
+                }
+        }).disposed(by: disposeBag)
+
     }
     
     func requestMessageDetail(_ param: MessageSessionParam) {
@@ -30,7 +36,13 @@ class MessageViewModel {
         let resposeeObj: Observable<BaseResponseObject<MessageDetailGroup>> = RequestManager.reqeust(.endpoint(MessageSession.getMessageDetails, param: param))
         resposeeObj
             .map { $0.object?.groups ?? []}
-            .bind(to: messageDetails)
+            .subscribe(onNext: {[weak self] (messageDetails) in
+                self?.messageDetails.value.append(contentsOf: messageDetails)
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+            })
             .disposed(by: disposeBag)
     }
 }

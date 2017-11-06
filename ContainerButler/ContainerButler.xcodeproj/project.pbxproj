@@ -117,6 +117,7 @@
 		CDD37D981FB0239500ADD456 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D971FB0239400ADD456 /* libz.tbd */; };
 		CDD37D9A1FB023AD00ADD456 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D991FB023A900ADD456 /* UserNotifications.framework */; };
 		CDD37D9C1FB023BB00ADD456 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D9B1FB023BB00ADD456 /* libresolv.tbd */; };
+		CDD37D9E1FB058B500ADD456 /* Networkerror@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD37D9D1FB058B500ADD456 /* Networkerror@3x.png */; };
 		CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDDBD27B1F94B646004F5526 /* juic.jpg */; };
 		CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */; };
 		CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD2801F95004A004F5526 /* ContainerViewController.swift */; };
@@ -376,6 +377,7 @@
 		CDD37D971FB0239400ADD456 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CDD37D991FB023A900ADD456 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		CDD37D9B1FB023BB00ADD456 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		CDD37D9D1FB058B500ADD456 /* Networkerror@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Networkerror@3x.png"; sourceTree = "<group>"; };
 		CDDBD27B1F94B646004F5526 /* juic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = juic.jpg; sourceTree = "<group>"; };
 		CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentView.swift; sourceTree = "<group>"; };
 		CDDBD2801F95004A004F5526 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -966,6 +968,7 @@
 		CD92CD171F973CD50077C78F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CDD37D9D1FB058B500ADD456 /* Networkerror@3x.png */,
 				CD92CD181F973CD50077C78F /* navigation_back@3x.png */,
 			);
 			path = Common;
@@ -1353,6 +1356,7 @@
 				CD84AD431FA1C7DC003666E4 /* volume_small@3x.png in Resources */,
 				CD532DE81FAABF45008F3D10 /* logo@3x.png in Resources */,
 				CDB9EBE01FA9C8670041E5C6 /* gradation@3x.png in Resources */,
+				CDD37D9E1FB058B500ADD456 /* Networkerror@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

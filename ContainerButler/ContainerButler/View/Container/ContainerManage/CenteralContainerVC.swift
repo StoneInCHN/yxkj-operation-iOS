@@ -15,14 +15,7 @@ import Closures
 class CenteralContainerVC: BaseViewController {
     var deviceNum: String?
     fileprivate var centralViewModel: CentralContainerViewModel = CentralContainerViewModel()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(VolumeTableViewCell.self, forCellReuseIdentifier: "VolumeTableViewCell")
-        taleView.register(LabelButtonCell.self, forCellReuseIdentifier: "LabelButtonCell")
-        return taleView
-    }()
+ 
     let items = Variable([
         "音量",
         "货柜重启"
@@ -34,11 +27,27 @@ class CenteralContainerVC: BaseViewController {
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let navi = navigationController as? NavigationController {
+            navi.reomvePopbackGesture()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let navi = navigationController as? NavigationController {
+            navi.addPopbackGesture()
+        }
+    }
 }
 
 extension CenteralContainerVC {
     fileprivate func setupUI() {
         title = "中控管理"
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
+        tableView.register(VolumeTableViewCell.self, forCellReuseIdentifier: "VolumeTableViewCell")
+        tableView.register(LabelButtonCell.self, forCellReuseIdentifier: "LabelButtonCell")
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.snp.makeConstraints { (maker) in

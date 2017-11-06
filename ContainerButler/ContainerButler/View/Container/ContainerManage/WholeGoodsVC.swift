@@ -20,13 +20,6 @@ class WholeGoodsVC: BaseViewController {
         viewModel.requestAllGoods()
         return viewModel
         }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
-        return taleView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +31,7 @@ class WholeGoodsVC: BaseViewController {
 
 extension WholeGoodsVC {
     fileprivate func setupUI() {
+         tableView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)

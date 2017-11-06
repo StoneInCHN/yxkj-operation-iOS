@@ -12,15 +12,6 @@ import RxCocoa
 
 class MineViewController: BaseViewController {
     fileprivate lazy var  datas: [String] = ["用户", "密码", "退出登录"]
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(TitleLabelTableViewCell.self, forCellReuseIdentifier: "TitleLabelTableViewCell")
-        taleView.register(UserHeaderCell.self, forCellReuseIdentifier: "UserHeaderCell")
-        taleView.register(CenterLabelTableViewCell.self, forCellReuseIdentifier: "CenterLabelTableViewCell")
-        return taleView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +23,10 @@ class MineViewController: BaseViewController {
 extension MineViewController {
     fileprivate func setupUI() {
         title = "我的"
+        tableView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        tableView.register(TitleLabelTableViewCell.self, forCellReuseIdentifier: "TitleLabelTableViewCell")
+        tableView.register(UserHeaderCell.self, forCellReuseIdentifier: "UserHeaderCell")
+        tableView.register(CenterLabelTableViewCell.self, forCellReuseIdentifier: "CenterLabelTableViewCell")
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self

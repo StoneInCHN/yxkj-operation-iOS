@@ -58,16 +58,6 @@ class NotReplenishedGoodsListVC: BaseViewController {
         return pvc
     }()
     
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.allowsSelection = false
-        taleView.separatorStyle = .none
-        taleView.contentInset = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
-        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
-        taleView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
-        return taleView
-    }()
-    
     fileprivate lazy var optiontableView: UITableView = {
         let taleView = UITableView()
         taleView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 65, right: 0)
@@ -94,6 +84,9 @@ extension NotReplenishedGoodsListVC {
   
     fileprivate func setupUI() {
         title = "待补清单"
+        tableView.allowsSelection = false
+        tableView.contentInset = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
+        tableView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
         let optionChooseView = UIView()
         optionChooseView.backgroundColor = .white
         optionChooseView.layer.borderWidth = 0.5

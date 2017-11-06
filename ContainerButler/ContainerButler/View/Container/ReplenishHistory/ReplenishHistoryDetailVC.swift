@@ -21,14 +21,7 @@ class ReplenishHistoryDetailVC: BaseViewController {
         viewModel.requestSupplementRecordDetails(param)
         return viewModel
     }()
-    fileprivate lazy var tableView: UITableView = {
-        let taleView = UITableView()
-        taleView.separatorStyle = .none
-        taleView.backgroundColor = UIColor(hex: 0xfafafa)
-         taleView.register(ReplenishHistoryDetailCell.self, forCellReuseIdentifier: "ReplenishHistoryDetailCell")
-        taleView.register(ReplenishHistoryDetailTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryDetailTableHeader")
-        return taleView
-    }()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +34,8 @@ class ReplenishHistoryDetailVC: BaseViewController {
 extension ReplenishHistoryDetailVC {
     fileprivate func setupUI() {
         title = "\(scence?.sceneName ?? "")-编号: \(scence?.sceneSn ?? "")"
+        tableView.register(ReplenishHistoryDetailCell.self, forCellReuseIdentifier: "ReplenishHistoryDetailCell")
+        tableView.register(ReplenishHistoryDetailTableHeader.self, forHeaderFooterViewReuseIdentifier: "ReplenishHistoryDetailTableHeader")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
@@ -49,7 +44,8 @@ extension ReplenishHistoryDetailVC {
     
     fileprivate func setupRX() {
         HUD.showLoading()
-        detailVM.supplyRecordDetailGroups.asObservable().subscribe(onNext: { [weak self](_) in
+        detailVM.supplyRecordDetailGroups.asObservable()
+            .subscribe(onNext: { [weak self](_) in
             HUD.hideLoading()
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)

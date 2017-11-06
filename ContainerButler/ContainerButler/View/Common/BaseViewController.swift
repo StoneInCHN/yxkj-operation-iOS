@@ -11,6 +11,14 @@ import RxSwift
 
 class BaseViewController: UIViewController {
     let disposeBag: DisposeBag = DisposeBag()
+    
+    lazy var tableView: UITableView = {
+        let taleView = UITableView()
+        taleView.separatorStyle = .none
+        taleView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+        return taleView
+    }()
+    
     fileprivate lazy  var backBtn: UIButton = {
         let loginBtn = UIButton()
         loginBtn.setBackgroundImage(UIImage(named: "login_back"), for: .normal)

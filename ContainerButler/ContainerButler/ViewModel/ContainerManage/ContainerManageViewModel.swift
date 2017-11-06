@@ -46,8 +46,14 @@ class ContainerManageViewModel {
                 }
                return []
             }
-            .bind(to: scenceList)
-            .disposed(by: disposeBag)
+            .subscribe(onNext: {[weak self] (messages) in
+                self?.scenceList.value.append(contentsOf: messages)
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+            }).disposed(by: disposeBag)
+    
     }
     
     func requestWaitSupplyGoodsCategoryList() {
@@ -65,7 +71,13 @@ class ContainerManageViewModel {
                 }
                 return []
             }
-        .bind(to: goodsCategory).disposed(by: disposeBag)
+            .subscribe(onNext: {[weak self] (messages) in
+                self?.goodsCategory.value.append(contentsOf: messages)
+                }, onError: { (error) in
+                    if let error = error as? AppError {
+                        HUD.showError(error.message)
+                    }
+            }).disposed(by: disposeBag)
     }
     
     func requestWaitSupplyGoodsList() {
