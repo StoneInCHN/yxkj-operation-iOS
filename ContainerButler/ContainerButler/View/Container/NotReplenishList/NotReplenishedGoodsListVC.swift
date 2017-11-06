@@ -15,6 +15,7 @@ import MGSwipeTableCell
 
 class NotReplenishedGoodsListVC: BaseViewController {
     var supplyMessage: MessageDetail?
+    fileprivate lazy  var optionChooseView = UIView()
     fileprivate lazy var listVM: ContainerManageViewModel = {
         let viewModel =  ContainerManageViewModel()
         viewModel.requestWaitSupplyGoodsCategoryList()
@@ -87,7 +88,7 @@ extension NotReplenishedGoodsListVC {
         tableView.allowsSelection = false
         tableView.contentInset = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
         tableView.register(GoodListCell.self, forCellReuseIdentifier: "GoodListCell")
-        let optionChooseView = UIView()
+       
         optionChooseView.backgroundColor = .white
         optionChooseView.layer.borderWidth = 0.5
         optionChooseView.layer.borderColor = UIColor(hex: 0xcccccc).cgColor
@@ -173,6 +174,20 @@ extension NotReplenishedGoodsListVC {
             .asObservable()
             .map {$0 == StatusType.success ? false: true}
             .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: optionChooseView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        listVM
+            .responseType
+            .asObservable()
+            .map {$0 == StatusType.success ? false: true}
+            .bind(to: pageTitleView.rx.isHidden)
             .disposed(by: disposeBag)
         
         emptyContainerView.reloadBtn.onTap {[weak self] in
