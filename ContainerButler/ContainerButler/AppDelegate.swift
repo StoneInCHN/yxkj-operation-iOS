@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         chooseRootVC()
         startLocate()
         addNotification() 
-        loadRSAPublickey()
         setupJPush(option: launchOptions ?? [:])
         checkPush(with: launchOptions)
         return true
@@ -83,16 +82,6 @@ extension AppDelegate {
         Location.share.startLocate()
     }
     
-  fileprivate  func loadRSAPublickey() {
-        let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
-        keyOberable.retry(10).subscribe(onNext: {[weak self] (response) in
-            if let obj = response.object {
-                self?.rsaPublickey = obj.key
-            }
-        })
-            .disposed(by: disposeBag)
-    }
-    
     fileprivate func addNotification() {
         NotificationCenter.default.rx
             .notification(CustomKey.NotificationName.loginInvalid)
@@ -107,7 +96,6 @@ extension AppDelegate {
                 
             })
             .disposed(by: disposeBag)
-        
     }
     
     fileprivate func  setupJPush(option: [UIApplicationLaunchOptionsKey: Any]) {

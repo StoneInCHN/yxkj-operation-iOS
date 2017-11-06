@@ -305,28 +305,36 @@ extension ResetPasswordVC {
                     })
                     return
                 }
-                let restVM = UserSessionViewModel()
-                let param = UserSessionParam()
-                param.phoneNum = weakSelf.phoneNumber
-                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: restVM.rsaPublickey ?? "")
                 HUD.showLoading()
-                 restVM.handleUserInfoResponse(with: UserSessionHandleType.resetPasswod(param))
-                    .subscribe(onNext: {  _ in
-                        HUD.showSuccess("密码设置成功", completed: {
-                            guard let view = weakSelf.view else { return }
-                            let rootVC = TabBarController()
-                            UIView.transition(with: view, duration: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-                                UIApplication.shared.keyWindow?.rootViewController?.view.removeFromSuperview()
-                            }, completion: { (_) in
-                                UIApplication.shared.keyWindow?.rootViewController = rootVC
-                            })
-                        })
-                    }, onError: { (error) in
-                        if let error = error as? AppError {
-                            HUD.showError(error.message)
-                        }
+                let restVM = UserSessionViewModel()
+                restVM
+                     .loadRSAPublickey()
+                     .map {weakSelf.pwdTF.text?.rsaEncryptor(with: $0)}
+                     .map({ (rsaPwd) -> UserSessionParam in
+                        let param = UserSessionParam()
+                        param.newPassword = rsaPwd
+                        param.phoneNum = weakSelf.phoneNumber
+                        return param
                     })
-                    .disposed(by: weakSelf.disposeBag)
+                    .subscribe(onNext: { (param) in
+                        restVM.handleUserInfoResponse(with: UserSessionHandleType.resetPasswod(param))
+                            .subscribe(onNext: {  _ in
+                                HUD.showSuccess("密码设置成功", completed: {
+                                    guard let view = weakSelf.view else { return }
+                                    let rootVC = TabBarController()
+                                    UIView.transition(with: view, duration: 0.5, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                                        UIApplication.shared.keyWindow?.rootViewController?.view.removeFromSuperview()
+                                    }, completion: { (_) in
+                                        UIApplication.shared.keyWindow?.rootViewController = rootVC
+                                    })
+                                })
+                            }, onError: { (error) in
+                                if let error = error as? AppError {
+                                    HUD.showError(error.message)
+                                }
+                            })
+                            .disposed(by: weakSelf.disposeBag)
+                    }).disposed(by: weakSelf.disposeBag)
             })
             .disposed(by: disposeBag)
     }

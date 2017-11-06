@@ -266,29 +266,36 @@ extension LoginViewController {
                     return
                 }
                 HUD.showLoading()
-                let param = UserSessionParam()
-                param.phoneNum = weakSelf.phoneNumTF.text
-                if let key = weakSelf.loginVM.rsaPublickey {
-                    param.password = weakSelf.pwdTF.text?.rsaEncryptor(with: key)
-                }
-                weakSelf.loginVM.login(param)
-                    .subscribe(onNext: { [weak self] (response) in
-                        HUD.hideLoading()
-                         let rootVC = TabBarController()
-                         guard let weakSelf = self else { return }
-                        UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
-                            weakSelf.view.removeFromSuperview()
-                             UIApplication.shared.keyWindow?.addSubview(rootVC.view)
-                        }, completion: { _ in
-                              UIApplication.shared.keyWindow?.rootViewController = rootVC
-                        })
-                    }, onError: { [weak self] error in
-                         HUD.hideLoading()
-                        if let error = error as? AppError {
-                            self?.showError(error.status)
-                        }
+                weakSelf
+                    .loginVM
+                    .loadRSAPublickey()
+                    .map {weakSelf.pwdTF.text?.rsaEncryptor(with: $0)}
+                    .map({ (rsaPwd) -> UserSessionParam in
+                        let param = UserSessionParam()
+                        param.password = rsaPwd
+                        param.phoneNum = weakSelf.phoneNumTF.text
+                        return param
                     })
-                    .disposed(by: weakSelf.disposeBag)
+                    .subscribe(onNext: { (param) in
+                        weakSelf.loginVM.login(param)
+                            .subscribe(onNext: { [weak self] (response) in
+                                HUD.hideLoading()
+                                let rootVC = TabBarController()
+                                guard let weakSelf = self else { return }
+                                UIView.transition(with: weakSelf.view, duration: 0.25, options: .curveEaseInOut, animations: {
+                                    weakSelf.view.removeFromSuperview()
+                                    UIApplication.shared.keyWindow?.addSubview(rootVC.view)
+                                }, completion: { _ in
+                                    UIApplication.shared.keyWindow?.rootViewController = rootVC
+                                })
+                                }, onError: { [weak self] error in
+                                    HUD.hideLoading()
+                                    if let error = error as? AppError {
+                                        self?.showError(error.status)
+                                    }
+                            })
+                            .disposed(by: weakSelf.disposeBag)
+                    }).disposed(by: weakSelf.disposeBag)
             }).disposed(by: disposeBag)
     }
     

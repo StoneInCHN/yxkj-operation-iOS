@@ -295,20 +295,33 @@ extension UpdatePasswordVC {
                     })
                     return
                 }
-                let param = UserSessionParam()
-                param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
-                param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
-                param.oldPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: weakSelf.sessionVM.rsaPublickey ?? "")
-                param.newPassword = weakSelf.pwdTF.text?.rsaEncryptor(with: weakSelf.sessionVM.rsaPublickey ?? "")
-                weakSelf.sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
-                    .subscribe(onNext: {response in
-                        weakSelf.navigationController?.popToRootViewController(animated: true)
-                    }, onError: { (error) in
-                    if let error = error as? AppError {
-                        HUD.showError(error.message)
+                weakSelf
+                    .sessionVM
+                    .loadRSAPublickey()
+                    .map { (key) -> (String?, String?) in
+                        let oldRsaPwd = weakSelf.phoneNumTF.text?.rsaEncryptor(with: key)
+                        let newRsaPwd = weakSelf.pwdTF.text?.rsaEncryptor(with: key)
+                        return (oldRsaPwd, newRsaPwd)
                     }
-                }).disposed(by: weakSelf.disposeBag)
-                
+                    .map({ (oldRsaPwd, newRsaPwd) -> UserSessionParam in
+                        let param = UserSessionParam()
+                        param.phoneNum = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
+                        param.userId = CoreDataManager.sharedInstance.getUserInfo()?.userId
+                        param.oldPwd = oldRsaPwd
+                        param.newPassword = newRsaPwd
+                        return param
+                    })
+                    .subscribe(onNext: { (param) in
+                        weakSelf.sessionVM.handle(with: UserSessionHandleType.updatePasswod(param))
+                            .subscribe(onNext: {response in
+                                weakSelf.navigationController?.popToRootViewController(animated: true)
+                            }, onError: { (error) in
+                                if let error = error as? AppError {
+                                    HUD.showError(error.message)
+                                }
+                            }).disposed(by: weakSelf.disposeBag)
+                    })
+                .disposed(by: weakSelf.disposeBag)
             })
             .disposed(by: disposeBag)
         

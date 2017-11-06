@@ -12,9 +12,6 @@ import RxSwift
 import ObjectMapper
 
 class UserSessionViewModel {
-    var rsaPublickey: String? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.rsaPublickey
-    }
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     
     func saveUserInfo(_ info: BaseResponseObject<UserInfo>, phoneNum: String) {
@@ -50,8 +47,13 @@ class UserSessionViewModel {
     }
     
     func login(_ param: UserSessionParam) -> Observable<BaseResponseObject<UserInfo>> {
+          let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
+        
         let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.loginByPwd, param: param), needToken: .false)
-         return loginObserable.map {  [weak self] (response) -> BaseResponseObject<UserInfo> in
+      return  Observable.combineLatest(keyOberable, loginObserable) { (keyOberable, loginObserable) -> BaseResponseObject<UserInfo> in
+            return loginObserable
+        }
+        .map {  [weak self] (response) -> BaseResponseObject<UserInfo> in
             self?.saveUserInfo(response, phoneNum: param.phoneNum ?? "")
             return response
         }
@@ -73,6 +75,19 @@ class UserSessionViewModel {
     func getVerificationCode(_ param: UserSessionParam) -> Observable<NullDataResponse> {
         let codeObserable: Observable<NullDataResponse> = RequestManager.reqeust(.endpoint(UserSession.getVerificationCode, param: param), needToken: .true)
         return codeObserable
+    }
+    
+      func loadRSAPublickey() -> Observable<String> {
+        let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
+        return   keyOberable
+                .retry(10)
+                .map { response -> String in
+                     if let obj = response.object, let key = obj.key {
+                        return key
+                     }
+                    return ""
+                 }
+              .share(replay: 1)
     }
     
 }
