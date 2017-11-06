@@ -47,6 +47,8 @@
 	</array>
 	<key>BASE_IMAGE_URL</key>
 	<string>$(BASE_IMAGE_URL)</string>
+	<key>Prodution_Flag</key>
+	<string>$(Prodution_Flag)</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

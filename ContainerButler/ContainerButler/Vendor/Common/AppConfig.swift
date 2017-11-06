@@ -62,6 +62,8 @@ struct CustomKey {
         static let TIMAccountType: String = "13870"
         static let JPushAppKey = "3bc3c88cb49b6a7add6356a5"
         static let JPushSecret = "39f7e00ab5782c8302213b28"
+        static let JPushChanel = "App Store"
+        static let isJPushProdution: Bool = ((Bundle.main.infoDictionary?["Prodution_Flag"] as? String) ?? "true") == "true" ? true: false
     }
     struct Description {
         static let wechatDescription = "Description"

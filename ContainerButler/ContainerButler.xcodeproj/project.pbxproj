@@ -106,6 +106,17 @@
 		CDD0D5081F9D9CA10056B6F1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D5071F9D9C960056B6F1 /* CoreFoundation.framework */; };
 		CDD0D5091F9D9CAB0056B6F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D5061F9D9C890056B6F1 /* UIKit.framework */; };
 		CDD0D50B1F9D9CB50056B6F1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0D50A1F9D9CB10056B6F1 /* CoreText.framework */; };
+		CDD37D881FB022CA00ADD456 /* jpush-ios-3.0.7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D851FB022CA00ADD456 /* jpush-ios-3.0.7.a */; };
+		CDD37D891FB022CA00ADD456 /* jcore-ios-1.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D861FB022CA00ADD456 /* jcore-ios-1.1.6.a */; };
+		CDD37D8C1FB0231A00ADD456 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D8B1FB0230800ADD456 /* CFNetwork.framework */; };
+		CDD37D8E1FB0233200ADD456 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D8D1FB0232800ADD456 /* CoreTelephony.framework */; };
+		CDD37D901FB0234200ADD456 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D8F1FB0233C00ADD456 /* SystemConfiguration.framework */; };
+		CDD37D921FB0236600ADD456 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D911FB0234A00ADD456 /* CoreGraphics.framework */; };
+		CDD37D941FB0237B00ADD456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D931FB0237400ADD456 /* Foundation.framework */; };
+		CDD37D961FB0238900ADD456 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D951FB0238500ADD456 /* Security.framework */; };
+		CDD37D981FB0239500ADD456 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D971FB0239400ADD456 /* libz.tbd */; };
+		CDD37D9A1FB023AD00ADD456 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D991FB023A900ADD456 /* UserNotifications.framework */; };
+		CDD37D9C1FB023BB00ADD456 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD37D9B1FB023BB00ADD456 /* libresolv.tbd */; };
 		CDDBD27C1F94B68C004F5526 /* juic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDDBD27B1F94B646004F5526 /* juic.jpg */; };
 		CDDBD2911F9500AF004F5526 /* ReplenishmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */; };
 		CDDBD2921F9500AF004F5526 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDBD2801F95004A004F5526 /* ContainerViewController.swift */; };
@@ -352,6 +363,19 @@
 		CDD0D50D1F9D9CC60056B6F1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CDD0D50E1F9D9CCC0056B6F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CDD37D811FB0078600ADD456 /* ContainerButler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContainerButler.entitlements; sourceTree = "<group>"; };
+		CDD37D831FB022CA00ADD456 /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
+		CDD37D841FB022CA00ADD456 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		CDD37D851FB022CA00ADD456 /* jpush-ios-3.0.7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.7.a"; sourceTree = "<group>"; };
+		CDD37D861FB022CA00ADD456 /* jcore-ios-1.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.6.a"; sourceTree = "<group>"; };
+		CDD37D8B1FB0230800ADD456 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CDD37D8D1FB0232800ADD456 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CDD37D8F1FB0233C00ADD456 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CDD37D911FB0234A00ADD456 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CDD37D931FB0237400ADD456 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CDD37D951FB0238500ADD456 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CDD37D971FB0239400ADD456 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CDD37D991FB023A900ADD456 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		CDD37D9B1FB023BB00ADD456 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CDDBD27B1F94B646004F5526 /* juic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = juic.jpg; sourceTree = "<group>"; };
 		CDDBD27F1F95004A004F5526 /* ReplenishmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishmentView.swift; sourceTree = "<group>"; };
 		CDDBD2801F95004A004F5526 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -402,9 +426,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD37D9A1FB023AD00ADD456 /* UserNotifications.framework in Frameworks */,
+				CDD37D961FB0238900ADD456 /* Security.framework in Frameworks */,
+				CDD37D941FB0237B00ADD456 /* Foundation.framework in Frameworks */,
+				CDD37D921FB0236600ADD456 /* CoreGraphics.framework in Frameworks */,
+				CDD37D901FB0234200ADD456 /* SystemConfiguration.framework in Frameworks */,
+				CDD37D8E1FB0233200ADD456 /* CoreTelephony.framework in Frameworks */,
+				CDD37D8C1FB0231A00ADD456 /* CFNetwork.framework in Frameworks */,
+				CDD37D9C1FB023BB00ADD456 /* libresolv.tbd in Frameworks */,
 				CDD0D50B1F9D9CB50056B6F1 /* CoreText.framework in Frameworks */,
 				CDD0D5091F9D9CAB0056B6F1 /* UIKit.framework in Frameworks */,
+				CDD37D981FB0239500ADD456 /* libz.tbd in Frameworks */,
+				CDD37D881FB022CA00ADD456 /* jpush-ios-3.0.7.a in Frameworks */,
 				CDD0D5081F9D9CA10056B6F1 /* CoreFoundation.framework in Frameworks */,
+				CDD37D891FB022CA00ADD456 /* jcore-ios-1.1.6.a in Frameworks */,
 				9C872BDB2900C6510DC322DB /* Pods_ContainerButler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +450,15 @@
 		5A32A670EC8787A9116109B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDD37D9B1FB023BB00ADD456 /* libresolv.tbd */,
+				CDD37D991FB023A900ADD456 /* UserNotifications.framework */,
+				CDD37D971FB0239400ADD456 /* libz.tbd */,
+				CDD37D951FB0238500ADD456 /* Security.framework */,
+				CDD37D931FB0237400ADD456 /* Foundation.framework */,
+				CDD37D911FB0234A00ADD456 /* CoreGraphics.framework */,
+				CDD37D8F1FB0233C00ADD456 /* SystemConfiguration.framework */,
+				CDD37D8D1FB0232800ADD456 /* CoreTelephony.framework */,
+				CDD37D8B1FB0230800ADD456 /* CFNetwork.framework */,
 				CDD0D50E1F9D9CCC0056B6F1 /* MobileCoreServices.framework */,
 				CDD0D50D1F9D9CC60056B6F1 /* Accelerate.framework */,
 				CDD0D50C1F9D9CBF0056B6F1 /* QuartzCore.framework */,
@@ -814,6 +858,7 @@
 		CD78F0951F67D92100D50B7B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CDD37D821FB022CA00ADD456 /* JPush */,
 				CDB9EBE11FA9D4470041E5C6 /* SegmentedBar */,
 				CDD0D4B91F9D9C0B0056B6F1 /* YYText */,
 				CDDBD2A01F9501F3004F5526 /* MGSwipeButton */,
@@ -1040,6 +1085,17 @@
 				CDD0D4ED1F9D9C0B0056B6F1 /* UIPasteboard+YYText.h */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		CDD37D821FB022CA00ADD456 /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				CDD37D831FB022CA00ADD456 /* JPushNotificationExtensionService.h */,
+				CDD37D841FB022CA00ADD456 /* JPUSHService.h */,
+				CDD37D851FB022CA00ADD456 /* jpush-ios-3.0.7.a */,
+				CDD37D861FB022CA00ADD456 /* jcore-ios-1.1.6.a */,
+			);
+			path = JPush;
 			sourceTree = "<group>";
 		};
 		CDDBD27D1F95004A004F5526 /* Container */ = {
@@ -1640,6 +1696,10 @@
 				INFOPLIST_FILE = ContainerButler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ContainerButler/Vendor/Lib/JPush",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1666,6 +1726,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				Prodution_Flag = false;
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";
@@ -1692,6 +1753,10 @@
 				INFOPLIST_FILE = ContainerButler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ContainerButler/Vendor/Lib/JPush",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1718,6 +1783,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				Prodution_Flag = true;
 				SWIFT_OBJC_BRIDGING_HEADER = "ContainerButler/Vendor/Common/Container-Bridge-Header.h";
 				SWIFT_VERSION = 4.0;
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";
