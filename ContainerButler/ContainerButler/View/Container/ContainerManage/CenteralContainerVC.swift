@@ -45,11 +45,15 @@ class CenteralContainerVC: BaseViewController {
 extension CenteralContainerVC {
     fileprivate func setupUI() {
         title = "中控管理"
+      tableView = UITableView()
+      tableView.backgroundColor = UIColor(hex: CustomKey.Color.mainBackgroundColor)
+       tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
         tableView.register(VolumeTableViewCell.self, forCellReuseIdentifier: "VolumeTableViewCell")
         tableView.register(LabelButtonCell.self, forCellReuseIdentifier: "LabelButtonCell")
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.top.equalTo(0)
         }
@@ -116,5 +120,11 @@ extension CenteralContainerVC: UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+}
+
+extension CenteralContainerVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
     }
 }

@@ -65,6 +65,8 @@ class MessageCell: UITableViewCell, ViewNameReusable {
         messageIcon.snp.makeConstraints { (maker) in
             maker.left.equalTo(20)
             maker.centerY.equalTo(contentView.snp.centerY)
+            maker.width.equalTo(40)
+            maker.height.equalTo(55)
         }
         
         messageTitleLabel.snp.makeConstraints { (maker) in

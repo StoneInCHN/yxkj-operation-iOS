@@ -69,7 +69,6 @@ extension ReplenishHistoryVC {
             self?.historyVM.requestCommand.onNext(true)
         }
 
-        
         historyVM.refreshStatus
             .asObservable()
             .subscribe(onNext: {[weak self] (status) in
