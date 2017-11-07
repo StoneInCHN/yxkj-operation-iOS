@@ -101,6 +101,15 @@ extension ContainerViewController {
         })
             .disposed(by: disposeBag)
         
+        containerVM
+            .totalCount
+            .asObservable()
+            .subscribe(onNext: { [weak self](value) in
+                HUD.hideLoading()
+                self?.title = "货柜(\(value))"
+            })
+            .disposed(by: disposeBag)
+        
         containerVM.refreshStatus
             .asObservable()
             .subscribe(onNext: {[weak self] (status) in

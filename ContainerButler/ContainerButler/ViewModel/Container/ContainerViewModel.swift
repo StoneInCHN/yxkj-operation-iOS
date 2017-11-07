@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class ContainerViewModel {
+    var totalCount = Variable(0)
     var responseType = Variable<StatusType>(StatusType.none)
     var models = Variable<[Scence]>([])
     var requestCommand: PublishSubject<Bool> = PublishSubject<Bool>()
@@ -54,7 +55,8 @@ extension ContainerViewModel {
                 switch event {
                 case  .next( let response):
                      self.responseType.value = response.status
-                    if let scences =  response.object?.scences {
+                    if let scences =  response.object?.scences, let totalCount = response.object?.totalCount{
+                         self.totalCount.value = totalCount
                         if isReloadData {
                             self.models.value = scences
                         } else {
