@@ -55,7 +55,7 @@ extension ContainerViewModel {
                 switch event {
                 case  .next( let response):
                      self.responseType.value = response.status
-                    if let scences =  response.object?.scences, let totalCount = response.object?.totalCount{
+                    if let scences =  response.object?.scences, let totalCount = response.object?.totalCount {
                          self.totalCount.value = totalCount
                         if isReloadData {
                             self.models.value = scences

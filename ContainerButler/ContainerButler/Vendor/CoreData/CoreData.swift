@@ -143,7 +143,8 @@ extension CoreDataManager {
         }
         if !searchResulst.isEmpty {
             for info in searchResulst {
-                managedObjectContext.delete(info)
+                info.userId = userInfo.userId
+                info.phoneNum = phoneNum
             }
         } else {
             guard let info: User = NSEntityDescription.insertNewObject(forEntityName: "User", into: self.managedObjectContext) as? User else {  return  }

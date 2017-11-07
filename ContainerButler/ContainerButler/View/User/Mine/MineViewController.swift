@@ -47,6 +47,7 @@ extension MineViewController: UITableViewDataSource {
             let cell: UserHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.userLog.image = UIImage(named: "logo")
             cell.titleLabel.text = title + ": " + (CoreDataManager.sharedInstance.getUserInfo()?.phoneNum ?? "9527")
+            cell.isUserInteractionEnabled = false
             return cell
         } else if title == "密码" {
             let cell: TitleLabelTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -74,7 +75,6 @@ extension MineViewController: UITableViewDelegate {
             let rootVC = NavigationController(rootViewController: LoginViewController())
             UIView.transition(with: self.view, duration: 0.25, options: .curveEaseInOut, animations: { [weak self] in
                guard let weakSelf = self else { return }
-                CoreDataManager.sharedInstance.clearUserInfo()
                 CoreDataManager.sharedInstance.clearSessionInfo()
                 weakSelf.view.removeFromSuperview()
                 UIApplication.shared.keyWindow?.addSubview(rootVC.view)

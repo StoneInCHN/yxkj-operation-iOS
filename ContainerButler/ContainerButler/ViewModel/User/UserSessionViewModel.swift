@@ -46,19 +46,6 @@ class UserSessionViewModel {
         }
     }
     
-    func login(_ param: UserSessionParam) -> Observable<BaseResponseObject<UserInfo>> {
-          let keyOberable: Observable<BaseResponseObject<RSAKey>> = RequestManager.reqeust(.endpoint(UserSession.getPublicKey, param: nil), needToken: .false)
-        
-        let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(.endpoint(UserSession.loginByPwd, param: param), needToken: .false)
-      return  Observable.combineLatest(keyOberable, loginObserable) { (keyOberable, loginObserable) -> BaseResponseObject<UserInfo> in
-            return loginObserable
-        }
-        .map {  [weak self] (response) -> BaseResponseObject<UserInfo> in
-            self?.saveUserInfo(response, phoneNum: param.phoneNum ?? "")
-            return response
-        }
-    }
-    
     func handleUserInfoResponse(with type: UserSessionHandleType) -> Observable<BaseResponseObject<UserInfo>> {
         let loginObserable: Observable<BaseResponseObject<UserInfo>> = RequestManager.reqeust(type.router, needToken: .false)
         return loginObserable.map { (response) -> BaseResponseObject<UserInfo> in

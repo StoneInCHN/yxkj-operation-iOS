@@ -59,7 +59,7 @@ class LoginViewController: BaseViewController {
         textField.textColor = UIColor(hex: 0x222222)
         textField.keyboardType = .numberPad
         textField.tintColor = UIColor(hex: CustomKey.Color.mainColor)
-//                textField.text = "18012341234"
+        textField.text = CoreDataManager.sharedInstance.getUserInfo()?.phoneNum
         return textField
     }()
     fileprivate lazy   var pwdTF: UITextField = {
@@ -277,7 +277,7 @@ extension LoginViewController {
                         return param
                     })
                     .subscribe(onNext: { (param) in
-                        weakSelf.loginVM.login(param)
+                        weakSelf.loginVM.handleUserInfoResponse(with: .loginWithPassword(param))
                             .subscribe(onNext: { [weak self] (response) in
                                 HUD.hideLoading()
                                 let rootVC = TabBarController()
