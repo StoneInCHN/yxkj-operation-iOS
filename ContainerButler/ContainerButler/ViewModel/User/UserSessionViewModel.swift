@@ -14,23 +14,6 @@ import ObjectMapper
 class UserSessionViewModel {
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     
-    func saveUserInfo(_ info: BaseResponseObject<UserInfo>, phoneNum: String) {
-        if  info.status == .success, let token = info.token, !token.isEmpty, let userInfo = info.object {
-            let session = UserSessionInfo()
-            session.token = token
-            CoreDataManager.sharedInstance.save(userSession: session)
-            CoreDataManager.sharedInstance.save(userInfo: userInfo, phoneNum: phoneNum)
-        }
-    }
-    
-    func saveSessionInfo(_ info: NullDataResponse) {
-        if  info.status == .success, let token = info.token, !token.isEmpty {
-            let session = UserSessionInfo()
-            session.token = token
-            CoreDataManager.sharedInstance.save(userSession: session)
-        }
-    }
-    
     func handle(with type: UserSessionHandleType) -> Observable<NullDataResponse> {
         var needToken: NeedToken = .false
         switch type {
@@ -40,8 +23,12 @@ class UserSessionViewModel {
             needToken = .false
         }
         let loginObserable: Observable<NullDataResponse> = RequestManager.reqeust(type.router, needToken: needToken)
-        return loginObserable.map { [weak self](response) -> NullDataResponse in
-             self?.saveSessionInfo(response)
+        return loginObserable.map {(response) -> NullDataResponse in
+            if  response.status == .success, let token = response.token, !token.isEmpty {
+                let session = UserSessionInfo()
+                session.token = token
+                CoreDataManager.sharedInstance.save(userSession: session)
+            }
               return response
         }
     }
