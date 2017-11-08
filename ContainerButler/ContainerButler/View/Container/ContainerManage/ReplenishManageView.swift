@@ -191,6 +191,7 @@ extension ReplenishManageView {
             maker.width.equalTo(200.0.fitWidth)
         }
         closeBtn.onTap {[unowned self] in
+            self.endEditing(true)
             self.dismiss()
         }
     }
